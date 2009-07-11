@@ -1,0 +1,9 @@
+/build
+/release
+/release.log
+/release.properties
+/res/*/*/*.dst
+/modules/IntensiBuild
+/modules/IntensiGame
+/modules/IntensiTools
+/modules/runME
