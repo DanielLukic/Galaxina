@@ -1,0 +1,20 @@
+
+= Configuration Symbols =
+
+Use these with the @symbols entry in the config/*.rb files.
+
+:NO_KEY_REPEAT
+    Disable key repeat events. Only key press and release will be used.
+    Note: This does not work in the WTK emulator.
+
+:MULTI_SOUNDS
+    Allow playing multiple sounds simultaneously.
+
+:CHEAT
+    Activate cheat codes.
+
+:CONSOLE
+    Activate in-game console overlay output.
+
+:DEBUG
+    Leave debug output in resulting JARs. Careful when building for real devices!

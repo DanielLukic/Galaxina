@@ -1,0 +1,7 @@
+MIDlet-Vendor: ${vendor.name}
+MIDlet-Jar-URL: ${project.name}.jar
+MIDlet-Version: ${version}
+MIDlet-Name: ${project.name}
+MIDlet-Icon: /icon.png
+MIDlet-1: Galaxina, /icon.png, net.intensicode.Galaxina
+MIDlet-2: GalaxinaSandbox, /icon.png, net.intensicode.GalaxinaSandbox

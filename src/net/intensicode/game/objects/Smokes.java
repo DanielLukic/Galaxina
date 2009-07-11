@@ -1,0 +1,85 @@
+package net.intensicode.game.objects;
+
+import net.intensicode.core.Engine;
+import net.intensicode.util.Position;
+
+
+/**
+ * TODO: Describe this!
+ */
+public final class Smokes extends GameObject
+    {
+    public final Smoke[] smokes = new Smoke[MAX_SMOKES];
+
+
+    public Smokes()
+        {
+        for ( int idx = 0; idx < smokes.length; idx++ ) smokes[ idx ] = new Smoke();
+        }
+
+    public final void add( final Position aWorldPosFixed )
+        {
+        final int speedValue = model.world.visibleSizeFixed.height / 4;
+        final int fallingSpeedFixed = speedValue / Engine.ticksPerSecond;
+        add( aWorldPosFixed, 0, fallingSpeedFixed );
+        }
+
+    public final void add( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+        {
+        final Smoke smoke = getSmoke();
+        smoke.init( aWorldPosFixed, Engine.ticksPerSecond, aSpeedX, aSpeedY );
+        }
+
+    // From GameObject
+
+    public void onStartGame()
+        {
+        }
+
+    public void onStartLevel()
+        {
+        for ( int idx = 0; idx < smokes.length; idx++ )
+            {
+            smokes[ idx ].active = false;
+            }
+        }
+
+    public final void onControlTick()
+        {
+        for ( int idx = 0; idx < smokes.length; idx++ )
+            {
+            final Smoke smoke = smokes[ idx ];
+            if ( smoke.active == false ) continue;
+            smoke.onControlTick();
+            }
+        }
+
+    // Implementation
+
+    private final Smoke getSmoke()
+        {
+        int oldestSmokeIndex = 0;
+        int oldestSmokeTicks = 0;
+
+        for ( int idx = 0; idx < smokes.length; idx++ )
+            {
+            final Smoke Smoke = smokes[ idx ];
+            if ( Smoke.active )
+                {
+                if ( Smoke.smokeTick > oldestSmokeTicks )
+                    {
+                    oldestSmokeTicks = Smoke.smokeTick;
+                    oldestSmokeIndex = idx;
+                    }
+                continue;
+                }
+
+            return Smoke;
+            }
+
+        return smokes[ oldestSmokeIndex ];
+        }
+
+
+    private static final int MAX_SMOKES = 32;
+    }

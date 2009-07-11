@@ -1,0 +1,101 @@
+<!-- IntensiCode Galaxina Tests Ant Buildfile -->
+
+<project name="Tests" default="test">
+
+    <property name="project.name" value="Galaxina"/>
+
+    <property name="dir.root" value="../.."/>
+
+    <property name="dir.build" value="build"/>
+    <property name="dir.env" value="${dir.root}/env"/>
+    <property name="dir.libraries" value="lib"/>
+    <property name="dir.tests" value="test"/>
+
+    <property name="dir.build.dist" value="${dir.build}/dist"/>
+    <property name="dir.build.tests" value="${dir.build}/tests"/>
+
+    <property name="dir.env.junit" value="${dir.env}/lib"/>
+
+    <property name="jar.midlet" value="${dir.libraries}/${project.name}.jar"/>
+    <property name="jar.runme" value="${dir.libraries}/RunMe.jar"/>
+
+    <property name="dir.runme" value="${dir.root}/modules/RunMe"/>
+
+
+    <path id="classpath.libraries">
+        <fileset id="libraries" dir="${dir.libraries}" includes="*.jar"/>
+    </path>
+
+    <path id="classpath.build">
+        <path refid="classpath.libraries"/>
+    </path>
+
+    <path id="classpath.junit">
+        <pathelement location="${dir.env.junit}/junit.jar"/>
+        <pathelement location="${dir.build.tests}"/>
+        <pathelement location="${dir.tests}"/>
+        <path refid="classpath.build"/>
+    </path>
+
+
+    <taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
+        <classpath>
+            <pathelement location="${dir.env.junit}/ant-junit.jar"/>
+            <pathelement location="${dir.env.junit}/junit.jar"/>
+        </classpath>
+    </taskdef>
+
+
+    <target name="_init">
+        <mkdir dir="${dir.build}"/>
+        <mkdir dir="${dir.build.tests}"/>
+        <mkdir dir="${dir.libraries}"/>
+    </target>
+
+    <target name="_check_midlet">
+        <uptodate property="midlet.uptodate" targetfile="${jar.midlet}">
+            <srcfiles dir="${dir.root}">
+                <include name="**/*"/>
+                <exclude name="build/**/*"/>
+                <exclude name="env/**/*"/>
+                <exclude name="modules/${ant.project.name}/**/*"/>
+                <exclude name="release/**/*"/>
+            </srcfiles>
+        </uptodate>
+    </target>
+
+    <target name="_build_midlet" unless="midlet.uptodate">
+        <subant antfile="build.xml" buildpath="${dir.runme}" failonerror="true"
+                inheritall="false" inheritrefs="false" target="build">
+            <property name="dont_sign" value="true"/>
+        </subant>
+        <copy file="${dir.runme}/${dir.build.dist}/${project.name}.jar" todir="${dir.libraries}" overwrite="true"/>
+    </target>
+
+    <target name="_build_tests" depends="_init,_check_midlet,_build_midlet">
+        <javac srcdir="${dir.tests}" destdir="${dir.build.tests}"
+               debug="true" classpathref="classpath.build"/>
+    </target>
+
+    <target name="_run_tests" depends="_build_tests">
+        <junit printsummary="yes" haltonfailure="yes" showoutput="true" dir="${dir.root}">
+            <classpath refid="classpath.junit"/>
+            <formatter type="brief" usefile="false"/>
+            <formatter type="xml" usefile="true"/>
+            <batchtest fork="yes" todir="${dir.build}">
+                <fileset dir="${dir.tests}">
+                    <include name="**/Test*.java"/>
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+
+    <target name="clean" description="Cleans all generated files">
+        <delete dir="${dir.build}" failonerror="false"/>
+    </target>
+
+    <target name="test" depends="_run_tests" description="Run all tests"/>
+
+</project>

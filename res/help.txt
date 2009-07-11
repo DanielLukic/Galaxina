@@ -1,0 +1,45 @@
+Use your space fighter to
+destroy the incoming enemy
+ships. Avoid their deadly
+ion bombs.
+
+Game Controls:
+==============
+
+LEFT/RIGHT
+Move your ship left/right
+
+PRIMARY FIRE
+Fire your active weapon
+
+SECONDARY FIRE
+Use extra weapon
+(if equipped)
+
+
+Challenging Stage:
+==================
+
+Destroy the incoming enemy
+swarms before they can
+escape into space.
+
+
+Swarm Bonus:
+============
+
+If you destroy all enemies
+of an incoming swarm before
+they can take their
+positions in the formation,
+you score a special bonus.
+
+
+Perfect Run Bonus:
+==================
+
+You score an extra bonus
+if you destroy all
+incoming swarms before
+they start entering their
+formation position.

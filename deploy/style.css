@@ -1,0 +1,247 @@
+body {
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    color:black;
+    background:white;
+    font-size:10pt;
+    line-height:18pt;
+    margin-left:12mm;
+    margin-right:12mm;
+    margin-top:0;
+    margin-bottom:0;
+}
+
+li {
+    line-height:16pt;
+}
+
+p {
+
+}
+
+.CodeBlock {
+    background:#E8E8E8;
+    margin-left:1em;
+    padding-left:1em;
+    border:solid 1px;
+}
+
+.Tight {
+    margin:0;
+}
+
+.TightIndent {
+    margin:0;
+    margin-left:5mm;
+}
+
+.NewsTag {
+    margin-left:10mm;
+    margin-bottom:2mm;
+}
+
+.NewsEntry {
+    margin-top:0;
+    margin-left:10mm;
+}
+
+.Caption {
+    text-align:center;
+    font-weight:bold;
+}
+
+.footer {
+    font-size:8pt;
+    text-align:right;
+}
+
+hr {
+    border-top-style:solid;
+    border-top-width:thin;
+    border-color:#666;
+}
+
+.comment {
+    font-style:italic;
+    background:#FFFFCC;
+}
+
+p.comment {
+    margin-left:2em;
+    margin-right:2em;
+}
+
+.code {
+    font-family:monospace;
+}
+
+.noindent {
+    margin-left:-10mm;
+    margin-right:-10mm;
+}
+
+.moreindent {
+    margin-left:10mm;
+    margin-right:10mm;
+}
+
+.border {
+    padding:10px;
+    border-style:solid;
+    border-width:thin;
+}
+
+pre.box {
+    margin-left:10mm;
+    margin-right:10mm;
+    border:solid;
+    border-width:1pt;
+    background-color:#E8E8E8;
+    padding:2mm;
+    page-break-inside:avoid;
+}
+
+.box {
+    margin-left:10mm;
+    margin-right:10mm;
+    border:solid;
+    border-width:1pt;
+    background-color:#E8E8E8;
+    padding:2mm;
+    page-break-inside:avoid;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-left:-10mm;
+    margin-right:-10mm;
+}
+
+h1 {    font-size:150%;font-weight:bold;font-style:normal; }
+h2 {    font-size:130%;font-weight:bold;font-style:normal; }
+h3 {    font-size:100%;font-weight:bold;font-style:normal; }
+
+h4 {    font-size:100%;font-weight:normal;font-style:italic; }
+h5 {    font-size:100%; }
+h6 {    font-size:100%; }
+
+.section {
+    background:#E8E8E8;
+    margin-left:0;
+    margin-right:0;
+    padding-left:2mm;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+    border-top-style:solid;
+    border-top-width:thin;
+    border-left-style:solid;
+    border-left-width:thin;
+    border-color: black;
+}
+
+h1.sectiontitle {
+    font-size:150%;
+    font-weight:bold;
+    line-height:250%;
+    background:#E8E8E8;
+    border-top-style:solid;
+    border-top-width:0;
+    border-left-style:solid;
+    border-left-width:0;
+    margin-left:-12mm;
+    margin-right:-12mm;
+    padding-left:2mm;
+}
+
+ul {
+    margin-top:2mm;
+    list-style-type:disc;
+}
+
+dt {
+    font-weight:bold;
+}
+
+a:visited {
+    color:#602000;
+    text-decoration:none;
+    background-color:transparent;
+}
+
+a:link {
+    color:#602000;
+    text-decoration:none;
+    background-color:transparent;
+}
+
+a:active {
+    color:#602000;
+    text-decoration:underline;
+    background-color:transparent;
+}
+
+a:hover {
+    color:#602000;
+    text-decoration:underline;
+    background-color:transparent;
+}
+
+.BlackLink:visited {
+    color:#000000;
+    text-decoration:none;
+    background-color:transparent;
+}
+
+.BlackLink:link {
+    color:#000000;
+    text-decoration:none;
+    background-color:transparent;
+}
+
+.BlackLink:active {
+    color:#000000;
+    text-decoration:none;
+    background-color:transparent;
+}
+
+.BlackLink:hover {
+    color:#000000;
+    text-decoration:none;
+    background-color:transparent;
+}
+
+pre {
+    margin-left:12mm;
+    margin-right:12mm;
+    font-family:monospace;
+    font-size:10pt;
+    line-height:12pt;
+    margin-top:1px;
+    margin-bottom:1px;
+}
+
+table {
+    margin-left:-10mm;
+    margin-right:-10mm;
+    font-size:10pt;
+    border-collapse:collapse;
+    border:thin;
+}
+
+td {
+    border-width:thin;
+    border-collapse:collapse;
+    border-color:#808080;
+    empty-cells:show;
+    padding:0;
+    vertical-align:top;
+    text-align:left;
+} 
+
+th {
+    border-collapse:collapse;
+    border-width:thin;
+    border-color:#808080;
+    empty-cells:show;
+    padding:0;
+    vertical-align:top;
+    text-align:center;
+}
