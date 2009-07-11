@@ -4,6 +4,8 @@ module Git
 
   class Configuration
 
+    GITMODULES_PATH = '.gitmodules'
+
     COMMENT_REGEX = /^[ \t]*#/
     COMMAND_REGEX = /^[a-z_]+\:.+/
 
@@ -28,7 +30,7 @@ module Git
     end
 
     def has_modules?
-      File.exist?(file_path('.git/modules'))
+      File.exist?(file_path(GITMODULES_PATH))
     end
 
     def load_remote_url(path = '.git/config')
@@ -38,7 +40,7 @@ module Git
       @remote_url = urls.first.split('=').last.strip
     end
 
-    def load_modules(path = '.git/modules')
+    def load_modules(path = GITMODULES_PATH)
       lines = readlines(path)
       lines.each do |l|
         next if l =~ COMMENT_REGEX
