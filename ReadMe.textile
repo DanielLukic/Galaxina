@@ -4,15 +4,15 @@ At some point I had implemented some attack behavior of the enemies. But as alwa
 
 h1. Dependencies
 
-* linux like environment
+ * linux like environment
 
-* git 1.6 or later
-* ruby 1.8 or later
-* rake 0.8.3 or later
-* jruby 1.0 or later
-* java 1.5 or later
-* ant 1.5 or later
-* wtk 2.5 or later (for running the application in the emulator)
+ * git 1.6 or later
+ * ruby 1.8 or later
+ * rake 0.8.3 or later
+ * jruby 1.0 or later
+ * java 1.5 or later
+ * ant 1.5 or later
+ * wtk 2.5 or later (for running the application in the emulator)
 
 h1. Notes
 
