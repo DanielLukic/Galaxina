@@ -8,6 +8,8 @@ The basic main logic and game logic is implemented. Enemies appear in swarms and
 
 At some point I had implemented some attack behavior of the enemies. But as always, the confusion in my head lead to crappy code. So at some later point I decided to delete this stuff. For now you can simply shoot the enemies. They don't mind.
 
+A basic game editor is included as a module. The IntelliJ project contains a run configuration for it.
+
 h1. Notes
 
 Galaxina is really a 1980s movie. Instead of naming this example project GalagaME a friend came up with the idea of calling it Galaxina and using the movie poster.
