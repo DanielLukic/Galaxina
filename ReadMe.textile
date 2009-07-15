@@ -1,6 +1,16 @@
 Partial implementation of a Galaga like shoot-em-up game.
 
-At some point I had implemented some attack behavior of the enemies. But as always, the confusion in my head lead to crappy code. So at some later point I decided to delete this stuff.
+h1. Description
+
+Example project demonstrating the basic usage of the IntensiBuild, IntensiGame, IntensiTools and RunMe modules to create a J2ME and J2SE game.
+
+The basic main logic and game logic is implemented. Enemies appear in swarms and you can shoot them. You can pick up extras and upgrade your weapons this way. Firing the primary (*) and secondary (#) weapon works.
+
+At some point I had implemented some attack behavior of the enemies. But as always, the confusion in my head lead to crappy code. So at some later point I decided to delete this stuff. For now you can simply shoot the enemies. They don't mind.
+
+h1. Notes
+
+Galaxina is really a 1980s movie. Instead of naming this example project GalagaME a friend came up with the idea of calling it Galaxina and using the movie poster.
 
 h1. Dependencies
 
@@ -14,9 +24,12 @@ h1. Dependencies
  * ant 1.5 or later
  * wtk 2.5 or later (for running the application in the emulator)
 
-h1. Notes
+JRuby is used for the font sizer script. You may want to install rake and rspec within JRuby, too.
 
-JRuby is used for the font sizer script.
+h1. License
 
-You may want to install rake and rspec within JRuby, too.
+This is open source software. See the gpl.txt file for more infomation.
 
+Note that some files are included for which different licenses may apply.
+
+Note that for all files that are probably 'mine', the GPL applies.
