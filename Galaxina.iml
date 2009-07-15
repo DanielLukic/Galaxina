@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module relativePaths="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
-    <facet type="JRUBY" name="JRuby" implicit="true">
+    <facet type="JRubyFacetType" name="JRuby" implicit="true">
       <configuration>
         <JRUBY_FACET_CONFIG_ID NAME="JRUBY_SDK_NAME" VALUE="" />
-        <JRUBY_FACET_CONFIG_ID NAME="SHOULD_USE_RSPEC" VALUE="false" />
+        <JRUBY_FACET_CONFIG_ID NAME="USE_TEST_UNIT_FRAMEWORK" VALUE="true" />
         <JRUBY_FACET_CONFIG_ID NAME="NUMBER" VALUE="0" />
+        <JRUBY_FACET_CONFIG_ID NAME="TEST_UNIT_FRAMEWORK_ROOT_URL" VALUE="" />
       </configuration>
     </facet>
   </component>
@@ -53,6 +54,9 @@
   <component name="PluginUploader.PluginUploadConfigurable">
     <option name="ARCHIVE_PATH" />
     <option name="PLUGIN_ID" />
+  </component>
+  <component name="RSpecModuleSettingsStorage">
+    <RSPEC_MODULE_SETTINGS_STORAGE_ID NAME="RSPEC_SUPPORT_TYPE" VALUE="NONE" />
   </component>
 </module>
 

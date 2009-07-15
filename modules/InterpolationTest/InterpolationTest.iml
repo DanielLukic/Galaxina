@@ -16,5 +16,8 @@
     <option name="ARCHIVE_PATH" />
     <option name="PLUGIN_ID" />
   </component>
+  <component name="RSpecModuleSettingsStorage">
+    <RSPEC_MODULE_SETTINGS_STORAGE_ID NAME="RSPEC_SUPPORT_TYPE" VALUE="NONE" />
+  </component>
 </module>
 

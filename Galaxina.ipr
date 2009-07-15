@@ -350,7 +350,9 @@
       </item>
     </group>
   </component>
-  <component name="ProjectFileVersion" converted="true" />
+  <component name="ProjectFileVersion" converted="true">
+    <converter id="ror-modules" />
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Galaxina.iml" filepath="$PROJECT_DIR$/Galaxina.iml" />
