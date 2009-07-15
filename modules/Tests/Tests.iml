@@ -14,12 +14,23 @@
     <orderEntry type="module" module-name="IntensiGame" />
     <orderEntry type="module" module-name="Galaxina" />
     <orderEntry type="module" module-name="RunME" />
-    <orderEntry type="library" name="JUnit" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/junit-3.8.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntryProperties />
   </component>
   <component name="PluginUploader.PluginUploadConfigurable">
     <option name="ARCHIVE_PATH" />
     <option name="PLUGIN_ID" />
+  </component>
+  <component name="RSpecModuleSettingsStorage">
+    <RSPEC_MODULE_SETTINGS_STORAGE_ID NAME="RSPEC_SUPPORT_TYPE" VALUE="NONE" />
   </component>
 </module>
 
