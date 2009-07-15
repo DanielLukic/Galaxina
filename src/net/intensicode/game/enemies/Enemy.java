@@ -7,7 +7,7 @@ import net.intensicode.game.objects.GameModel;
 import net.intensicode.game.objects.GameObject;
 import net.intensicode.game.objects.Player;
 import net.intensicode.path.PathWithDirection;
-import net.intensicode.util.Utilities;
+import net.intensicode.util.UtilitiesEx;
 import net.intensicode.util.*;
 
 
@@ -198,7 +198,7 @@ public final class Enemy
     public final void jumpToStartOfPath()
         {
         final Position startPosition = path.getStartPosition();
-        final int direction = Utilities.directionToDegrees( path.getStartPosition() );
+        final int direction = UtilitiesEx.directionToDegrees( path.getStartPosition() );
         final int startDirection = FixedMath.toFixed( direction );
         worldPosFixed.setTo( startPosition );
         directionInDegreesFixed = targetDirectionFixed = startDirection;
@@ -210,7 +210,7 @@ public final class Enemy
         aOffset.scaleFixed( getSpeedFixed() );
         worldPosFixed.translate( aOffset );
 
-        final int degrees = Utilities.directionToDegrees( aOffset );
+        final int degrees = UtilitiesEx.directionToDegrees( aOffset );
         targetDirectionFixed = FixedMath.toFixed( degrees );
         }
 
@@ -341,7 +341,7 @@ public final class Enemy
         myTempPos.x = myBeforeDirection.x + myAfterDirection.x;
         myTempPos.y = myBeforeDirection.y + myAfterDirection.y;
 
-        final int degrees = Utilities.directionToDegrees( myTempPos );
+        final int degrees = UtilitiesEx.directionToDegrees( myTempPos );
         targetDirectionFixed = FixedMath.toFixed( degrees );
         }
 

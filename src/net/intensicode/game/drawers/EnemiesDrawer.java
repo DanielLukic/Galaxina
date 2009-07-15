@@ -9,7 +9,7 @@ import net.intensicode.game.GameContext;
 import net.intensicode.game.enemies.Enemy;
 import net.intensicode.game.enemies.EnemyType;
 import net.intensicode.game.objects.Level;
-import net.intensicode.util.Utilities;
+import net.intensicode.util.UtilitiesEx;
 import net.intensicode.util.*;
 
 import javax.microedition.lcdui.Graphics;
@@ -74,7 +74,7 @@ public final class EnemiesDrawer extends AbstractScreen
         final Sprite sprite = myEnemyGenerators[ aEnemy.type.typeID ];
         final int directionSteps = sprite.getFrameSequenceLength();
         final int direction = FixedMath.toIntRounded( aEnemy.directionInDegreesFixed );
-        final int directionIndex = Utilities.getDirectionID( direction + 45, directionSteps );
+        final int directionIndex = UtilitiesEx.getDirectionID( direction + 45, directionSteps );
         sprite.setFrame( directionIndex % directionSteps );
         sprite.setRefPixelPosition( screenPos.x, screenPos.y );
         sprite.paint( aGraphics );

@@ -1,10 +1,6 @@
 package net.intensicode.util;
 
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.MathFP;
-import net.intensicode.util.Position;
-
-public final class Utilities
+public final class UtilitiesEx
     {
     public static int getDirectionID( final int aDirectionInDegrees, final int aDirectionSteps )
         {

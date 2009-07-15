@@ -7,7 +7,7 @@ import net.intensicode.core.Skin;
 import net.intensicode.game.Camera;
 import net.intensicode.game.GameContext;
 import net.intensicode.game.objects.Missile;
-import net.intensicode.util.Utilities;
+import net.intensicode.util.UtilitiesEx;
 import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
 
@@ -67,9 +67,9 @@ public final class MissilesDrawer extends AbstractScreen
 
         final Sprite sprite = myGenerators[ aMissile.type ];
         final int directionSteps = sprite.getFrameSequenceLength();
-        final int directinFixed = Utilities.directionToDegrees( aMissile.directionFixed );
+        final int directinFixed = UtilitiesEx.directionToDegrees( aMissile.directionFixed );
         final int direction = FixedMath.toIntRounded( directinFixed );
-        final int directionIndex = Utilities.getDirectionID( direction + 45, directionSteps );
+        final int directionIndex = UtilitiesEx.getDirectionID( direction + 45, directionSteps );
         sprite.setFrame( directionIndex % directionSteps );
         sprite.setRefPixelPosition( screenPos.x, screenPos.y );
         sprite.paint( aGraphics );

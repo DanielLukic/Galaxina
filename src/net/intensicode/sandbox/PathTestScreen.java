@@ -10,12 +10,8 @@ import net.intensicode.game.drawers.EnemiesDrawer;
 import net.intensicode.game.enemies.Enemy;
 import net.intensicode.game.enemies.EnemyPath;
 import net.intensicode.game.objects.GameModel;
-import net.intensicode.util.Utilities;
 import net.intensicode.screens.ImageScreen;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.FontGen;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import javax.microedition.lcdui.Graphics;
 
@@ -122,7 +118,7 @@ public final class PathTestScreen extends MultiScreen
         myEnemyDir3.x = myEnemyDir1.x + myEnemyDir2.x;
         myEnemyDir3.y = myEnemyDir1.y + myEnemyDir2.y;
 
-        final int degrees = Utilities.directionToDegrees( myEnemyDir3 );
+        final int degrees = UtilitiesEx.directionToDegrees( myEnemyDir3 );
         myEnemy.directionInDegreesFixed = myEnemy.targetDirectionFixed = FixedMath.toFixed( degrees );
 
         FixedMath.toInt( myEnemyDir );

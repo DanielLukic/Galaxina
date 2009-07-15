@@ -3,7 +3,7 @@ package net.intensicode.path;
 import junit.framework.TestCase;
 import net.intensicode.util.MathFP;
 import net.intensicode.util.*;
-import net.intensicode.util.Utilities;
+import net.intensicode.util.UtilitiesEx;
 
 
 public final class SmoothPathTest extends TestCase
@@ -23,47 +23,47 @@ public final class SmoothPathTest extends TestCase
 
         position.x = -aOffset;
         position.y = 0;
-        assertEquals( 270, Utilities.directionToDegrees( position ) );
+        assertEquals( 270, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = -aOffset;
         position.y = -aOffset;
-        assertEquals( 315, Utilities.directionToDegrees( position ) );
+        assertEquals( 315, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = 0;
         position.y = -aOffset;
-        assertEquals( 0, Utilities.directionToDegrees( position ) );
+        assertEquals( 0, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = aOffset;
         position.y = -aOffset;
-        assertEquals( 45, Utilities.directionToDegrees( position ) );
+        assertEquals( 45, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = aOffset;
         position.y = 0;
-        assertEquals( 90, Utilities.directionToDegrees( position ) );
+        assertEquals( 90, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = aOffset;
         position.y = aOffset;
-        assertEquals( 135, Utilities.directionToDegrees( position ) );
+        assertEquals( 135, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = 0;
         position.y = aOffset;
-        assertEquals( 180, Utilities.directionToDegrees( position ) );
+        assertEquals( 180, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = -aOffset;
         position.y = aOffset;
-        assertEquals( 225, Utilities.directionToDegrees( position ) );
+        assertEquals( 225, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = -aOffset;
         position.y = 0;
-        assertEquals( 270, Utilities.directionToDegrees( position ) );
+        assertEquals( 270, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = -aOffset;
         position.y = -aOffset;
-        assertEquals( 315, Utilities.directionToDegrees( position ) );
+        assertEquals( 315, UtilitiesEx.directionToDegrees( position ) );
 
         position.x = 0;
         position.y = -aOffset;
-        assertEquals( 0, Utilities.directionToDegrees( position ) );
+        assertEquals( 0, UtilitiesEx.directionToDegrees( position ) );
         }
 
     public static final void test_acos()
@@ -100,6 +100,6 @@ public final class SmoothPathTest extends TestCase
 
     private static final int dir2x100( final int aFixedX, final int aFixedY )
         {
-        return MathFP.toInt( Utilities.directionToMathFP( aFixedX, aFixedY ) * 100 );
+        return MathFP.toInt( UtilitiesEx.directionToMathFP( aFixedX, aFixedY ) * 100 );
         }
     }
