@@ -3,7 +3,7 @@
 <jnlp spec="1.0+" codebase="http://www.intensicode.net/projects/Galaxina" href="Galaxina.jnlp">
 
     <information>
-        <title>Block Shock</title>
+        <title>Galaxina</title>
         <vendor>IntensiCode / The.Berlin.Factor</vendor>
         <description>Another IntensiGame project.</description>
         <icon href="bx.png"/>
@@ -25,4 +25,3 @@
     </application-desc>
 
 </jnlp>
-
