@@ -3,7 +3,6 @@ package net.intensicode.game.weapons;
 import junit.framework.TestCase;
 import net.intensicode.game.objects.GameModel;
 import net.intensicode.game.objects.GameObject;
-import net.intensicode.core.Engine;
 
 public final class SimpleGunTest extends TestCase
     {
@@ -39,7 +38,6 @@ public final class SimpleGunTest extends TestCase
 
     public final void testGetReloadTicks()
         {
-        Engine.ticksPerSecond = 60;
         GameObject.model.player.reloadUpgrades = 0;
         assertEquals( 20, SimpleGun.getReloadTicks() );
         GameObject.model.player.reloadUpgrades = 2;

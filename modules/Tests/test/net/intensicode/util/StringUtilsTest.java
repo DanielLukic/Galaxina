@@ -1,28 +1,24 @@
-package net.intensicode.core;
+package net.intensicode.util;
 
 import junit.framework.TestCase;
-import net.intensicode.util.DynamicArray;
-
-import java.io.IOException;
 
 
-
-public final class ConfigurationTest extends TestCase
+public final class StringUtilsTest extends TestCase
     {
     public final void testFindDelimiter()
         {
-        assertEquals( -1, Configuration.findDelimiter( "abc123", "\n\r!", 0 ) );
-        assertEquals( 3, Configuration.findDelimiter( "abc\n123", "\n\r!", 0 ) );
-        assertEquals( 1, Configuration.findDelimiter( "a!b\rc\n123", "\n\r!", 0 ) );
-        assertEquals( -1, Configuration.findDelimiter( "a!b\rc\n123", "", 0 ) );
-        assertEquals( -1, Configuration.findDelimiter( "", "", 0 ) );
+        assertEquals( -1, StringUtils.findDelimiter( "abc123", "\n\r!", 0 ) );
+        assertEquals( 3, StringUtils.findDelimiter( "abc\n123", "\n\r!", 0 ) );
+        assertEquals( 1, StringUtils.findDelimiter( "a!b\rc\n123", "\n\r!", 0 ) );
+        assertEquals( -1, StringUtils.findDelimiter( "a!b\rc\n123", "", 0 ) );
+        assertEquals( -1, StringUtils.findDelimiter( "", "", 0 ) );
         }
 
-    public final void testSplitString() throws IOException
+    public final void testSplitString()
         {
         final String dataString = new String( TEST_CONFIGURATION );
 
-        final DynamicArray lines = Configuration.splitString( dataString, true );
+        final DynamicArray lines = StringUtils.splitString( dataString, true );
         assertEquals( 4, lines.size );
         assertEquals( "Skin.allowResize = false", lines.objects[ 0 ] );
         assertEquals( "BitmapFontGen.buffered = false", lines.objects[ 1 ] );
