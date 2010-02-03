@@ -10,6 +10,7 @@
       <antReference projectDefault="true" />
       <customJdkName value="" />
       <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
       <properties />
     </buildFile>
     <buildFile url="file://$PROJECT_DIR$/modules/Tests/build.xml">
@@ -20,6 +21,7 @@
       <antReference projectDefault="true" />
       <customJdkName value="" />
       <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
       <properties />
     </buildFile>
   </component>
@@ -97,6 +99,7 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
@@ -153,7 +156,12 @@
         <option name="myLocal" value="false" />
       </profile>
     </profiles>
-    <list size="0" />
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="SERVER PROBLEM" />
+      <item index="1" class="java.lang.String" itemvalue="INFO" />
+      <item index="2" class="java.lang.String" itemvalue="WARNING" />
+      <item index="3" class="java.lang.String" itemvalue="ERROR" />
+    </list>
   </component>
   <component name="IssueNavigationConfiguration">
     <option name="links">
@@ -350,46 +358,66 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDetails">
+    <option name="projectName" value="Galaxina" />
+  </component>
   <component name="ProjectFileVersion" converted="true">
     <converter id="ror-modules" />
+    <converter id="SelenaRunConfToDiana" />
+  </component>
+  <component name="ProjectKey">
+    <option name="state" value="project:///home/dl/Projects/intensicode/galaxina/Galaxina.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Galaxina.iml" filepath="$PROJECT_DIR$/Galaxina.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/GalaxinaEditor/GalaxinaEditor.iml" filepath="$PROJECT_DIR$/modules/GalaxinaEditor/GalaxinaEditor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/HiscoreServer/HiscoreServer.iml" filepath="$PROJECT_DIR$/modules/HiscoreServer/HiscoreServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiBuild/IntensiBuild.iml" filepath="$PROJECT_DIR$/modules/IntensiBuild/IntensiBuild.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiGame/IntensiGame.iml" filepath="$PROJECT_DIR$/modules/IntensiGame/IntensiGame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/IntensiME/IntensiME.iml" filepath="$PROJECT_DIR$/modules/IntensiME/IntensiME.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiTools/IntensiTools.iml" filepath="$PROJECT_DIR$/modules/IntensiTools/IntensiTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/InterpolationTest/InterpolationTest.iml" filepath="$PROJECT_DIR$/modules/InterpolationTest/InterpolationTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/RunME/RunME.iml" filepath="$PROJECT_DIR$/modules/RunME/RunME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/RunME_Galaxina/RunME_Galaxina.iml" filepath="$PROJECT_DIR$/modules/RunME_Galaxina/RunME_Galaxina.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/Tests/Tests.iml" filepath="$PROJECT_DIR$/modules/Tests/Tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modules/Webxina/Webxina.iml" filepath="$PROJECT_DIR$/modules/Webxina/Webxina.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="JDK 1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="JDK 1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="Galaxina 240x320" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="Galaxina 240x320" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.Galaxina width=240 height=320" />
+      <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.Galaxina width=240 height=320 resources=res resources=res/Galaxina resources=res/Galaxina/240x320" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Webxina" />
+      <module name="RunME_Galaxina" />
       <envs />
+      <RunnerSettings RunnerId="Profile CPU">
+        <option name="startFromMode" value="MAIN_CLASS" />
+        <option name="otherClassesToStartFrom" value="" />
+        <option name="profileNewRunnables" value="true" />
+        <option name="filteringMode" value="EXCLUDE" />
+        <option name="filterIncludeClasses" value="" />
+        <option name="filterExcludeClasses" value="java.*, javax.*,&#10;sun.*, sunw.*, com.sun.*" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Profile Memory">
+        <option name="profileAllocMode" value="ALLOC_AND_GC" />
+        <option name="profileAllocInterval" value="10" />
+        <option name="recordAllocTraces" value="false" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Sandbox 240x320" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="Sandbox 240x320" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.GalaxinaSandbox width=240 height=320" />
@@ -399,15 +427,28 @@
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="Webxina" />
+      <module name="RunME_Galaxina" />
       <envs />
+      <RunnerSettings RunnerId="Profile CPU">
+        <option name="startFromMode" value="MAIN_CLASS" />
+        <option name="otherClassesToStartFrom" value="" />
+        <option name="profileNewRunnables" value="true" />
+        <option name="filteringMode" value="EXCLUDE" />
+        <option name="filterIncludeClasses" value="" />
+        <option name="filterExcludeClasses" value="java.*, javax.*,&#10;sun.*, sunw.*, com.sun.*" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Profile Memory">
+        <option name="profileAllocMode" value="ALLOC_AND_GC" />
+        <option name="profileAllocInterval" value="10" />
+        <option name="recordAllocTraces" value="false" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Editor" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="Editor" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.galaxina.Editor" />
       <option name="VM_PARAMETERS" value="-Djava.util.logging.config.file=logging.properties" />
       <option name="PROGRAM_PARAMETERS" value="res/Galaxina/240x320" />
@@ -419,13 +460,26 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="GalaxinaEditor" />
       <envs />
+      <RunnerSettings RunnerId="Profile CPU">
+        <option name="startFromMode" value="MAIN_CLASS" />
+        <option name="otherClassesToStartFrom" value="" />
+        <option name="profileNewRunnables" value="true" />
+        <option name="filteringMode" value="EXCLUDE" />
+        <option name="filterIncludeClasses" value="" />
+        <option name="filterExcludeClasses" value="java.*, javax.*,&#10;sun.*, sunw.*, com.sun.*" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Profile Memory">
+        <option name="profileAllocMode" value="ALLOC_AND_GC" />
+        <option name="profileAllocInterval" value="10" />
+        <option name="recordAllocTraces" value="false" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="TestCatmullRomIntepolation" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="TestCatmullRomIntepolation" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.TestCatmullRomIntepolation" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -443,7 +497,7 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="TestHermiteIntepolation" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="TestHermiteIntepolation" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.TestHermiteIntepolation" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -461,7 +515,7 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="TestLinearPath" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="TestLinearPath" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.TestLinearPath" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -479,7 +533,7 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="false" name="TestSmoothPath" type="Application" factoryName="Application" enabled="false" merge="false">
+    <configuration default="false" name="TestSmoothPath" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
       <option name="MAIN_CLASS_NAME" value="net.intensicode.TestSmoothPath" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -512,8 +566,14 @@
     <option name="GENERATE_IIOP_STUBS" value="false" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/modules/GalaxinaEditor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/IntensiME" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/RunME_Galaxina" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
