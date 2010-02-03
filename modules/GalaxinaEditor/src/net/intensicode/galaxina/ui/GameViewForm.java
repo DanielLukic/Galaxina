@@ -1,12 +1,9 @@
 package net.intensicode.galaxina.ui;
 
-import net.intensicode.core.Engine;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorStateListener;
+import net.intensicode.galaxina.*;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.event.*;
 
 public final class GameViewForm extends FormBase implements EditorStateListener
     {
@@ -25,7 +22,7 @@ public final class GameViewForm extends FormBase implements EditorStateListener
         public final void stateChanged( final ChangeEvent aEvent )
             {
             final int value = mySlowDownSlider.getValue();
-            Engine.slowDownInTicks = value;
+            myCoreAPI.engine().slowDownInTicks = value;
             mySlowDownField.setText( Integer.toString( value ) );
             }
         } );
@@ -38,18 +35,20 @@ public final class GameViewForm extends FormBase implements EditorStateListener
 
     public final void onStateChanged( final String aEventID, final Object aOldValue, final Object aNewValue )
         {
-        final boolean enabled = aNewValue != null;
-        if ( aEventID == PROJECT )
+        if ( aEventID == MIDLET_RUNNING )
             {
-            if ( enabled )
+            final boolean running = aNewValue != null && (Boolean) aNewValue;
+            if ( running )
                 {
-                mySlowDownSlider.setMinimum( -Engine.ticksPerSecond / 6 );
-                mySlowDownSlider.setMaximum( Engine.ticksPerSecond / 4 );
+                mySlowDownSlider.setMinimum( -myCoreAPI.timing().ticksPerSecond / 6 );
+                mySlowDownSlider.setMaximum( myCoreAPI.timing().ticksPerSecond / 4 );
                 mySlowDownSlider.setValue( 0 );
                 }
             }
+
         if ( aEventID == MIDLET_CONTAINER )
             {
+            final boolean enabled = aNewValue != null;
             mySlowDownSlider.setEnabled( enabled );
             mySlowDownField.setEnabled( enabled );
             }
@@ -57,7 +56,7 @@ public final class GameViewForm extends FormBase implements EditorStateListener
 
     // Implementation
 
-    private final void createUIComponents()
+    private void createUIComponents()
         {
         myGameView = new GamePanel( myCoreAPI );
         }

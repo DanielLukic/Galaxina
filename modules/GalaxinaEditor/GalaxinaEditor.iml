@@ -8,6 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="RunME" />
+    <orderEntry type="module" module-name="IntensiME" />
+    <orderEntry type="module" module-name="IntensiGame" />
+    <orderEntry type="module" module-name="Galaxina" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -17,14 +21,10 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="Webxina" />
-    <orderEntry type="module" module-name="RunME" />
-    <orderEntry type="module" module-name="Galaxina" />
-    <orderEntry type="module" module-name="IntensiGame" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jruby.jar!/" />
+          <root url="file://$MODULE_DIR$/../../res/Galaxina/240x320" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -33,30 +33,21 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jruby.jar!/" />
+          <root url="file://$MODULE_DIR$/../../res/Galaxina" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="JRuby facet sdk">
+      <library>
         <CLASSES>
-          <root url="file:///media/kubuntu/usr/local/jruby-1.1RC2/lib/ruby/site_ruby/1.8" />
-          <root url="file:///media/kubuntu/usr/local/jruby-1.1RC2/lib/ruby/site_ruby" />
-          <root url="file:///media/kubuntu/usr/local/jruby-1.1RC2/lib/ruby/1.8" />
-          <root url="file://$MODULE_DIR$/../../../../.IntelliJIdea70/config/plugins/ruby/rubystubs" />
+          <root url="file://$MODULE_DIR$/../../res" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="file:///media/kubuntu/usr/local/jruby-1.1RC2/lib/ruby/site_ruby/1.8" />
-          <root url="file:///media/kubuntu/usr/local/jruby-1.1RC2/lib/ruby/site_ruby" />
-          <root url="file:///media/kubuntu/usr/local/jruby-1.1RC2/lib/ruby/1.8" />
-          <root url="file://$MODULE_DIR$/../../../../.IntelliJIdea70/config/plugins/ruby/rubystubs" />
-        </SOURCES>
+        <SOURCES />
       </library>
     </orderEntry>
-    <orderEntryProperties />
   </component>
   <component name="PluginUploader.PluginUploadConfigurable">
     <option name="ARCHIVE_PATH" />

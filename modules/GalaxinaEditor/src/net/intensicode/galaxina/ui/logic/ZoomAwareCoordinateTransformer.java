@@ -1,8 +1,6 @@
 package net.intensicode.galaxina.ui.logic;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.PositionEx;
 import net.intensicode.util.Position;
 
@@ -54,10 +52,10 @@ public final class ZoomAwareCoordinateTransformer implements CoordinateTransform
 
     // Implementation
 
-    private final double xOffset()
+    private double xOffset()
         {
         final int width = myComponent.getWidth();
-        final int screenWidth = screen().width();
+        final int screenWidth = myCoreAPI.gameScreenWidth();
 
         final double rawOffset = ( width - screenWidth * myZoomFactor ) / 2;
 
@@ -66,10 +64,10 @@ public final class ZoomAwareCoordinateTransformer implements CoordinateTransform
         return rawOffset - offset.x;
         }
 
-    private final double yOffset()
+    private double yOffset()
         {
         final int height = myComponent.getHeight();
-        final int screenHeight = screen().height();
+        final int screenHeight = myCoreAPI.gameScreenHeight();
 
         final double rawOffset = ( height - screenHeight * myZoomFactor ) / 2;
 
@@ -77,12 +75,6 @@ public final class ZoomAwareCoordinateTransformer implements CoordinateTransform
         if ( offset == null ) return rawOffset;
         return rawOffset + offset.y;
         }
-
-    private final DirectScreen screen()
-        {
-        return myCoreAPI.project().engine().screen;
-        }
-
 
 
     private double myZoomFactor;

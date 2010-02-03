@@ -19,6 +19,8 @@ public interface Identifiers
 
     String MIDLET_ZOOM = "MIDLET_ZOOM";
 
+    String MIDLET_DISPLAY = "MIDLET_DISPLAY";
+
     String MIDLET_CONTAINER = "MIDLET_CONTAINER";
 
     String MIDLET_RUNNING = "MIDLET_RUNNING";

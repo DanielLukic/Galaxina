@@ -1,8 +1,6 @@
 package net.intensicode.galaxina.ui.actions.swarmEditor;
 
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.ui.actions.RunnableAction;
 import net.intensicode.util.Position;
@@ -19,7 +17,7 @@ public final class ShrinkX extends RunnableAction implements EditorStateListener
 
     public final void run()
         {
-        final int width = myCoreAPI.project().engine().screen.width();
+        final int width = myCoreAPI.gameScreenWidth();
         final int halfWidth = width / 2;
 
         final Swarm swarm = myCoreAPI.state().currentSwarm();

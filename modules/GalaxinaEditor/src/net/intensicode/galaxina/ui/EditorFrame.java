@@ -1,12 +1,12 @@
 package net.intensicode.galaxina.ui;
 
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorUiAPI;
+import net.intensicode.galaxina.*;
+import net.intensicode.runme.GraphicsContext;
 
 import javax.swing.*;
 import java.awt.*;
 
-public final class EditorFrame extends JFrame
+public final class EditorFrame extends JFrame implements GraphicsContext
     {
     public EditorFrame( final EditorCoreAPI aCoreAPI )
         {
@@ -27,17 +27,7 @@ public final class EditorFrame extends JFrame
 
         pack();
 
-        final int minWidth = getSize().width;
-        final int minHeight = getSize().height;
-
-        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        final int targetWidth = screenSize.width * 2 / 4;
-        final int targetHeight = screenSize.height * 3 / 4;
-        final int width = Math.max( minWidth, targetWidth );
-        final int height = Math.max( minHeight, targetHeight );
-        final int x = ( screenSize.width - width ) / 2;
-        final int y = ( screenSize.height - height ) / 2;
-        setBounds( x, y, width, height );
+        centerAndResizeTo();
 
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
@@ -46,7 +36,30 @@ public final class EditorFrame extends JFrame
         ui().register( this );
         }
 
-    private final JMenuBar createMenuBar()
+    public final void centerAndResizeTo()
+        {
+        final GraphicsDevice device = getGraphicsDevice();
+        final DisplayMode mode = device.getDisplayMode();
+        final int availableWidth = mode.getWidth() * 80 / 100;
+        final int availableHeight = mode.getHeight() * 80 / 100;
+        final Insets insets = getInsets();
+        final int width = availableWidth + insets.left + insets.right;
+        final int height = availableHeight + insets.top + insets.bottom;
+        final int x = ( mode.getWidth() - width ) / 2;
+        final int y = ( mode.getHeight() - height ) / 2;
+        setBounds( x, y, width, height );
+        }
+
+    // From GraphicsContext
+
+    public final GraphicsDevice getGraphicsDevice()
+        {
+        return getGraphicsConfiguration().getDevice();
+        }
+
+    // Implementation
+
+    private JMenuBar createMenuBar()
         {
         final JMenuBar menuBar = new JMenuBar();
         menuBar.add( createProjectMenu() );
@@ -57,7 +70,7 @@ public final class EditorFrame extends JFrame
         return menuBar;
         }
 
-    private final JMenu createProjectMenu()
+    private JMenu createProjectMenu()
         {
         final JMenu menu = new JMenu( ui().action( "Project" ) );
         menu.add( new JMenuItem( ui().action( "OpenProject" ) ) );
@@ -68,7 +81,7 @@ public final class EditorFrame extends JFrame
         return menu;
         }
 
-    private final JMenu createPathMenu()
+    private JMenu createPathMenu()
         {
         final JMenu menu = new JMenu( ui().action( "Path" ) );
         menu.add( new JMenuItem( ui().action( "AddPath" ) ) );
@@ -87,7 +100,7 @@ public final class EditorFrame extends JFrame
         return menu;
         }
 
-    private final JMenu createSwarmMenu()
+    private JMenu createSwarmMenu()
         {
         final JMenu menu = new JMenu( ui().action( "Swarm" ) );
         menu.add( new JMenuItem( ui().action( "AddSwarm" ) ) );
@@ -108,7 +121,7 @@ public final class EditorFrame extends JFrame
         return menu;
         }
 
-    private final JMenu createGameMenu()
+    private JMenu createGameMenu()
         {
         final JMenu menu = new JMenu( ui().action( "Game" ) );
         menu.add( new JMenuItem( ui().action( "StepGame" ) ) );
@@ -120,7 +133,7 @@ public final class EditorFrame extends JFrame
         return menu;
         }
 
-    private final JMenu createEditMenu()
+    private JMenu createEditMenu()
         {
         final JMenu menu = new JMenu( ui().action( "Edit" ) );
         menu.add( new JMenuItem( ui().action( "editors.AlignToGrid" ) ) );
@@ -135,7 +148,7 @@ public final class EditorFrame extends JFrame
         return menu;
         }
 
-    private final EditorUiAPI ui()
+    private EditorUiAPI ui()
         {
         return myCoreAPI.ui();
         }

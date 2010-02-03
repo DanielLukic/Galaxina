@@ -1,9 +1,6 @@
 package net.intensicode.galaxina.domain;
 
-import net.intensicode.core.Engine;
-import net.intensicode.galaxina.EditorConfiguration;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorState;
+import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.util.Log;
 
 import java.io.*;
@@ -64,7 +61,6 @@ public final class Project extends AbstractDomainObject<ProjectListener>
         myProjectDirectory = aProjectDirectory;
 
         myGalaxina = new EmbeddedGalaxina();
-        myEngine = myGalaxina.engine();
 
         fire( "onProjectOpened", this );
 
@@ -102,7 +98,6 @@ public final class Project extends AbstractDomainObject<ProjectListener>
 
         fire( "onProjectClosed" );
 
-        myEngine = null;
         myGalaxina = null;
 
         myProjectDirectory = null;
@@ -127,11 +122,6 @@ public final class Project extends AbstractDomainObject<ProjectListener>
         return myEnemies;
         }
 
-    public final Engine engine()
-        {
-        return myEngine;
-        }
-
     public final EmbeddedGalaxina galaxina()
         {
         return myGalaxina;
@@ -153,8 +143,6 @@ public final class Project extends AbstractDomainObject<ProjectListener>
         }
 
 
-
-    private Engine myEngine;
 
     private EmbeddedGalaxina myGalaxina;
 

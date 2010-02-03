@@ -1,8 +1,6 @@
 package net.intensicode.galaxina.ui.actions.swarmEditor;
 
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.ui.actions.RunnableAction;
 import net.intensicode.util.Position;
@@ -23,7 +21,7 @@ public final class MirrorY extends RunnableAction implements EditorStateListener
         if ( swarm == null ) return;
         for ( final Position pos : swarm.positions() )
             {
-            pos.y = myCoreAPI.project().engine().screen.height() - pos.y;
+            pos.y = myCoreAPI.gameScreenHeight() - pos.y;
             }
         swarm.positions().fireDataChanged();
         }

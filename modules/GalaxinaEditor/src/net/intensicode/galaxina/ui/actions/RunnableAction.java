@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.ui.actions;
 
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

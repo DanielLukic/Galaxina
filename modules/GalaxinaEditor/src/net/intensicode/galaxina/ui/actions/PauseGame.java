@@ -1,9 +1,6 @@
 package net.intensicode.galaxina.ui.actions;
 
-import net.intensicode.core.Engine;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 
 public final class PauseGame extends RunnableAction implements EditorStateListener, Identifiers
     {
@@ -25,6 +22,6 @@ public final class PauseGame extends RunnableAction implements EditorStateListen
 
     protected final void runUnsafe() throws Exception
         {
-        Engine.pause = !Engine.pause;
+        myCoreAPI.toggleGameEnginePause();
         }
     }

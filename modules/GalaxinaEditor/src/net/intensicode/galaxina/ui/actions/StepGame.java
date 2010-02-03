@@ -1,9 +1,6 @@
 package net.intensicode.galaxina.ui.actions;
 
-import net.intensicode.core.Engine;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 
 public final class StepGame extends RunnableAction implements EditorStateListener, Identifiers
     {
@@ -25,7 +22,6 @@ public final class StepGame extends RunnableAction implements EditorStateListene
 
     protected final void runUnsafe() throws Exception
         {
-        Engine.pause = false;
-        Engine.singleStep = true;
+        myCoreAPI.doGameEngineSingleStep();
         }
     }

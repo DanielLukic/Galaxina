@@ -1,23 +1,14 @@
 package net.intensicode.galaxina.ui;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorState;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
-import net.intensicode.galaxina.domain.Group;
-import net.intensicode.galaxina.domain.GroupListener;
-import net.intensicode.galaxina.domain.Path;
+import net.intensicode.galaxina.*;
+import net.intensicode.galaxina.domain.*;
 import net.intensicode.galaxina.ui.layers.*;
-import net.intensicode.galaxina.ui.logic.MouseWheelZoomer;
-import net.intensicode.galaxina.ui.logic.PathEditorLogic;
-import net.intensicode.galaxina.ui.logic.ZoomAwareCoordinateTransformer;
+import net.intensicode.galaxina.ui.logic.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public final class PathEditorPanel extends JPanel implements Identifiers, EditorStateListener, GroupListener<Path>
     {
@@ -45,7 +36,7 @@ public final class PathEditorPanel extends JPanel implements Identifiers, Editor
         logic.setComponent( this );
 
         new MouseBasedFocusHandler( this );
-        
+
         addMouseWheelListener( new MouseWheelZoomer( aCoreAPI ) );
         addKeyListener( new PathEditorKeyHandler( aCoreAPI ) );
         setFocusable( true );
@@ -72,7 +63,7 @@ public final class PathEditorPanel extends JPanel implements Identifiers, Editor
         {
         final PathLayer oldLayer = myPathLayers.remove( aRemovedEntry );
         if ( oldLayer == null ) throw new IllegalArgumentException();
-        if ( myLayers.remove( oldLayer ) == false ) throw new IllegalArgumentException();
+        if ( !myLayers.remove( oldLayer ) ) throw new IllegalArgumentException();
         }
 
     public final void onReplaced( final Group<Path> aPathGroup, final Path aOldEntry, final Path aEntry, final Integer aIndex )
@@ -128,12 +119,7 @@ public final class PathEditorPanel extends JPanel implements Identifiers, Editor
 
     // Implementation
 
-    private final DirectScreen screen()
-        {
-        return myCoreAPI.project().engine().screen;
-        }
-
-    private final double getZoomFactor()
+    private double getZoomFactor()
         {
         final EditorState.ZoomMode zoomMode = myCoreAPI.state().getZoomMode();
         if ( zoomMode == Identifiers.ZoomMode.ZOOM_EXACT )
@@ -142,20 +128,20 @@ public final class PathEditorPanel extends JPanel implements Identifiers, Editor
             }
         else if ( zoomMode == Identifiers.ZoomMode.ZOOM_TO_FIT )
             {
-            final double xZoom = getWidth() * 0.8 / screen().width();
-            final double yZoom = getHeight() * 0.8 / screen().height();
+            final double xZoom = getWidth() * 0.8 / myCoreAPI.gameScreenWidth();
+            final double yZoom = getHeight() * 0.8 / myCoreAPI.gameScreenHeight();
             final double zoom = Math.min( xZoom, yZoom );
             myCoreAPI.state().setZoomFactor( zoom );
             return myCoreAPI.state().getZoomFactor();
             }
         else if ( zoomMode == Identifiers.ZoomMode.ZOOM_FREE )
-            {
-            return myCoreAPI.state().getZoomFactor();
-            }
-        else
-            {
-            throw new IllegalArgumentException();
-            }
+                {
+                return myCoreAPI.state().getZoomFactor();
+                }
+            else
+                {
+                throw new IllegalArgumentException();
+                }
         }
 
 

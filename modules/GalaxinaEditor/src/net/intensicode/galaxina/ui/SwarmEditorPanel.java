@@ -1,20 +1,14 @@
 package net.intensicode.galaxina.ui;
 
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorState;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.*;
 import net.intensicode.galaxina.ui.layers.*;
-import net.intensicode.galaxina.ui.logic.MouseWheelZoomer;
-import net.intensicode.galaxina.ui.logic.SwarmEditorLogic;
-import net.intensicode.galaxina.ui.logic.ZoomAwareCoordinateTransformer;
+import net.intensicode.galaxina.ui.logic.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public final class SwarmEditorPanel extends JPanel implements Identifiers, EditorStateListener
     {
@@ -82,8 +76,8 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
         {
         super.paintComponent( g );
 
-        if ( myCoreAPI.project().isOpen() == false ) return;
-        
+        if ( !myCoreAPI.project().isOpen() ) return;
+
         final Graphics2D g2d = (Graphics2D) g;
         final AffineTransform at = g2d.getTransform();
 
@@ -98,7 +92,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
 
     // Implementation
 
-    private final void detachFrom( final Swarm aOldSwarm )
+    private void detachFrom( final Swarm aOldSwarm )
         {
         if ( aOldSwarm == null ) return;
 
@@ -109,7 +103,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
             }
         }
 
-    private final void attachTo( final Swarm aNewSwarm )
+    private void attachTo( final Swarm aNewSwarm )
         {
         if ( aNewSwarm == null ) return;
 
@@ -120,7 +114,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
         aNewSwarm.pathes().add( myPathManager );
         }
 
-    private final void detachFrom( final Level aOldLevel )
+    private void detachFrom( final Level aOldLevel )
         {
         if ( aOldLevel == null ) return;
 
@@ -131,7 +125,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
             }
         }
 
-    private final void attachTo( final Level aNewLevel )
+    private void attachTo( final Level aNewLevel )
         {
         if ( aNewLevel == null ) return;
 
@@ -142,7 +136,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
         aNewLevel.swarms().add( mySwarmManager );
         }
 
-    private final double getZoomFactor()
+    private double getZoomFactor()
         {
         final ZoomMode zoomMode = myCoreAPI.state().getZoomMode();
         if ( zoomMode == ZoomMode.ZOOM_EXACT )
@@ -151,30 +145,20 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
             }
         else if ( zoomMode == ZoomMode.ZOOM_TO_FIT )
             {
-            final double xZoom = getWidth() * 0.8 / screenWidth();
-            final double yZoom = getHeight() * 0.8 / screenHeight();
+            final double xZoom = getWidth() * 0.8 / myCoreAPI.gameScreenWidth();
+            final double yZoom = getHeight() * 0.8 / myCoreAPI.gameScreenHeight();
             final double zoom = Math.min( xZoom, yZoom );
             myCoreAPI.state().setZoomFactor( zoom );
             return myCoreAPI.state().getZoomFactor();
             }
         else if ( zoomMode == ZoomMode.ZOOM_FREE )
-            {
-            return myCoreAPI.state().getZoomFactor();
-            }
-        else
-            {
-            throw new IllegalArgumentException();
-            }
-        }
-
-    private final int screenWidth()
-        {
-        return myCoreAPI.project().engine().screen.width();
-        }
-
-    private final int screenHeight()
-        {
-        return myCoreAPI.project().engine().screen.height();
+                {
+                return myCoreAPI.state().getZoomFactor();
+                }
+            else
+                {
+                throw new IllegalArgumentException();
+                }
         }
 
 
@@ -211,7 +195,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
             {
             final SwarmLayer oldLayer = mySwarmLayers.remove( aRemovedEntry );
             if ( oldLayer == null ) throw new IllegalArgumentException();
-            if ( myLayers.remove( oldLayer ) == false ) throw new IllegalArgumentException();
+            if ( !myLayers.remove( oldLayer ) ) throw new IllegalArgumentException();
             updateUI();
             }
 
@@ -252,7 +236,7 @@ public final class SwarmEditorPanel extends JPanel implements Identifiers, Edito
             {
             final PathLayer oldLayer = myPathLayers.remove( aRemovedEntry );
             if ( oldLayer == null ) throw new IllegalArgumentException();
-            if ( myLayers.remove( oldLayer ) == false ) throw new IllegalArgumentException();
+            if ( !myLayers.remove( oldLayer ) ) throw new IllegalArgumentException();
             updateUI();
             }
 

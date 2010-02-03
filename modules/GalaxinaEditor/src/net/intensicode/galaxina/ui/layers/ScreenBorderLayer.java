@@ -1,8 +1,6 @@
 package net.intensicode.galaxina.ui.layers;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 
 import java.awt.*;
 
@@ -17,9 +15,8 @@ public final class ScreenBorderLayer implements VisualLayer, Identifiers
 
     public final void paintInto( final Graphics2D aGraphics2D )
         {
-        final DirectScreen screen = myCoreAPI.project().engine().screen;
-        final int screenWidth = screen.width();
-        final int screenHeight = screen.height();
+        final int screenWidth = myCoreAPI.gameScreenWidth();
+        final int screenHeight = myCoreAPI.gameScreenHeight();
 
         aGraphics2D.setColor( myCoreAPI.ui().configuration().guideColor );
         aGraphics2D.setStroke( myCoreAPI.ui().configuration().guideStroke );

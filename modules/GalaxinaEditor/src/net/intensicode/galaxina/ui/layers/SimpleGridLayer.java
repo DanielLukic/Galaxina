@@ -1,8 +1,6 @@
 package net.intensicode.galaxina.ui.layers;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 
 import java.awt.*;
 
@@ -31,15 +29,16 @@ public final class SimpleGridLayer implements VisualLayer, Identifiers
         if ( myCoreAPI.state().getZoomFactor() < 0.66 ) gridSizeY *= 2;
         if ( myCoreAPI.state().getZoomFactor() < 0.33 ) gridSizeY *= 2;
 
-        final DirectScreen screen = myCoreAPI.project().engine().screen;
+        final int width = myCoreAPI.gameScreenWidth();
+        final int height = myCoreAPI.gameScreenHeight();
 
-        final int xOffset = screen.width() / gridSizeX * gridSizeX;
+        final int xOffset = width / gridSizeX * gridSizeX;
         final int xStart = -xOffset;
-        final int xEnd = screen.width() + xOffset;
+        final int xEnd = width + xOffset;
 
-        final int yOffset = screen.height() / gridSizeY * gridSizeY;
+        final int yOffset = height / gridSizeY * gridSizeY;
         final int yStart = -yOffset;
-        final int yEnd = screen.height() + yOffset;
+        final int yEnd = height + yOffset;
 
         for ( int x = xStart; x <= xEnd; x += gridSizeX )
             {

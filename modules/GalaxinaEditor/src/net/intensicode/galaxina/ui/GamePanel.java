@@ -1,22 +1,15 @@
 package net.intensicode.galaxina.ui;
 
-import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.galaxina.EditorIdentifiers;
-import net.intensicode.galaxina.EditorStateListener;
-import net.intensicode.galaxina.Identifiers;
+import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.EmbeddedGalaxina;
-import net.intensicode.runme.MIDletContainer;
-import net.intensicode.runme.MIDletDisplay;
+import net.intensicode.runme.*;
 
-import javax.microedition.lcdui.DisplayContext;
-import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Displayable;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-public final class GamePanel extends JPanel implements DisplayContext, KeyListener, EditorStateListener, Identifiers
+public final class GamePanel extends JPanel implements DisplayBuffer, EditorStateListener, Identifiers
     {
     public GamePanel( final EditorCoreAPI aCoreAPI )
         {
@@ -27,17 +20,43 @@ public final class GamePanel extends JPanel implements DisplayContext, KeyListen
         aCoreAPI.state().add( MIDLET_ZOOM, this );
         aCoreAPI.state().add( SELECTED_LEVEL, this );
 
-        final int width = displayWidth();
-        final int height = displayHeight();
+        final int width = width();
+        final int height = height();
         setMinimumSize( new Dimension( width, height ) );
 
         myImage = new BufferedImage( width, height, BufferedImage.TYPE_INT_ARGB );
-        myGraphics = new Graphics( myImage );
+        myGraphics = new javax.microedition.lcdui.Graphics( myImage );
 
         addMouseListener( new MouseBasedFocusHandler( this ) );
-        addKeyListener( this );
 
         setFocusable( true );
+        }
+
+    // From DisplayBuffer
+
+    public final int width()
+        {
+        return myCoreAPI.gameScreenWidth();
+        }
+
+    public final int height()
+        {
+        return myCoreAPI.gameScreenHeight();
+        }
+
+    public final javax.microedition.lcdui.Graphics beginFrame()
+        {
+        return myGraphics;
+        }
+
+    public final void endFrame()
+        {
+        repaint();
+        }
+
+    public final void renderInto( final java.awt.Graphics aGraphics, final int aX, final int aY, final int aWidth, final int aHeight )
+        {
+        throw new RuntimeException( "nyi" );
         }
 
     // From EditorStateListener
@@ -55,14 +74,30 @@ public final class GamePanel extends JPanel implements DisplayContext, KeyListen
             if ( aNewValue != null )
                 {
                 final EmbeddedGalaxina galaxina = myCoreAPI.project().galaxina();
-                final MIDletDisplay display = new MIDletDisplay( this, 240, 320 );
-                myContainer = new MIDletContainer( galaxina, display );
+
+                myDisplay = new MIDletDisplay( galaxina, this );
+
+                myContainer = new MIDletContainer( galaxina );
+
+                myKeyHandler = new MIDletKeyHandler( galaxina );
+                addKeyListener( myKeyHandler );
+
+                myCoreAPI.state().change( MIDLET_DISPLAY, myDisplay );
                 myCoreAPI.state().change( MIDLET_CONTAINER, myContainer );
                 }
             else
                 {
                 myCoreAPI.state().change( MIDLET_CONTAINER, null );
+                myCoreAPI.state().change( MIDLET_DISPLAY, null );
+
+                if ( myKeyHandler != null ) removeKeyListener( myKeyHandler );
+                myKeyHandler = null;
+
+                if ( myContainer != null ) myContainer.destroy();
                 myContainer = null;
+
+                if ( myDisplay != null ) myDisplay.unregister( myContainer.getMidlet() );
+                myDisplay = null;
                 }
             }
 
@@ -152,48 +187,9 @@ public final class GamePanel extends JPanel implements DisplayContext, KeyListen
         g.drawImage( myImage, xOffset, yOffset, width, height, null );
         }
 
-    // From KeyListener
-
-    public final void keyPressed( final KeyEvent aKeyEvent )
-        {
-        if ( myContainer != null ) myContainer.keyPressed( aKeyEvent );
-        }
-
-    public final void keyReleased( final KeyEvent aKeyEvent )
-        {
-        if ( myContainer != null ) myContainer.keyReleased( aKeyEvent );
-        }
-
-    public final void keyTyped( final KeyEvent aKeyEvent )
-        {
-        if ( myContainer != null ) myContainer.keyTyped( aKeyEvent );
-        }
-
-    // From DisplayContext
-
-    public final int displayWidth()
-        {
-        return 240;
-        }
-
-    public final int displayHeight()
-        {
-        return 320;
-        }
-
-    public final void onRepaintDone()
-        {
-        repaint();
-        }
-
-    public final Graphics displayGraphics()
-        {
-        return myGraphics;
-        }
-
     // Implementation
 
-    private final int getBlitWidth()
+    private int getBlitWidth()
         {
         if ( myCoreAPI.state().get( MIDLET_ZOOM ) == ZoomMode.ZOOM_EXACT )
             {
@@ -205,7 +201,7 @@ public final class GamePanel extends JPanel implements DisplayContext, KeyListen
         return myImage.getWidth() * mult;
         }
 
-    private final int getBlitHeigh()
+    private int getBlitHeigh()
         {
         if ( myCoreAPI.state().get( MIDLET_ZOOM ) == ZoomMode.ZOOM_EXACT )
             {
@@ -219,12 +215,16 @@ public final class GamePanel extends JPanel implements DisplayContext, KeyListen
 
 
 
+    private MIDletDisplay myDisplay;
+
     private MIDletContainer myContainer;
 
+    private MIDletKeyHandler myKeyHandler;
 
-    private final Graphics myGraphics;
 
     private final BufferedImage myImage;
 
     private final EditorCoreAPI myCoreAPI;
+
+    private final javax.microedition.lcdui.Graphics myGraphics;
     }
