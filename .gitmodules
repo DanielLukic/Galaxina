@@ -2,4 +2,5 @@ remote_override: git://github.com/DanielLukic/{{module}}.git
 add_module: IntensiBuild modules/IntensiBuild
 add_module: IntensiTools modules/IntensiTools
 add_module: IntensiGame modules/IntensiGame
+add_module: IntensiME modules/IntensiME
 add_module: RunME modules/RunME
