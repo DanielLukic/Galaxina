@@ -73,15 +73,11 @@ public final class GamePanel extends JPanel implements DisplayBuffer, EditorStat
             {
             if ( aNewValue != null )
                 {
-                final EmbeddedGalaxina galaxina = myCoreAPI.project().galaxina();
-
-                myDisplay = new MIDletDisplay( galaxina, this );
-
-                myContainer = new MIDletContainer( galaxina );
-
-                myKeyHandler = new MIDletKeyHandler( galaxina );
+                myGalaxina = myCoreAPI.project().galaxina();
+                myDisplay = new MIDletDisplay( myGalaxina, this );
+                myContainer = new MIDletContainer( myGalaxina );
+                myKeyHandler = new MIDletKeyHandler( myGalaxina );
                 addKeyListener( myKeyHandler );
-
                 myCoreAPI.state().change( MIDLET_DISPLAY, myDisplay );
                 myCoreAPI.state().change( MIDLET_CONTAINER, myContainer );
                 }
@@ -89,15 +85,14 @@ public final class GamePanel extends JPanel implements DisplayBuffer, EditorStat
                 {
                 myCoreAPI.state().change( MIDLET_CONTAINER, null );
                 myCoreAPI.state().change( MIDLET_DISPLAY, null );
-
                 if ( myKeyHandler != null ) removeKeyListener( myKeyHandler );
                 myKeyHandler = null;
-
                 if ( myContainer != null ) myContainer.destroy();
                 myContainer = null;
-
-                if ( myDisplay != null ) myDisplay.unregister( myContainer.getMidlet() );
+                if ( myDisplay != null ) myDisplay.unregister( myGalaxina );
                 myDisplay = null;
+                if ( myGalaxina != null ) myGalaxina.destroyApp( true );
+                myGalaxina = null;
                 }
             }
 
@@ -220,6 +215,8 @@ public final class GamePanel extends JPanel implements DisplayBuffer, EditorStat
     private MIDletContainer myContainer;
 
     private MIDletKeyHandler myKeyHandler;
+
+    private EmbeddedGalaxina myGalaxina;
 
 
     private final BufferedImage myImage;
