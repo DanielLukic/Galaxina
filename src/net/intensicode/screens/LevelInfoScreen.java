@@ -1,22 +1,11 @@
 package net.intensicode.screens;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
-import net.intensicode.core.MultiScreen;
-import net.intensicode.game.GameContext;
-import net.intensicode.game.VisualContext;
+import net.intensicode.core.*;
+import net.intensicode.game.*;
 import net.intensicode.game.objects.GameModel;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.FontGen;
+import net.intensicode.graphics.*;
 import net.intensicode.util.Position;
 
-import javax.microedition.lcdui.Graphics;
-
-
-/**
- * Shows the level to played next.
- */
 public final class LevelInfoScreen extends MultiScreen
     {
     public LevelInfoScreen( final GameContext aGameContext )
@@ -27,14 +16,14 @@ public final class LevelInfoScreen extends MultiScreen
 
     // From MultiScreen
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
         final VisualContext visualContext = myGameContext.visualContext();
         addScreen( visualContext.sharedGameBackground() );
         myFont = visualContext.textFont();
         }
 
-    public final void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitEverytime() throws Exception
         {
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "START", "END", false );
 
@@ -55,40 +44,40 @@ public final class LevelInfoScreen extends MultiScreen
             }
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkFireAndConsume() || keys.checkLeftSoftAndConsume() )
             {
-            aEngine.popScreen( this );
+            stack().popScreen( this );
             myGameModel.startLevel();
             }
         else if ( keys.checkRightSoftAndConsume() )
             {
-            aEngine.popScreen( this );
+            stack().popScreen( this );
             myGameContext.showMainMenu();
             }
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        super.onDrawFrame( aScreen );
+        super.onDrawFrame();
 
-        final Graphics gc = aScreen.graphics();
+        final DirectGraphics gc = graphics();
 
-        myBlitPos.x = aScreen.width() / 2;
-        myBlitPos.y = aScreen.height() / 2 - myFont.charHeight();
-        myFont.blitString( gc, myLevelInfo, myBlitPos, FontGen.HCENTER | FontGen.BOTTOM );
+        myBlitPos.x = screen().width() / 2;
+        myBlitPos.y = screen().height() / 2 - myFont.charHeight();
+        myFont.blitString( gc, myLevelInfo, myBlitPos, FontGenerator.HCENTER | FontGenerator.BOTTOM );
 
-        myBlitPos.x = aScreen.width() / 2;
-        myBlitPos.y = aScreen.height() / 2 + myFont.charHeight();
-        myFont.blitString( gc, "PRESS FIRE TO START", myBlitPos, FontGen.HCENTER | FontGen.TOP );
+        myBlitPos.x = screen().width() / 2;
+        myBlitPos.y = screen().height() / 2 + myFont.charHeight();
+        myFont.blitString( gc, "PRESS FIRE TO START", myBlitPos, FontGenerator.HCENTER | FontGenerator.TOP );
         }
 
 
-    private BitmapFontGen myFont;
+    private BitmapFontGenerator myFont;
 
     private String myLevelInfo = "LEVEL 1";
 

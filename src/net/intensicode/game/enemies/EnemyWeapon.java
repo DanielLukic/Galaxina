@@ -1,21 +1,16 @@
 package net.intensicode.game.enemies;
 
-import net.intensicode.core.Engine;
+import net.intensicode.core.*;
 import net.intensicode.game.objects.GameModel;
 import net.intensicode.util.Position;
 
-
-
-/**
- * TODO: Describe this!
- */
 public abstract class EnemyWeapon
     {
-    public static Engine engine;
+    public static GameTiming timing;
+
+    public static GameEngine engine;
 
     public static GameModel model;
-
-
 
     public abstract void onControlTick();
 

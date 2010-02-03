@@ -1,30 +1,21 @@
 package net.intensicode.game.drawers;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.game.Camera;
-import net.intensicode.game.GameContext;
+import net.intensicode.core.DirectGraphics;
+import net.intensicode.game.*;
 import net.intensicode.game.objects.Spark;
+import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.Position;
 
-import javax.microedition.lcdui.Graphics;
-
-
-
-/**
- * TODO: Describe this!
- */
-public final class SparksDrawer extends AbstractScreen
+public final class SparksDrawer extends ScreenBase
     {
     public SparksDrawer( final GameContext aGameContext )
         {
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
         for ( int color = 0; color < GRADIENT_COLORS.length - 1; color++ )
             {
@@ -49,13 +40,13 @@ public final class SparksDrawer extends AbstractScreen
             }
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        final Graphics graphics = aScreen.graphics();
+        final DirectGraphics graphics = graphics();
 
         final int maxIndex = gradientColors.length;
 
@@ -72,7 +63,7 @@ public final class SparksDrawer extends AbstractScreen
             myFromPos.setTo( camera.toScreen( spark.fromPosFixed ) );
             myToPos.setTo( camera.toScreen( spark.toPosFixed ) );
 
-            graphics.setColor( gradientColors[ gradientIndex ] );
+            graphics.setColorRGB24( gradientColors[ gradientIndex ] );
             graphics.drawLine( myFromPos.x, myFromPos.y, myToPos.x, myToPos.y );
             }
         }

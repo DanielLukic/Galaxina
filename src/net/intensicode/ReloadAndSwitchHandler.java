@@ -1,12 +1,12 @@
 package net.intensicode;
 
-import net.intensicode.core.AbstractScreen;
+import net.intensicode.screens.ScreenBase;
 import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
+import net.intensicode.core.GameEngine;
 import net.intensicode.game.GameController;
 import net.intensicode.util.Log;
 
-public final class ReloadAndSwitchHandler extends AbstractScreen
+public final class ReloadAndSwitchHandler extends ScreenBase
     {
     public ReloadAndSwitchHandler( final GameController aGameController )
         {
@@ -26,9 +26,9 @@ public final class ReloadAndSwitchHandler extends AbstractScreen
         myTriggerLevelSwitch = aLevelIndex;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         if ( myTriggerReload )
             {
@@ -45,7 +45,7 @@ public final class ReloadAndSwitchHandler extends AbstractScreen
             }
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
         }
 

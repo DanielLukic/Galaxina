@@ -1,6 +1,6 @@
 package net.intensicode.game.enemies;
 
-import net.intensicode.core.Engine;
+import net.intensicode.core.*;
 import net.intensicode.game.objects.GameModel;
 import net.intensicode.util.Random;
 
@@ -8,9 +8,7 @@ public abstract class EnemyBehavior
     {
     public static GameModel model;
 
-    public static Engine engine;
-
-
+    public static GameEngine engine;
 
     public boolean isActive( final Enemy aEnemy )
         {
@@ -28,8 +26,6 @@ public abstract class EnemyBehavior
     public void onAttacking( final Enemy aEnemy )
         {
         }
-
-
 
     protected static final Random theRandom = new Random( 4711 );
     }

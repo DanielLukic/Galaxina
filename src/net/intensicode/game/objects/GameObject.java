@@ -1,29 +1,31 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
+import net.intensicode.core.*;
 
-
-
-/**
- * TODO: Describe this!
- */
 public abstract class GameObject
     {
-    public static Engine engine;
+    public static GameSystem system;
+
+    public static GameEngine engine;
+
+    public static GameTiming timing;
 
     public static GameModel model;
 
 
 
-    public final void onInitialize( final Engine aEngine, final GameModel aGameModel ) throws Exception
+    public final void onInitialize( final GameSystem aGameSystem, final GameModel aGameModel ) throws Exception
         {
         //#if DEBUG
-        if ( engine != null && engine != aEngine ) throw new IllegalArgumentException();
+        if ( system != null && system != aGameSystem ) throw new IllegalArgumentException();
         if ( model != null && model != aGameModel ) throw new IllegalArgumentException();
         //#endif
 
-        if ( engine == null ) engine = aEngine;
+        if ( system == null ) system = aGameSystem;
         if ( model == null ) model = aGameModel;
+
+        engine = aGameSystem.engine;
+        timing = aGameSystem.timing;
 
         if ( !myInitializedFlag ) onInitOnce();
         myInitializedFlag = true;

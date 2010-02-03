@@ -19,6 +19,7 @@ public final class Missiles extends GameObject
 
     public final void onStartGame() throws Exception
         {
+        Missile.timing = timing;
         }
 
     public final void onStartLevel() throws Exception
@@ -41,7 +42,7 @@ public final class Missiles extends GameObject
 
     // Implementation
 
-    private final Missile getMissile()
+    private Missile getMissile()
         {
         for ( int idx = 0; idx < missiles.length; idx++ )
             {

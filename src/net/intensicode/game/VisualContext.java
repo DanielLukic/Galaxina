@@ -1,36 +1,30 @@
 package net.intensicode.game;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.Skin;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.screens.AutoHideSoftkeysScreen;
+import net.intensicode.core.SkinManager;
+import net.intensicode.graphics.BitmapFontGenerator;
+import net.intensicode.screens.*;
 
 import java.io.IOException;
 
-
-
-/**
- * TODO: Describe this!
- */
 public interface VisualContext
-{
-    Skin skin();
+    {
+    SkinManager skinManager();
 
-    AbstractScreen sharedStars();
+    ScreenBase sharedStars();
 
-    AbstractScreen sharedBackground();
+    ScreenBase sharedBackground();
 
-    AbstractScreen sharedGameBackground();
+    ScreenBase sharedGameBackground();
 
-    AbstractScreen sharedGameDrawers();
+    ScreenBase sharedGameDrawers();
 
-    AutoHideSoftkeysScreen sharedSoftkeys();
+    AutohideSoftkeysScreen sharedSoftkeys();
 
-    BitmapFontGen titleFont() throws IOException;
+    BitmapFontGenerator titleFont() throws IOException;
 
-    BitmapFontGen menuFont() throws IOException;
+    BitmapFontGenerator menuFont() throws IOException;
 
-    BitmapFontGen textFont() throws IOException;
+    BitmapFontGenerator textFont() throws IOException;
 
-    BitmapFontGen softkeysFont() throws IOException;
-}
+    BitmapFontGenerator softkeysFont() throws IOException;
+    }

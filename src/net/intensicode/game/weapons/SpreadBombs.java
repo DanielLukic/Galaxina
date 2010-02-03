@@ -1,14 +1,9 @@
 package net.intensicode.game.weapons;
 
 import net.intensicode.core.Configuration;
-import net.intensicode.core.Engine;
 import net.intensicode.game.objects.*;
 import net.intensicode.util.Position;
 
-
-/**
- * TODO: Describe this!
- */
 public final class SpreadBombs extends Weapon
     {
     public final boolean isSecondary()
@@ -27,16 +22,15 @@ public final class SpreadBombs extends Weapon
         {
         myState = STATE_IDLE;
         myReloadTickCount = 0;
-        myReloadTicks = Engine.ticksPerSecond;
+        myReloadTicks = GameObject.timing.ticksPerSecond;
         }
 
     public final void onControlTick( final boolean aAllowControl )
         {
-        final Engine engine = GameObject.engine;
         switch ( myState )
             {
             case STATE_IDLE:
-                if ( aAllowControl ) onControl( engine );
+                if ( aAllowControl ) onControl();
                 break;
 
             case STATE_RELOADING:
@@ -53,9 +47,9 @@ public final class SpreadBombs extends Weapon
 
     // Implementation
 
-    private void onControl( final Engine aEngine )
+    private void onControl()
         {
-        if ( !aEngine.keys.checkFire2AndConsume() ) return;
+        if ( !GameObject.system.keys.checkFire2AndConsume() ) return;
 
         final boolean fired = onFire();
         onReload( fired );
@@ -67,7 +61,7 @@ public final class SpreadBombs extends Weapon
         final Bombs bombs = model.bombs;
         final World world = model.world;
 
-        final int bombSpeed = world.visibleSizeFixed.height / Engine.ticksPerSecond;
+        final int bombSpeed = world.visibleSizeFixed.height / GameObject.timing.ticksPerSecond;
         final int xSpeedStart = -bombSpeed;
         final int xSpeedStep = bombSpeed * 2 / myBombSpread.length;
 

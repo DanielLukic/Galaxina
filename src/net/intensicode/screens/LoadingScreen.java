@@ -1,22 +1,19 @@
 package net.intensicode.screens;
 
 import net.intensicode.core.*;
-import net.intensicode.util.FontGen;
+import net.intensicode.graphics.FontGenerator;
 
 import java.io.IOException;
 
-/**
- * TODO: Describe this!
- */
 public final class LoadingScreen extends MultiScreen
     {
-    public LoadingScreen( final Skin aSkin, final FontGen aTextFont ) throws IOException
+    public LoadingScreen( final SkinManager aSkin, final FontGenerator aTextFont ) throws IOException
         {
         mySkin = aSkin;
         myTextFont = aTextFont;
         }
 
-    public final LoadingScreen setLogo( final AbstractScreen aLogoScreen )
+    public final LoadingScreen setLogo( final ScreenBase aLogoScreen )
         {
         myLogoScreen = aLogoScreen;
         return this;
@@ -34,42 +31,42 @@ public final class LoadingScreen extends MultiScreen
         return this;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public void onInitEverytime() throws Exception
         {
-        myWaitTicks = Engine.ticksPerSecond * SECONDS_TO_WAIT;
+        myWaitTicks = timing().ticksPerSecond * SECONDS_TO_WAIT;
         }
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        addScreen( new ColorScreen( 0 ) );
+        addScreen( new ClearScreen() );
 
         if ( myLogoScreen != null ) addScreen( myLogoScreen );
 
         final AlignedTextScreen loading = new AlignedTextScreen( myTextFont, I18n._( "LOADING" ) );
-        loading.position.x = aScreen.width() / 2;
-        loading.position.y = aScreen.height() / 8;
+        loading.position.x = screen().width() / 2;
+        loading.position.y = screen().height() / 8;
         addScreen( loading );
 
         addScreen( mySoftkeys );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
         if ( myWaitTicks > 0 ) myWaitTicks--;
 
         if ( mySkin.allImagesLoaded() )
             {
-            myCallback.onLoadingDone( engine(), screen() );
-            if ( myWaitTicks == 0 ) aEngine.popScreen( this );
+            myCallback.onLoadingDone( system() );
+            if ( myWaitTicks == 0 ) stack().popScreen( this );
             }
 
-        if ( aEngine.keys.checkRightSoftAndConsume() )
+        if ( keys().checkRightSoftAndConsume() )
             {
-            aEngine.shutdownAndExit();
+            system().shutdownAndExit();
             }
 
         mySoftkeys.setSoftkeys( "", I18n._( "EXIT" ) );
@@ -83,11 +80,11 @@ public final class LoadingScreen extends MultiScreen
 
     private LoadingCallback myCallback;
 
-    private AbstractScreen myLogoScreen;
+    private ScreenBase myLogoScreen;
 
-    private final Skin mySkin;
+    private final SkinManager mySkin;
 
-    private final FontGen myTextFont;
+    private final FontGenerator myTextFont;
 
     private static final int SECONDS_TO_WAIT = 2;
     }

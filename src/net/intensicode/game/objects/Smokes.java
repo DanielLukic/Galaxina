@@ -1,12 +1,7 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.util.Position;
 
-
-/**
- * TODO: Describe this!
- */
 public final class Smokes extends GameObject
     {
     public final Smoke[] smokes = new Smoke[MAX_SMOKES];
@@ -20,14 +15,14 @@ public final class Smokes extends GameObject
     public final void add( final Position aWorldPosFixed )
         {
         final int speedValue = model.world.visibleSizeFixed.height / 4;
-        final int fallingSpeedFixed = speedValue / Engine.ticksPerSecond;
+        final int fallingSpeedFixed = speedValue / timing.ticksPerSecond;
         add( aWorldPosFixed, 0, fallingSpeedFixed );
         }
 
     public final void add( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
         {
         final Smoke smoke = getSmoke();
-        smoke.init( aWorldPosFixed, Engine.ticksPerSecond, aSpeedX, aSpeedY );
+        smoke.init( aWorldPosFixed, timing.ticksPerSecond, aSpeedX, aSpeedY );
         }
 
     // From GameObject
@@ -49,14 +44,14 @@ public final class Smokes extends GameObject
         for ( int idx = 0; idx < smokes.length; idx++ )
             {
             final Smoke smoke = smokes[ idx ];
-            if ( smoke.active == false ) continue;
+            if ( !smoke.active ) continue;
             smoke.onControlTick();
             }
         }
 
     // Implementation
 
-    private final Smoke getSmoke()
+    private Smoke getSmoke()
         {
         int oldestSmokeIndex = 0;
         int oldestSmokeTicks = 0;

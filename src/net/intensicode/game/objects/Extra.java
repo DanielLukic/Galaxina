@@ -1,20 +1,17 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.game.extras.ExtraType;
 import net.intensicode.util.Position;
 import net.intensicode.util.Rectangle;
+import net.intensicode.core.GameTiming;
 
-
-
-/**
- * TODO: Describe this!
- */
 public final class Extra
     {
     public final Position worldPosFixed = new Position();
 
     public final Position speedFixed = new Position();
+
+    public static GameTiming timing;
 
     public int animTickCount;
 
@@ -34,7 +31,7 @@ public final class Extra
         {
         active = true;
         animTickCount = 0;
-        animTicks = Engine.ticksPerSecond / 2;
+        animTicks = timing.ticksPerSecond / 2;
 
         speedFixed.x = aSpeedX;
         speedFixed.y = aSpeedY;
@@ -48,7 +45,7 @@ public final class Extra
 
     public final void onControlTick( final GameModel aGameModel )
         {
-        if ( active == false ) return;
+        if ( !active ) return;
 
         if ( animTickCount < animTicks ) animTickCount++;
         else animTickCount = 0;
@@ -64,7 +61,7 @@ public final class Extra
 
     // Implementation
 
-    private final void checkIfCaught( final GameModel aGameModel )
+    private void checkIfCaught( final GameModel aGameModel )
         {
         final Player player = aGameModel.player;
         if ( player.outerBBox.intersectsWith( myRect ) )

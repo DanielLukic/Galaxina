@@ -1,58 +1,51 @@
 package net.intensicode.game;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
+import net.intensicode.core.*;
 import net.intensicode.game.objects.World;
-import net.intensicode.util.Position;
-import net.intensicode.util.Size;
+import net.intensicode.screens.ScreenBase;
+import net.intensicode.util.*;
 
-
-
-/**
- * TODO: Describe this!
- */
-public final class Camera extends AbstractScreen
-{
+public final class Camera extends ScreenBase
+    {
     public Camera( final GameContext aGameContext )
-    {
+        {
         myWorld = aGameContext.gameModel().world;
-    }
+        }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
-    {
-        myScreenWidth = aScreen.width();
-        myScreenHeight = aScreen.height();
+    public final void onInitOnce() throws Exception
+        {
+        myScreenWidth = screen().width();
+        myScreenHeight = screen().height();
 
         myScreenCenterX = myScreenWidth / 2;
         myScreenCenterY = myScreenHeight / 2;
-    }
+        }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
-    {
-    }
+    public final void onControlTick() throws Exception
+        {
+        }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
-    {
-    }
+    public final void onDrawFrame()
+        {
+        }
 
     public final Position toScreen( final Position aWorldPos )
-    {
+        {
         final int x = aWorldPos.x * myScreenWidth / myWorld.visibleSizeFixed.width;
         final int y = aWorldPos.y * myScreenHeight / myWorld.visibleSizeFixed.height;
         myTempPos.x = x + myScreenCenterX;
         myTempPos.y = y + myScreenCenterY;
         return myTempPos;
-    }
+        }
 
     public final Size toWorldSize( final int aWidth, final int aHeight )
-    {
+        {
         myTempSize.width = aWidth * myWorld.visibleSizeFixed.width / myScreenWidth;
         myTempSize.height = aHeight * myWorld.visibleSizeFixed.height / myScreenHeight;
         return myTempSize;
-    }
+        }
 
 
 
@@ -69,4 +62,4 @@ public final class Camera extends AbstractScreen
     private final Size myTempSize = new Size();
 
     private final Position myTempPos = new Position();
-}
+    }

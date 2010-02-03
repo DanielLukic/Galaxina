@@ -1,22 +1,12 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.game.data;
 
-import net.intensicode.core.ResourceLoader;
+import net.intensicode.core.ResourcesManager;
+import net.intensicode.game.enemies.*;
 import net.intensicode.game.objects.GameModel;
-import net.intensicode.game.enemies.EnemyType;
-import net.intensicode.game.enemies.EnemyPath;
 import net.intensicode.path.PathWithDirection;
 
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 
-
-/**
- * TODO: Describe this!
- */
 public final class FormationConfiguration
     {
     public int numberOfSwarms;
@@ -29,9 +19,9 @@ public final class FormationConfiguration
 
 
 
-    public FormationConfiguration( final ResourceLoader aLoader, final GameModel aGameModel ) throws IOException
+    public FormationConfiguration( final ResourcesManager aResourcesManager, final GameModel aGameModel ) throws IOException
         {
-        myLoader = aLoader;
+        myResourcesManager = aResourcesManager;
         myGameModel = aGameModel;
 
         loadPathes( openStream( "/pathes.dat" ) );
@@ -74,12 +64,12 @@ public final class FormationConfiguration
 
     // Implementation
 
-    private final DataInputStream openStream( final String aFileName ) throws IOException
+    private DataInputStream openStream( final String aFileName ) throws IOException
         {
-        return new DataInputStream( myLoader.openChecked( aFileName ) );
+        return new DataInputStream( myResourcesManager.openStreamChecked( aFileName ) );
         }
 
-    private final void loadPathes( final DataInputStream aInputStream ) throws IOException
+    private void loadPathes( final DataInputStream aInputStream ) throws IOException
         {
         final int count = aInputStream.readInt();
         myDefinedPaths = new PathWithDirection[count];
@@ -92,7 +82,7 @@ public final class FormationConfiguration
         aInputStream.close();
         }
 
-    private final EnemyPath loadPath( final DataInputStream aInputStream ) throws IOException
+    private EnemyPath loadPath( final DataInputStream aInputStream ) throws IOException
         {
         final EnemyPath path = new EnemyPath( myGameModel.world );
 
@@ -110,7 +100,7 @@ public final class FormationConfiguration
         return path;
         }
 
-    private final void loadLevels( final DataInputStream aInputStream ) throws IOException
+    private void loadLevels( final DataInputStream aInputStream ) throws IOException
         {
         final int count = aInputStream.readInt();
         myDefinedLevels = new LevelConfiguration[count];
@@ -123,7 +113,7 @@ public final class FormationConfiguration
         aInputStream.close();
         }
 
-    private final LevelConfiguration loadLevel( final DataInputStream aInputStream ) throws IOException
+    private LevelConfiguration loadLevel( final DataInputStream aInputStream ) throws IOException
         {
         final LevelConfiguration config = new LevelConfiguration();
         config.load( aInputStream );
@@ -139,5 +129,5 @@ public final class FormationConfiguration
 
     private final GameModel myGameModel;
 
-    private final ResourceLoader myLoader;
+    private final ResourcesManager myResourcesManager;
     }

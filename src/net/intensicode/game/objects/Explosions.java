@@ -1,6 +1,5 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.util.Position;
 
 
@@ -21,8 +20,8 @@ public final class Explosions extends GameObject
         {
         final Explosion explosion = getExplosion();
 
-        //final int driftSpeedFixed = model.world.visibleSizeFixed.height / 8 / Engine.ticksPerSecond;
-        explosion.init( aWorldPosFixed, Engine.ticksPerSecond / 2, 0 );
+        //final int driftSpeedFixed = model.world.visibleSizeFixed.height / 8 / timing.ticksPerSecond;
+        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, 0 );
         explosion.type = Explosion.BIG;
         }
 
@@ -30,8 +29,8 @@ public final class Explosions extends GameObject
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 10 / Engine.ticksPerSecond;
-        explosion.init( aWorldPosFixed, Engine.ticksPerSecond / 2, driftSpeedFixed );
+        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 10 / timing.ticksPerSecond;
+        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, driftSpeedFixed );
         explosion.type = Explosion.DEFAULT;
         }
 
@@ -39,8 +38,8 @@ public final class Explosions extends GameObject
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 10 / Engine.ticksPerSecond;
-        explosion.init( aWorldPosFixed, Engine.ticksPerSecond / 2, -driftSpeedFixed );
+        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 10 / timing.ticksPerSecond;
+        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, -driftSpeedFixed );
         explosion.type = Explosion.SPECIAL;
         }
 
@@ -48,8 +47,8 @@ public final class Explosions extends GameObject
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 12 / Engine.ticksPerSecond;
-        explosion.init( aWorldPosFixed, Engine.ticksPerSecond / 2, -driftSpeedFixed );
+        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 12 / timing.ticksPerSecond;
+        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, -driftSpeedFixed );
         explosion.type = Explosion.DEFAULT;
         }
 
@@ -57,8 +56,8 @@ public final class Explosions extends GameObject
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 12 / Engine.ticksPerSecond;
-        explosion.init( aWorldPosFixed, Engine.ticksPerSecond / 2, -driftSpeedFixed );
+        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 12 / timing.ticksPerSecond;
+        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, -driftSpeedFixed );
         explosion.type = Explosion.BIG;
         }
 

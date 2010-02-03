@@ -1,76 +1,72 @@
 package net.intensicode.game;
 
-import net.intensicode.core.*;
+import net.intensicode.core.ImageResource;
+import net.intensicode.core.SkinManager;
 import net.intensicode.game.drawers.*;
 import net.intensicode.game.objects.GameModel;
 import net.intensicode.game.objects.World;
+import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
-import net.intensicode.util.BitmapFontGen;
 import net.intensicode.util.Log;
 
-import javax.microedition.lcdui.Image;
 import java.io.IOException;
 
-
-/**
- * TODO: Describe this!
- */
-public final class GameController extends AbstractScreen implements GameContext, VisualContext
+public final class GameController extends ScreenBase implements GameContext, VisualContext
     {
-    public GameController( final Skin aSkin )
+    public GameController( final SkinManager aSkin )
         {
         mySkin = aSkin;
         }
 
     // From VisualContext
 
-    public final Skin skin()
+    public final SkinManager skinManager()
         {
         return mySkin;
         }
 
-    public final AbstractScreen sharedStars()
+    public final ScreenBase sharedStars()
         {
         return mySharedStars;
         }
 
-    public final AbstractScreen sharedBackground()
+    public final ScreenBase sharedBackground()
         {
         return mySharedBackground;
         }
 
-    public final AbstractScreen sharedGameBackground()
+    public final ScreenBase sharedGameBackground()
         {
         return mySharedGameBackground;
         }
 
 
-    public final AbstractScreen sharedGameDrawers()
+    public final ScreenBase sharedGameDrawers()
         {
         return mySharedGameDrawers;
         }
 
-    public final AutoHideSoftkeysScreen sharedSoftkeys()
+    public final AutohideSoftkeysScreen sharedSoftkeys()
         {
         return mySharedSoftkeys;
         }
 
-    public BitmapFontGen menuFont() throws IOException
+    public BitmapFontGenerator menuFont() throws IOException
         {
         return mySkin.font( "menufont" );
         }
 
-    public BitmapFontGen softkeysFont() throws IOException
+    public BitmapFontGenerator softkeysFont() throws IOException
         {
         return mySkin.font( "textfont" );
         }
 
-    public BitmapFontGen textFont() throws IOException
+    public BitmapFontGenerator textFont() throws IOException
         {
         return mySkin.font( "textfont" );
         }
 
-    public BitmapFontGen titleFont() throws IOException
+    public BitmapFontGenerator titleFont() throws IOException
         {
         return mySkin.font( "menufont" );
         }
@@ -101,14 +97,14 @@ public final class GameController extends AbstractScreen implements GameContext,
         {
         disposeScreens();
         if ( myMainMenuScreen == null ) myMainMenuScreen = new MainMenuScreen( this );
-        engine().pushOnce( myMainMenuScreen );
+        stack().pushOnce( myMainMenuScreen );
         }
 
     public final void showHelp() throws Exception
         {
         disposeScreens();
         if ( myHelpScreen == null ) myHelpScreen = new HelpScreen( this );
-        engine().pushOnce( myHelpScreen );
+        stack().pushOnce( myHelpScreen );
         }
 
     public final void showHiscore() throws Exception
@@ -125,7 +121,7 @@ public final class GameController extends AbstractScreen implements GameContext,
         {
         disposeScreens();
         if ( myGameScreen == null ) myGameScreen = new GameScreen( this );
-        engine().pushOnce( myGameScreen );
+        stack().pushOnce( myGameScreen );
         myGameModel.startGame();
         }
 
@@ -133,28 +129,28 @@ public final class GameController extends AbstractScreen implements GameContext,
         {
         disposeScreens();
         if ( myGamePausedScreen == null ) myGamePausedScreen = new GamePausedScreen( this );
-        engine().pushOnce( myGamePausedScreen );
+        stack().pushOnce( myGamePausedScreen );
         }
 
     public final void exit() throws Exception
         {
-        engine().shutdownAndExit();
+        system().shutdownAndExit();
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public void onInitOnce() throws Exception
         {
-        final World world = new World( aScreen.width(), aScreen.height() );
+        final World world = new World( screen().width(), screen().height() );
         myGameModel = new GameModel( world );
 
         myCamera = new Camera( this );
         myHiscore = new Hiscore();
 
         mySharedStars = SimpleStars.instance();
-        mySharedSoftkeys = new AutoHideSoftkeysScreen( softkeysFont() );
+        mySharedSoftkeys = new AutohideSoftkeysScreen( softkeysFont() );
 
-        final Image background = mySkin.image( "background" );
+        final ImageResource background = mySkin.image( "background" );
         mySharedBackground = new ImageScreen( background, 50, 50, ImageScreen.MODE_RELATIVE );
         mySharedBackground.clearOutside = true;
 
@@ -180,18 +176,18 @@ public final class GameController extends AbstractScreen implements GameContext,
         mySharedGameBackground.addScreen( new ScoreboardDrawer( this ) );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         showMainMenu();
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
         }
 
     // Implementation
 
-    private final void disposeScreens()
+    private void disposeScreens()
         {
         //#if DEBUG
         Log.debug( "TODO: DISPOSE SCREENS IF MEM LOW" );
@@ -223,8 +219,8 @@ public final class GameController extends AbstractScreen implements GameContext,
 
     private MultiScreen mySharedGameBackground;
 
-    private AutoHideSoftkeysScreen mySharedSoftkeys;
+    private AutohideSoftkeysScreen mySharedSoftkeys;
 
 
-    private final Skin mySkin;
+    private final SkinManager mySkin;
     }

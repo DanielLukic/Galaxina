@@ -1,6 +1,5 @@
 package net.intensicode.game.enemies;
 
-import net.intensicode.core.Engine;
 import net.intensicode.game.enemies.controllers.*;
 import net.intensicode.game.extras.ExtraType;
 import net.intensicode.game.objects.GameModel;
@@ -9,11 +8,8 @@ import net.intensicode.game.objects.Player;
 import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.UtilitiesEx;
 import net.intensicode.util.*;
+import net.intensicode.core.GameTiming;
 
-
-/**
- * TODO: Describe this!
- */
 public final class Enemy
     {
     public static final EnemyController ENTERING = new EnteringController();
@@ -45,6 +41,8 @@ public final class Enemy
 
     public static final int SYNC_RIGHT = 4;
 
+
+    public static GameTiming timing;
 
     public static GameModel model;
 
@@ -313,8 +311,8 @@ public final class Enemy
 
         if ( hitsRemaining < type.hits )
             {
-            final int probability = Engine.ticksPerSecond * ( type.hits - hitsRemaining ) / type.hits;
-            if ( theRandom.nextInt( Engine.ticksPerSecond ) < probability / 3 )
+            final int probability = timing.ticksPerSecond * ( type.hits - hitsRemaining ) / type.hits;
+            if ( theRandom.nextInt( timing.ticksPerSecond ) < probability / 3 )
                 {
                 model.sparks.add( worldPosFixed, type.sizeInWorldFixed );
                 }
@@ -350,7 +348,7 @@ public final class Enemy
         if ( targetDirectionFixed == directionInDegreesFixed ) return;
 
         final int delta = getDirectionDelta( targetDirectionFixed, directionInDegreesFixed );
-        directionInDegreesFixed += delta * 12 / Engine.ticksPerSecond;
+        directionInDegreesFixed += delta * 12 / timing.ticksPerSecond;
 
         while ( directionInDegreesFixed < 0 )
             {

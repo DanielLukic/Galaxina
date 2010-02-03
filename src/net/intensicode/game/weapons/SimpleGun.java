@@ -1,8 +1,6 @@
 package net.intensicode.game.weapons;
 
-import net.intensicode.core.Configuration;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
+import net.intensicode.core.*;
 import net.intensicode.game.objects.GameObject;
 import net.intensicode.game.objects.GunShot;
 import net.intensicode.game.objects.Weapons;
@@ -10,30 +8,26 @@ import net.intensicode.util.DynamicArray;
 import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
 
-
-/**
- * TODO: Describe this!
- */
 public final class SimpleGun extends Weapon
     {
-    public static final int getNumberOfSlots()
+    public static int getNumberOfSlots()
         {
         return 1 + GameObject.model.player.weaponUpgrades;
         }
 
-    public static final int getNumberOfBullets()
+    public static int getNumberOfBullets()
         {
         return 1 + GameObject.model.player.bulletUpgrades;
         }
 
-    public static final int getReloadTicks()
+    public static int getReloadTicks()
         {
-        return Engine.ticksPerSecond / ( 3 + GameObject.model.player.reloadUpgrades );
+        return GameObject.timing.ticksPerSecond / ( 3 + GameObject.model.player.reloadUpgrades );
         }
 
-    public static final int getGunShotSpeed()
+    public static int getGunShotSpeed()
         {
-        return 2 * GameObject.model.world.visibleSizeFixed.height / Engine.ticksPerSecond;
+        return 2 * GameObject.model.world.visibleSizeFixed.height / GameObject.timing.ticksPerSecond;
         }
 
     public final boolean canFire()
@@ -86,16 +80,16 @@ public final class SimpleGun extends Weapon
 
     // Implementation
 
-    private final void onControl()
+    private void onControl()
         {
-        final Keys keys = GameObject.engine.keys;
+        final KeysHandler keys = GameObject.system.keys;
         if ( !keys.checkFire1AndConsume() ) return;
 
         final boolean fired = onFire();
         if ( fired ) onReload( fired );
         }
 
-    private final boolean onFire()
+    private boolean onFire()
         {
         //#if DEBUG
         if ( myShotDistanceFixed == 0 ) throw new IllegalStateException();
@@ -122,7 +116,7 @@ public final class SimpleGun extends Weapon
         return true;
         }
 
-    private final void onReload( final boolean aFiredFlag )
+    private void onReload( final boolean aFiredFlag )
         {
         final int numberOfSlots = getNumberOfSlots();
         for ( int idx = 0; idx < numberOfSlots; idx++ )

@@ -1,6 +1,5 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
 
@@ -20,7 +19,7 @@ public final class Breather extends GameObject
 
     public final Position getBreathPos( final Position aRelativePosition, final boolean aInSyncFlag )
         {
-        if ( aInSyncFlag == false )
+        if ( !aInSyncFlag )
             {
             return model.world.relativeToWorld( aRelativePosition );
             }
@@ -52,7 +51,7 @@ public final class Breather extends GameObject
 
     public final void onControlTick()
         {
-        final int breathingTicks = Engine.ticksPerSecond * 4;
+        final int breathingTicks = timing.ticksPerSecond * 4;
 
         switch ( myState )
             {
@@ -82,7 +81,7 @@ public final class Breather extends GameObject
 
     // Implementation
 
-    private final void setExpansion()
+    private void setExpansion()
         {
         if ( breathPercent >= 0 & breathPercent < 50 )
             {
@@ -100,7 +99,7 @@ public final class Breather extends GameObject
         breathOffsetFixedY = FixedMath.toFixed( breathOffsetFixedY );
         }
 
-    private final void setMovement()
+    private void setMovement()
         {
         if ( breathPercent >= 0 & breathPercent < 25 )
             breathOffsetFixedX = FixedMath.toFixed( breathPercent * 15 / 25 );

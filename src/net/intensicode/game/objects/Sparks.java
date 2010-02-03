@@ -1,13 +1,8 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.util.Position;
 import net.intensicode.util.Size;
 
-
-/**
- * TODO: Describe this!
- */
 public final class Sparks extends GameObject
     {
     public final Spark[] sparks = new Spark[MAX_SPARKS];
@@ -22,7 +17,7 @@ public final class Sparks extends GameObject
     public final void add( final Position aWorldPosFixed, final Size aSparkArea )
         {
         final Spark spark = getSpark();
-        spark.init( aWorldPosFixed, Engine.ticksPerSecond /3);
+        spark.init( aWorldPosFixed, timing.ticksPerSecond /3);
         spark.randomize( aSparkArea );
         }
 
@@ -45,14 +40,14 @@ public final class Sparks extends GameObject
         for ( int idx = 0; idx < sparks.length; idx++ )
             {
             final Spark spark = sparks[ idx ];
-            if ( spark.active == false ) continue;
+            if ( !spark.active ) continue;
             spark.onControlTick();
             }
         }
 
     // Implementation
 
-    private final Spark getSpark()
+    private Spark getSpark()
         {
         int oldestIndex = 0;
         int oldestTicks = 0;

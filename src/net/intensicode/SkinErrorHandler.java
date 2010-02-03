@@ -2,34 +2,32 @@
 
 package net.intensicode;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Skin;
+import net.intensicode.core.SkinManager;
+import net.intensicode.screens.ScreenBase;
 
-public final class SkinErrorHandler extends AbstractScreen
+public final class SkinErrorHandler extends ScreenBase
     {
-    public SkinErrorHandler( final Skin aSkin )
+    public SkinErrorHandler( final SkinManager aSkin )
         {
         mySkin = aSkin;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        if ( mySkin.exceptions.size > 0 )
+        if ( mySkin.exceptionsFromLoaderThread.size > 0 )
             {
-            Engine.showError( "SKIN FAILURE", (Throwable) mySkin.exceptions.get( 0 ) );
-            mySkin.exceptions.remove( 0 );
+            system().showError( "skin loader failure", (Throwable) mySkin.exceptionsFromLoaderThread.get( 0 ) );
+            mySkin.exceptionsFromLoaderThread.remove( 0 );
             }
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
         }
 
 
 
-    private final Skin mySkin;
+    private final SkinManager mySkin;
     }

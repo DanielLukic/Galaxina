@@ -1,24 +1,14 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.sandbox;
 
 import net.intensicode.core.*;
 import net.intensicode.game.GameContext;
 import net.intensicode.game.drawers.EnemiesDrawer;
-import net.intensicode.game.enemies.Enemy;
-import net.intensicode.game.enemies.EnemyPath;
+import net.intensicode.game.enemies.*;
 import net.intensicode.game.objects.GameModel;
-import net.intensicode.screens.ImageScreen;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.*;
 import net.intensicode.util.*;
 
-import javax.microedition.lcdui.Graphics;
-
-
-/**
- * TODO: Describe this!
- */
 public final class PathTestScreen extends MultiScreen
     {
     public PathTestScreen( final GameContext aGameContext )
@@ -26,13 +16,13 @@ public final class PathTestScreen extends MultiScreen
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        final Skin skin = myGameContext.visualContext().skin();
+        final SkinManager skin = myGameContext.visualContext().skinManager();
 
-        myGameContext.gameModel().onInitialize( aEngine );
+        myGameContext.gameModel().onInitialize( system() );
         myGameContext.gameModel().startGame();
         myGameContext.gameModel().startLevel();
 
@@ -58,42 +48,42 @@ public final class PathTestScreen extends MultiScreen
         myTextFont = myGameContext.visualContext().textFont();
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
-        final Keys keys = aEngine.keys;
-        if ( keys.checkRightSoftAndConsume() ) aEngine.popScreen();
+        final KeysHandler keys = keys();
+        if ( keys.checkRightSoftAndConsume() ) stack().popScreen();
 
         if ( keys.checkLeftSoftAndConsume() ) myAutoMove = !myAutoMove;
 
         if ( keys.checkUpAndConsume() || myAutoMove ) moveEnemy();
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        super.onDrawFrame( aScreen );
+        super.onDrawFrame();
 
         final int degrees = FixedMath.toIntRounded( myEnemy.targetDirectionFixed );
-        final Graphics gc = aScreen.graphics();
+        final DirectGraphics gc = graphics();
 
-        myDegreesPos.x = aScreen.width() / 2;
-        myDegreesPos.y = aScreen.height() / 4;
-        myTextFont.blitNumber( gc, myDegreesPos, degrees, FontGen.CENTER );
+        myDegreesPos.x = screen().width() / 2;
+        myDegreesPos.y = screen().height() / 4;
+        myTextFont.blitNumber( gc, myDegreesPos, degrees, FontGenerator.CENTER );
 
-        gc.setColor( 0xFFFFFF );
+        gc.setColorRGB24( 0xFFFFFF );
         gc.drawLine( myEnemyPos.x, myEnemyPos.y, myEnemyPos.x + myEnemyDir.x, myEnemyPos.y + myEnemyDir.y );
-        gc.setColor( 0xFF0000 );
+        gc.setColorRGB24( 0xFF0000 );
         gc.drawLine( myEnemyPos.x, myEnemyPos.y, myEnemyPos.x + myEnemyDir1.x, myEnemyPos.y + myEnemyDir1.y );
-        gc.setColor( 0x00FF00 );
+        gc.setColorRGB24( 0x00FF00 );
         gc.drawLine( myEnemyPos.x, myEnemyPos.y, myEnemyPos.x + myEnemyDir2.x, myEnemyPos.y + myEnemyDir2.y );
-        gc.setColor( 0xFFFF00 );
+        gc.setColorRGB24( 0xFFFF00 );
         gc.drawLine( myEnemyPos.x, myEnemyPos.y, myEnemyPos.x + myEnemyDir3.x, myEnemyPos.y + myEnemyDir3.y );
         }
 
     // Implementation
 
-    private final void moveEnemy()
+    private void moveEnemy()
         {
         myEnemy.moveAlongPath();
         myEnemy.directionInDegreesFixed = myEnemy.targetDirectionFixed;
@@ -133,7 +123,7 @@ public final class PathTestScreen extends MultiScreen
 
     private boolean myAutoMove;
 
-    private BitmapFontGen myTextFont;
+    private BitmapFontGenerator myTextFont;
 
     private final GameContext myGameContext;
 

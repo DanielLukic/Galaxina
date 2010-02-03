@@ -1,23 +1,12 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.sandbox;
 
 import net.intensicode.core.*;
 import net.intensicode.game.GameContext;
-import net.intensicode.screens.ImageScreen;
-import net.intensicode.util.CharGen;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.*;
 
-import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.game.Sprite;
 import java.io.IOException;
 
-
-/**
- * TODO: Describe this!
- */
 public final class ImageDataTest extends MultiScreen
     {
     public ImageDataTest( final GameContext aGameContext )
@@ -25,11 +14,11 @@ public final class ImageDataTest extends MultiScreen
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        final Skin skin = myGameContext.visualContext().skin();
+        final SkinManager skin = myGameContext.visualContext().skinManager();
 
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "NEXT", "BACK", false );
 
@@ -39,21 +28,21 @@ public final class ImageDataTest extends MultiScreen
         switchImage( myImageIndex = 0 );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkDownAndConsume() ) myFrameIndex = 0;
         if ( keys.checkUpAndConsume() ) myAutoStep = !myAutoStep;
         if ( keys.checkLeftAndConsume() ) myFrameIndex--;
         if ( keys.checkRightAndConsume() ) myFrameIndex++;
         if ( keys.checkLeftSoftAndConsume() ) nextImage();
-        if ( keys.checkRightSoftAndConsume() ) aEngine.popScreen();
+        if ( keys.checkRightSoftAndConsume() ) stack().popScreen();
 
         if ( myAutoStep )
             {
-            if ( myTickCounter < Engine.ticksPerSecond / 8 ) myTickCounter++;
+            if ( myTickCounter < timing().ticksPerSecond / 8 ) myTickCounter++;
             else myTickCounter = 0;
 
             if ( myTickCounter == 0 ) myFrameIndex++;
@@ -64,42 +53,41 @@ public final class ImageDataTest extends MultiScreen
         myFrameIndex %= frameCount;
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        super.onDrawFrame( aScreen );
+        super.onDrawFrame();
 
-        final Graphics gc = aScreen.graphics();
+        final DirectGraphics gc = graphics();
 
-        final int yBlitPos = aScreen.height() / 2;
-        final int xBlitPos1 = aScreen.width() / 4;
-        final int xBlitPos2 = aScreen.width() * 3 / 4;
+        final int yBlitPos = screen().height() / 2;
+        final int xBlitPos1 = screen().width() / 4;
+        final int xBlitPos2 = screen().width() * 3 / 4;
 
         mySprite.setFrame( myFrameIndex );
-        mySprite.setRefPixelPosition( xBlitPos1, yBlitPos );
-        mySprite.paint( gc );
+        mySprite.paint( gc, xBlitPos1, yBlitPos );
 
         myCharGen.blit( gc, xBlitPos2, yBlitPos, myFrameIndex );
         }
 
     // Implementation
 
-    private final void nextImage() throws IOException
+    private void nextImage() throws IOException
         {
         final int imageIndex = ( myImageIndex + 1 ) % IMAGES.length;
         switchImage( imageIndex );
         }
 
-    private final void switchImage( final int aImageIndex ) throws IOException
+    private void switchImage( final int aImageIndex ) throws IOException
         {
         if ( aImageIndex == 0 )
             {
-            final Image image = InMemoryImage.getFourFrames();
-            mySprite = new Sprite( image, 32, 32 );
-            myCharGen = CharGen.fromSize( image, 32, 32 );
+            //final Image image = InMemoryImage.getFourFrames();
+            //mySprite = new SpriteGenerator( image, 32, 32 );
+            //myCharGen = CharGenerator.fromSize( image, 32, 32 );
             }
         else
             {
-            final Skin skin = myGameContext.visualContext().skin();
+            final SkinManager skin = myGameContext.visualContext().skinManager();
             final String image = IMAGES[ aImageIndex ];
             mySprite = skin.sprite( image );
             myCharGen = skin.charGen( image );
@@ -117,9 +105,9 @@ public final class ImageDataTest extends MultiScreen
 
     private boolean myAutoStep;
 
-    private Sprite mySprite;
+    private SpriteGenerator mySprite;
 
-    private CharGen myCharGen;
+    private CharGenerator myCharGen;
 
     private final GameContext myGameContext;
 

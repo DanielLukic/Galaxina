@@ -1,16 +1,9 @@
 package net.intensicode.screens;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
 import net.intensicode.game.GameContext;
 import net.intensicode.game.objects.GameModel;
 
-
-/**
- * TODO: Describe this!
- */
-public final class GameScreen extends AbstractScreen
+public final class GameScreen extends ScreenBase
     {
     public GameScreen( final GameContext aGameContext )
         {
@@ -18,29 +11,29 @@ public final class GameScreen extends AbstractScreen
         myGameModel = aGameContext.gameModel();
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        myGameModel.onInitialize( aEngine );
+        myGameModel.onInitialize( system() );
 
         myLevelInfo = new LevelInfoScreen( myGameContext );
         myPlayLevel = new PlayLevelScreen( myGameContext );
         myLevelStats = new LevelStatsScreen( myGameContext );
         myGameOver = new GameOverScreen( myGameContext );
 
-        myLevelInfo.onInit( aEngine, aScreen );
-        myPlayLevel.onInit( aEngine, aScreen );
-        myLevelStats.onInit( aEngine, aScreen );
-        myGameOver.onInit( aEngine, aScreen );
+        myLevelInfo.onInit( system() );
+        myPlayLevel.onInit( system() );
+        myLevelStats.onInit( system() );
+        myGameOver.onInit( system() );
         }
 
-    public void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public void onInitEverytime() throws Exception
         {
-        aEngine.sound.stopMusic();
+        //audio().stopMusic();
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         switch ( myGameModel.state )
             {
@@ -48,21 +41,21 @@ public final class GameScreen extends AbstractScreen
                 myGameModel.startGame();
                 break;
             case GameModel.STATE_SHOW_LEVEL_INFO:
-                aEngine.pushOnce( myLevelInfo );
+                stack().pushOnce( myLevelInfo );
                 break;
             case GameModel.STATE_PLAY_LEVEL:
-                aEngine.pushOnce( myPlayLevel );
+                stack().pushOnce( myPlayLevel );
                 break;
             case GameModel.STATE_SHOW_LEVEL_STATS:
-                aEngine.pushOnce( myLevelStats );
+                stack().pushOnce( myLevelStats );
                 break;
             case GameModel.STATE_SHOW_GAME_OVER:
-                aEngine.pushOnce( myGameOver );
+                stack().pushOnce( myGameOver );
                 break;
             }
         }
 
-    public void onDrawFrame( final DirectScreen aScreen )
+    public void onDrawFrame()
         {
         }
 

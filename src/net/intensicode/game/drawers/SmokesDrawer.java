@@ -1,45 +1,36 @@
 package net.intensicode.game.drawers;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Skin;
-import net.intensicode.game.Camera;
-import net.intensicode.game.GameContext;
+import net.intensicode.core.*;
+import net.intensicode.game.*;
 import net.intensicode.game.objects.Smoke;
-import net.intensicode.util.CharGen;
-import net.intensicode.util.FontGen;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.Position;
 
 import javax.microedition.lcdui.Graphics;
 
-
-
-/**
- * TODO: Describe this!
- */
-public final class SmokesDrawer extends AbstractScreen
+public final class SmokesDrawer extends ScreenBase
     {
     public SmokesDrawer( final GameContext aGameContext )
         {
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        final Skin skin = myGameContext.visualContext().skin();
+        final SkinManager skin = myGameContext.visualContext().skinManager();
         mySmokeGen = skin.charGen( "smoke" );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        final Graphics graphics = aScreen.graphics();
+        final DirectGraphics graphics = graphics();
 
         final int maxAnimFrame = mySmokeGen.charsPerRow * mySmokeGen.charsPerColumn - 1;
 
@@ -53,14 +44,14 @@ public final class SmokesDrawer extends AbstractScreen
 
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( smoke.worldPosFixed );
-            final Position aligned = FontGen.getAlignedPosition( screenPos, mySmokeGen.charWidth, mySmokeGen.charHeight, SmokesDrawer.ALIGN_CENTER );
+            final Position aligned = FontGenerator.getAlignedPosition( screenPos, mySmokeGen.charWidth, mySmokeGen.charHeight, SmokesDrawer.ALIGN_CENTER );
             mySmokeGen.blit( graphics, aligned.x, aligned.y, frame );
             }
         }
 
 
 
-    private CharGen mySmokeGen;
+    private CharGenerator mySmokeGen;
 
     private final GameContext myGameContext;
 

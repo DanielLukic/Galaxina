@@ -2,16 +2,12 @@
 
 package net.intensicode;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
 import net.intensicode.game.GameController;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.FontGen;
-import net.intensicode.util.Position;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.ScreenBase;
+import net.intensicode.util.*;
 
-public final class CheatHandler extends AbstractScreen
+public final class CheatHandler extends ScreenBase
     {
     public CheatHandler( final GameController aGameController )
         {
@@ -99,48 +95,48 @@ public final class CheatHandler extends AbstractScreen
         } );
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public void onInitOnce() throws Exception
         {
         myFontGen = myGameController.visualContext().textFont();
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        if ( aEngine.keys.cheatCode != 0 )
-            {
-            for ( int idx = 0; idx < myCheats.size; idx++ )
-                {
-                final Cheat cheat = (Cheat) myCheats.get( idx );
-                if ( aEngine.keys.cheatCode == cheat.code )
-                    {
-                    cheat.onPerform();
-                    aEngine.keys.cheatCode = 0;
-                    }
-                }
-            }
+        //if ( keys().cheatCode != 0 )
+        //    {
+        //    for ( int idx = 0; idx < myCheats.size; idx++ )
+        //        {
+        //        final Cheat cheat = (Cheat) myCheats.get( idx );
+        //        if ( keys().cheatCode == cheat.code )
+        //            {
+        //            cheat.onPerform();
+        //            keys().cheatCode = 0;
+        //            }
+        //        }
+        //    }
 
         //if ( myGodMode ) myMainLogic.gameModel().player.slowDown = 9999;
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
         if ( mySlowDownMode > 0 ) simulateSlowDown();
 
-        final FontGen font = myFontGen;
+        final FontGenerator font = myFontGen;
 
         if ( myGodMode )
             {
-            final int xPos = ( aScreen.width() - font.stringWidth( "GOD" ) ) / 2;
-            font.blitString( aScreen.graphics(), "GOD", 0, 3, xPos, 0 );
+            final int xPos = ( screen().width() - font.stringWidth( "GOD" ) ) / 2;
+            font.blitString( graphics(), "GOD", 0, 3, xPos, 0 );
             }
 
-        if ( engine().keys.debugEnabled )
-            {
-            final int xPos = ( aScreen.width() - font.stringWidth( "DEBUG" ) ) / 2;
-            font.blitString( aScreen.graphics(), "DEBUG", 0, 5, xPos, aScreen.height() - font.charHeight() );
-            }
+        //if ( keys().debugEnabled )
+        //    {
+        //    final int xPos = ( screen().width() - font.stringWidth( "DEBUG" ) ) / 2;
+        //    font.blitString( graphics(), "DEBUG", 0, 5, xPos, screen().height() - font.charHeight() );
+        //    }
 
         if ( myShowHelp )
             {
@@ -157,11 +153,11 @@ public final class CheatHandler extends AbstractScreen
                 {
                 final Cheat cheat = (Cheat) myCheats.get( idx );
                 myBlitPos.x = x1;
-                font.blitNumber( aScreen.graphics(), myBlitPos, idx, FontGen.TOP_LEFT );
+                font.blitNumber( graphics(), myBlitPos, idx, FontGenerator.TOP_LEFT );
                 myBlitPos.x = x2;
-                font.blitChar( aScreen.graphics(), myBlitPos.x, myBlitPos.y, cheat.code );
+                font.blitChar( graphics(), myBlitPos.x, myBlitPos.y, cheat.code );
                 myBlitPos.x = x3;
-                font.blitString( aScreen.graphics(), cheat.name, myBlitPos, FontGen.LEFT );
+                font.blitString( graphics(), cheat.name, myBlitPos, FontGenerator.LEFT );
                 myBlitPos.y += charHeight;
                 }
             }
@@ -169,17 +165,17 @@ public final class CheatHandler extends AbstractScreen
 
     // Implementation
 
-    private final void register( final Cheat aCheat )
+    private void register( final Cheat aCheat )
         {
         myCheats.add( aCheat );
         }
 
-    private final void simulateSlowDown()
+    private void simulateSlowDown()
         {
         try
             {
             int delay = mySlowDownMode * 10;
-            delay += BitmapFontGen.buffered ? 0 : 10;
+            //delay += BitmapFontGenerator.buffered ? 0 : 10;
             Thread.sleep( delay );
             }
         catch ( InterruptedException e )
@@ -196,7 +192,7 @@ public final class CheatHandler extends AbstractScreen
 
     private int mySlowDownMode;
 
-    private BitmapFontGen myFontGen;
+    private BitmapFontGenerator myFontGen;
 
 
     private final GameController myGameController;

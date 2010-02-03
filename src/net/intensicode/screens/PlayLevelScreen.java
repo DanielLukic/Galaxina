@@ -1,17 +1,9 @@
 package net.intensicode.screens;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
-import net.intensicode.core.MultiScreen;
+import net.intensicode.core.KeysHandler;
 import net.intensicode.game.GameContext;
 import net.intensicode.game.objects.GameModel;
 
-
-
-/**
- * Shows the level to played next.
- */
 public final class PlayLevelScreen extends MultiScreen
     {
     public PlayLevelScreen( final GameContext aGameContext )
@@ -22,33 +14,33 @@ public final class PlayLevelScreen extends MultiScreen
 
     // From MultiScreen
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
         addScreen( myGameContext.visualContext().sharedGameBackground() );
         addScreen( myGameContext.visualContext().sharedGameDrawers() );
         }
 
-    public final void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitEverytime() throws Exception
         {
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "MENU", "PAUSE", true );
 
-        aEngine.keys.dontRepeatFlags[ Keys.FIRE1 ] = false;
-        aEngine.keys.dontRepeatFlags[ Keys.FIRE2 ] = true;
+        keys().dontRepeatFlags[ KeysHandler.FIRE1 ] = false;
+        keys().dontRepeatFlags[ KeysHandler.FIRE2 ] = true;
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         myGameModel.onControlTick();
 
         if ( myGameModel.state != GameModel.STATE_PLAY_LEVEL )
             {
-            aEngine.popScreen( this );
+            stack().popScreen( this );
             return;
             }
 
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkLeftSoftAndConsume() ) myGameContext.showMainMenu();
         else if ( keys.checkRightSoftAndConsume() ) myGameContext.pauseGame();
         }

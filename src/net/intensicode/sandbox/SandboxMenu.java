@@ -1,32 +1,20 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.sandbox;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
 import net.intensicode.game.GameContext;
-import net.intensicode.screens.AbstractMenu;
-import net.intensicode.screens.ClearScreen;
-import net.intensicode.screens.MenuEntry;
-import net.intensicode.util.FontGen;
+import net.intensicode.graphics.FontGenerator;
+import net.intensicode.screens.*;
 
-
-/**
- * TODO: Describe this!
- */
-public final class SandboxMenu extends AbstractMenu
+public final class SandboxMenu extends MenuBase
     {
-    public SandboxMenu( final GameContext aGameContext, final FontGen aMenuFont )
+    public SandboxMenu( final GameContext aGameContext, final FontGenerator aMenuFont )
         {
         super( aMenuFont );
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
         addScreen( new ClearScreen( 0 ) );
         addScreen( myGameContext.visualContext().sharedSoftkeys() );
@@ -38,7 +26,7 @@ public final class SandboxMenu extends AbstractMenu
         updateSelectedEntry( 0 );
         }
 
-    public final void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitEverytime() throws Exception
         {
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "SELECT", "EXIT", false );
         }
@@ -50,13 +38,13 @@ public final class SandboxMenu extends AbstractMenu
         switch ( aSelectedEntry.id )
             {
             case ROTATION_TEST:
-                engine().pushOnce( new RotationTestScreen( myGameContext ) );
+                stack().pushOnce( new RotationTestScreen( myGameContext ) );
                 break;
             case PATH_TEST:
-                engine().pushOnce( new PathTestScreen( myGameContext ) );
+                stack().pushOnce( new PathTestScreen( myGameContext ) );
                 break;
             case IMAGE_DATA_TEST:
-                engine().pushOnce( new ImageDataTest( myGameContext ) );
+                stack().pushOnce( new ImageDataTest( myGameContext ) );
                 break;
             }
         }

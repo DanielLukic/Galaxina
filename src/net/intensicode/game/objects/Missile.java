@@ -1,6 +1,6 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
+import net.intensicode.core.GameTiming;
 import net.intensicode.game.enemies.Enemy;
 import net.intensicode.util.*;
 
@@ -17,6 +17,8 @@ public final class Missile
     public final Position worldPosFixed = new Position();
 
     public final Position directionFixed = new Position();
+
+    public static GameTiming timing;
 
     public int speedFixed;
 
@@ -45,7 +47,7 @@ public final class Missile
         speedFixed = 0;
 
         final int worldHeightFixed = GameObject.model.world.visibleSizeFixed.height;
-        myMaxSpeedFixed = 75 * worldHeightFixed / 100 / Engine.ticksPerSecond;
+        myMaxSpeedFixed = 75 * worldHeightFixed / 100 / timing.ticksPerSecond;
         }
 
     public final void launch()
@@ -91,7 +93,7 @@ public final class Missile
 
     // Implementation
 
-    private final void moveAhead()
+    private void moveAhead()
         {
         myTempPosition.setTo( directionFixed );
         myTempPosition.scaleFixed( speedFixed );
@@ -105,7 +107,7 @@ public final class Missile
 
         bbox.setCenterAndSize( worldPosFixed, GameObject.model.player.sizeInWorldFixed );
 
-        if ( myStateTicks < myRandom.nextInt( Engine.ticksPerSecond / 4 ) )
+        if ( myStateTicks < myRandom.nextInt( timing.ticksPerSecond / 4 ) )
             {
             myStateTicks++;
             }
@@ -121,11 +123,11 @@ public final class Missile
             }
         }
 
-    private final void onLaunched()
+    private void onLaunched()
         {
         if ( speedFixed < myMaxSpeedFixed )
             {
-            speedFixed += myMaxSpeedFixed / Engine.ticksPerSecond;
+            speedFixed += myMaxSpeedFixed / timing.ticksPerSecond;
             }
         else
             {
@@ -133,18 +135,18 @@ public final class Missile
             }
         }
 
-    private final void onHoming()
+    private void onHoming()
         {
         onSearching();
         }
 
-    private final void onSearching()
+    private void onSearching()
         {
         if ( playerOwned ) onPlayerOwned();
         else throw new RuntimeException( "nyi" );
         }
 
-    private final void onPlayerOwned()
+    private void onPlayerOwned()
         {
         final DynamicArray enemies = GameObject.model.level.activeEnemies;
         for ( int idx = 0; idx < enemies.size; idx++ )
@@ -163,7 +165,7 @@ public final class Missile
             }
         }
 
-    private final void onExploding()
+    private void onExploding()
         {
         if ( myExplodeTicks == 0 )
             {
@@ -178,7 +180,7 @@ public final class Missile
                 }
             }
 
-        final int quarterSecond = Engine.ticksPerSecond / 4;
+        final int quarterSecond = timing.ticksPerSecond / 4;
         if ( myExplodeTicks <= quarterSecond )
             {
             final int debrisSoFar = myExplodeTicks * DEBRIS_COUNT / quarterSecond;
@@ -191,7 +193,7 @@ public final class Missile
                 }
             }
 
-        if ( myExplodeTicks < Engine.ticksPerSecond )
+        if ( myExplodeTicks < timing.ticksPerSecond )
             {
             myExplodeTicks++;
             }
@@ -215,7 +217,7 @@ public final class Missile
             }
         }
 
-    private final void addDebris( final int speed, final int sinIndex )
+    private void addDebris( final int speed, final int sinIndex )
         {
         final int dx = Sinus.instance().sin( sinIndex, speed );
         final int dy = Sinus.instance().cos( sinIndex, speed );
@@ -223,10 +225,10 @@ public final class Missile
         final Debris debris = GameObject.model.debrises.getInstance();
         debris.init( worldPosFixed, dx, dy );
         debris.type = Debris.TYPE_SMALL;
-        debris.timeOut = Engine.ticksPerSecond * 2;
+        debris.timeOut = timing.ticksPerSecond * 2;
         }
 
-    private final void addBomb( final int speed, final int sinIndex )
+    private void addBomb( final int speed, final int sinIndex )
         {
         final int dx = Sinus.instance().sin( sinIndex, speed );
         final int dy = Sinus.instance().cos( sinIndex, speed );

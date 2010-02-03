@@ -1,17 +1,11 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Configuration;
-import net.intensicode.core.Engine;
+import net.intensicode.core.*;
 import net.intensicode.game.enemies.*;
 import net.intensicode.game.extras.ExtraTypes;
 import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Log;
 
-
-
-/**
- * TODO: Describe this!
- */
 public final class GameModel
     {
     public static final int STATE_INITIALIZED = -1;
@@ -136,16 +130,17 @@ public final class GameModel
         aSwarm.bonusApplies = 0;
         }
 
-    public final void onInitialize( final Engine aEngine ) throws Exception
+    public final void onInitialize( final GameSystem aGameSystem ) throws Exception
         {
         state = STATE_INITIALIZED;
 
         EnemyBehavior.model = EnemyWeapon.model = Enemy.model = this;
-        EnemyBehavior.engine = EnemyWeapon.engine = aEngine;
+        EnemyBehavior.engine = EnemyWeapon.engine = aGameSystem.engine;
+        Enemy.timing = EnemyWeapon.timing = aGameSystem.timing;
 
         try
             {
-            configuration = aEngine.loader.loadConfiguration( "/game.properties" );
+            configuration = aGameSystem.resources.loadConfiguration( "/game.properties" );
             }
         catch ( final Exception e )
             {
@@ -158,7 +153,7 @@ public final class GameModel
         for ( int idx = 0; idx < myGameObjects.size; idx++ )
             {
             final GameObject gameObject = (GameObject) myGameObjects.objects[ idx ];
-            gameObject.onInitialize( aEngine, this );
+            gameObject.onInitialize( aGameSystem, this );
             }
         }
 

@@ -1,6 +1,5 @@
 package net.intensicode.game.enemies;
 
-import net.intensicode.core.Engine;
 import net.intensicode.game.data.FormationConfiguration;
 import net.intensicode.game.data.SwarmConfiguration;
 import net.intensicode.game.objects.GameObject;
@@ -11,10 +10,6 @@ import net.intensicode.util.Position;
 
 import java.io.IOException;
 
-
-/**
- * TODO: Describe this!
- */
 public final class EnemySpawner extends GameObject
     {
     public final DynamicArray spawnedSwarms = new DynamicArray();
@@ -31,9 +26,9 @@ public final class EnemySpawner extends GameObject
         Log.debug( "Reloading formation" );
         //#endif
         //#if CONSOLE
-        net.intensicode.core.ConsoleOverlay.addMessage( "Reloading formation" );
+        net.intensicode.screens.ConsoleOverlay.addMessage( "Reloading formation" );
         //#endif
-        myConfiguration = new FormationConfiguration( engine.loader, model );
+        myConfiguration = new FormationConfiguration( system.resources, model );
         }
 
     public final boolean isChallengingStage()
@@ -114,7 +109,7 @@ public final class EnemySpawner extends GameObject
 
     private void onInitializing()
         {
-        mySpawningTicks = Engine.ticksPerSecond / 3;
+        mySpawningTicks = timing.ticksPerSecond / 3;
         myCurrentSwarmIndex = 0;
         changeState( STATE_SPAWNING_SWARM );
         }
@@ -125,7 +120,7 @@ public final class EnemySpawner extends GameObject
         if ( myCurrentEnemyIndex < config.size )
             {
             final int delayInDeciSecs = config.delayInDeciSecondsFor( myCurrentEnemyIndex );
-            mySpawningTicks = Engine.ticksPerSecond * delayInDeciSecs / 10;
+            mySpawningTicks = timing.ticksPerSecond * delayInDeciSecs / 10;
 
             if ( mySpawnTicks < mySpawningTicks )
                 {

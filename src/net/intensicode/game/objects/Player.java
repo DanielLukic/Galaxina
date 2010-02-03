@@ -1,15 +1,9 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
-import net.intensicode.game.weapons.SimpleGun;
+import net.intensicode.core.KeysHandler;
 import net.intensicode.game.weapons.Weapon;
 import net.intensicode.util.*;
 
-
-/**
- * TODO: Describe this!
- */
 public final class Player extends GameObject
     {
     public static final int NOT_HIT = 0;
@@ -69,16 +63,16 @@ public final class Player extends GameObject
     public final boolean isCrash( final Rectangle aRectangleFixed )
         {
         if ( invulnerableTicks > 0 ) return false;
-        if ( visible == false ) return false;
+        if ( !visible ) return false;
         return innerBBox.intersectsWith( aRectangleFixed );
         }
 
     public final int isHit( final Position aWorldPosFixed )
         {
         if ( invulnerableTicks > 0 ) return NOT_HIT;
-        if ( myState != STATE_PLAYING || visible == false ) return NOT_HIT;
-        if ( outerBBox.contains( aWorldPosFixed ) == false ) return NOT_HIT;
-        if ( innerBBox.contains( aWorldPosFixed ) == false ) return OUTER_HIT;
+        if ( myState != STATE_PLAYING || !visible ) return NOT_HIT;
+        if ( !outerBBox.contains( aWorldPosFixed ) ) return NOT_HIT;
+        if ( !innerBBox.contains( aWorldPosFixed ) ) return OUTER_HIT;
         return FULL_HIT;
         }
 
@@ -97,7 +91,7 @@ public final class Player extends GameObject
         myState = STATE_EXPLODING;
         damageInPercentFixed = FixedMath.FIXED_100;
         myExplodeTick = 0;
-        myExplodeTicks = Engine.ticksPerSecond * 2;
+        myExplodeTicks = timing.ticksPerSecond * 2;
         }
 
     // From GameObject
@@ -129,7 +123,7 @@ public final class Player extends GameObject
         worldPosFixed.y = visibleSizeFixed.height / 2;
         worldPosFixed.y -= visibleSizeFixed.height / 10;
 
-        mySpeedStepFixed = visibleSizeFixed.width / Engine.ticksPerSecond * 2 / 3;
+        mySpeedStepFixed = visibleSizeFixed.width / timing.ticksPerSecond * 2 / 3;
         mySpeedLeftFixed = mySpeedRightFixed = 0;
 
         updateBBoxes();
@@ -158,7 +152,7 @@ public final class Player extends GameObject
 
     // Implementation
 
-    private final void updateBBoxes()
+    private void updateBBoxes()
         {
         final int outerWidth = sizeInWorldFixed.width * 90 / 100;
         final int outerHeight = sizeInWorldFixed.height * 90 / 100;
@@ -169,7 +163,7 @@ public final class Player extends GameObject
         innerBBox.setCenterAndSize( worldPosFixed, innerWidth, innerHeight );
         }
 
-    private final void onPlayLevel()
+    private void onPlayLevel()
         {
         switch ( myState )
             {
@@ -197,12 +191,12 @@ public final class Player extends GameObject
                 myTempPos.x += myRandom.nextInt( sizeInWorldFixed.width ) - sizeInWorldFixed.width / 2;
                 model.smokes.add( myTempPos );
                 final int maxDamage = Math.min( 75, FixedMath.toInt( damageInPercentFixed ) );
-                mySmokeTicks = Engine.ticksPerSecond * ( 100 - maxDamage ) / 100;
+                mySmokeTicks = timing.ticksPerSecond * ( 100 - maxDamage ) / 100;
                 }
             }
         }
 
-    private final void onPlaying()
+    private void onPlaying()
         {
         tickWeapons();
 
@@ -210,11 +204,11 @@ public final class Player extends GameObject
 
         if ( invulnerableTicks > 0 ) invulnerableTicks--;
 
-        damageInPercentFixed -= FixedMath.FIXED_1 / Engine.ticksPerSecond;
+        damageInPercentFixed -= FixedMath.FIXED_1 / timing.ticksPerSecond;
         if ( damageInPercentFixed < 0 ) damageInPercentFixed = 0;
 
-        final Keys keys = engine.keys;
-        if ( keys.check( Keys.LEFT ) )
+        final KeysHandler keys = system.keys;
+        if ( keys.check( KeysHandler.LEFT ) )
             {
             mySpeedLeftFixed += mySpeedStepFixed / 6;
             mySpeedRightFixed = mySpeedRightFixed * 60 / 100;
@@ -223,7 +217,7 @@ public final class Player extends GameObject
             {
             mySpeedLeftFixed = mySpeedLeftFixed * 80 / 100;
             }
-        if ( keys.check( Keys.RIGHT ) )
+        if ( keys.check( KeysHandler.RIGHT ) )
             {
             mySpeedRightFixed += mySpeedStepFixed / 6;
             mySpeedLeftFixed = mySpeedLeftFixed * 60 / 100;
@@ -249,7 +243,7 @@ public final class Player extends GameObject
         updateBBoxes();
         }
 
-    private final void onExploding()
+    private void onExploding()
         {
         tickWeapons();
 
@@ -282,7 +276,7 @@ public final class Player extends GameObject
             }
         }
 
-    private final void onLiveLost()
+    private void onLiveLost()
         {
         if ( lives > 0 )
             {
@@ -290,7 +284,7 @@ public final class Player extends GameObject
             damageInPercentFixed = 0;
             worldPosFixed.x = 0;
             myState = STATE_PLAYING;
-            invulnerableTicks = Engine.ticksPerSecond * 1;
+            invulnerableTicks = timing.ticksPerSecond;
             }
         else
             {
@@ -299,7 +293,7 @@ public final class Player extends GameObject
             }
         }
 
-    private final void tickWeapons()
+    private void tickWeapons()
         {
         if ( primaryWeapon != null ) primaryWeapon.onControlTick( isAlive() );
         if ( secondaryWeapon != null ) secondaryWeapon.onControlTick( isAlive() );

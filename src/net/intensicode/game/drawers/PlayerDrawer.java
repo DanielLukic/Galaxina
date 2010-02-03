@@ -1,36 +1,26 @@
 package net.intensicode.game.drawers;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Skin;
-import net.intensicode.game.Camera;
-import net.intensicode.game.GameContext;
+import net.intensicode.core.*;
+import net.intensicode.game.*;
 import net.intensicode.game.objects.Player;
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.Position;
-import net.intensicode.util.Size;
+import net.intensicode.graphics.SpriteGenerator;
+import net.intensicode.screens.ScreenBase;
+import net.intensicode.util.*;
 
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.game.Sprite;
 
-
-/**
- * TODO: Describe this!
- */
-public final class PlayerDrawer extends AbstractScreen
+public final class PlayerDrawer extends ScreenBase
     {
     public PlayerDrawer( final GameContext aGameContext )
         {
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        final Skin skin = myGameContext.visualContext().skin();
+        final SkinManager skin = myGameContext.visualContext().skinManager();
         myGalaxina = skin.sprite( "galaxian" );
         myDamageIndicator = skin.sprite( "damage" );
 
@@ -42,9 +32,9 @@ public final class PlayerDrawer extends AbstractScreen
         player.sizeInWorldFixed.setTo( sizeInWorld );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        final int tps = Engine.ticksPerSecond / 3;
+        final int tps = timing().ticksPerSecond / 3;
 
         if ( myAnimTicks < tps ) myAnimTicks++;
         else myAnimTicks = 0;
@@ -70,11 +60,11 @@ public final class PlayerDrawer extends AbstractScreen
             }
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
         final Player player = myGameContext.gameModel().player;
 
-        final Graphics gc = aScreen.graphics();
+        final DirectGraphics gc = graphics();
 
         if ( player.invulnerableTicks == 0 ) myLastInvulState = true;
         else myLastInvulState = !myLastInvulState;
@@ -83,9 +73,8 @@ public final class PlayerDrawer extends AbstractScreen
             {
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( player.worldPosFixed );
-            myGalaxina.setRefPixelPosition( screenPos.x, screenPos.y );
             myGalaxina.setFrame( myAnimFrame );
-            myGalaxina.paint( gc );
+            myGalaxina.paint( gc, screenPos.x, screenPos.y );
             }
 
         if ( myIndicatorVisible )
@@ -93,18 +82,17 @@ public final class PlayerDrawer extends AbstractScreen
             final int indicatorFrames = myDamageIndicator.getRawFrameCount();
             final int damage = FixedMath.toInt( player.damageInPercentFixed );
             final int frameID = damage * ( indicatorFrames - 1 ) / 100;
-            final int xPos = aScreen.width() / 2;
-            final int yPos = aScreen.height() - myDamageIndicator.getHeight();
-            myDamageIndicator.setRefPixelPosition( xPos, yPos );
+            final int xPos = screen().width() / 2;
+            final int yPos = screen().height() - myDamageIndicator.getHeight();
             myDamageIndicator.setFrame( frameID );
-            myDamageIndicator.paint( gc );
+            myDamageIndicator.paint( gc, xPos, yPos );
             }
 
         final int shownLives = Math.min( 5, player.lives );
         final int liveWidth = myLive.getWidth();
         final int liveHeight = myLive.getHeight();
-        final int xPosBase = ( aScreen.width() - shownLives * liveWidth ) / 2;
-        final int yPos = aScreen.height() - liveHeight - liveHeight / 2 - myDamageIndicator.getHeight();
+        final int xPosBase = ( screen().width() - shownLives * liveWidth ) / 2;
+        final int yPos = screen().height() - liveHeight - liveHeight / 2 - myDamageIndicator.getHeight();
         for ( int idx = 0; idx < shownLives; idx++ )
             {
             final int xPos = xPosBase + idx * liveWidth;
@@ -125,11 +113,11 @@ public final class PlayerDrawer extends AbstractScreen
     private boolean myIndicatorVisible;
 
 
-    private Image myLive;
+    private ImageResource myLive;
 
-    private Sprite myGalaxina;
+    private SpriteGenerator myGalaxina;
 
-    private Sprite myDamageIndicator;
+    private SpriteGenerator myDamageIndicator;
 
 
     private final GameContext myGameContext;

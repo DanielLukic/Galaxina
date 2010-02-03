@@ -2,72 +2,64 @@ package net.intensicode.screens;
 
 import net.intensicode.core.*;
 import net.intensicode.game.GameContext;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.FontGen;
+import net.intensicode.graphics.*;
 import net.intensicode.util.Position;
 
-import javax.microedition.lcdui.Graphics;
-
-
-
-/**
- * Shows the level to played next.
- */
 public final class GameOverScreen extends MultiScreen
-{
-    public GameOverScreen( final GameContext aGameContext )
     {
+    public GameOverScreen( final GameContext aGameContext )
+        {
         myGameContext = aGameContext;
-    }
+        }
 
     // From MultiScreen
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
-    {
+    public final void onInitOnce() throws Exception
+        {
         addScreen( myGameContext.visualContext().sharedGameBackground() );
         addScreen( myGameContext.visualContext().sharedGameDrawers() );
         myFont = myGameContext.visualContext().textFont();
-    }
+        }
 
-    public final void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
-    {
+    public final void onInitEverytime() throws Exception
+        {
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "START", "END", false );
-    }
+        }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
-    {
+    public final void onControlTick() throws Exception
+        {
         myGameContext.gameModel().onControlTick();
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkFireAndConsume() || keys.checkLeftSoftAndConsume() )
-        {
-            aEngine.popScreen( this );
+            {
+            stack().popScreen( this );
             myGameContext.gameModel().startGame();
-        }
+            }
         else if ( keys.checkRightSoftAndConsume() )
-        {
-            aEngine.popScreen( this );
+            {
+            stack().popScreen( this );
             myGameContext.pauseGame();
+            }
         }
-    }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
-    {
-        super.onDrawFrame( aScreen );
+    public final void onDrawFrame()
+        {
+        super.onDrawFrame();
 
-        final Graphics gc = aScreen.graphics();
-        myBlitPos.x = aScreen.width() / 2;
-        myBlitPos.y = aScreen.height() / 2 + myFont.charHeight();
-        myFont.blitString( gc, "GAME OVER", myBlitPos, FontGen.HCENTER | FontGen.TOP );
-    }
-
+        final DirectGraphics gc = graphics();
+        myBlitPos.x = screen().width() / 2;
+        myBlitPos.y = screen().height() / 2 + myFont.charHeight();
+        myFont.blitString( gc, "GAME OVER", myBlitPos, FontGenerator.HCENTER | FontGenerator.TOP );
+        }
 
 
-    private BitmapFontGen myFont;
+
+    private BitmapFontGenerator myFont;
 
 
     private final GameContext myGameContext;
 
     private final Position myBlitPos = new Position();
-}
+    }

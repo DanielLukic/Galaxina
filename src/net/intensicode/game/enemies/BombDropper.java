@@ -1,15 +1,10 @@
 package net.intensicode.game.enemies;
 
-import net.intensicode.core.Engine;
+import net.intensicode.core.GameEngine;
 import net.intensicode.util.Position;
 import net.intensicode.util.Log;
 import net.intensicode.game.objects.Bomb;
 
-
-
-/**
- * TODO: Describe this!
- */
 public final class BombDropper extends EnemyWeapon
     {
     public final void onControlTick()
@@ -44,12 +39,12 @@ public final class BombDropper extends EnemyWeapon
 
         final Bomb bomb = model.bombs.getAvailableBomb();
         final int dropHeight = model.world.visibleSizeFixed.height;
-        final int dropSpeed = dropHeight / Engine.ticksPerSecond / 2;
+        final int dropSpeed = dropHeight / timing.ticksPerSecond / 2;
         final int xDelta = ( model.player.worldPosFixed.x - myParentPosition.x ) / 30;
         bomb.init( myParentPosition, xDelta, dropSpeed );
         bomb.start( Bomb.FROM_ENEMY );
         model.level.onEnemyBombLaunched();
-        myReloadTicks = Engine.ticksPerSecond;
+        myReloadTicks = timing.ticksPerSecond;
         }
 
 

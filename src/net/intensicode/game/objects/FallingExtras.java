@@ -1,15 +1,9 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.game.extras.ExtraType;
 import net.intensicode.util.Position;
 import net.intensicode.util.Size;
 
-
-
-/**
- * TODO: Describe this!
- */
 public final class FallingExtras extends GameObject
     {
     public final Size sizeInWorldFixed = new Size();
@@ -27,7 +21,7 @@ public final class FallingExtras extends GameObject
         final Extra extra = getInstance();
         if ( extra == null ) return;
 
-        final int dropSpeed = model.world.visibleSizeFixed.height / Engine.ticksPerSecond / 3;
+        final int dropSpeed = model.world.visibleSizeFixed.height / timing.ticksPerSecond / 3;
         extra.init( aPosition, dropSpeed );
         extra.type = aExtraType;
         }
@@ -36,6 +30,7 @@ public final class FallingExtras extends GameObject
 
     public void onStartGame()
         {
+        Extra.timing = timing;
         }
 
     public void onStartLevel()
@@ -52,20 +47,20 @@ public final class FallingExtras extends GameObject
         for ( int idx = 0; idx < extras.length; idx++ )
             {
             final Extra extra = extras[ idx ];
-            if ( extra == null || extra.active == false ) continue;
+            if ( extra == null || !extra.active ) continue;
             extra.onControlTick( model );
             }
         }
 
     // Implementation
 
-    private final Extra getInstance()
+    private Extra getInstance()
         {
         for ( int idx = 0; idx < extras.length; idx++ )
             {
             final Extra extra = extras[ idx ];
             if ( extra == null ) return extras[ idx ] = new Extra();
-            if ( extra.active == false ) return extra;
+            if ( !extra.active ) return extra;
             }
         return null;
         }

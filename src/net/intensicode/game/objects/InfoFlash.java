@@ -1,7 +1,5 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
-
 public final class InfoFlash extends GameObject
     {
     public boolean visible;
@@ -20,7 +18,7 @@ public final class InfoFlash extends GameObject
     public final void show( final String aMessage )
         {
         message = aMessage;
-        myVisibleTicks = Engine.ticksPerSecond;
+        myVisibleTicks = timing.ticksPerSecond;
         }
 
     // From GameObject
@@ -38,7 +36,7 @@ public final class InfoFlash extends GameObject
         {
         if ( myVisibleTicks > 0 )
             {
-            final int interval = Engine.ticksPerSecond / 4;
+            final int interval = timing.ticksPerSecond / 4;
             final int flashInterval = interval * 2 / 3;
             visible = ( myVisibleTicks % interval ) < flashInterval;
             myVisibleTicks--;

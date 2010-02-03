@@ -1,15 +1,11 @@
 package net.intensicode.game.weapons;
 
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
 import net.intensicode.game.enemies.Enemy;
 import net.intensicode.game.objects.GameModel;
 import net.intensicode.game.objects.GameObject;
 import net.intensicode.util.DynamicArray;
+import net.intensicode.core.KeysHandler;
 
-/**
- * TODO: Describe this!
- */
 public final class SmartBomb extends Weapon
     {
     public final boolean isSecondary()
@@ -32,7 +28,7 @@ public final class SmartBomb extends Weapon
         switch ( myState )
             {
             case STATE_IDLE:
-                final Keys keys = GameObject.engine.keys;
+                final KeysHandler keys = GameObject.system.keys;
                 if ( aAllowControl && keys.checkFire2AndConsume() ) onEngage();
                 break;
             case STATE_LOADING:
@@ -58,11 +54,11 @@ public final class SmartBomb extends Weapon
 
     // Implementation
 
-    private final void updateFlashIntensity( final int aStateTicks )
+    private void updateFlashIntensity( final int aStateTicks )
         {
         final GameModel model = GameObject.model;
 
-        final int interval = Engine.ticksPerSecond / 6;
+        final int interval = GameObject.timing.ticksPerSecond / 6;
         if ( aStateTicks < interval )
             {
             model.screenFlashIntensity = ( interval - aStateTicks ) * 255 / interval;
@@ -73,16 +69,16 @@ public final class SmartBomb extends Weapon
             }
         }
 
-    private final void onEngage()
+    private void onEngage()
         {
         myState = STATE_LOADING;
-        myStateTicks = Engine.ticksPerSecond;
+        myStateTicks = GameObject.timing.ticksPerSecond;
         }
 
-    private final void onRelease()
+    private void onRelease()
         {
         myState = STATE_RELEASING;
-        myStateTicks = Engine.ticksPerSecond;
+        myStateTicks = GameObject.timing.ticksPerSecond;
 
         final DynamicArray enemies = GameObject.model.level.activeEnemies;
         for ( int idx = 0; idx < enemies.size; idx++ )

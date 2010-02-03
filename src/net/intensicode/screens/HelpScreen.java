@@ -1,22 +1,10 @@
 package net.intensicode.screens;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
-import net.intensicode.core.MultiScreen;
-import net.intensicode.game.GameContext;
-import net.intensicode.game.VisualContext;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.FontGen;
-import net.intensicode.util.Position;
+import net.intensicode.core.*;
+import net.intensicode.game.*;
+import net.intensicode.graphics.*;
+import net.intensicode.util.*;
 
-import javax.microedition.lcdui.Graphics;
-
-
-/**
- * TODO: Describe this!
- */
 public final class HelpScreen extends MultiScreen
     {
     public HelpScreen( final GameContext aGameContext )
@@ -24,9 +12,9 @@ public final class HelpScreen extends MultiScreen
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
         final VisualContext visualContext = myGameContext.visualContext();
         myTitleFont = visualContext.titleFont();
@@ -37,27 +25,27 @@ public final class HelpScreen extends MultiScreen
 
         visualContext.sharedSoftkeys().setSoftkeys( "START", "BACK", false );
 
-        extractLines( aEngine.loader.loadString( "/help.txt" ) );
+        extractLines( resources().loadString( "/help.txt" ) );
 
-        myHelpPos.x = aScreen.width() / 2;
+        myHelpPos.x = screen().width() / 2;
         myHelpPos.y = myTitleFont.charHeight();
         }
 
-    public final void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitEverytime() throws Exception
         {
-        final Keys keys = aEngine.keys;
-        keys.keyRepeatDelayInTicks = Engine.ticksPerSecond * 25 / 100;
-        keys.keyRepeatIntervalInTicks = Engine.ticksPerSecond * 10 / 100;
+        final KeysHandler keys = keys();
+        keys.keyRepeatDelayInTicks = timing().ticksPerSecond * 25 / 100;
+        keys.keyRepeatIntervalInTicks = timing().ticksPerSecond * 10 / 100;
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkLeftSoftAndConsume() ) myGameContext.startGame();
         else if ( keys.checkFireAndConsume() ) myGameContext.startGame();
-        else if ( keys.checkRightSoftAndConsume() ) aEngine.popScreen( this );
+        else if ( keys.checkRightSoftAndConsume() ) stack().popScreen( this );
 
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
         if ( keys.checkUpAndConsume() ) myLineOffset--;
         if ( keys.checkDownAndConsume() ) myLineOffset++;
@@ -68,12 +56,12 @@ public final class HelpScreen extends MultiScreen
             myLineOffset = myHelpTextLines.size - linesOnScreen;
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        super.onDrawFrame( aScreen );
+        super.onDrawFrame();
 
-        final Graphics gc = aScreen.graphics();
-        myTitleFont.blitString( gc, "HELP", myHelpPos, FontGen.CENTER );
+        final DirectGraphics gc = graphics();
+        myTitleFont.blitString( gc, "HELP", myHelpPos, FontGenerator.CENTER );
 
         final int linesOnScreen = linesOnScreen();
 
@@ -83,31 +71,31 @@ public final class HelpScreen extends MultiScreen
             if ( myLineOffset + idx >= myHelpTextLines.size ) break;
 
             final String line = (String) lines[ myLineOffset + idx ];
-            myBlitPos.x = aScreen.width() / 2;
+            myBlitPos.x = screen().width() / 2;
             myBlitPos.y = titleHeight() + idx * lineHeight();
-            myTextFont.blitString( gc, line, myBlitPos, FontGen.CENTER );
+            myTextFont.blitString( gc, line, myBlitPos, FontGenerator.CENTER );
             }
         }
 
-    private final int linesOnScreen()
+    private int linesOnScreen()
         {
         final int textHeight = ( screen().height() - titleHeight() );
         return ( textHeight / lineHeight() - 1 );
         }
 
-    private final int lineHeight()
+    private int lineHeight()
         {
         return myTextFont.charHeight() * 3 / 2;
         }
 
-    private final int titleHeight()
+    private int titleHeight()
         {
         return myTitleFont.charHeight() * 3;
         }
 
     // Implementation
 
-    private final void extractLines( final String aText )
+    private void extractLines( final String aText )
         {
         final int textLength = aText.length();
 
@@ -140,9 +128,9 @@ public final class HelpScreen extends MultiScreen
 
     private int myLineOffset = 0;
 
-    private BitmapFontGen myTextFont;
+    private BitmapFontGenerator myTextFont;
 
-    private BitmapFontGen myTitleFont;
+    private BitmapFontGenerator myTitleFont;
 
     private final GameContext myGameContext;
 

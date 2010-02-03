@@ -1,23 +1,13 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.sandbox;
 
 import net.intensicode.core.*;
 import net.intensicode.game.GameContext;
 import net.intensicode.game.drawers.EnemiesDrawer;
 import net.intensicode.game.enemies.Enemy;
-import net.intensicode.screens.ImageScreen;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.FontGen;
-import net.intensicode.util.Position;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.*;
+import net.intensicode.util.*;
 
-
-/**
- * TODO: Describe this!
- */
 public final class RotationTestScreen extends MultiScreen
     {
     public RotationTestScreen( final GameContext aGameContext )
@@ -25,11 +15,11 @@ public final class RotationTestScreen extends MultiScreen
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        final Skin skin = myGameContext.visualContext().skin();
+        final SkinManager skin = myGameContext.visualContext().skinManager();
 
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "", "BACK", false );
 
@@ -46,11 +36,11 @@ public final class RotationTestScreen extends MultiScreen
         myTextFont = myGameContext.visualContext().textFont();
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        super.onControlTick( aEngine );
+        super.onControlTick();
 
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkLeftAndConsume() )
             {
             myEnemy.directionInDegreesFixed -= FixedMath.FIXED_5;
@@ -61,25 +51,25 @@ public final class RotationTestScreen extends MultiScreen
             }
         if ( keys.checkRightSoftAndConsume() )
             {
-            aEngine.popScreen();
+            stack().popScreen();
             }
 
         myEnemy.directionInDegreesFixed = ( myEnemy.directionInDegreesFixed + FixedMath.FIXED_360 ) % FixedMath.FIXED_360;
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        super.onDrawFrame( aScreen );
+        super.onDrawFrame();
 
-        myDegreesPos.x = aScreen.width() / 2;
-        myDegreesPos.y = aScreen.height() / 4;
+        myDegreesPos.x = screen().width() / 2;
+        myDegreesPos.y = screen().height() / 4;
         final int degrees = FixedMath.toIntRounded( myEnemy.directionInDegreesFixed );
-        myTextFont.blitNumber( aScreen.graphics(), myDegreesPos, degrees, FontGen.CENTER );
+        myTextFont.blitNumber( graphics(), myDegreesPos, degrees, FontGenerator.CENTER );
         }
 
 
 
-    private BitmapFontGen myTextFont;
+    private BitmapFontGenerator myTextFont;
 
     private final GameContext myGameContext;
 

@@ -1,15 +1,8 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode;
 
-import net.intensicode.core.AbstractScreen;
+import net.intensicode.core.GameSystem;
+import net.intensicode.screens.ScreenBase;
 
-
-/**
- * TODO: Describe this!
- */
 public final class Galaxina extends IntensiGame
     {
     public Galaxina() throws Exception
@@ -19,7 +12,7 @@ public final class Galaxina extends IntensiGame
 
     // From SystemContext
 
-    public final AbstractScreen initMainController() throws Exception
+    public ScreenBase createMainScreen( final GameSystem aGameSystem ) throws Exception
         {
         return new MainController();
         }

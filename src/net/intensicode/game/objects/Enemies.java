@@ -1,13 +1,11 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.game.enemies.EnemyBehavior;
-import net.intensicode.game.enemies.EnemyType;
+import net.intensicode.game.enemies.*;
 import net.intensicode.game.enemies.behaviors.*;
 import net.intensicode.game.extras.ExtraTypes;
 import net.intensicode.util.Log;
 
-import java.io.DataInputStream;
-import java.io.InputStream;
+import java.io.*;
 
 public final class Enemies extends GameObject
     {
@@ -54,7 +52,7 @@ public final class Enemies extends GameObject
 
     private void loadEnemyTypes() throws Exception
         {
-        final InputStream stream = engine.loader.openChecked( DATA_FILE_NAME );
+        final InputStream stream = system.resources.openStreamChecked( DATA_FILE_NAME );
         final DataInputStream input = new DataInputStream( stream );
 
         final int count = input.readInt();

@@ -1,17 +1,9 @@
 package net.intensicode.game.enemies;
 
-import net.intensicode.core.Engine;
 import net.intensicode.game.extras.ExtraTypes;
-import net.intensicode.game.objects.GameModel;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.Log;
-import net.intensicode.util.Position;
-import net.intensicode.util.Size;
+import net.intensicode.game.objects.*;
+import net.intensicode.util.*;
 
-
-/**
- * TODO: Describe this!
- */
 public final class EnemyType
     {
     public final Size sizeInWorldFixed = new Size();
@@ -68,7 +60,7 @@ public final class EnemyType
 
     public final int getSpeedFixed( final GameModel aModel )
         {
-        return baseSpeed * aModel.world.visibleSizeFixed.height / 100 / Engine.ticksPerSecond;
+        return baseSpeed * aModel.world.visibleSizeFixed.height / 100 / GameObject.timing.ticksPerSecond;
         }
 
     public final void tickEnteringBehaviors( final Enemy aEnemy )

@@ -1,35 +1,26 @@
 package net.intensicode.game.drawers;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Skin;
-import net.intensicode.game.Camera;
-import net.intensicode.game.GameContext;
+import net.intensicode.core.*;
+import net.intensicode.game.*;
 import net.intensicode.game.objects.Debris;
+import net.intensicode.graphics.SpriteGenerator;
+import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.Position;
 
-import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.game.Sprite;
-
-
-/**
- * TODO: Describe this!
- */
-public final class DebrisDrawer extends AbstractScreen
+public final class DebrisDrawer extends ScreenBase
     {
     public DebrisDrawer( final GameContext aGameContext )
         {
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
-        final Skin skin = myGameContext.visualContext().skin();
+        final SkinManager skin = myGameContext.visualContext().skinManager();
 
-        myGenerators = new Sprite[3];
+        myGenerators = new SpriteGenerator[3];
 
         for ( int idx = 0; idx < myGenerators.length; idx++ )
             {
@@ -39,13 +30,13 @@ public final class DebrisDrawer extends AbstractScreen
             }
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
-        final Graphics graphics = aScreen.graphics();
+        final DirectGraphics graphics = graphics();
 
         final Debris[] debrises = myGameContext.gameModel().debrises.debrises;
         for ( int idx = 0; idx < debrises.length; idx++ )
@@ -58,22 +49,21 @@ public final class DebrisDrawer extends AbstractScreen
 
     // Implementation
 
-    private final void draw( final Graphics aGraphics, final Debris aDebris )
+    private void draw( final DirectGraphics aGraphics, final Debris aDebris )
         {
         final Camera camera = myGameContext.camera();
         final Position screenPos = camera.toScreen( aDebris.worldPosFixed );
 
-        final Sprite sprite = myGenerators[ aDebris.type ];
+        final SpriteGenerator sprite = myGenerators[ aDebris.type ];
         final int steps = sprite.getFrameSequenceLength();
         final int step = aDebris.tickCount * ( steps - 1 ) / aDebris.animTicks;
         sprite.setFrame( step );
-        sprite.setRefPixelPosition( screenPos.x, screenPos.y );
-        sprite.paint( aGraphics );
+        sprite.paint( aGraphics, screenPos.x, screenPos.y );
         }
 
 
 
-    private Sprite[] myGenerators;
+    private SpriteGenerator[] myGenerators;
 
     private final GameContext myGameContext;
     }

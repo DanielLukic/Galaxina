@@ -2,12 +2,7 @@ package net.intensicode.game.objects;
 
 import net.intensicode.game.enemies.Enemy;
 import net.intensicode.util.DynamicArray;
-import net.intensicode.core.Engine;
 
-
-/**
- * TODO: Describe this!
- */
 public final class Level extends GameObject
     {
     public final DynamicArray activeEnemies = new DynamicArray();
@@ -36,13 +31,13 @@ public final class Level extends GameObject
 
     public final void onEnemyBombLaunched()
         {
-        myBombWaitTicks += Engine.ticksPerSecond / 3;
+        myBombWaitTicks += timing.ticksPerSecond / 3;
         myBombCount++;
         }
 
     public final void onEnemyBombDone()
         {
-        myBombWaitTicks -= Engine.ticksPerSecond / 5;
+        myBombWaitTicks -= timing.ticksPerSecond / 5;
         if ( myBombWaitTicks < 0 ) myBombWaitTicks = 0;
         myBombCount--;
         }
@@ -108,7 +103,7 @@ public final class Level extends GameObject
     public final void onControlTick()
         {
         if ( myBombWaitTicks > 0 ) myBombWaitTicks--;
-        
+
         if ( activeEnemies.size == model.enemySpawner.numberOfEnemies() )
             {
             boolean levelComplete = true;

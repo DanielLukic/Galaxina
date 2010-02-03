@@ -1,26 +1,12 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.screens;
 
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Keys;
-import net.intensicode.core.MultiScreen;
-import net.intensicode.game.GameContext;
-import net.intensicode.game.VisualContext;
-import net.intensicode.game.objects.GameModel;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.FontGen;
-import net.intensicode.util.Position;
+import net.intensicode.core.KeysHandler;
+import net.intensicode.game.*;
+import net.intensicode.graphics.FontGenerator;
+import net.intensicode.util.*;
 
 import javax.microedition.lcdui.Canvas;
 
-
-/**
- * TODO: Describe this!
- */
 public final class MainMenuScreen extends MultiScreen
     {
     public MainMenuScreen( final GameContext aGameContext )
@@ -28,14 +14,14 @@ public final class MainMenuScreen extends MultiScreen
         myGameContext = aGameContext;
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitOnce() throws Exception
         {
         final VisualContext visualContext = myGameContext.visualContext();
         myFont = visualContext.menuFont();
 
-        addScreen( new ImageScreen( myGameContext.visualContext().skin().image( "title" ), 50, 50, ImageScreen.MODE_RELATIVE ) );
+        addScreen( new ImageScreen( myGameContext.visualContext().skinManager().image( "title" ), 50, 50, ImageScreen.MODE_RELATIVE ) );
 
         addMenuEntry( START_GAME, "START GAME" );
         addMenuEntry( SHOW_HELP, "SHOW HELP" );
@@ -46,16 +32,16 @@ public final class MainMenuScreen extends MultiScreen
         addScreen( visualContext.sharedSoftkeys() );
         }
 
-    public final void onInitEverytime( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onInitEverytime() throws Exception
         {
-        final AutoHideSoftkeysScreen sofkeys = myGameContext.visualContext().sharedSoftkeys();
-        final String rightKey = aEngine.numberOfStackedScreens() == 2 ? "EXIT" : "BACK";
+        final AutohideSoftkeysScreen sofkeys = myGameContext.visualContext().sharedSoftkeys();
+        final String rightKey = stack().numberOfStackedScreens() == 2 ? "EXIT" : "BACK";
         sofkeys.setSoftkeys( "SELECT", rightKey, false );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        final Keys keys = aEngine.keys;
+        final KeysHandler keys = keys();
         if ( keys.checkUpAndConsume() )
             {
             updateSelectedEntry( mySelectedEntry - 1 );
@@ -65,31 +51,31 @@ public final class MainMenuScreen extends MultiScreen
             updateSelectedEntry( mySelectedEntry + 1 );
             }
         else if ( keys.checkLeftSoftAndConsume() || keys.checkStickDownAndConsume() || keys.checkFireAndConsume() )
-            {
-            onSelected( mySelectedEntry );
-            }
-        else if ( keys.checkRightSoftAndConsume() )
-            {
-            if ( aEngine.numberOfStackedScreens() == 2 ) aEngine.shutdownAndExit();
-            else aEngine.popScreen( this );
-            }
+                {
+                onSelected( mySelectedEntry );
+                }
+            else if ( keys.checkRightSoftAndConsume() )
+                    {
+                    if ( stack().numberOfStackedScreens() == 2 ) system().shutdownAndExit();
+                    else stack().popScreen( this );
+                    }
 
         if ( keys.lastCode == Canvas.KEY_NUM0 )
             {
             final VisualContext visualContext = myGameContext.visualContext();
             myFont = visualContext.menuFont();
 
-            final InfoScreen infoScreen = new InfoScreen( visualContext.menuFont(), visualContext.textFont() );
-            infoScreen.shareSoftkeys( visualContext.sharedSoftkeys() );
-            aEngine.pushScreen( infoScreen );
+            //final InfoScreen infoScreen = new InfoScreen( visualContext.menuFont(), visualContext.textFont() );
+            //infoScreen.shareSoftkeys( visualContext.sharedSoftkeys() );
+            //aEngine.pushScreen( infoScreen );
             }
 
-        super.onControlTick( aEngine );
+        super.onControlTick();
         }
 
     // Implementation
 
-    private final void addMenuEntry( final int aID, final String aText ) throws Exception
+    private void addMenuEntry( final int aID, final String aText ) throws Exception
         {
         if ( aID != myEntries.size ) throw new IllegalArgumentException();
 
@@ -113,7 +99,7 @@ public final class MainMenuScreen extends MultiScreen
         myEntries.add( newEntry );
         }
 
-    private final void updateSelectedEntry( final int aSelectedEntry )
+    private void updateSelectedEntry( final int aSelectedEntry )
         {
         final int numberOfEntries = myEntries.size;
         mySelectedEntry = ( aSelectedEntry + numberOfEntries ) % numberOfEntries;
@@ -125,7 +111,7 @@ public final class MainMenuScreen extends MultiScreen
             }
         }
 
-    private final void onSelected( final int aSelectedEntry ) throws Exception
+    private void onSelected( final int aSelectedEntry ) throws Exception
         {
         switch ( aSelectedEntry )
             {
@@ -148,7 +134,7 @@ public final class MainMenuScreen extends MultiScreen
         }
 
 
-    private FontGen myFont;
+    private FontGenerator myFont;
 
     private int mySelectedEntry = 0;
 

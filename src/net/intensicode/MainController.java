@@ -1,20 +1,13 @@
 package net.intensicode;
 
-import net.intensicode.core.*;
+import net.intensicode.core.GameSystem;
+import net.intensicode.core.ImageResource;
+import net.intensicode.core.SkinManager;
 import net.intensicode.game.GameController;
-import net.intensicode.screens.AutoHideSoftkeysScreen;
-import net.intensicode.screens.ImageScreen;
-import net.intensicode.screens.LoadingCallback;
-import net.intensicode.screens.LoadingScreen;
-import net.intensicode.util.BitmapFontGen;
+import net.intensicode.graphics.BitmapFontGenerator;
+import net.intensicode.screens.*;
 
-import javax.microedition.lcdui.Image;
-
-
-/**
- * TODO: Describe this!
- */
-public final class MainController extends AbstractScreen implements LoadingCallback
+public final class MainController extends ScreenBase implements LoadingCallback
     {
     public MainController()
         {
@@ -22,70 +15,68 @@ public final class MainController extends AbstractScreen implements LoadingCallb
 
     // From LoadingCallback
 
-    public final void onLoadingDone( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public final void onLoadingDone( final GameSystem aGameSystem ) throws Exception
         {
         if ( myLateInitFlag ) return;
         myLateInitFlag = true;
 
         myGameController = new GameController( mySkin );
-        myGameController.onInit( aEngine, screen() );
+        myGameController.onInit( aGameSystem );
 
         //#if DEBUG
-        aEngine.addGlobalHandler( new SkinErrorHandler( mySkin ) );
+        stack().addGlobalHandler( new SkinErrorHandler( mySkin ) );
         //#endif
 
         //#if CHEAT
-        aEngine.addGlobalHandler( new CheatHandler( myGameController ) );
+        stack().addGlobalHandler( new CheatHandler( myGameController ) );
         //#endif
 
         //#if CONSOLE
-        aEngine.addGlobalHandler( new ConsoleOverlay( mySkin.font( "textfont" ) ) );
+        stack().addGlobalHandler( new ConsoleOverlay( mySkin.font( "textfont" ) ) );
         //#endif
         }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
+    public void onInitOnce() throws Exception
         {
-        final ResourceLoader loader = aEngine.loader;
-        final Configuration skinConfig = loader.loadConfiguration( "/skin.properties" );
-        mySkin = new Skin( loader, skinConfig );
+        mySkin = skin();
 
-        mySharedSoftkeys = new AutoHideSoftkeysScreen( mySkin.font( "textfont" ) );
+        mySharedSoftkeys = new AutohideSoftkeysScreen( mySkin.font( "textfont" ) );
         }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
+    public final void onControlTick() throws Exception
         {
-        if ( myState == STATE_LOADING ) showLoadingScreen( aEngine );
+        if ( myState == STATE_LOADING ) showLoadingScreen();
         if ( myState == STATE_GAME ) showGameController();
         if ( myState != STATE_GAME ) myState++;
         }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
+    public final void onDrawFrame()
         {
         }
 
     // Implementation
 
-    private final void showLoadingScreen( final Engine aEngine ) throws Exception
+    private void showLoadingScreen() throws Exception
         {
-        final BitmapFontGen textFont = mySkin.font( "textfont" );
+        final BitmapFontGenerator textFont = mySkin.font( "textfont" );
         final LoadingScreen loadingScreen = new LoadingScreen( mySkin, textFont );
         loadingScreen.shareSoftkeys( mySharedSoftkeys );
         loadingScreen.setLateInit( this );
 
-        final Image logoImage = mySkin.image( "logo" );
+        final ImageResource logoImage = mySkin.image( "logo" );
         final ImageScreen logo = new ImageScreen( logoImage );
         logo.position.x = 50;
         logo.position.y = 50;
         loadingScreen.setLogo( logo );
 
-        aEngine.pushOnce( loadingScreen );
+        stack().pushOnce( loadingScreen );
         }
 
-    private final void showGameController() throws Exception
+    private void showGameController() throws Exception
         {
-        engine().pushOnce( myGameController );
+        stack().pushOnce( myGameController );
         }
 
 
@@ -95,11 +86,11 @@ public final class MainController extends AbstractScreen implements LoadingCallb
     private int myState = STATE_LOADING;
 
 
-    private Skin mySkin;
+    private SkinManager mySkin;
 
     private GameController myGameController;
 
-    private AutoHideSoftkeysScreen mySharedSoftkeys;
+    private AutohideSoftkeysScreen mySharedSoftkeys;
 
 
     private static final int STATE_LOADING = 0;

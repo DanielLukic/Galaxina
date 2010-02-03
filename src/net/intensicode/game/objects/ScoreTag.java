@@ -1,13 +1,9 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
+import net.intensicode.core.GameTiming;
 import net.intensicode.util.Position;
 
-
-/**
- * TODO: Describe this!
- */
-public final class ScoreTag extends Object
+public final class ScoreTag
     {
     public final Position worldPosFixed;
 
@@ -24,12 +20,18 @@ public final class ScoreTag extends Object
         myTicksVisible = aTicksVisible;
         }
 
-    public final void onControlTick( final Engine aEngine, final World aWorld )
+    public final void onControlTick( final GameTiming aGameTiming, final World aWorld )
         {
-        if ( myTicksVisible > 0 ) myTicksVisible--;
-        else active = false;
+        if ( myTicksVisible > 0 )
+            {
+            myTicksVisible--;
+            }
+        else
+            {
+            active = false;
+            }
 
-        worldPosFixed.y -= aWorld.visibleSizeFixed.height / 6 / Engine.ticksPerSecond;
+        worldPosFixed.y -= aWorld.visibleSizeFixed.height / 6 / aGameTiming.ticksPerSecond;
         }
 
 

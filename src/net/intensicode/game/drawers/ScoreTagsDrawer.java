@@ -1,66 +1,56 @@
 package net.intensicode.game.drawers;
 
-import net.intensicode.core.AbstractScreen;
-import net.intensicode.core.DirectScreen;
-import net.intensicode.core.Engine;
-import net.intensicode.core.Skin;
-import net.intensicode.game.Camera;
-import net.intensicode.game.GameContext;
+import net.intensicode.core.SkinManager;
+import net.intensicode.game.*;
 import net.intensicode.game.objects.ScoreTag;
-import net.intensicode.util.BitmapFontGen;
-import net.intensicode.util.FontGen;
-import net.intensicode.util.Position;
-import net.intensicode.util.Visitor;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.ScreenBase;
+import net.intensicode.util.*;
 
-
-
-/**
- * TODO: Describe this!
- */
-public final class ScoreTagsDrawer extends AbstractScreen
-{
+public final class ScoreTagsDrawer extends ScreenBase
+    {
     public ScoreTagsDrawer( final GameContext aGameContext )
-    {
+        {
         myGameContext = aGameContext;
-    }
+        }
 
-    // From AbstractScreen
+    // From ScreenBase
 
-    public final void onInitOnce( final Engine aEngine, final DirectScreen aScreen ) throws Exception
-    {
-        final Skin skin = myGameContext.visualContext().skin();
+    public final void onInitOnce() throws Exception
+        {
+        final SkinManager skin = myGameContext.visualContext().skinManager();
         myFontGen = skin.font( "bonusfont" );
-    }
+        }
 
-    public final void onControlTick( final Engine aEngine ) throws Exception
-    {
-    }
+    public final void onControlTick() throws Exception
+        {
+        }
 
-    public final void onDrawFrame( final DirectScreen aScreen )
-    {
+    public final void onDrawFrame()
+        {
         myGameContext.gameModel().scoreMarkers.scoreTags.each( DRAW_TAG );
-    }
+        }
 
 
 
-    private BitmapFontGen myFontGen;
+    private BitmapFontGenerator myFontGen;
 
     private final GameContext myGameContext;
 
 
-    private static final int ALIGN_CENTER = FontGen.HCENTER | FontGen.VCENTER;
+    private static final int ALIGN_CENTER = FontGenerator.HCENTER | FontGenerator.VCENTER;
 
 
 
     private final Visitor DRAW_TAG = new Visitor()
     {
-        public final void visit( final Object aObject )
+    public final void visit( final Object aObject )
         {
-            final ScoreTag scoreTag = ( ScoreTag ) aObject;
-            if ( scoreTag.active == false ) return;
-            final Camera camera = myGameContext.camera();
-            final Position screenPos = camera.toScreen( scoreTag.worldPosFixed );
-            myFontGen.blitNumber( screen().graphics(), screenPos, scoreTag.score, ALIGN_CENTER );
+        final ScoreTag scoreTag = (ScoreTag) aObject;
+        if ( !scoreTag.active ) return;
+        final Camera camera = myGameContext.camera();
+        final Position screenPos = camera.toScreen( scoreTag.worldPosFixed );
+        myFontGen.blitNumber( graphics(), screenPos, scoreTag.score, ALIGN_CENTER );
         }
     };
-}
+    }

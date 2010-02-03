@@ -1,13 +1,8 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Position;
 
-
-/**
- * TODO: Describe this!
- */
 public final class ScoreMarkers extends GameObject
     {
     public final DynamicArray scoreTags = new DynamicArray();
@@ -15,7 +10,7 @@ public final class ScoreMarkers extends GameObject
 
     public final void add( final Position aPosition, final int aScore )
         {
-        scoreTags.add( new ScoreTag( aPosition, aScore, Engine.ticksPerSecond ) );
+        scoreTags.add( new ScoreTag( aPosition, aScore, timing.ticksPerSecond ) );
         }
 
     // From GameObject
@@ -34,8 +29,8 @@ public final class ScoreMarkers extends GameObject
         for ( int idx = scoreTags.size - 1; idx >= 0; idx-- )
             {
             final ScoreTag scoreTag = (ScoreTag) scoreTags.objects[ idx ];
-            scoreTag.onControlTick( engine, model.world );
-            if ( scoreTag.active == false ) scoreTags.remove( idx );
+            scoreTag.onControlTick( timing, model.world );
+            if ( !scoreTag.active ) scoreTags.remove( idx );
             }
         }
     }

@@ -1,15 +1,10 @@
 package net.intensicode.game.objects;
 
-import net.intensicode.core.Engine;
 import net.intensicode.game.enemies.Enemy;
 import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Position;
+import net.intensicode.core.GameTiming;
 
-
-
-/**
- * TODO: Describe this!
- */
 public final class Debris
     {
     public static final int TYPE_BIG = 0;
@@ -34,10 +29,6 @@ public final class Debris
 
 
 
-    public Debris()
-        {
-        }
-
     public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
         {
         timeOut = 0;
@@ -47,7 +38,7 @@ public final class Debris
         speedFixed.y = aSpeedY;
         worldPosFixed.setTo( aWorldPosFixed );
         tickCount = 0;
-        animTicks = Engine.ticksPerSecond / 2;
+        animTicks = GameObject.timing.ticksPerSecond / 2;
         }
 
     public final void onControlTick()
@@ -57,7 +48,7 @@ public final class Debris
             timeOut--;
             if ( timeOut == 0 ) active = false;
             }
-        if ( active == false ) return;
+        if ( !active ) return;
 
         if ( tickCount < animTicks ) tickCount++;
         else tickCount = 0;
@@ -73,16 +64,16 @@ public final class Debris
 
     // Implementation
 
-    private final void checkIfEnemyHit( final GameModel aGameModel )
+    private void checkIfEnemyHit( final GameModel aGameModel )
         {
         final DynamicArray enemies = aGameModel.level.activeEnemies;
         for ( int idx = 0; idx < enemies.size; idx++ )
             {
             final Enemy enemy = (Enemy) enemies.objects[ idx ];
-            if ( enemy.active == false ) continue;
+            if ( !enemy.active ) continue;
 
             final boolean hit = enemy.isHit( worldPosFixed );
-            if ( hit == false ) continue;
+            if ( !hit ) continue;
 
             enemy.hit();
 
@@ -91,7 +82,7 @@ public final class Debris
             }
         }
 
-    private final void checkIfPlayerHit( final GameModel aGameModel )
+    private void checkIfPlayerHit( final GameModel aGameModel )
         {
         final Player player = aGameModel.player;
         final int hitKind = player.isHit( worldPosFixed );
