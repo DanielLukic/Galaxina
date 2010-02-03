@@ -21,7 +21,7 @@ namespace :modules do
 
   desc "Update the GIT sub-modules if necessary."
   task :update do
-    git_modules.each { |m| git.update_module(m) }
+    git_modules.each { |m| puts m.path ; git.update_module(m) }
   end
 
   desc "Reset the GIT sub-modules by removing any local changes."
