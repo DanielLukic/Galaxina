@@ -7,7 +7,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Galaxina" />
     <orderEntry type="module" module-name="RunME" />
-    <orderEntryProperties />
   </component>
   <component name="PluginUploader.PluginUploadConfigurable">
     <option name="ARCHIVE_PATH" />
