@@ -1,9 +1,9 @@
 #!/usr/bin/rake
 
-$LOAD_PATH << 'lib'
+$LOAD_PATH << 'modules/IntensiBuild/lib'
 
-Dir.glob('lib/tasks/**/*.rb').each do |tasks|
-  require tasks.sub('lib/', '')
+Dir.glob('modules/IntensiBuild/lib/tasks/**/*.rb').each do |tasks|
+  require tasks.sub('modules/IntensiBuild/lib/', '')
 end
 
 task :default => 'release:do'
