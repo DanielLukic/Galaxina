@@ -26,12 +26,12 @@ public final class SandboxMenu extends MenuBase
         updateSelectedEntry( 0 );
         }
 
-    public final void onInitEverytime() throws Exception
+    // From MenuBase
+
+    protected void afterInitEverytime() throws Exception
         {
         myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "SELECT", "EXIT", false );
         }
-
-    // From AbstractMenu
 
     protected final void onSelected( final MenuEntry aSelectedEntry ) throws Exception
         {
