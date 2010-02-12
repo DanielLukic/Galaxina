@@ -12,6 +12,11 @@ public final class Galaxina extends IntensiGame
 
     // From SystemContext
 
+    public final boolean useOpenglIfPossible()
+        {
+        return true;
+        }
+
     public ScreenBase createMainScreen( final GameSystem aGameSystem ) throws Exception
         {
         return new MainController();

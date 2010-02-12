@@ -5,11 +5,8 @@ import net.intensicode.core.GameSystem;
 import net.intensicode.game.GameController;
 import net.intensicode.screens.ScreenBase;
 
-import javax.microedition.lcdui.Displayable;
-import java.awt.*;
 
-
-public final class EmbeddedGalaxina extends IntensiGameME
+public final class EmbeddedGalaxina extends IntensiME
     {
     public EmbeddedGalaxina()
         {
@@ -36,6 +33,11 @@ public final class EmbeddedGalaxina extends IntensiGameME
         }
 
     // From SystemContext
+
+    public final boolean useOpenglIfPossible()
+        {
+        return false;
+        }
 
     public final ScreenBase createMainScreen( final GameSystem aGameSystem ) throws Exception
         {
