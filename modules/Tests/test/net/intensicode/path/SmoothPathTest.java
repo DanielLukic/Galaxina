@@ -1,9 +1,9 @@
 package net.intensicode.path;
 
 import junit.framework.TestCase;
-import net.intensicode.util.MathFP;
+import net.intensicode.galaxina.util.MathFP;
+import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.util.*;
-import net.intensicode.util.UtilitiesEx;
 
 
 public final class SmoothPathTest extends TestCase

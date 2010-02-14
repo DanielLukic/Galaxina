@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.domain;
 
-import net.intensicode.game.data.EnemyConfiguration;
+import net.intensicode.galaxina.game.data.EnemyConfiguration;
 
 public interface SwarmEnemy extends GroupEntryEx
     {
@@ -19,7 +19,7 @@ public interface SwarmEnemy extends GroupEntryEx
     SyncMode FOLLOW_RIGHT_SIDE = new SyncMode( EnemyConfiguration.SYNC_FOLLOW_RIGHT_SIDE, "Follow Right Side" );
 
     SyncMode SYNC_SPEED = new SyncMode( EnemyConfiguration.SYNC_SPEED, "Sync Speed" );
-    
+
     Enemy getEnemy();
 
     void setEnemey( Enemy aEnemy );

@@ -7,7 +7,6 @@ public final class SyncMode
     public final String name;
 
 
-
     public SyncMode( final int aID, final String aName )
         {
         id = aID;

@@ -1,8 +1,9 @@
 package net.intensicode.galaxina.domain;
 
-import net.intensicode.*;
+import net.intensicode.IntensiME;
 import net.intensicode.core.GameSystem;
-import net.intensicode.game.GameController;
+import net.intensicode.galaxina.ReloadAndSwitchHandler;
+import net.intensicode.galaxina.game.GameController;
 import net.intensicode.screens.ScreenBase;
 
 
@@ -65,7 +66,6 @@ public final class EmbeddedGalaxina extends IntensiME
             while ( myReloadHandler == null ) wait();
             }
         }
-
 
 
     private GameController myGameController;

@@ -4,10 +4,10 @@
 
 package net.intensicode;
 
-import net.intensicode.util.*;
 import net.intensicode.path.Interpolation;
 import net.intensicode.path.Path;
 import net.intensicode.path.PositionList;
+import net.intensicode.util.*;
 
 
 

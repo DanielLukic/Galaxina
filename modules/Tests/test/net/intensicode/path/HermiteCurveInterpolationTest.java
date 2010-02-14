@@ -2,8 +2,8 @@ package net.intensicode.path;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
-import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
+import net.intensicode.util.FixedMath;
 
 
 public final class HermiteCurveInterpolationTest extends TestCase

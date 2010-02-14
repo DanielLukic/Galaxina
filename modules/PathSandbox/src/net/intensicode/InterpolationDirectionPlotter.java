@@ -5,8 +5,8 @@
 package net.intensicode;
 
 import net.intensicode.path.Interpolation;
-import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
+import net.intensicode.util.FixedMath;
 
 import java.awt.*;
 
