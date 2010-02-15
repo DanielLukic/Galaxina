@@ -1,72 +1,16 @@
 package net.intensicode.galaxina.game;
 
-import net.intensicode.core.*;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.galaxina.game.drawers.*;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.screens.*;
-import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
 
-import java.io.IOException;
-
-public final class GameController extends ScreenBase implements GameContext, VisualContext
+public final class GameController extends ScreenBase implements GameContext
     {
-    public GameController( final SkinManager aSkin )
+    public GameController( final MainContext aMainContext )
         {
-        mySkin = aSkin;
-        }
-
-    // From VisualContext
-
-    public final SkinManager skinManager()
-        {
-        return mySkin;
-        }
-
-    public final ScreenBase sharedStars()
-        {
-        return mySharedStars;
-        }
-
-    public final ScreenBase sharedBackground()
-        {
-        return mySharedBackground;
-        }
-
-    public final ScreenBase sharedGameBackground()
-        {
-        return mySharedGameBackground;
-        }
-
-
-    public final ScreenBase sharedGameDrawers()
-        {
-        return mySharedGameDrawers;
-        }
-
-    public final AutohideSoftkeysScreen sharedSoftkeys()
-        {
-        return mySharedSoftkeys;
-        }
-
-    public BitmapFontGenerator menuFont() throws IOException
-        {
-        return mySkin.font( "menufont" );
-        }
-
-    public BitmapFontGenerator softkeysFont() throws IOException
-        {
-        return mySkin.font( "textfont" );
-        }
-
-    public BitmapFontGenerator textFont() throws IOException
-        {
-        return mySkin.font( "textfont" );
-        }
-
-    public BitmapFontGenerator titleFont() throws IOException
-        {
-        return mySkin.font( "menufont" );
+        myMainContext = aMainContext;
         }
 
     // From GameContext
@@ -88,29 +32,34 @@ public final class GameController extends ScreenBase implements GameContext, Vis
 
     public final VisualContext visualContext()
         {
-        return this;
+        return myMainContext.visualContext();
+        }
+
+    public final ScreenBase sharedGameBackground()
+        {
+        return mySharedGameBackground;
+        }
+
+    public final ScreenBase sharedGameDrawers()
+        {
+        return mySharedGameDrawers;
         }
 
     public final void showMainMenu() throws Exception
         {
-        if ( myMainMenuScreen == null ) myMainMenuScreen = new MainMenuScreen( this );
-        stack().pushOnce( myMainMenuScreen );
+        myMainContext.showMainMenu();
         }
 
     public final void showHelp() throws Exception
         {
-        if ( myHelpScreen == null ) myHelpScreen = new HelpScreen( this );
-        stack().pushOnce( myHelpScreen );
         }
 
     public final void showHiscore() throws Exception
         {
-        throw new RuntimeException( "NYI" );
         }
 
     public final void showOptions() throws Exception
         {
-        throw new RuntimeException( "NYI" );
         }
 
     public final void startGame() throws Exception
@@ -141,13 +90,6 @@ public final class GameController extends ScreenBase implements GameContext, Vis
         myCamera = new Camera( this );
         myHiscore = new Hiscore();
 
-        mySharedStars = SimpleStars.instance();
-        mySharedSoftkeys = new AutohideSoftkeysScreen( softkeysFont() );
-
-        final ImageResource background = mySkin.image( "background" );
-        mySharedBackground = new ImageScreen( background, 50, 50, ImageScreen.MODE_RELATIVE );
-        mySharedBackground.clearOutside = true;
-
         mySharedGameDrawers = new MultiScreen();
         mySharedGameDrawers.addScreen( new BombsDrawer( this ) );
         mySharedGameDrawers.addScreen( new DebrisDrawer( this ) );
@@ -163,31 +105,20 @@ public final class GameController extends ScreenBase implements GameContext, Vis
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 
         mySharedGameBackground = new MultiScreen();
-        mySharedGameBackground.addScreen( mySharedBackground );
+        mySharedGameBackground.addScreen( visualContext().sharedBackground() );
         mySharedGameBackground.addScreen( new SimpleStars( 32 ) );
         mySharedGameBackground.addScreen( myCamera );
-        mySharedGameBackground.addScreen( mySharedSoftkeys );
+        mySharedGameBackground.addScreen( visualContext().sharedSoftkeys() );
         mySharedGameBackground.addScreen( new ScoreboardDrawer( this ) );
         }
 
     public final void onControlTick() throws Exception
         {
-        showMainMenu();
         }
 
     public final void onDrawFrame()
         {
         }
-
-
-
-    private HelpScreen myHelpScreen;
-
-    private GameScreen myGameScreen;
-
-    private MainMenuScreen myMainMenuScreen;
-
-    private GamePausedScreen myGamePausedScreen;
 
 
     private Camera myCamera;
@@ -196,16 +127,13 @@ public final class GameController extends ScreenBase implements GameContext, Vis
 
     private GameModel myGameModel;
 
-    private SimpleStars mySharedStars;
-
-    private ImageScreen mySharedBackground;
+    private GameScreen myGameScreen;
 
     private MultiScreen mySharedGameDrawers;
 
     private MultiScreen mySharedGameBackground;
 
-    private AutohideSoftkeysScreen mySharedSoftkeys;
+    private GamePausedScreen myGamePausedScreen;
 
-
-    private final SkinManager mySkin;
+    private final MainContext myMainContext;
     }

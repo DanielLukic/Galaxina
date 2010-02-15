@@ -37,15 +37,12 @@ public final class ScreensBuilder
 
     public final void showTitleScreen() throws Exception
         {
-        if ( myTitleScreen == null ) myTitleScreen = new TitleScreen( myMainContext );
-        stack().pushOnce( myTitleScreen );
+        stack().pushOnce( new TitleScreen( myMainContext ) );
         }
 
     public final void showMainMenu() throws Exception
         {
-        //if ( myMainMenuScreen == null ) myMainMenuScreen = new MainMenuScreen( myMainContext );
-        //stack().pushOnce( myMainMenuScreen );
-        throw new RuntimeException( "nyi" );
+        stack().pushOnce( new MainMenuScreen( myMainContext ) );
         }
 
     public final void showHelp() throws Exception
@@ -87,8 +84,6 @@ public final class ScreensBuilder
         return myGameSystem.stack;
         }
 
-
-    private TitleScreen myTitleScreen;
 
     private final GameSystem myGameSystem;
 

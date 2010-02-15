@@ -24,6 +24,11 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         return myVisualContext;
         }
 
+    public final void showMainMenu() throws Exception
+        {
+        myScreenBuilder.showMainMenu();
+        }
+
     // From LoadingCallback
 
     public final void onLoadingDone( final GameSystem aGameSystem ) throws Exception
@@ -62,11 +67,11 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     public final void onControlTick() throws Exception
         {
         //#if FALSE
-        //# if ( myState == STATE_LOADING ) myScreenBuilder.showLoadingScreen( this );
-        //# if ( myState == STATE_AUDIO ) myScreenBuilder.showAudioMenu();
-        //#else
+        myState = STATE_TITLE;
         onLoadingDone( system() );
         //#endif
+        if ( myState == STATE_LOADING ) myScreenBuilder.showLoadingScreen( this );
+        if ( myState == STATE_AUDIO ) myScreenBuilder.showAudioMenu();
         if ( myState == STATE_TITLE ) myScreenBuilder.showTitleScreen();
         if ( myState < STATE_TITLE ) myState++;
         }

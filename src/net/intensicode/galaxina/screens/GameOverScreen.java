@@ -3,8 +3,8 @@ package net.intensicode.galaxina.screens;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.graphics.*;
-import net.intensicode.util.Position;
 import net.intensicode.screens.MultiScreen;
+import net.intensicode.util.Position;
 
 public final class GameOverScreen extends MultiScreen
     {
@@ -17,8 +17,8 @@ public final class GameOverScreen extends MultiScreen
 
     public final void onInitOnce() throws Exception
         {
-        addScreen( myGameContext.visualContext().sharedGameBackground() );
-        addScreen( myGameContext.visualContext().sharedGameDrawers() );
+        addScreen( myGameContext.sharedGameBackground() );
+        addScreen( myGameContext.sharedGameDrawers() );
         myFont = myGameContext.visualContext().textFont();
         }
 
@@ -38,7 +38,8 @@ public final class GameOverScreen extends MultiScreen
             stack().popScreen( this );
             myGameContext.gameModel().startGame();
             }
-        else if ( keys.checkRightSoftAndConsume() )
+        else
+        if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
             myGameContext.pauseGame();
@@ -54,7 +55,6 @@ public final class GameOverScreen extends MultiScreen
         myBlitPos.y = screen().height() / 2 + myFont.charHeight();
         myFont.blitString( gc, "GAME OVER", myBlitPos, FontGenerator.HCENTER | FontGenerator.TOP );
         }
-
 
 
     private BitmapFontGenerator myFont;

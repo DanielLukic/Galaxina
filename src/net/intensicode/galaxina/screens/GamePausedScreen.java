@@ -18,7 +18,7 @@ public final class GamePausedScreen extends MultiScreen
         {
         final VisualContext visualContext = myGameContext.visualContext();
 
-        addScreen( visualContext.sharedGameBackground() );
+        addScreen( myGameContext.sharedGameBackground() );
 
         final int x = screen().width() / 2;
 
@@ -44,12 +44,12 @@ public final class GamePausedScreen extends MultiScreen
             stack().popScreen( this );
             myGameContext.showMainMenu();
             }
-        else if ( keys.checkRightSoftAndConsume() )
+        else
+        if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
             }
         }
-
 
 
     private final GameContext myGameContext;

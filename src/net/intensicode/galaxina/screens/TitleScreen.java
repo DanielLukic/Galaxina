@@ -38,6 +38,21 @@ public final class TitleScreen extends MultiScreen
         myVisualContext.sharedSoftkeys().setSoftkeys( "MENU", "EXIT", false );
         }
 
+    public final void onControlTick() throws Exception
+        {
+        super.onControlTick();
+
+        if ( keys().checkLeftSoftAndConsume() )
+            {
+            stack().popScreen( this );
+            myMainContext.showMainMenu();
+            }
+        if ( keys().checkRightSoftAndConsume() )
+            {
+            system().shutdownAndExit();
+            }
+        }
+
 
     private final MainContext myMainContext;
 

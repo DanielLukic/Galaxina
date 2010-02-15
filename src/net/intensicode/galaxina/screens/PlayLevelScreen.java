@@ -17,8 +17,8 @@ public final class PlayLevelScreen extends MultiScreen
 
     public final void onInitOnce() throws Exception
         {
-        addScreen( myGameContext.visualContext().sharedGameBackground() );
-        addScreen( myGameContext.visualContext().sharedGameDrawers() );
+        addScreen( myGameContext.sharedGameBackground() );
+        addScreen( myGameContext.sharedGameDrawers() );
         }
 
     public final void onInitEverytime() throws Exception
@@ -43,9 +43,9 @@ public final class PlayLevelScreen extends MultiScreen
 
         final KeysHandler keys = keys();
         if ( keys.checkLeftSoftAndConsume() ) myGameContext.showMainMenu();
-        else if ( keys.checkRightSoftAndConsume() ) myGameContext.pauseGame();
+        else
+        if ( keys.checkRightSoftAndConsume() ) myGameContext.pauseGame();
         }
-
 
 
     private final GameModel myGameModel;

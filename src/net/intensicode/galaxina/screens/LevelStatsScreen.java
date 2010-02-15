@@ -3,8 +3,8 @@ package net.intensicode.galaxina.screens;
 import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.galaxina.game.objects.Level;
 import net.intensicode.graphics.*;
-import net.intensicode.util.Position;
 import net.intensicode.screens.MultiScreen;
+import net.intensicode.util.Position;
 
 public final class LevelStatsScreen extends MultiScreen
     {
@@ -17,8 +17,8 @@ public final class LevelStatsScreen extends MultiScreen
 
     public final void onInitOnce() throws Exception
         {
-        addScreen( myGameContext.visualContext().sharedGameBackground() );
-        addScreen( myGameContext.visualContext().sharedGameDrawers() );
+        addScreen( myGameContext.sharedGameBackground() );
+        addScreen( myGameContext.sharedGameDrawers() );
         myFontGen = myGameContext.visualContext().textFont();
         }
 
@@ -37,14 +37,16 @@ public final class LevelStatsScreen extends MultiScreen
             {
             myTimeOutTicks = 0;
             }
-        else if ( keys().checkRightSoftAndConsume() )
+        else
+        if ( keys().checkRightSoftAndConsume() )
             {
             myTimeOutTicks = 0;
             }
-        else if ( myTimeOutTicks < timing().ticksPerSecond * 3 && keys().checkFireAndConsume() )
-                {
-                myTimeOutTicks = 0;
-                }
+        else
+        if ( myTimeOutTicks < timing().ticksPerSecond * 3 && keys().checkFireAndConsume() )
+            {
+            myTimeOutTicks = 0;
+            }
 
         if ( myTimeOutTicks > 0 )
             {
@@ -74,7 +76,8 @@ public final class LevelStatsScreen extends MultiScreen
             myBlitPos.y += myFontGen.charHeight() * 3 / 2;
             myFontGen.blitString( graphics(), "PERFECT", myBlitPos, FontGenerator.CENTER );
             }
-        else if ( level.bonusApplies > 0 )
+        else
+        if ( level.bonusApplies > 0 )
             {
             myBlitPos.y += myFontGen.charHeight() * 3 / 2;
             myFontGen.blitString( graphics(), "BONUS", myBlitPos, FontGenerator.CENTER );

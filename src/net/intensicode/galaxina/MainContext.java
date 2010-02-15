@@ -8,4 +8,6 @@ public interface MainContext
     GameSystem gameSystem();
 
     VisualContext visualContext();
+
+    void showMainMenu() throws Exception;
     }

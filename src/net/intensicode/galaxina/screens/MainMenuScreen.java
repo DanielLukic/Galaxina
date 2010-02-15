@@ -1,25 +1,26 @@
 package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.KeysHandler;
-import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.MainContext;
+import net.intensicode.galaxina.game.VisualContext;
 import net.intensicode.graphics.FontGenerator;
-import net.intensicode.util.*;
 import net.intensicode.screens.*;
+import net.intensicode.util.*;
 
 import javax.microedition.lcdui.Canvas;
 
 public final class MainMenuScreen extends MultiScreen
     {
-    public MainMenuScreen( final GameContext aGameContext )
+    public MainMenuScreen( final MainContext aMainContext )
         {
-        myGameContext = aGameContext;
+        myMainContext = aMainContext;
         }
 
     // From ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        final VisualContext visualContext = myGameContext.visualContext();
+        final VisualContext visualContext = myMainContext.visualContext();
         myFont = visualContext.menuFont();
 
         addScreen( new ImageScreen( skin().image( "title" ), 50, 50, ImageScreen.MODE_RELATIVE ) );
@@ -37,7 +38,7 @@ public final class MainMenuScreen extends MultiScreen
 
     public final void onInitEverytime() throws Exception
         {
-        final AutohideSoftkeysScreen sofkeys = myGameContext.visualContext().sharedSoftkeys();
+        final AutohideSoftkeysScreen sofkeys = myMainContext.visualContext().sharedSoftkeys();
         final String rightKey = stack().numberOfStackedScreens() == 2 ? "EXIT" : "BACK";
         sofkeys.setSoftkeys( "SELECT", rightKey, false );
         }
@@ -49,23 +50,26 @@ public final class MainMenuScreen extends MultiScreen
             {
             updateSelectedEntry( mySelectedEntry - 1 );
             }
-        else if ( keys.checkDownAndConsume() )
+        else
+        if ( keys.checkDownAndConsume() )
             {
             updateSelectedEntry( mySelectedEntry + 1 );
             }
-        else if ( keys.checkLeftSoftAndConsume() || keys.checkStickDownAndConsume() || keys.checkFireAndConsume() )
-                {
-                onSelected( mySelectedEntry );
-                }
-            else if ( keys.checkRightSoftAndConsume() )
-                    {
-                    if ( stack().numberOfStackedScreens() == 2 ) system().shutdownAndExit();
-                    else stack().popScreen( this );
-                    }
+        else
+        if ( keys.checkLeftSoftAndConsume() || keys.checkStickDownAndConsume() || keys.checkFireAndConsume() )
+            {
+            onSelected( mySelectedEntry );
+            }
+        else
+        if ( keys.checkRightSoftAndConsume() )
+            {
+            if ( stack().numberOfStackedScreens() == 2 ) system().shutdownAndExit();
+            else stack().popScreen( this );
+            }
 
         if ( keys.lastCode == Canvas.KEY_NUM0 )
             {
-            final VisualContext visualContext = myGameContext.visualContext();
+            final VisualContext visualContext = myMainContext.visualContext();
             myFont = visualContext.menuFont();
 
             //final InfoScreen infoScreen = new InfoScreen( visualContext.menuFont(), visualContext.textFont() );
@@ -116,24 +120,24 @@ public final class MainMenuScreen extends MultiScreen
 
     private void onSelected( final int aSelectedEntry ) throws Exception
         {
-        switch ( aSelectedEntry )
-            {
-            case START_GAME:
-                myGameContext.startGame();
-                break;
-            case SHOW_HELP:
-                myGameContext.showHelp();
-                break;
-            case HISCORE:
-                myGameContext.showHiscore();
-                break;
-            case OPTIONS:
-                myGameContext.showOptions();
-                break;
-            case EXIT:
-                myGameContext.exit();
-                break;
-            }
+//        switch ( aSelectedEntry )
+//            {
+//            case START_GAME:
+//                myGameContext.startGame();
+//                break;
+//            case SHOW_HELP:
+//                myGameContext.showHelp();
+//                break;
+//            case HISCORE:
+//                myGameContext.showHiscore();
+//                break;
+//            case OPTIONS:
+//                myGameContext.showOptions();
+//                break;
+//            case EXIT:
+//                myGameContext.exit();
+//                break;
+//            }
         }
 
 
@@ -141,8 +145,7 @@ public final class MainMenuScreen extends MultiScreen
 
     private int mySelectedEntry = 0;
 
-
-    private final GameContext myGameContext;
+    private final MainContext myMainContext;
 
     private final DynamicArray myEntries = new DynamicArray( 5, 5 );
 

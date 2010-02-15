@@ -38,16 +38,6 @@ public final class ConfigurableVisualContext implements VisualContext
         return mySharedBackground;
         }
 
-    public final ScreenBase sharedGameBackground()
-        {
-        throw new RuntimeException( "nyi" );
-        }
-
-    public final ScreenBase sharedGameDrawers()
-        {
-        throw new RuntimeException( "nyi" );
-        }
-
     public final AutohideSoftkeysScreen sharedSoftkeys()
         {
         return mySharedSoftkeys;

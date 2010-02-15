@@ -14,10 +14,6 @@ public interface VisualContext
 
     ScreenBase sharedBackground();
 
-    ScreenBase sharedGameBackground();
-
-    ScreenBase sharedGameDrawers();
-
     AutohideSoftkeysScreen sharedSoftkeys();
 
     BitmapFontGenerator titleFont() throws IOException;

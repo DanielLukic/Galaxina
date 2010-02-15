@@ -1,7 +1,5 @@
 package net.intensicode.galaxina.screens;
 
-import net.intensicode.util.Log;
-
 public final class TitleFancyChar
     {
     public char charCode;
@@ -25,6 +23,10 @@ public final class TitleFancyChar
     public int drawOffsetX;
 
     public int drawOffsetY;
+
+    public int posX;
+
+    public int posY;
 
     public int alpha;
 
@@ -64,7 +66,7 @@ public final class TitleFancyChar
                 else nextState();
                 break;
             case STATE_STAYING:
-                if ( myStateTicks < stayTicks ) myStateTicks++;
+                if ( myStateTicks < stayTicks ) onStayingTick();
                 else nextState();
                 break;
             case STATE_OUTGOING:
@@ -80,8 +82,8 @@ public final class TitleFancyChar
         {
         if ( myStateTicks == 0 )
             {
-            drawOffsetX = startOffsetX;
-            drawOffsetY = startOffsetY;
+            drawOffsetX = posX + startOffsetX;
+            drawOffsetY = posY + startOffsetY;
             alpha = 0;
             }
         myStateTicks++;
@@ -95,17 +97,24 @@ public final class TitleFancyChar
 
     private void onIncomingTick()
         {
-        drawOffsetX = startOffsetX * ( incomingTicks - myStateTicks ) / incomingTicks;
-        drawOffsetY = startOffsetY * ( incomingTicks - myStateTicks ) / incomingTicks;
+        drawOffsetX = posX + startOffsetX * ( incomingTicks - myStateTicks ) / incomingTicks;
+        drawOffsetY = posY + startOffsetY * ( incomingTicks - myStateTicks ) / incomingTicks;
         alpha = myStateTicks * 255 / incomingTicks;
+        myStateTicks++;
+        }
+
+    private void onStayingTick()
+        {
+        drawOffsetX = posX;
+        drawOffsetY = posY;
         myStateTicks++;
         }
 
     private void onOutgoingTick()
         {
-        drawOffsetX = endOffsetX * myStateTicks / outgoingTicks;
-        drawOffsetY = endOffsetY * myStateTicks / outgoingTicks;
-        alpha = ( outgoingTicks - myStateTicks ) * 255 / outgoingTicks;        
+        drawOffsetX = posX + endOffsetX * myStateTicks / outgoingTicks;
+        drawOffsetY = posY + endOffsetY * myStateTicks / outgoingTicks;
+        alpha = ( outgoingTicks - myStateTicks ) * 255 / outgoingTicks;
         myStateTicks++;
         }
 

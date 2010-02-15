@@ -1,11 +1,9 @@
 package net.intensicode.galaxina.game;
 
 import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.screens.ScreenBase;
 
 
-/**
- * TODO: Describe this!
- */
 public interface GameContext
     {
     Camera camera();
@@ -15,6 +13,10 @@ public interface GameContext
     GameModel gameModel();
 
     VisualContext visualContext();
+
+    ScreenBase sharedGameBackground();
+
+    ScreenBase sharedGameDrawers();
 
     void showMainMenu() throws Exception;
 

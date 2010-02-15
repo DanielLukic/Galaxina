@@ -4,8 +4,8 @@ import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.GameModel;
 import net.intensicode.graphics.*;
-import net.intensicode.util.Position;
 import net.intensicode.screens.MultiScreen;
+import net.intensicode.util.Position;
 
 public final class LevelInfoScreen extends MultiScreen
     {
@@ -20,7 +20,7 @@ public final class LevelInfoScreen extends MultiScreen
     public final void onInitOnce() throws Exception
         {
         final VisualContext visualContext = myGameContext.visualContext();
-        addScreen( visualContext.sharedGameBackground() );
+        addScreen( myGameContext.sharedGameBackground() );
         myFont = visualContext.textFont();
         }
 
@@ -55,7 +55,8 @@ public final class LevelInfoScreen extends MultiScreen
             stack().popScreen( this );
             myGameModel.startLevel();
             }
-        else if ( keys.checkRightSoftAndConsume() )
+        else
+        if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
             myGameContext.showMainMenu();
