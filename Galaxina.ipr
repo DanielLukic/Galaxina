@@ -80,7 +80,6 @@
         <option name="WHILE_ON_NEW_LINE" value="true" />
         <option name="CATCH_ON_NEW_LINE" value="true" />
         <option name="FINALLY_ON_NEW_LINE" value="true" />
-        <option name="SPECIAL_ELSE_IF_TREATMENT" value="false" />
         <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
         <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
         <option name="ALIGN_MULTILINE_ASSIGNMENT" value="true" />
@@ -89,6 +88,7 @@
         <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
         <option name="ALIGN_MULTILINE_PARENTHESIZED_EXPRESSION" value="true" />
         <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
+        <option name="BLANK_LINES_AROUND_FIELD" value="1" />
         <option name="SPACE_WITHIN_PARENTHESES" value="true" />
         <option name="SPACE_WITHIN_METHOD_CALL_PARENTHESES" value="true" />
         <option name="SPACE_WITHIN_METHOD_PARENTHESES" value="true" />
