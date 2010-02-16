@@ -85,6 +85,7 @@ public final class TitleCreditsScreen extends ScreenBase
     private void clearCharBuffer()
         {
         myVisibleLines = 0;
+        myNumberOfChars = 0;
         for ( int idx = 0; idx < myChars.length; idx++ )
             {
             if ( myChars[ idx ] == null ) myChars[ idx ] = new TitleFancyChar();
@@ -93,6 +94,8 @@ public final class TitleCreditsScreen extends ScreenBase
         for ( int idx = 0; idx < MAX_LINES; idx++ )
             {
             myLineUsed[ idx ] = false;
+            myLineLength[ idx ] = 0;
+            myLineWidthInPixels[ idx ] = 0;
             }
         }
 
@@ -100,53 +103,58 @@ public final class TitleCreditsScreen extends ScreenBase
         {
         final int lineLength = aEndIndex - aStartIndex;
         final int lineOffset = aLineIndex * MAX_CHARS_PER_ROW;
-        final int charOffset = ( MAX_CHARS_PER_ROW - lineLength ) / 2;
         for ( int idx = 0; idx < lineLength; idx++ )
             {
-            myChars[ lineOffset + charOffset + idx ].charCode = aString.charAt( aStartIndex + idx );
+            myChars[ lineOffset + idx ].charCode = aString.charAt( aStartIndex + idx );
             }
         myLineUsed[ aLineIndex ] = lineLength > 0;
+        myLineLength[ aLineIndex ] = lineLength;
         myLineWidthInPixels[ aLineIndex ] = myFontGenerator.substringWidth( aString, aStartIndex, lineLength );
+        myNumberOfChars += lineLength;
         }
 
     private void setupAnimation()
         {
         final int tps = timing().ticksPerSecond;
-        final int overallWaitTicks = tps * myVisibleLines * 2;
-        final int incomingTicks = tps * 1;
-        final int stayTicks = tps * 5;
-        final int outgoingTicks = tps * 1;
+        final int overallWaitTicks = tps * myVisibleLines;
+        final int incomingTicks = tps;
+        final int stayTicks = myNumberOfChars * tps / 3;
+        final int outgoingTicks = tps / 2;
         final int moveDistance = myFontGenerator.charHeight() * 3;
-        final int numberOfChars = myChars.length;
-        for ( int lineIndex = 0; lineIndex < MAX_LINES; lineIndex++ )
+        int animIndex = 0;
+        final int sinOffset = myCreditsTextOffset * Sinus.SIN_TABLE_SIZE / myCreditsText.length();
+        for ( int lineIndex = 0; lineIndex < myVisibleLines; lineIndex++ )
             {
             int xPos = ( screen().width() - myLineWidthInPixels[ lineIndex ] ) / 2;
             final int yStart = ( screen().height() - myFontGenerator.charHeight() * myVisibleLines ) / 2;
             final int yPos = yStart + lineIndex * myFontGenerator.charHeight();
-            for ( int charIndex = 0; charIndex < MAX_CHARS_PER_ROW; charIndex++ )
+            for ( int charIndex = 0; charIndex < myLineLength[lineIndex]; charIndex++ )
                 {
                 final int idx = charIndex + lineIndex * MAX_CHARS_PER_ROW;
                 final TitleFancyChar fancyChar = myChars[ idx ];
-                fancyChar.waitTicks = idx * overallWaitTicks / numberOfChars;
-                final int sinIndex1 = charIndex * Sinus.SIN_TABLE_SIZE * 3 / MAX_CHARS_PER_ROW;
-                final int sinIndex2 = lineIndex * Sinus.SIN_TABLE_SIZE * 3 / MAX_CHARS_PER_ROW;
-                final int sinIndex = sinIndex1 + sinIndex2;
+                fancyChar.waitTicks = animIndex * overallWaitTicks / myNumberOfChars;
+                final int sinIndex1 = charIndex * Sinus.SIN_TABLE_SIZE / 2 / ( myLineLength[lineIndex] - 1 );
+                final int sinIndex2 = lineIndex * Sinus.SIN_TABLE_SIZE / 2 / ( myVisibleLines - 1 );
+                final int sinIndex = sinOffset + sinIndex1 + sinIndex2;
                 fancyChar.incomingTicks = incomingTicks;
                 fancyChar.stayTicks = stayTicks;
                 fancyChar.outgoingTicks = outgoingTicks;
-                fancyChar.startOffsetX = mySinus.cos( sinIndex, moveDistance );
-                fancyChar.startOffsetY = mySinus.sin( sinIndex, moveDistance * 2 );
+                fancyChar.startOffsetX = -mySinus.cos( sinIndex1, moveDistance * 2 );
+                fancyChar.startOffsetY = -mySinus.cos( sinIndex2, moveDistance );
                 fancyChar.endOffsetX = mySinus.sin( sinIndex, moveDistance );
                 fancyChar.endOffsetY = mySinus.cos( sinIndex, moveDistance ) * 2;
                 fancyChar.posX = xPos;
                 fancyChar.posY = yPos;
                 xPos += myFontGenerator.charWidth( fancyChar.charCode );
+                animIndex++;
                 }
             }
         }
 
 
     private int myVisibleLines;
+
+    private int myNumberOfChars;
 
     private boolean myNeedNewLines;
 
@@ -157,6 +165,8 @@ public final class TitleCreditsScreen extends ScreenBase
     private final FontGenerator myFontGenerator;
 
     private final Sinus mySinus = Sinus.instance();
+
+    private final int[] myLineLength = new int[MAX_LINES];
 
     private final boolean[] myLineUsed = new boolean[MAX_LINES];
 
