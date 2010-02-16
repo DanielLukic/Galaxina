@@ -52,8 +52,12 @@ public final class TitleCreditsScreen extends ScreenBase
             {
             final TitleFancyChar fancyChar = myChars[ idx ];
             if ( fancyChar == null || !fancyChar.isVisible() ) continue;
+            //#if FULL_FX
             final int safeAlpha = Math.max( 0, Math.min( 255, fancyChar.alpha ) );
-            myFontGenerator.blendChar( graphics, fancyChar.drawOffsetX, fancyChar.drawOffsetY, fancyChar.charCode, safeAlpha );
+            myFontGenerator.blendChar( graphics, fancyChar.drawPosX, fancyChar.drawPosY, fancyChar.charCode, safeAlpha );
+            //#else
+            //# myFontGenerator.blitChar( graphics, fancyChar.drawPosX, fancyChar.drawPosY, fancyChar.charCode );
+            //#endif
             }
         }
 
@@ -117,8 +121,8 @@ public final class TitleCreditsScreen extends ScreenBase
         {
         final int tps = timing().ticksPerSecond;
         final int overallWaitTicks = tps * myVisibleLines;
-        final int incomingTicks = tps;
-        final int stayTicks = myNumberOfChars * tps / 3;
+        final int incomingTicks = tps * 2 / 3;
+        final int stayTicks = myNumberOfChars * tps / 4;
         final int outgoingTicks = tps / 2;
         final int moveDistance = myFontGenerator.charHeight() * 3;
         int animIndex = 0;
@@ -143,8 +147,9 @@ public final class TitleCreditsScreen extends ScreenBase
                 fancyChar.startOffsetY = -mySinus.cos( sinIndex2, moveDistance );
                 fancyChar.endOffsetX = mySinus.sin( sinIndex, moveDistance );
                 fancyChar.endOffsetY = mySinus.cos( sinIndex, moveDistance ) * 2;
-                fancyChar.posX = xPos;
-                fancyChar.posY = yPos;
+                fancyChar.basePosX = fancyChar.drawPosX = xPos;
+                fancyChar.basePosY = fancyChar.drawPosY = yPos;
+                fancyChar.alpha = 0;
                 xPos += myFontGenerator.charWidth( fancyChar.charCode );
                 animIndex++;
                 }
