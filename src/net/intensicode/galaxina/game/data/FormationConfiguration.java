@@ -24,8 +24,8 @@ public final class FormationConfiguration
         myResourcesManager = aResourcesManager;
         myGameModel = aGameModel;
 
-        loadPathes( openStream( "/pathes.dat" ) );
-        loadLevels( openStream( "/levels.dat" ) );
+        loadPathes( openStream( "pathes.dat" ) );
+        loadLevels( openStream( "levels.dat" ) );
         }
 
     public final void switchTo( final int aLevelNumberStartingAt1 )

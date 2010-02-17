@@ -118,5 +118,5 @@ public final class Enemies extends GameObject
 
 
 
-    private static final String DATA_FILE_NAME = "/enemies.dat";
+    private static final String DATA_FILE_NAME = "enemies.dat";
     }

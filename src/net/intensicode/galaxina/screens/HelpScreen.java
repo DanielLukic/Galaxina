@@ -27,7 +27,7 @@ public final class HelpScreen extends MultiScreen
 
         visualContext.sharedSoftkeys().setSoftkeys( "START", "BACK", false );
 
-        extractLines( resources().loadString( "/help.txt" ) );
+        extractLines( resources().loadString( "help.txt" ) );
 
         myHelpPos.x = screen().width() / 2;
         myHelpPos.y = myTitleFont.charHeight();

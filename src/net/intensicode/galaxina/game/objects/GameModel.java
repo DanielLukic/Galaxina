@@ -164,7 +164,7 @@ public final class GameModel
 
         try
             {
-            configuration = aGameSystem.resources.loadConfiguration( "/game.properties" );
+            configuration = aGameSystem.resources.loadConfiguration( "game.properties" );
             }
         catch ( final Exception e )
             {
