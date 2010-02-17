@@ -29,8 +29,6 @@ public final class MainMenuScreen extends MenuBase
         addMenuEntry( HISCORE, "HISCORE" );
         addMenuEntry( OPTIONS, "OPTIONS" );
         addMenuEntry( EXIT, "EXIT" );
-
-        audio().loadMusic( "theme" ).start();
         }
 
     // From MenuBase
