@@ -7,8 +7,6 @@ import net.intensicode.graphics.SpriteGenerator;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.*;
 
-import javax.microedition.lcdui.Graphics;
-
 public final class PlayerDrawer extends ScreenBase
     {
     public PlayerDrawer( final GameContext aGameContext )
@@ -96,7 +94,7 @@ public final class PlayerDrawer extends ScreenBase
         for ( int idx = 0; idx < shownLives; idx++ )
             {
             final int xPos = xPosBase + idx * liveWidth;
-            gc.drawImage( myLive, xPos, yPos, Graphics.TOP | Graphics.LEFT );
+            gc.drawImage( myLive, xPos, yPos, DirectGraphics.ALIGN_TOP_LEFT );
             }
         }
 

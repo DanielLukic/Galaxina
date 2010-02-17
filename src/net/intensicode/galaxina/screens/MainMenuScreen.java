@@ -1,19 +1,16 @@
 package net.intensicode.galaxina.screens;
 
-import net.intensicode.core.KeysHandler;
 import net.intensicode.galaxina.MainContext;
-import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.VisualContext;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.screens.*;
-import net.intensicode.util.*;
-
-import javax.microedition.lcdui.Canvas;
+import net.intensicode.util.DynamicArray;
 
 public final class MainMenuScreen extends MenuBase
     {
     public MainMenuScreen( final MainContext aMainContext )
         {
-        super(aMainContext.visualContext().menuFont() );
+        super( aMainContext.visualContext().menuFont() );
         myMainContext = aMainContext;
         myVisualContext = aMainContext.visualContext();
         }

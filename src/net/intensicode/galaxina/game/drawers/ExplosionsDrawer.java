@@ -7,8 +7,6 @@ import net.intensicode.graphics.*;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.Position;
 
-import javax.microedition.lcdui.Graphics;
-
 public final class ExplosionsDrawer extends ScreenBase
     {
     public ExplosionsDrawer( final GameContext aGameContext )
@@ -47,7 +45,7 @@ public final class ExplosionsDrawer extends ScreenBase
 
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( explosion.worldPosFixed );
-            final Position aligned = FontGenerator.getAlignedPosition( screenPos, gen.charWidth, gen.charHeight, ExplosionsDrawer.ALIGN_CENTER );
+            final Position aligned = FontGenerator.getAlignedPosition( screenPos, gen.charWidth, gen.charHeight, DirectGraphics.ALIGN_CENTER );
             gen.blit( graphics, aligned.x, aligned.y, frame );
             }
         }
@@ -57,7 +55,4 @@ public final class ExplosionsDrawer extends ScreenBase
     private CharGenerator[] myCharGens;
 
     private final GameContext myGameContext;
-
-
-    private static final int ALIGN_CENTER = Graphics.HCENTER | Graphics.VCENTER;
     }

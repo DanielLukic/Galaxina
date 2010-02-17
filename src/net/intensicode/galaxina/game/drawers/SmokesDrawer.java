@@ -7,8 +7,6 @@ import net.intensicode.graphics.*;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.Position;
 
-import javax.microedition.lcdui.Graphics;
-
 public final class SmokesDrawer extends ScreenBase
     {
     public SmokesDrawer( final GameContext aGameContext )
@@ -44,7 +42,7 @@ public final class SmokesDrawer extends ScreenBase
 
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( smoke.worldPosFixed );
-            final Position aligned = FontGenerator.getAlignedPosition( screenPos, mySmokeGen.charWidth, mySmokeGen.charHeight, SmokesDrawer.ALIGN_CENTER );
+            final Position aligned = FontGenerator.getAlignedPosition( screenPos, mySmokeGen.charWidth, mySmokeGen.charHeight, DirectGraphics.ALIGN_CENTER );
             mySmokeGen.blit( graphics, aligned.x, aligned.y, frame );
             }
         }
@@ -54,7 +52,4 @@ public final class SmokesDrawer extends ScreenBase
     private CharGenerator mySmokeGen;
 
     private final GameContext myGameContext;
-
-
-    private static final int ALIGN_CENTER = Graphics.HCENTER | Graphics.VCENTER;
     }

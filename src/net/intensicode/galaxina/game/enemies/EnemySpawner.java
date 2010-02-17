@@ -7,7 +7,6 @@ import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Log;
 import net.intensicode.util.Position;
-import net.intensicode.screens.ConsoleOverlay;
 
 import java.io.IOException;
 
@@ -27,7 +26,7 @@ public final class EnemySpawner extends GameObject
         Log.debug( "Reloading formation" );
         //#endif
         //#if CONSOLE
-        ConsoleOverlay.addMessage( "Reloading formation" );
+        net.intensicode.screens.ConsoleOverlay.addMessage( "Reloading formation" );
         //#endif
         myConfiguration = new FormationConfiguration( system.resources, model );
         }
