@@ -91,7 +91,8 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         if ( myState == STATE_LOADING ) myScreenBuilder.showLoadingScreen( this );
         if ( myState == STATE_AUDIO ) myScreenBuilder.showAudioMenu();
         if ( myState == STATE_TITLE ) myScreenBuilder.showTitleScreen();
-        if ( myState < STATE_TITLE ) myState++;
+        if ( myState == STATE_MAIN_MENU ) myScreenBuilder.showMainMenu();
+        if ( myState < STATE_MAIN_MENU ) myState++;
         }
 
     public final void onDrawFrame()
@@ -116,6 +117,8 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     private static final int STATE_AUDIO = 1;
 
     private static final int STATE_TITLE = 2;
+
+    private static final int STATE_MAIN_MENU = 3;
 
     private final MusicController myMusicController = new MusicController();
     }
