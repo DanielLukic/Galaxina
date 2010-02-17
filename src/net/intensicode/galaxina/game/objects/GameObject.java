@@ -16,13 +16,8 @@ public abstract class GameObject
 
     public final void onInitialize( final GameSystem aGameSystem, final GameModel aGameModel ) throws Exception
         {
-        //#if DEBUG
-        if ( system != null && system != aGameSystem ) throw new IllegalArgumentException();
-        if ( model != null && model != aGameModel ) throw new IllegalArgumentException();
-        //#endif
-
-        if ( system == null ) system = aGameSystem;
-        if ( model == null ) model = aGameModel;
+        system = aGameSystem;
+        model = aGameModel;
 
         engine = aGameSystem.engine;
         timing = aGameSystem.timing;

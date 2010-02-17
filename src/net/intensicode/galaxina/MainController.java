@@ -5,6 +5,7 @@ import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.screens.*;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
+import net.intensicode.util.*;
 
 public final class MainController extends ScreenBase implements LoadingCallback, MainContext
     {
@@ -69,6 +70,10 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         stack().addGlobalHandler( new ConsoleOverlay( skin().font( "textfont" ) ) );
         //#endif
 
+        //#if DEBUG
+        Assert.notNull( "audio initialized", audio() );
+        //#endif
+        myMusicController = new MusicController();
         stack().addGlobalHandler( myMusicController );
         }
 
@@ -109,6 +114,8 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
     private ScreensBuilder myScreenBuilder;
 
+    private MusicController myMusicController;
+
     private ConfigurableVisualContext myVisualContext;
 
 
@@ -119,6 +126,4 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     private static final int STATE_TITLE = 2;
 
     private static final int STATE_MAIN_MENU = 3;
-
-    private final MusicController myMusicController = new MusicController();
     }
