@@ -4,7 +4,6 @@ import net.intensicode.core.*;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.extras.ExtraTypes;
 import net.intensicode.util.*;
-import net.intensicode.util.Log;
 
 public final class GameModel
     {
@@ -17,6 +16,8 @@ public final class GameModel
     public static final int STATE_SHOW_LEVEL_STATS = 2;
 
     public static final int STATE_SHOW_GAME_OVER = 3;
+
+    public static final int STATE_PAUSED = 4;
 
 
     public final World world;
@@ -64,7 +65,6 @@ public final class GameModel
     public int state;
 
 
-
     public GameModel( final World aWorld )
         {
         myGameObjects.add( world = aWorld );
@@ -100,6 +100,20 @@ public final class GameModel
             final GameObject gameObject = (GameObject) myGameObjects.objects[ idx ];
             gameObject.onStartGame();
             }
+        }
+
+    public final void pauseGame()
+        {
+        if ( state == STATE_PAUSED ) return;
+        myStateBeforePause = state;
+        state = STATE_PAUSED;
+        }
+
+    public final void unpauseGame()
+        {
+        if ( state != STATE_PAUSED ) return;
+        state = myStateBeforePause;
+        myStateBeforePause = STATE_INITIALIZED;
         }
 
     public final void startLevel() throws Exception
@@ -183,6 +197,7 @@ public final class GameModel
         }
 
 
+    private int myStateBeforePause;
 
     private final DynamicArray myGameObjects = new DynamicArray();
     }
