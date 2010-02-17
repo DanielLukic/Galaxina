@@ -22,7 +22,7 @@ public final class ScreensBuilder
         loadingScreen.shareSoftkeys( softkeys() );
         loadingScreen.setLateInit( aLoadingCallback );
         loadingScreen.setLogoAnim( skin().sprite( "logo_anim" ) );
-        //loadingScreen.setStartSound( audio().loadSound( "psychocell" ) );
+        loadingScreen.setStartSound( audio().loadSound( "psychocell" ) );
         stack().pushOnce( loadingScreen );
         }
 
@@ -45,11 +45,15 @@ public final class ScreensBuilder
         stack().pushOnce( new MainMenuScreen( myMainContext ) );
         }
 
+    public final void showGameScreen() throws Exception
+        {
+        if ( myGameScreen == null ) myGameScreen = new GameScreen( myMainContext );
+        stack().pushOnce( myGameScreen );
+        }
+
     public final void showHelp() throws Exception
         {
-        //if ( myHelpScreen == null ) myHelpScreen = new HelpScreen( myMainContext );
-        //stack().pushOnce( myHelpScreen );
-        throw new RuntimeException( "nyi" );
+        stack().pushOnce( new HelpScreen( myMainContext ) );
         }
 
     public final void showHiscore() throws Exception
@@ -84,6 +88,8 @@ public final class ScreensBuilder
         return myGameSystem.stack;
         }
 
+
+    private GameScreen myGameScreen;
 
     private final GameSystem myGameSystem;
 

@@ -2,14 +2,17 @@ package net.intensicode.galaxina.screens;
 
 import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.screens.ScreenBase;
+import net.intensicode.util.*;
 
 public final class GameScreen extends ScreenBase
     {
-    public GameScreen( final GameContext aGameContext )
+    public GameScreen( final MainContext aMainContext )
         {
-        myGameContext = aGameContext;
-        myGameModel = aGameContext.gameModel();
+        myMainContext = aMainContext;
+        myGameContext = myMainContext.gameContext();
+        myGameModel = myGameContext.gameModel();
         }
 
     // From ScreenBase
@@ -18,10 +21,11 @@ public final class GameScreen extends ScreenBase
         {
         myGameModel.onInitialize( system() );
 
-        myLevelInfo = new LevelInfoScreen( myGameContext );
-        myPlayLevel = new PlayLevelScreen( myGameContext );
+        myLevelInfo = new LevelInfoScreen( myMainContext );
+        myPlayLevel = new PlayLevelScreen( myMainContext );
         myLevelStats = new LevelStatsScreen( myGameContext );
         myGameOver = new GameOverScreen( myGameContext );
+        myPausedScreen = new GamePausedScreen( myMainContext );
 
         myLevelInfo.onInit( system() );
         myPlayLevel.onInit( system() );
@@ -39,6 +43,9 @@ public final class GameScreen extends ScreenBase
         switch ( myGameModel.state )
             {
             case GameModel.STATE_INITIALIZED:
+                //#if DEBUG
+                Assert.fail( "should not be here" );
+                //#endif
                 myGameModel.startGame();
                 break;
             case GameModel.STATE_SHOW_LEVEL_INFO:
@@ -52,6 +59,9 @@ public final class GameScreen extends ScreenBase
                 break;
             case GameModel.STATE_SHOW_GAME_OVER:
                 stack().pushOnce( myGameOver );
+                break;
+            case GameModel.STATE_PAUSED:
+                stack().pushOnce( myPausedScreen );
                 break;
             }
         }
@@ -73,4 +83,8 @@ public final class GameScreen extends ScreenBase
     private final GameModel myGameModel;
 
     private final GameContext myGameContext;
+
+    private final MainContext myMainContext;
+
+    private GamePausedScreen myPausedScreen;
     }

@@ -45,39 +45,9 @@ public final class GameController extends ScreenBase implements GameContext
         return mySharedGameDrawers;
         }
 
-    public final void showMainMenu() throws Exception
-        {
-        myMainContext.showMainMenu();
-        }
-
-    public final void showHelp() throws Exception
-        {
-        }
-
-    public final void showHiscore() throws Exception
-        {
-        }
-
-    public final void showOptions() throws Exception
-        {
-        }
-
     public final void startGame() throws Exception
         {
-        if ( myGameScreen == null ) myGameScreen = new GameScreen( this );
-        stack().pushOnce( myGameScreen );
         myGameModel.startGame();
-        }
-
-    public final void pauseGame() throws Exception
-        {
-        if ( myGamePausedScreen == null ) myGamePausedScreen = new GamePausedScreen( this );
-        stack().pushOnce( myGamePausedScreen );
-        }
-
-    public final void exit() throws Exception
-        {
-        system().shutdownAndExit();
         }
 
     // From ScreenBase
@@ -105,8 +75,7 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 
         mySharedGameBackground = new MultiScreen();
-        mySharedGameBackground.addScreen( visualContext().sharedBackground() );
-        mySharedGameBackground.addScreen( new SimpleStars( 32 ) );
+        mySharedGameBackground.addScreen( new StarField( 32, skin().charGen( "stars" ) ) );
         mySharedGameBackground.addScreen( myCamera );
         mySharedGameBackground.addScreen( visualContext().sharedSoftkeys() );
         mySharedGameBackground.addScreen( new ScoreboardDrawer( this ) );

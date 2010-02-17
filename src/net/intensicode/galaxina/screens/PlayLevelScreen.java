@@ -3,14 +3,16 @@ package net.intensicode.galaxina.screens;
 import net.intensicode.core.KeysHandler;
 import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.screens.MultiScreen;
 
 public final class PlayLevelScreen extends MultiScreen
     {
-    public PlayLevelScreen( final GameContext aGameContext )
+    public PlayLevelScreen( final MainContext aMainContext )
         {
-        myGameContext = aGameContext;
-        myGameModel = aGameContext.gameModel();
+        myMainContext = aMainContext;
+        myGameContext = myMainContext.gameContext();
+        myGameModel = myGameContext.gameModel();
         }
 
     // From MultiScreen
@@ -42,13 +44,14 @@ public final class PlayLevelScreen extends MultiScreen
         super.onControlTick();
 
         final KeysHandler keys = keys();
-        if ( keys.checkLeftSoftAndConsume() ) myGameContext.showMainMenu();
-        else
-        if ( keys.checkRightSoftAndConsume() ) myGameContext.pauseGame();
+        if ( keys.checkLeftSoftAndConsume() ) myMainContext.showMainMenu();
+        else if ( keys.checkRightSoftAndConsume() ) myGameModel.pauseGame();
         }
 
 
     private final GameModel myGameModel;
 
     private final GameContext myGameContext;
+
+    private final MainContext myMainContext;
     }

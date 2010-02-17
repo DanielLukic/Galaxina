@@ -2,22 +2,23 @@ package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.graphics.*;
 import net.intensicode.util.*;
 import net.intensicode.screens.MultiScreen;
 
 public final class HelpScreen extends MultiScreen
     {
-    public HelpScreen( final GameContext aGameContext )
+    public HelpScreen( final MainContext aMainContext )
         {
-        myGameContext = aGameContext;
+        myMainContext = aMainContext;
         }
 
     // From ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        final VisualContext visualContext = myGameContext.visualContext();
+        final VisualContext visualContext = myMainContext.visualContext();
         myTitleFont = visualContext.titleFont();
         myTextFont = visualContext.textFont();
 
@@ -42,9 +43,15 @@ public final class HelpScreen extends MultiScreen
     public final void onControlTick() throws Exception
         {
         final KeysHandler keys = keys();
-        if ( keys.checkLeftSoftAndConsume() ) myGameContext.startGame();
-        else if ( keys.checkFireAndConsume() ) myGameContext.startGame();
-        else if ( keys.checkRightSoftAndConsume() ) stack().popScreen( this );
+        if ( keys.checkLeftSoftAndConsume() || keys.checkFireAndConsume() || keys.checkStickDownAndConsume() )
+            {
+            stack().popScreen( this );
+            myMainContext.startNewGame();
+            }
+        else if ( keys.checkRightSoftAndConsume() )
+            {
+            stack().popScreen( this );
+            }
 
         super.onControlTick();
 
@@ -133,7 +140,7 @@ public final class HelpScreen extends MultiScreen
 
     private BitmapFontGenerator myTitleFont;
 
-    private final GameContext myGameContext;
+    private final MainContext myMainContext;
 
     private final Position myBlitPos = new Position();
 

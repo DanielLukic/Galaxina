@@ -42,7 +42,7 @@ public final class TitleScreen extends MultiScreen
         {
         super.onControlTick();
 
-        if ( keys().checkLeftSoftAndConsume() )
+        if ( keys().checkLeftSoftAndConsume() || keys().checkFireAndConsume() || keys().checkStickDownAndConsume() )
             {
             stack().popScreen( this );
             myMainContext.showMainMenu();

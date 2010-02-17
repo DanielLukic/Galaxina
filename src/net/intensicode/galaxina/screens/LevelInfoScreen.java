@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.*;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.GameModel;
 import net.intensicode.graphics.*;
@@ -9,10 +10,11 @@ import net.intensicode.util.Position;
 
 public final class LevelInfoScreen extends MultiScreen
     {
-    public LevelInfoScreen( final GameContext aGameContext )
+    public LevelInfoScreen( final MainContext aMainContext )
         {
-        myGameContext = aGameContext;
-        myGameModel = aGameContext.gameModel();
+        myMainContext = aMainContext;
+        myGameContext = myMainContext.gameContext();
+        myGameModel = myGameContext.gameModel();
         }
 
     // From MultiScreen
@@ -55,11 +57,10 @@ public final class LevelInfoScreen extends MultiScreen
             stack().popScreen( this );
             myGameModel.startLevel();
             }
-        else
-        if ( keys.checkRightSoftAndConsume() )
+        else if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
-            myGameContext.showMainMenu();
+            myMainContext.showMainMenu();
             }
         }
 
@@ -87,6 +88,8 @@ public final class LevelInfoScreen extends MultiScreen
     private final GameModel myGameModel;
 
     private final GameContext myGameContext;
+
+    private final MainContext myMainContext;
 
     private final Position myBlitPos = new Position();
     }

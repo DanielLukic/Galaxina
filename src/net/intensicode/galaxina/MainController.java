@@ -1,7 +1,7 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.GameSystem;
-import net.intensicode.galaxina.game.VisualContext;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.screens.*;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
@@ -19,6 +19,11 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         return system();
         }
 
+    public final GameContext gameContext()
+        {
+        return myGameController;
+        }
+
     public final VisualContext visualContext()
         {
         return myVisualContext;
@@ -27,6 +32,12 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     public final void showMainMenu() throws Exception
         {
         myScreenBuilder.showMainMenu();
+        }
+
+    public final void startNewGame() throws Exception
+        {
+        myScreenBuilder.showGameScreen();
+        myGameController.startGame();
         }
 
     // From LoadingCallback
@@ -38,8 +49,8 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
         myVisualContext.initialize();
 
-        //myGameController = new GameController( mySkin );
-        //myGameController.onInit( aGameSystem );
+        myGameController = new GameController( this );
+        myGameController.onInit( aGameSystem );
 
         //#if DEBUG
         stack().addGlobalHandler( new SkinErrorHandler( skin() ) );
@@ -86,6 +97,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
     private int myState = STATE_LOADING;
 
+    private GameController myGameController;
 
     private ScreensBuilder myScreenBuilder;
 
