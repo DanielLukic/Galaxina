@@ -30,7 +30,7 @@ public final class EditorUi implements EditorUiAPI
 
     public final Action action( final String aActionID )
         {
-        if ( myActions.containsKey( aActionID ) == false )
+        if ( !myActions.containsKey( aActionID ) )
             {
             try
                 {
@@ -92,7 +92,7 @@ public final class EditorUi implements EditorUiAPI
 
     // Implementation
 
-    private final String getActionClassName( final String aActionID )
+    private String getActionClassName( final String aActionID )
         {
         final String actionPackage = getClass().getPackage().getName();
         final StringBuilder className = new StringBuilder();
@@ -102,7 +102,7 @@ public final class EditorUi implements EditorUiAPI
         return className.toString();
         }
 
-    private final Action createAction( final String aActionID ) throws Exception
+    private Action createAction( final String aActionID ) throws Exception
         {
         final String actionClassName = getActionClassName( aActionID );
         final Class actionClass = Class.forName( actionClassName );
@@ -120,7 +120,7 @@ public final class EditorUi implements EditorUiAPI
         throw new IllegalArgumentException( aActionID );
         }
 
-    private final Action tryEmptyConstructor( final Class aClass ) throws Exception
+    private Action tryEmptyConstructor( final Class aClass ) throws Exception
         {
         for ( final Constructor constructor : aClass.getConstructors() )
             {
@@ -133,20 +133,19 @@ public final class EditorUi implements EditorUiAPI
         return null;
         }
 
-    private final Action tryDefaultConstructor( final Class aClass ) throws Exception
+    private Action tryDefaultConstructor( final Class aClass ) throws Exception
         {
         final Constructor constructor = aClass.getConstructor( EditorCoreAPI.class );
         return (Action) constructor.newInstance( myCoreAPI );
         }
 
-    private final ImageIcon loadIcon( final String aFolder, final String aIconID )
+    private ImageIcon loadIcon( final String aFolder, final String aIconID )
         {
         final String resourceName = String.format( "/%s/%s.png", aFolder, aIconID );
         final URL resource = getClass().getResource( resourceName );
         if ( resource == null ) return null;
         return new ImageIcon( resource );
         }
-
 
 
     private JFrame myFrame;
