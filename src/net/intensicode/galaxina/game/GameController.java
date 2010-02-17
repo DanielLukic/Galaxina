@@ -5,6 +5,7 @@ import net.intensicode.galaxina.game.drawers.*;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.screens.*;
 import net.intensicode.screens.*;
+import net.intensicode.util.Assert;
 
 public final class GameController extends ScreenBase implements GameContext
     {
@@ -56,6 +57,7 @@ public final class GameController extends ScreenBase implements GameContext
         {
         final World world = new World( screen().width(), screen().height() );
         myGameModel = new GameModel( world );
+        myGameModel.onInitialize( system() );
 
         myCamera = new Camera( this );
         myHiscore = new Hiscore();
@@ -83,6 +85,9 @@ public final class GameController extends ScreenBase implements GameContext
 
     public final void onControlTick() throws Exception
         {
+        //#if DEBUG
+        Assert.fail( "should not be here" );
+        //#endif
         }
 
     public final void onDrawFrame()

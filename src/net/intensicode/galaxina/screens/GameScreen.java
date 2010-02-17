@@ -19,8 +19,6 @@ public final class GameScreen extends ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        myGameModel.onInitialize( system() );
-
         myLevelInfo = new LevelInfoScreen( myMainContext );
         myPlayLevel = new PlayLevelScreen( myMainContext );
         myLevelStats = new LevelStatsScreen( myGameContext );
