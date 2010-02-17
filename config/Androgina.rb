@@ -2,13 +2,13 @@
 @name = "Galaxina"
 
 # Possible targets are defined in file _targets.rb.
-@targets = [ Generic_J2ME ]
+@targets = [ Generic_ANDROID ]
 
 # Possible sizes correspond to the image folders in the res directory.
 # You may use arbitrary folder names (no spaces or special chars) here -
 # as long as they exist.
-@sizes = [ "240x320" ]
+@sizes = [ "320x480" ]
 
 # Use this to activate global - not target-specific - settings. Used
 # primarly for debug output and effects.
-@symbols = [ :NO_KEY_REPEAT, :MORE_FX, :FULL_FX, :TOUCH_SUPPORTED, :HANDLE_SLOW_DOWN, :CHEAT ]
+@symbols = [ :NO_KEY_REPEAT, :MORE_FX, :FULL_FX, :TOUCH_SUPPORTED, :HANDLE_SLOW_DOWN, :CHEAT, :MULTI_BG ]

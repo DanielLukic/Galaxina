@@ -1,7 +1,2 @@
-load_config 'Galaxina.rb'
-
 @sizes = [ "240x320" ]
-
-@targets = [ Generic_MIDP2 ]
-
 @manifest = { 'SEMC-Screen-Size'=>'240,320' }
