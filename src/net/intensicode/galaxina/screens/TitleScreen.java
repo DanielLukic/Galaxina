@@ -30,7 +30,7 @@ public final class TitleScreen extends MultiScreen
         addScreen( new TitleCreditsScreen( creditsFont, creditsText ) );
         addScreen( myVisualContext.sharedSoftkeys() );
 
-        audio().loadMusic( "theme" ).start();
+        myMainContext.musicController().play( "theme" );
         }
 
     public final void onInitEverytime() throws Exception

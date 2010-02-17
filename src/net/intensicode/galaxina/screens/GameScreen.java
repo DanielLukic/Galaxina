@@ -35,7 +35,7 @@ public final class GameScreen extends ScreenBase
 
     public void onInitEverytime() throws Exception
         {
-        //audio().stopMusic();
+        myMainContext.musicController().play( "game" );
         }
 
     public final void onControlTick() throws Exception

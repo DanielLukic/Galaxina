@@ -29,6 +29,11 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         return myVisualContext;
         }
 
+    public final MusicController musicController()
+        {
+        return myMusicController;
+        }
+
     public final void showMainMenu() throws Exception
         {
         myScreenBuilder.showMainMenu();
@@ -63,6 +68,8 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         //#if CONSOLE
         stack().addGlobalHandler( new ConsoleOverlay( skin().font( "textfont" ) ) );
         //#endif
+
+        stack().addGlobalHandler( myMusicController );
         }
 
     // From ScreenBase
@@ -109,4 +116,6 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     private static final int STATE_AUDIO = 1;
 
     private static final int STATE_TITLE = 2;
+
+    private final MusicController myMusicController = new MusicController();
     }
