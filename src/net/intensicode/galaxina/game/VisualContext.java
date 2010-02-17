@@ -16,9 +16,9 @@ public interface VisualContext
 
     AutohideSoftkeysScreen sharedSoftkeys();
 
-    BitmapFontGenerator titleFont() throws IOException;
+    BitmapFontGenerator titleFont();
 
-    BitmapFontGenerator menuFont() throws IOException;
+    BitmapFontGenerator menuFont();
 
-    BitmapFontGenerator textFont() throws IOException;
+    BitmapFontGenerator textFont();
     }

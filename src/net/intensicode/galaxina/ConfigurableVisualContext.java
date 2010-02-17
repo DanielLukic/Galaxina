@@ -18,6 +18,9 @@ public final class ConfigurableVisualContext implements VisualContext
     public final void initialize() throws IOException
         {
         mySharedBackground = new ImageScreen( skin().image( "title_background" ) );
+        myTitleFont = skinManager().font( "menufont" );
+        myMenuFont = skinManager().font( "menufont" );
+        myTextFont = skinManager().font( "textfont" );
         }
 
     // From VisualContext
@@ -43,19 +46,19 @@ public final class ConfigurableVisualContext implements VisualContext
         return mySharedSoftkeys;
         }
 
-    public final BitmapFontGenerator titleFont() throws IOException
+    public final BitmapFontGenerator titleFont()
         {
-        return skinManager().font( "menufont" );
+        return myTitleFont;
         }
 
-    public final BitmapFontGenerator menuFont() throws IOException
+    public final BitmapFontGenerator menuFont()
         {
-        return skinManager().font( "menufont" );
+        return myMenuFont;
         }
 
-    public final BitmapFontGenerator textFont() throws IOException
+    public final BitmapFontGenerator textFont()
         {
-        return skinManager().font( "textfont" );
+        return myTextFont;
         }
 
     // Implementation
@@ -67,6 +70,12 @@ public final class ConfigurableVisualContext implements VisualContext
 
 
     private ScreenBase mySharedBackground;
+
+    private BitmapFontGenerator myTitleFont;
+
+    private BitmapFontGenerator myMenuFont;
+
+    private BitmapFontGenerator myTextFont;
 
     private final SkinManager mySkinManager;
 
