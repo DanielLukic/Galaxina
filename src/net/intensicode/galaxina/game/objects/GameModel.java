@@ -58,6 +58,10 @@ public final class GameModel
 
     public final ExtraTypes extraTypes = new ExtraTypes();
 
+    public AudioResource soundExtra;
+
+    public AudioResource soundDebris;
+
     public Configuration configuration;
 
     public int screenFlashIntensity;
@@ -144,6 +148,12 @@ public final class GameModel
         aSwarm.bonusApplies = 0;
         }
 
+    public final void triggerSound( final AudioResource aAudioResource )
+        {
+        // collect these and play at end of tick..
+        aAudioResource.start();
+        }
+
     public final void onInitialize( final GameSystem aGameSystem ) throws Exception
         {
         state = STATE_INITIALIZED;
@@ -169,6 +179,9 @@ public final class GameModel
             final GameObject gameObject = (GameObject) myGameObjects.objects[ idx ];
             gameObject.onInitialize( aGameSystem, this );
             }
+
+        soundExtra = aGameSystem.audio.loadSound( "extra" );
+        soundDebris = aGameSystem.audio.loadSound( "debris" );
         }
 
     public final void onControlTick() throws Exception

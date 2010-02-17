@@ -24,6 +24,8 @@ public final class FallingExtras extends GameObject
         final int dropSpeed = model.world.visibleSizeFixed.height / timing.ticksPerSecond / 3;
         extra.init( aPosition, dropSpeed );
         extra.type = aExtraType;
+
+        model.triggerSound( model.soundExtra );
         }
 
     // From GameObject
