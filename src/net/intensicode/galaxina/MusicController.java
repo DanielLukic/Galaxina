@@ -6,7 +6,7 @@ import net.intensicode.util.*;
 
 public class MusicController extends ScreenBase
     {
-    public final void play( final String aMusicId )
+    public void play( final String aMusicId )
         {
         //#if DEBUG
         Assert.notNull( "valid music id", aMusicId );
@@ -16,7 +16,7 @@ public class MusicController extends ScreenBase
         else if ( myState == STATE_PLAYING ) fadeIntoNewMusic( aMusicId );
         }
 
-    public final void stop()
+    public void stop()
         {
         if ( myActiveMusicResource != null ) myActiveMusicResource.stop();
         myActiveMusicResource = null;
