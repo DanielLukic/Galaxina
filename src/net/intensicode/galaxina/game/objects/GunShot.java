@@ -6,10 +6,6 @@ import net.intensicode.util.DynamicArray;
 import net.intensicode.util.Position;
 
 
-
-/**
- * TODO: Describe this!
- */
 public final class GunShot
     {
     public final Position worldPosFixed = new Position();
@@ -48,10 +44,10 @@ public final class GunShot
         for ( int idx = 0; idx < enemies.size; idx++ )
             {
             final Enemy enemy = (Enemy) enemies.objects[ idx ];
-            if ( enemy.active == false ) continue;
+            if ( !enemy.active ) continue;
 
             final boolean hit = enemy.isHit( worldPosFixed );
-            if ( hit == false ) continue;
+            if ( !hit ) continue;
 
             enemy.hit();
 
