@@ -682,6 +682,7 @@
       <module fileurl="file://$PROJECT_DIR$/Galaxina.iml" filepath="$PROJECT_DIR$/Galaxina.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/GalaxinaEditor/GalaxinaEditor.iml" filepath="$PROJECT_DIR$/modules/GalaxinaEditor/GalaxinaEditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiBuild/IntensiBuild.iml" filepath="$PROJECT_DIR$/modules/IntensiBuild/IntensiBuild.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/IntensiDroid/IntensiDroid.iml" filepath="$PROJECT_DIR$/modules/IntensiDroid/IntensiDroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiGame/IntensiGame.iml" filepath="$PROJECT_DIR$/modules/IntensiGame/IntensiGame.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiME/IntensiME.iml" filepath="$PROJECT_DIR$/modules/IntensiME/IntensiME.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/IntensiTools/IntensiTools.iml" filepath="$PROJECT_DIR$/modules/IntensiTools/IntensiTools.iml" />
@@ -931,11 +932,13 @@
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/modules/GalaxinaEditor" vcs="Git" />
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/IntensiBuild" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/IntensiDroid" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/IntensiGame" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/modules/IntensiME" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/modules/PathSandbox" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/modules/RunME_Galaxina" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/IntensiTools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/RunME" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
