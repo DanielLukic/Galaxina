@@ -4,4 +4,3 @@ MIDlet-Version: ${version}
 MIDlet-Name: ${project.name}
 MIDlet-Icon: /icon.png
 MIDlet-1: Galaxina, /icon.png, net.intensicode.galaxina.Galaxina
-MIDlet-2: GalaxinaSandbox, /icon.png, net.intensicode.galaxina.GalaxinaSandbox
