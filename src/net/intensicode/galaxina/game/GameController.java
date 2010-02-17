@@ -77,6 +77,7 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 
         mySharedGameBackground = new MultiScreen();
+        mySharedGameBackground.addScreen( new ClearScreen() );
         mySharedGameBackground.addScreen( new StarField( 32, skin().charGen( "stars" ) ) );
         mySharedGameBackground.addScreen( myCamera );
         mySharedGameBackground.addScreen( visualContext().sharedSoftkeys() );
