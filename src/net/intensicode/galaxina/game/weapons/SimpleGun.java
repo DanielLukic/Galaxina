@@ -78,7 +78,10 @@ public final class SimpleGun extends Weapon
     private void onControl()
         {
         final KeysHandler keys = GameObject.system.keys;
-        if ( !keys.checkFire1AndConsume() ) return;
+
+        boolean fire = keys.checkFire1AndConsume() || keys.checkStickDownAndConsume();
+        fire = fire || keys.checkFire3AndConsume() || keys.checkFire4AndConsume();
+        if ( !fire ) return;
 
         final boolean fired = onFire();
         if ( fired ) onReload( fired );

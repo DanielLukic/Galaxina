@@ -43,7 +43,7 @@ public final class LevelInfoScreen extends GalaxinaGameScreen
         super.onControlTick();
 
         final KeysHandler keys = keys();
-        if ( keys.checkFireAndConsume() || keys.checkLeftSoftAndConsume() )
+        if ( keys.checkFireAndConsume() || keys.checkLeftSoftAndConsume() || keys.checkStickDownAndConsume() )
             {
             stack().popScreen( this );
             model().startLevel();
