@@ -25,11 +25,6 @@ public final class SimpleGun extends Weapon
         return GameObject.timing.ticksPerSecond / ( 3 + GameObject.model.player.reloadUpgrades );
         }
 
-    public static int getGunShotSpeed()
-        {
-        return 2 * GameObject.model.world.visibleSizeFixed.height / GameObject.timing.ticksPerSecond;
-        }
-
     public final boolean canFire()
         {
         return myTrackedShots.size < getNumberOfBullets();
@@ -98,7 +93,7 @@ public final class SimpleGun extends Weapon
         final int spreadWidth = myShotDistanceFixed * ( numberOfSlots - 1 );
         final int xOffset = -spreadWidth / 2;
 
-        final int gunShotSpeed = getGunShotSpeed();
+        final int gunShotSpeed = GameObject.model.level.getGunShotSpeed();
 
         final Position startPos = GameObject.model.player.worldPosFixed;
 

@@ -161,6 +161,7 @@ public final class Player extends GameObject
 
         //#if DEBUG
         addSatellite( model.satellites.getAvailableInstance() );
+        addSatellite( model.satellites.getAvailableInstance() );
         //#endif
         }
 

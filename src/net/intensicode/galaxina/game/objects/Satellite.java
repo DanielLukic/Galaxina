@@ -10,17 +10,28 @@ public final class Satellite extends SimpleObject
         myIndex = aIndex;
         myNumberOfSatellites = aCount;
         myPreviousSatellite = aPrevious;
+
         active = true;
 
+        tickCount = 0;
         animTicks = GameObject.timing.ticksPerSecond;
+
+        worldPosFixed.setTo( myOwningPlayer.worldPosFixed );
         }
 
     public final void onStartGame() throws Exception
         {
-        active = false;
-        myPreviousSatellite = null;
         myOwningPlayer = null;
-        myIndex = myNumberOfSatellites = tickCount = animTicks = 0;
+        myIndex = 0;
+        myNumberOfSatellites = 0;
+        myPreviousSatellite = null;
+
+        active = false;
+
+        tickCount = 0;
+        animTicks = 0;
+
+        worldPosFixed.x = worldPosFixed.y = 0;
         }
 
     public final void onStartLevel() throws Exception
@@ -33,13 +44,14 @@ public final class Satellite extends SimpleObject
 
         tickAnimation();
 
+        final int sinTableSizeFixed = FixedMath.toFixed( Sinus.SIN_TABLE_SIZE );
         if ( myPreviousSatellite == null )
             {
             tickRotation();
             }
         else
             {
-            final int rotationAngleOffsetInFixedSinusSize = FixedMath.toFixed( Sinus.SIN_TABLE_SIZE ) / myNumberOfSatellites;
+            final int rotationAngleOffsetInFixedSinusSize = sinTableSizeFixed / myNumberOfSatellites;
             myRotationAngleInFixedSinusSize = myPreviousSatellite.myRotationAngleInFixedSinusSize + rotationAngleOffsetInFixedSinusSize;
             }
 
@@ -54,12 +66,35 @@ public final class Satellite extends SimpleObject
         worldPosFixed.y += FixedMath.toFixed( yOffset );
 
         updateBBoxes();
+
+        while ( myRotationAngleInFixedSinusSize >= sinTableSizeFixed )
+            {
+            myRotationAngleInFixedSinusSize -= sinTableSizeFixed;
+            }
+
+        if ( Math.abs( yOffset ) == 0 && !myHaveFiredFlag )
+            {
+            final int gunShotSpeed = GameObject.model.level.getGunShotSpeed();
+            final GunShot shot = GameObject.model.gunShots.getAvailableGunShot();
+            if ( shot != null )
+                {
+                shot.init( worldPosFixed, gunShotSpeed );
+                myHaveFiredFlag = true;
+                }
+            }
+        else myHaveFiredFlag = false;
         }
+
+    private boolean myHaveFiredFlag;
 
     private void tickRotation()
         {
-        final int rotationDeltaInFixedSinusSize = FixedMath.toFixed( Sinus.SIN_TABLE_SIZE ) / GameObject.timing.ticksPerSecond / 2;
-        myRotationAngleInFixedSinusSize += rotationDeltaInFixedSinusSize;
+        myRotationAngleInFixedSinusSize += getRotationDeltaInFixedSinusSize();
+        }
+
+    private int getRotationDeltaInFixedSinusSize()
+        {
+        return FixedMath.toFixed( Sinus.SIN_TABLE_SIZE ) / GameObject.timing.ticksPerSecond / 2;
         }
 
     public final void explode()

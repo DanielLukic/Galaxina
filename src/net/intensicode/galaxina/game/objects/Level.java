@@ -80,6 +80,11 @@ public final class Level extends GameObject
         return !isChallengingStage();
         }
 
+    public final int getGunShotSpeed()
+        {
+        return 2 * GameObject.model.world.visibleSizeFixed.height / GameObject.timing.ticksPerSecond;
+        }
+
     // From GameObject
 
     public final void onStartGame() throws Exception
