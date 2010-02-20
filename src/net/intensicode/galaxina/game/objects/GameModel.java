@@ -78,12 +78,12 @@ public final class GameModel
         myGameObjects.add( bombs = new Bombs() );
         myGameObjects.add( gunShots = new GunShots() );
         myGameObjects.add( extras = new FallingExtras() );
+        myGameObjects.add( satellites = new Satellites() ); // before player!
         myGameObjects.add( player = new Player() );
         myGameObjects.add( enemies = new Enemies() );
         myGameObjects.add( missiles = new Missiles() );
         myGameObjects.add( debrises = new Debrises() );
         myGameObjects.add( weapons = new Weapons() );
-        myGameObjects.add( satellites = new Satellites() );
         myGameObjects.add( enemySpawner = new EnemySpawner() );
         myGameObjects.add( attackSpawner = new AttackSpawner() );
         myGameObjects.add( smokes = new Smokes() );

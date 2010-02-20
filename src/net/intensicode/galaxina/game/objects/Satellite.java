@@ -18,6 +18,9 @@ public final class Satellite extends SimpleObject
     public final void onStartGame() throws Exception
         {
         active = false;
+        myPreviousSatellite = null;
+        myOwningPlayer = null;
+        myIndex = myNumberOfSatellites = tickCount = animTicks = 0;
         }
 
     public final void onStartLevel() throws Exception
