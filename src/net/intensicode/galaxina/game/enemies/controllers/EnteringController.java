@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.game.enemies.controllers;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
-import net.intensicode.galaxina.game.enemies.EnemyController;
+import net.intensicode.galaxina.game.enemies.*;
 
 public final class EnteringController extends EnemyController
     {

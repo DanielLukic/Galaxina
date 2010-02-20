@@ -1,7 +1,3 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.galaxina.game.extras.ExtraType;

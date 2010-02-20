@@ -30,7 +30,6 @@ public final class SwarmBonusVisitor extends Visitor
         }
 
 
-
     private int myBonusScore;
 
     private boolean myBonusApplies;

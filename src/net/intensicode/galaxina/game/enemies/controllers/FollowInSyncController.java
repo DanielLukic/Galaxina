@@ -1,10 +1,14 @@
 package net.intensicode.galaxina.game.enemies.controllers;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
-import net.intensicode.galaxina.game.enemies.EnemyController;
+import net.intensicode.galaxina.game.enemies.*;
 
 public final class FollowInSyncController extends EnemyController
     {
+    public boolean isReadyForAction( final Enemy aEnemy )
+        {
+        return aEnemy.syncSource.controller.isReadyForAction( aEnemy );
+        }
+
     public final void onInitialize( final Enemy aEnemy )
         {
         aEnemy.syncPathTo( aEnemy.syncSource );
