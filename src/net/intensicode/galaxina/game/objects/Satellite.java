@@ -14,24 +14,14 @@ public final class Satellite extends SimpleObject
         active = true;
 
         tickCount = 0;
-        animTicks = GameObject.timing.ticksPerSecond;
+        animTicks = GameObject.timing.ticksPerSecond / 2;
 
         worldPosFixed.setTo( myOwningPlayer.worldPosFixed );
         }
 
     public final void onStartGame() throws Exception
         {
-        myOwningPlayer = null;
-        myIndex = 0;
-        myNumberOfSatellites = 0;
-        myPreviousSatellite = null;
-
         active = false;
-
-        tickCount = 0;
-        animTicks = 0;
-
-        worldPosFixed.x = worldPosFixed.y = 0;
         }
 
     public final void onStartLevel() throws Exception

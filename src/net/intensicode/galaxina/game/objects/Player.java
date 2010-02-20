@@ -112,7 +112,7 @@ public final class Player extends GameObject
 
         for ( int idx = 0; idx < satellites.size; idx++ )
             {
-            final Satellite satellite = (Satellite) satellites.get(idx);
+            final Satellite satellite = (Satellite) satellites.get( idx );
             if ( satellite.active && satellite.isCrash( aEnemy.bbox ) )
                 {
                 satellite.explode();
@@ -129,7 +129,8 @@ public final class Player extends GameObject
 
     public final void removeSatellite( final Satellite aSatellite )
         {
-        if ( !satellites.remove( aSatellite ) ) return;
+        aSatellite.active = false;
+        satellites.remove( aSatellite );
         updateSatellites();
         }
 
@@ -160,6 +161,7 @@ public final class Player extends GameObject
         primaryWeapon = model.weapons.simpleGun;
 
         //#if DEBUG
+        while ( satellites.size > 0 ) removeSatellite( (Satellite) satellites.get( 0 ) );
         addSatellite( model.satellites.getAvailableInstance() );
         addSatellite( model.satellites.getAvailableInstance() );
         //#endif
