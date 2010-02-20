@@ -12,11 +12,32 @@ public final class RandomExtra extends ExtraType
 
     // From ExtraType
 
+    public int idForDrawer()
+        {
+        createNewNextRandomId();
+        return myNextRandomId;
+        }
+
     public final boolean apply( final GameModel aModel )
         {
-        final int randomID = Random.INSTANCE.nextInt( aModel.extraTypes.all.length );
+        final int randomID = myNextRandomId;
+        createNewNextRandomId();
+
         final ExtraType randomType = aModel.extraTypes.all[ randomID ];
         name = randomType.name;
         return randomType.apply( aModel );
         }
+
+    // Implementation
+
+    private void createNewNextRandomId()
+        {
+        do
+            {
+            myNextRandomId = Random.INSTANCE.nextInt( ExtraTypes.NUMBER_OF_EXTRA_TYPES );
+            }
+        while ( myNextRandomId == ExtraTypes.NO_EXTRA );
+        }
+
+    private int myNextRandomId;
     }

@@ -26,6 +26,8 @@ public final class Player extends GameObject
 
     public Weapon secondaryWeapon;
 
+    public Weapon auxillaryWeapon;
+
 
     public int damageInPercentFixed;
 
@@ -103,15 +105,16 @@ public final class Player extends GameObject
         lives = 3;
         damageInPercentFixed = 0;
         myLastScoreCheck = 0;
-        weaponUpgrades = 0;
-        reloadUpgrades = 0;
-        bulletUpgrades = 0;
+        weaponUpgrades = 2;
+        reloadUpgrades = 2;
+        bulletUpgrades = 2;
         secondaryWeapon = null;
         primaryWeapon = model.weapons.simpleGun;
         }
 
     public final void onStartLevel()
         {
+        // TODO: This seems to occur in Weapons class already?
         if ( primaryWeapon != null ) primaryWeapon.onStartLevel();
         if ( secondaryWeapon != null ) secondaryWeapon.onStartLevel();
 

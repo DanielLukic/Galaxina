@@ -1,8 +1,5 @@
 package net.intensicode.galaxina.game.extras;
 
-/**
- * TODO: Describe this!
- */
 public final class ExtraTypes
     {
     public static final int NO_EXTRA = 0;
@@ -25,13 +22,15 @@ public final class ExtraTypes
 
     public static final int RANDOM = 9;
 
+    public static final int NUMBER_OF_EXTRA_TYPES = 10;
+
     public final ExtraType[] all;
 
 
 
     public ExtraTypes()
         {
-        all = new ExtraType[10];
+        all = new ExtraType[NUMBER_OF_EXTRA_TYPES];
         add( new NoExtra( NO_EXTRA ) );
         add( new ScoreBonus( SCORE_BONUS ) );
         add( new UpgradeReload( UPGRADE_RELOAD ) );
@@ -46,7 +45,7 @@ public final class ExtraTypes
 
     // Implementation
 
-    private final void add( final ExtraType aExtraType )
+    private void add( final ExtraType aExtraType )
         {
         if ( all[ aExtraType.id ] != null ) throw new IllegalArgumentException();
         all[ aExtraType.id ] = aExtraType;

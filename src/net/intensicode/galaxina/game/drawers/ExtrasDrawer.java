@@ -3,7 +3,7 @@ package net.intensicode.galaxina.game.drawers;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.*;
-import net.intensicode.graphics.SpriteGenerator;
+import net.intensicode.graphics.*;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.*;
 
@@ -18,10 +18,9 @@ public final class ExtrasDrawer extends ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        final SkinManager skin = myGameContext.visualContext().skinManager();
-        myExtraGen = skin.sprite( "extras" );
+        myExtraGen = skin().charGen( "extras" );
 
-        final Size sizeInWorld = myGameContext.camera().toWorldSize( myExtraGen.getWidth(), myExtraGen.getHeight() );
+        final Size sizeInWorld = myGameContext.camera().toWorldSize( myExtraGen.charWidth, myExtraGen.charHeight );
         myGameContext.gameModel().extras.sizeInWorldFixed.setTo( sizeInWorld );
         }
 
@@ -47,18 +46,20 @@ public final class ExtrasDrawer extends ScreenBase
 
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( extra.worldPosFixed );
-            myExtraGen.paint( aGraphics, screenPos.x, screenPos.y );
 
-            final int frame = extra.animTickCount * 3 / extra.animTicks;
-            final int maxID = myExtraGen.getRawFrameCount() / 3;
-            final int id = extra.type.id % maxID;
-            myExtraGen.setFrame( id * 3 + frame );
+            final int frame = extra.animTickCount * ( myExtraGen.charsPerRow - 1 ) / ( extra.animTicks - 1 );
+            final int maxId = myExtraGen.charsPerColumn;
+            final int id = extra.type.idForDrawer() % maxId;
+            final int idOffset = id * myExtraGen.charsPerRow;
+            final int index = idOffset + frame;
+
+            myExtraGen.blit( aGraphics, screenPos.x, screenPos.y, index );
             }
         }
 
 
 
-    private SpriteGenerator myExtraGen;
+    private CharGenerator myExtraGen;
 
     private final GameContext myGameContext;
     }
