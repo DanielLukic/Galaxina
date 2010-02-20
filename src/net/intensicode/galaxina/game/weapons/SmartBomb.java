@@ -8,11 +8,6 @@ import net.intensicode.core.KeysHandler;
 
 public final class SmartBomb extends Weapon
     {
-    public final boolean isSecondary()
-        {
-        return true;
-        }
-
     public final void onInitialize()
         {
         }

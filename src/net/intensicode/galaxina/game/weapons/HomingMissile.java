@@ -7,11 +7,6 @@ import net.intensicode.util.FixedMath;
 
 public final class HomingMissile extends Weapon
     {
-    public final boolean isSecondary()
-        {
-        return true;
-        }
-
     public final void onInitialize()
         {
         }

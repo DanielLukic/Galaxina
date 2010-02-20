@@ -37,11 +37,6 @@ public final class SimpleGun extends Weapon
 
     // From Weapon
 
-    public final boolean isSecondary()
-        {
-        return false;
-        }
-
     public final void onInitialize()
         {
         final Configuration config = GameObject.model.configuration;

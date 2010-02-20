@@ -1,12 +1,7 @@
 package net.intensicode.galaxina.game.weapons;
 
-/**
- * TODO: Describe this!
- */
 public abstract class Weapon
     {
-    public abstract boolean isSecondary();
-
     public abstract void onInitialize();
 
     public abstract void onStartLevel();

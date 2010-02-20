@@ -12,9 +12,6 @@ import net.intensicode.util.Visitor;
 import net.intensicode.util.DynamicArray;
 
 
-/**
- * TODO: Describe this!
- */
 public final class Swarm
     {
     /**
@@ -62,7 +59,7 @@ public final class Swarm
             if ( enemy.active ) enemy.onControlTick();
             }
 
-        if ( isComplete == false ) return;
+        if ( !isComplete ) return;
 
         boolean allEnemiesDestroyed = true;
         for ( int idx = 0; idx < myParticipants.size; idx++ )

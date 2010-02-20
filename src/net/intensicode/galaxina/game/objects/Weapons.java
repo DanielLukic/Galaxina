@@ -2,9 +2,6 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.weapons.*;
 
-/**
- * TODO: Describe this!
- */
 public final class Weapons extends GameObject
     {
     public static final int MAX_BULLET_UPGRADES = 8;

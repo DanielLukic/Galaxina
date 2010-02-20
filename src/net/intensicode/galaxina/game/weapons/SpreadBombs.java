@@ -6,11 +6,6 @@ import net.intensicode.util.Position;
 
 public final class SpreadBombs extends Weapon
     {
-    public final boolean isSecondary()
-        {
-        return true;
-        }
-
     public final void onInitialize()
         {
         final Configuration config = GameObject.model.configuration;
