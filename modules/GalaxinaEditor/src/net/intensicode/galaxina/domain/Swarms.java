@@ -48,6 +48,7 @@ public final class Swarms extends GroupDomainObject<Swarm>
         return NormalSwarm.loadNew( myCoreAPI, aInputStream );
         }
 
+
     private final EditorCoreAPI myCoreAPI;
 
     private static final Log LOG = Log.get();

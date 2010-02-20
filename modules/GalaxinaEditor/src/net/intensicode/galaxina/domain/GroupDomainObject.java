@@ -30,6 +30,16 @@ public abstract class GroupDomainObject<T extends GroupEntry> implements Group<T
         while ( myEntries.size() > 0 ) deleteEntry( at( 0 ) );
         }
 
+    public final void moveUp( final T aEntry )
+        {
+        final int index = myEntries.indexOf( aEntry );
+        if ( index == -1 ) throw new IllegalArgumentException();
+        if ( index == 0 ) return;
+        final T removed = myEntries.remove( index );
+        myEntries.add( index - 1, removed );
+        myListeners.fire( "onDataChanged", this );
+        }
+
     public final void addEntry( final T aEntry )
         {
         myEntries.add( aEntry );
@@ -38,7 +48,7 @@ public abstract class GroupDomainObject<T extends GroupEntry> implements Group<T
 
     public final void deleteEntry( final T aEntry )
         {
-        if ( myEntries.contains( aEntry ) == false )
+        if ( !myEntries.contains( aEntry ) )
             {
             throw new IllegalArgumentException( aEntry.toString() );
             }
