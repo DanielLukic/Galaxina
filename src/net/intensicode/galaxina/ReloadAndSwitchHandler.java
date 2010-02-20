@@ -6,7 +6,7 @@ import net.intensicode.util.Log;
 
 public final class ReloadAndSwitchHandler extends ScreenBase
     {
-    public ReloadAndSwitchHandler( final GameController aGameController )
+    public final void attach( final GameController aGameController )
         {
         myGameController = aGameController;
         }
@@ -37,8 +37,13 @@ public final class ReloadAndSwitchHandler extends ScreenBase
 
         if ( myTriggerLevelSwitch > 0 )
             {
+            // Start a new game first, then set the level number:
             myGameController.startGame();
             myGameController.gameModel().level.numberStartingAt1 = myTriggerLevelSwitch;
+
+            // This will update the level number on the level info screen:
+            stack().activeScreen().onInit( system() );
+
             myTriggerLevelSwitch = 0;
             }
         }
@@ -53,5 +58,5 @@ public final class ReloadAndSwitchHandler extends ScreenBase
 
     private int myTriggerLevelSwitch;
 
-    private final GameController myGameController;
+    private GameController myGameController;
     }

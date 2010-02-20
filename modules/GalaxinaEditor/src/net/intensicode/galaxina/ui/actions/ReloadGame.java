@@ -9,7 +9,7 @@ public final class ReloadGame extends RunnableAction implements EditorStateListe
         {
         super( aCoreAPI );
 
-        aCoreAPI.state().add( MIDLET_CONTAINER, this );
+        aCoreAPI.state().add( MIDLET_RUNNING, this );
         }
 
     // From EditorStateListener

@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.domain;
 
 import net.intensicode.IntensiME;
+import net.intensicode.util.Log;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.*;
@@ -17,13 +18,11 @@ public final class EmbeddedGalaxina extends IntensiME implements MainContext
 
     public final void reloadGame() throws Exception
         {
-        waitForHandler();
         myReloadHandler.reloadGame();
         }
 
     public final void switchToLevel( final int aLevelIndex ) throws Exception
         {
-        waitForHandler();
         myReloadHandler.switchToLevel( aLevelIndex );
         }
 
@@ -57,7 +56,7 @@ public final class EmbeddedGalaxina extends IntensiME implements MainContext
             myGameController.onInit( aGameSystem );
             myGameController.startGame();
 
-            myReloadHandler = new ReloadAndSwitchHandler( myGameController );
+            myReloadHandler.attach( myGameController );
             aGameSystem.stack.addGlobalHandler( myReloadHandler );
 
             synchronized ( this )
@@ -95,27 +94,29 @@ public final class EmbeddedGalaxina extends IntensiME implements MainContext
         myGameController.startGame();
         }
 
+    public void showHelp() throws Exception
+        {
+        }
+
+    public void showHiscore() throws Exception
+        {
+        }
+
+    public void showOptions() throws Exception
+        {
+        }
+
     public void startNewGame() throws Exception
         {
         myGameController.startGame();
         }
 
-    // Implementation
-
-    private void waitForHandler() throws InterruptedException
-        {
-        synchronized ( this )
-            {
-            while ( myReloadHandler == null ) wait();
-            }
-        }
-
 
     private GameController myGameController;
-
-    private ReloadAndSwitchHandler myReloadHandler;
 
     private AutohideSoftkeysScreen mySoftkeysScreen;
 
     private ConfigurableVisualContext myVisualContext;
+
+    private final ReloadAndSwitchHandler myReloadHandler = new ReloadAndSwitchHandler();
     }
