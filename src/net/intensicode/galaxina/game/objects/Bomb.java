@@ -1,14 +1,9 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.enemies.Enemy;
-import net.intensicode.util.Position;
-import net.intensicode.util.DynamicArray;
+import net.intensicode.util.*;
 
 
-
-/**
- * TODO: Describe this!
- */
 public final class Bomb
     {
     public static final int FROM_ENEMY = 0;
@@ -22,7 +17,6 @@ public final class Bomb
     public final Position speedFixed = new Position();
 
     public boolean active;
-
 
 
     public Bomb()
@@ -60,7 +54,7 @@ public final class Bomb
 
         final World world = aGameModel.world;
         active = world.isInside( worldPosFixed );
-        if (!active) GameObject.model.level.onEnemyBombDone();
+        if ( !active ) GameObject.model.level.onEnemyBombDone();
 
         if ( myOwner == FROM_PLAYER || myOwner == FROM_MISSILE )
             {

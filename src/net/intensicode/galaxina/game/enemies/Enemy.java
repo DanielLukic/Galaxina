@@ -300,11 +300,7 @@ public final class Enemy
         if ( worldPosFixed.y > 0 )
             {
             final Player player = model.player;
-            if ( player.isCrash( bbox ) )
-                {
-                player.explode();
-                this.explode();
-                }
+            player.checkForCrash( this );
             }
 
         if ( !active ) return;

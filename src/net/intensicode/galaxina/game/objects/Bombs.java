@@ -1,8 +1,5 @@
 package net.intensicode.galaxina.game.objects;
 
-/**
- * TODO: Describe this!
- */
 public final class Bombs extends GameObject
     {
     public int activeCount;

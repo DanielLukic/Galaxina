@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.extras;
 
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.objects.*;
 
 public final class AddSatellite extends ExtraType
     {
@@ -13,6 +13,10 @@ public final class AddSatellite extends ExtraType
 
     public final boolean apply( final GameModel aModel )
         {
-        return false;
+        final Player player = aModel.player;
+        if ( !aModel.satellites.hasAvailableInstance() ) return false;
+        final Satellite satellite = aModel.satellites.getAvailableInstance();
+        player.addSatellite( satellite );
+        return true;
         }
     }

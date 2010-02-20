@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.KeysHandler;
+import net.intensicode.galaxina.game.enemies.Enemy;
 import net.intensicode.galaxina.game.weapons.Weapon;
 import net.intensicode.util.*;
 
@@ -26,7 +27,7 @@ public final class Player extends GameObject
 
     public Weapon secondaryWeapon;
 
-    public Weapon auxillaryWeapon;
+    public final DynamicArray satellites = new DynamicArray();
 
 
     public int damageInPercentFixed;
@@ -45,7 +46,6 @@ public final class Player extends GameObject
 
 
     public boolean visible;
-
 
 
     public Player()
@@ -94,6 +94,54 @@ public final class Player extends GameObject
         damageInPercentFixed = FixedMath.FIXED_100;
         myExplodeTick = 0;
         myExplodeTicks = timing.ticksPerSecond * 2;
+
+        for ( int idx = 0; idx < satellites.size; idx++ )
+            {
+            final Satellite satellite = (Satellite) satellites.get( idx );
+            if ( satellite.active ) satellite.explode();
+            }
+        }
+
+    public void checkForCrash( final Enemy aEnemy )
+        {
+        if ( isCrash( aEnemy.bbox ) )
+            {
+            explode();
+            aEnemy.explode();
+            }
+
+        for ( int idx = 0; idx < satellites.size; idx++ )
+            {
+            final Satellite satellite = (Satellite) satellites.get(idx);
+            if ( satellite.active && satellite.isCrash( aEnemy.bbox ) )
+                {
+                satellite.explode();
+                aEnemy.explode();
+                }
+            }
+        }
+
+    public final void addSatellite( final Satellite aSatellite )
+        {
+        satellites.add( aSatellite );
+        updateSatellites();
+        }
+
+    public final void removeSatellite( final Satellite aSatellite )
+        {
+        if ( !satellites.remove( aSatellite ) ) return;
+        updateSatellites();
+        }
+
+    private void updateSatellites()
+        {
+        Satellite previous = null;
+        for ( int idx = 0; idx < satellites.size; idx++ )
+            {
+            final Satellite satellite = (Satellite) satellites.get( idx );
+            satellite.init( this, idx, satellites.size, previous );
+            previous = satellite;
+            }
         }
 
     // From GameObject
@@ -301,7 +349,6 @@ public final class Player extends GameObject
         if ( primaryWeapon != null ) primaryWeapon.onControlTick( isAlive() );
         if ( secondaryWeapon != null ) secondaryWeapon.onControlTick( isAlive() );
         }
-
 
 
     private int myState;

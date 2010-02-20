@@ -13,7 +13,6 @@ public abstract class GameObject
     public static GameModel model;
 
 
-
     public final void onInitialize( final GameSystem aGameSystem, final GameModel aGameModel ) throws Exception
         {
         system = aGameSystem;
@@ -39,7 +38,6 @@ public abstract class GameObject
     protected void onInitOnce() throws Exception
         {
         }
-
 
 
     private boolean myInitializedFlag;

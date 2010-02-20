@@ -28,6 +28,8 @@ public final class GameModel
 
     public final GunShots gunShots;
 
+    public final Satellites satellites;
+
     public final FallingExtras extras;
 
     public final Player player;
@@ -81,6 +83,7 @@ public final class GameModel
         myGameObjects.add( missiles = new Missiles() );
         myGameObjects.add( debrises = new Debrises() );
         myGameObjects.add( weapons = new Weapons() );
+        myGameObjects.add( satellites = new Satellites() );
         myGameObjects.add( enemySpawner = new EnemySpawner() );
         myGameObjects.add( attackSpawner = new AttackSpawner() );
         myGameObjects.add( smokes = new Smokes() );
