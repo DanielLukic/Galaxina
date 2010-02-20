@@ -124,7 +124,8 @@ public final class TitleCreditsScreen extends ScreenBase
         final int incomingTicks = tps * 2 / 3;
         final int stayTicks = myNumberOfChars * tps / 4;
         final int outgoingTicks = tps / 2;
-        final int moveDistance = myFontGenerator.charHeight() * 3;
+        final int moveDistanceX = screen().width() / 2;
+        final int moveDistanceY = screen().height() / 2;
         int animIndex = 0;
         final int sinOffset = myCreditsTextOffset * Sinus.SIN_TABLE_SIZE / myCreditsText.length();
         for ( int lineIndex = 0; lineIndex < myVisibleLines; lineIndex++ )
@@ -143,10 +144,10 @@ public final class TitleCreditsScreen extends ScreenBase
                 fancyChar.incomingTicks = incomingTicks;
                 fancyChar.stayTicks = stayTicks;
                 fancyChar.outgoingTicks = outgoingTicks;
-                fancyChar.startOffsetX = -mySinus.cos( sinIndex1, moveDistance * 2 );
-                fancyChar.startOffsetY = -mySinus.cos( sinIndex2, moveDistance );
-                fancyChar.endOffsetX = mySinus.sin( sinIndex, moveDistance );
-                fancyChar.endOffsetY = mySinus.cos( sinIndex, moveDistance ) * 2;
+                fancyChar.startOffsetX = -mySinus.cos( sinIndex1, moveDistanceX );
+                fancyChar.startOffsetY = -mySinus.cos( sinIndex2, moveDistanceY );
+                fancyChar.endOffsetX = mySinus.sin( sinIndex, moveDistanceX );
+                fancyChar.endOffsetY = mySinus.cos( sinIndex, moveDistanceY );
                 fancyChar.basePosX = fancyChar.drawPosX = xPos;
                 fancyChar.basePosY = fancyChar.drawPosY = yPos;
                 fancyChar.alpha = 0;
