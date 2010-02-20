@@ -1,12 +1,8 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 
-
-/**
- * TODO: Describe this!
- */
 public final class Explosion
     {
     public static final int BIG = 0;
@@ -24,7 +20,6 @@ public final class Explosion
     public boolean active;
 
     public int type;
-    
 
 
     public final void init( final Position aWorldPosFixed, final int aDurationTicks, final int aFallingSpeedFixed )

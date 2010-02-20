@@ -3,9 +3,6 @@ package net.intensicode.galaxina.game.objects;
 import net.intensicode.util.Position;
 
 
-/**
- * TODO: Describe this!
- */
 public final class Explosions extends GameObject
     {
     public final Explosion[] explosions = new Explosion[MAX_EXPLOSIONS];
@@ -20,7 +17,6 @@ public final class Explosions extends GameObject
         {
         final Explosion explosion = getExplosion();
 
-        //final int driftSpeedFixed = model.world.visibleSizeFixed.height / 8 / timing.ticksPerSecond;
         explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, 0 );
         explosion.type = Explosion.BIG;
         }

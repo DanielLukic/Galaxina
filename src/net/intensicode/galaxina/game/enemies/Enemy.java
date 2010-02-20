@@ -1,14 +1,13 @@
 package net.intensicode.galaxina.game.enemies;
 
+import net.intensicode.core.GameTiming;
 import net.intensicode.galaxina.game.enemies.controllers.*;
 import net.intensicode.galaxina.game.extras.ExtraType;
-import net.intensicode.galaxina.game.objects.GameModel;
-import net.intensicode.galaxina.game.objects.GameObject;
-import net.intensicode.galaxina.game.objects.Player;
-import net.intensicode.path.PathWithDirection;
+import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.util.UtilitiesEx;
-import net.intensicode.core.GameTiming;
+import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.*;
+
 
 public final class Enemy
     {
@@ -64,7 +63,7 @@ public final class Enemy
 
     public int syncMode;
 
-    
+
     public EnemyController controller;
 
     public EnemyWeapon weapon;
@@ -84,7 +83,6 @@ public final class Enemy
     public boolean inSyncWithBreath;
 
     public boolean active;
-
 
 
     public Enemy( final Position aLastHitPosition )
@@ -355,7 +353,6 @@ public final class Enemy
             directionInDegreesFixed -= FixedMath.FIXED_360;
             }
         }
-
 
 
     private final Position myLastHitPosition;

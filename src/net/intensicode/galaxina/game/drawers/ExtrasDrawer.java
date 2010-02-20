@@ -18,9 +18,9 @@ public final class ExtrasDrawer extends ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        myExtraGen = skin().charGen( "extras" );
+        myExtraGen = skin().sprite( "extras" );
 
-        final Size sizeInWorld = myGameContext.camera().toWorldSize( myExtraGen.charWidth, myExtraGen.charHeight );
+        final Size sizeInWorld = myGameContext.camera().toWorldSize( myExtraGen.getWidth(), myExtraGen.getHeight() );
         myGameContext.gameModel().extras.sizeInWorldFixed.setTo( sizeInWorld );
         }
 
@@ -47,19 +47,26 @@ public final class ExtrasDrawer extends ScreenBase
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( extra.worldPosFixed );
 
-            final int frame = extra.animTickCount * ( myExtraGen.charsPerRow - 1 ) / ( extra.animTicks - 1 );
-            final int maxId = myExtraGen.charsPerColumn;
+            final int frame = extra.animTickCount * ( FRAMES_PER_EXTRA - 1 ) / ( extra.animTicks - 1 );
+            final int maxId = myExtraGen.getFrameSequenceLength() / FRAMES_PER_EXTRA;
             final int id = extra.type.idForDrawer() % maxId;
-            final int idOffset = id * myExtraGen.charsPerRow;
+            final int idOffset = id * FRAMES_PER_EXTRA;
             final int index = idOffset + frame;
 
-            myExtraGen.blit( aGraphics, screenPos.x, screenPos.y, index );
+            myExtraGen.paint( aGraphics, screenPos.x, screenPos.y, index );
+
+            //#if DEBUG
+            aGraphics.setColorARGB32( 0xFF00FFFF );
+            aGraphics.fillRect( screenPos.x - 1, screenPos.y - 1, FRAMES_PER_EXTRA, FRAMES_PER_EXTRA );
+            //#endif
             }
         }
 
 
 
-    private CharGenerator myExtraGen;
+    private SpriteGenerator myExtraGen;
 
     private final GameContext myGameContext;
+
+    private static final int FRAMES_PER_EXTRA = 3;
     }

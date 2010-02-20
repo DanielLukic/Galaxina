@@ -19,10 +19,10 @@ public final class ExplosionsDrawer extends ScreenBase
     public final void onInitOnce() throws Exception
         {
         final SkinManager skin = myGameContext.visualContext().skinManager();
-        myCharGens = new CharGenerator[3];
-        myCharGens[ Explosion.BIG ] = skin.charGen( "explosion1" );
-        myCharGens[ Explosion.DEFAULT ] = skin.charGen( "explosion2" );
-        myCharGens[ Explosion.SPECIAL ] = skin.charGen( "explosion3" );
+        myCharGens = new SpriteGenerator[3];
+        myCharGens[ Explosion.BIG ] = skin.sprite( "explosion1" );
+        myCharGens[ Explosion.DEFAULT ] = skin.sprite( "explosion2" );
+        myCharGens[ Explosion.SPECIAL ] = skin.sprite( "explosion3" );
         }
 
     public final void onControlTick() throws Exception
@@ -39,20 +39,24 @@ public final class ExplosionsDrawer extends ScreenBase
             final Explosion explosion = explosions[ idx ];
             if ( !explosion.active ) continue;
 
-            final CharGenerator gen = myCharGens[ explosion.type ];
-            final int maxAnimFrame = gen.charsPerRow * gen.charsPerColumn - 1;
-            final int frame = explosion.explodeTick * maxAnimFrame / ( explosion.durationTicks - 1 );
+            final SpriteGenerator gen = myCharGens[ explosion.type ];
+            final int numberOfFrames = gen.getFrameSequenceLength();
+            final int frame = explosion.explodeTick * ( numberOfFrames - 1 ) / ( explosion.durationTicks - 1 );
 
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( explosion.worldPosFixed );
-            final Position aligned = FontGenerator.getAlignedPosition( screenPos, gen.charWidth, gen.charHeight, DirectGraphics.ALIGN_CENTER );
-            gen.blit( graphics, aligned.x, aligned.y, frame );
+            gen.paint( graphics, screenPos.x, screenPos.y, frame );
+
+            //#if DEBUG
+            graphics.setColorARGB32( 0xFF00FFFF );
+            graphics.fillRect( screenPos.x - 1, screenPos.y - 1, 3, 3 );
+            //#endif
             }
         }
 
 
 
-    private CharGenerator[] myCharGens;
+    private SpriteGenerator[] myCharGens;
 
     private final GameContext myGameContext;
     }

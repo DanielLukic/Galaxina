@@ -4,9 +4,9 @@ import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.Level;
+import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.graphics.SpriteGenerator;
 import net.intensicode.screens.ScreenBase;
-import net.intensicode.galaxina.util.*;
 import net.intensicode.util.*;
 
 public final class EnemiesDrawer extends ScreenBase
@@ -67,6 +67,11 @@ public final class EnemiesDrawer extends ScreenBase
         final int directionIndex = UtilitiesEx.getDirectionID( direction + 45, directionSteps );
         sprite.setFrame( directionIndex % directionSteps );
         sprite.paint( aGraphics, screenPos.x, screenPos.y );
+
+        //#if DEBUG
+        aGraphics.setColorARGB32( 0xFF00FFFF );
+        aGraphics.fillRect( screenPos.x - 1, screenPos.y - 1, 3, 3 );
+        //#endif
         }
 
     private SpriteGenerator[] myEnemyGenerators;
