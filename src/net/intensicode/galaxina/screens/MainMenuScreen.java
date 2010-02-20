@@ -32,7 +32,6 @@ public final class MainMenuScreen extends MenuBase
     protected void afterInitEverytime() throws Exception
         {
         final int screenCount = stack().numberOfStackedScreens();
-        Log.debug( "screen count: {}", screenCount );
         if ( screenCount <= MAIN_CONTROLLER_AND_MAIN_MENU )
             {
             mySoftkeys.setSoftkeys( "SELECT", "", false );
