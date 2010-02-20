@@ -15,5 +15,11 @@ public interface MainContext
 
     void showMainMenu() throws Exception;
 
+    void showHelp() throws Exception;
+
+    void showHiscore() throws Exception;
+
+    void showOptions() throws Exception;
+
     void startNewGame() throws Exception;
     }

@@ -1,31 +1,28 @@
 package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.MainContext;
 import net.intensicode.graphics.*;
 import net.intensicode.util.*;
-import net.intensicode.screens.MultiScreen;
 
-public final class HelpScreen extends MultiScreen
+public final class HelpScreen extends GalaxinaScreen
     {
     public HelpScreen( final MainContext aMainContext )
         {
-        myMainContext = aMainContext;
+        super( aMainContext );
         }
 
     // From ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        final VisualContext visualContext = myMainContext.visualContext();
-        myTitleFont = visualContext.titleFont();
-        myTextFont = visualContext.textFont();
+        myTitleFont = visuals().titleFont();
+        myTextFont = visuals().textFont();
 
-        addScreen( visualContext.sharedBackground() );
-        addScreen( visualContext.sharedSoftkeys() );
+        addScreen( visuals().sharedBackground() );
+        addScreen( visuals().sharedSoftkeys() );
 
-        visualContext.sharedSoftkeys().setSoftkeys( "START", "BACK", false );
+        visuals().sharedSoftkeys().setSoftkeys( "START", "BACK", false );
 
         extractLines( resources().loadString( "help.txt" ) );
 
@@ -46,7 +43,7 @@ public final class HelpScreen extends MultiScreen
         if ( keys.checkLeftSoftAndConsume() || keys.checkFireAndConsume() || keys.checkStickDownAndConsume() )
             {
             stack().popScreen( this );
-            myMainContext.startNewGame();
+            context().startNewGame();
             }
         else if ( keys.checkRightSoftAndConsume() )
             {
@@ -59,9 +56,14 @@ public final class HelpScreen extends MultiScreen
         if ( keys.checkDownAndConsume() ) myLineOffset++;
 
         final int linesOnScreen = linesOnScreen();
-        if ( myLineOffset < 0 ) myLineOffset = 0;
+        if ( myLineOffset < 0 )
+            {
+            myLineOffset = 0;
+            }
         if ( myLineOffset + linesOnScreen >= myHelpTextLines.size )
+            {
             myLineOffset = myHelpTextLines.size - linesOnScreen;
+            }
         }
 
     public final void onDrawFrame()
@@ -139,8 +141,6 @@ public final class HelpScreen extends MultiScreen
     private BitmapFontGenerator myTextFont;
 
     private BitmapFontGenerator myTitleFont;
-
-    private final MainContext myMainContext;
 
     private final Position myBlitPos = new Position();
 

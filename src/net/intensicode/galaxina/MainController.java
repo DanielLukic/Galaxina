@@ -2,10 +2,10 @@ package net.intensicode.galaxina;
 
 import net.intensicode.core.GameSystem;
 import net.intensicode.galaxina.game.*;
-import net.intensicode.galaxina.screens.*;
+import net.intensicode.galaxina.screens.LoadingCallback;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
-import net.intensicode.util.*;
+import net.intensicode.util.Assert;
 
 public final class MainController extends ScreenBase implements LoadingCallback, MainContext
     {
@@ -38,6 +38,21 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     public final void showMainMenu() throws Exception
         {
         myScreenBuilder.showMainMenu();
+        }
+
+    public final void showHelp() throws Exception
+        {
+        myScreenBuilder.showHelp();
+        }
+
+    public final void showHiscore() throws Exception
+        {
+        myScreenBuilder.showHiscore();
+        }
+
+    public final void showOptions() throws Exception
+        {
+        myScreenBuilder.showOptions();
         }
 
     public final void startNewGame() throws Exception
@@ -90,8 +105,11 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     public final void onControlTick() throws Exception
         {
         //#if FALSE
-        myState = STATE_TITLE;
-        onLoadingDone( system() );
+        if ( myState < STATE_TITLE )
+            {
+            myState = STATE_TITLE;
+            onLoadingDone( system() );
+            }
         //#endif
         if ( myState == STATE_LOADING ) myScreenBuilder.showLoadingScreen( this );
         if ( myState == STATE_AUDIO ) myScreenBuilder.showAudioMenu();
@@ -103,7 +121,6 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     public final void onDrawFrame()
         {
         }
-
 
 
     private boolean myLateInitFlag;

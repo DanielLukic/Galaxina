@@ -2,16 +2,14 @@ package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.ImageResource;
 import net.intensicode.galaxina.MainContext;
-import net.intensicode.galaxina.game.VisualContext;
 import net.intensicode.graphics.FontGenerator;
-import net.intensicode.screens.*;
+import net.intensicode.screens.ImageScreen;
 
-public final class TitleScreen extends MultiScreen
+public final class TitleScreen extends GalaxinaScreen
     {
     public TitleScreen( final MainContext aMainContext )
         {
-        myMainContext = aMainContext;
-        myVisualContext = aMainContext.visualContext();
+        super( aMainContext );
         }
 
     // From ScreenBase
@@ -25,17 +23,17 @@ public final class TitleScreen extends MultiScreen
         final FontGenerator creditsFont = skin().font( "menufont" );
         final String creditsText = resources().loadString( "credits.txt" );
 
-        addScreen( myVisualContext.sharedBackground() );
+        addScreen( visuals().sharedBackground() );
         addScreen( new ImageScreen( title, titlePosX, titlePosY, ImageScreen.MODE_ABSOLUTE ) );
         addScreen( new TitleCreditsScreen( creditsFont, creditsText ) );
-        addScreen( myVisualContext.sharedSoftkeys() );
+        addScreen( visuals().sharedSoftkeys() );
 
-        myMainContext.musicController().play( "theme" );
+        context().musicController().play( "theme" );
         }
 
     public final void onInitEverytime() throws Exception
         {
-        myVisualContext.sharedSoftkeys().setSoftkeys( "MENU", "EXIT", false );
+        visuals().sharedSoftkeys().setSoftkeys( "MENU", "EXIT", false );
         }
 
     public final void onControlTick() throws Exception
@@ -45,16 +43,11 @@ public final class TitleScreen extends MultiScreen
         if ( keys().checkLeftSoftAndConsume() || keys().checkFireAndConsume() || keys().checkStickDownAndConsume() )
             {
             stack().popScreen( this );
-            myMainContext.showMainMenu();
+            context().showMainMenu();
             }
         if ( keys().checkRightSoftAndConsume() )
             {
             system().shutdownAndExit();
             }
         }
-
-
-    private final MainContext myMainContext;
-
-    private final VisualContext myVisualContext;
     }

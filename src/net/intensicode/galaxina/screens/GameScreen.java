@@ -1,29 +1,25 @@
 package net.intensicode.galaxina.screens;
 
-import net.intensicode.galaxina.game.GameContext;
-import net.intensicode.galaxina.game.objects.GameModel;
 import net.intensicode.galaxina.MainContext;
-import net.intensicode.screens.ScreenBase;
-import net.intensicode.util.*;
+import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.util.Assert;
 
-public final class GameScreen extends ScreenBase
+public final class GameScreen extends GalaxinaGameScreen
     {
     public GameScreen( final MainContext aMainContext )
         {
-        myMainContext = aMainContext;
-        myGameContext = myMainContext.gameContext();
-        myGameModel = myGameContext.gameModel();
+        super( aMainContext );
         }
 
     // From ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        myLevelInfo = new LevelInfoScreen( myMainContext );
-        myPlayLevel = new PlayLevelScreen( myMainContext );
-        myLevelStats = new LevelStatsScreen( myGameContext );
-        myGameOver = new GameOverScreen( myGameContext );
-        myPausedScreen = new GamePausedScreen( myMainContext );
+        myLevelInfo = new LevelInfoScreen( context() );
+        myPlayLevel = new PlayLevelScreen( context() );
+        myLevelStats = new LevelStatsScreen( game() );
+        myGameOver = new GameOverScreen( game() );
+        myPausedScreen = new GamePausedScreen( context() );
 
         myLevelInfo.onInit( system() );
         myPlayLevel.onInit( system() );
@@ -33,18 +29,18 @@ public final class GameScreen extends ScreenBase
 
     public void onInitEverytime() throws Exception
         {
-        myMainContext.musicController().play( "game" );
+        context().musicController().play( "game" );
         }
 
     public final void onControlTick() throws Exception
         {
-        switch ( myGameModel.state )
+        switch ( model().state )
             {
             case GameModel.STATE_INITIALIZED:
                 //#if DEBUG
                 Assert.fail( "should not be here" );
                 //#endif
-                myGameModel.startGame();
+                model().startGame();
                 break;
             case GameModel.STATE_SHOW_LEVEL_INFO:
                 stack().pushOnce( myLevelInfo );
@@ -76,13 +72,6 @@ public final class GameScreen extends ScreenBase
     private PlayLevelScreen myPlayLevel;
 
     private LevelStatsScreen myLevelStats;
-
-
-    private final GameModel myGameModel;
-
-    private final GameContext myGameContext;
-
-    private final MainContext myMainContext;
 
     private GamePausedScreen myPausedScreen;
     }

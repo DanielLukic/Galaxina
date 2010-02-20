@@ -38,8 +38,7 @@ public final class GameOverScreen extends MultiScreen
             stack().popScreen( this );
             myGameContext.gameModel().startGame();
             }
-        else
-        if ( keys.checkRightSoftAndConsume() )
+        else if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
             myGameContext.gameModel().pauseGame();

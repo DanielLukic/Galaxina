@@ -4,5 +4,5 @@ import net.intensicode.core.GameSystem;
 
 public interface LoadingCallback
     {
-    void onLoadingDone( final GameSystem aGameSystem ) throws Exception;
+    void onLoadingDone( GameSystem aGameSystem ) throws Exception;
     }
