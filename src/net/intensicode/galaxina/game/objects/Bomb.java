@@ -4,7 +4,7 @@ import net.intensicode.galaxina.game.enemies.Enemy;
 import net.intensicode.util.*;
 
 
-public final class Bomb
+public final class Bomb extends WorldObject
     {
     public static final int FROM_ENEMY = 0;
 
@@ -12,11 +12,7 @@ public final class Bomb
 
     public static final int FROM_MISSILE = 2;
 
-    public final Position worldPosFixed = new Position();
-
     public final Position speedFixed = new Position();
-
-    public boolean active;
 
 
     public Bomb()

@@ -104,7 +104,7 @@ public final class Player extends GameObject
 
     public void checkForCrash( final Enemy aEnemy )
         {
-        if ( isCrash( aEnemy.bbox ) )
+        if ( isCrash( aEnemy.boundingBox ) )
             {
             explode();
             aEnemy.explode();
@@ -113,7 +113,7 @@ public final class Player extends GameObject
         for ( int idx = 0; idx < satellites.size; idx++ )
             {
             final Satellite satellite = (Satellite) satellites.get( idx );
-            if ( satellite.active && satellite.isCrash( aEnemy.bbox ) )
+            if ( satellite.active && satellite.isCrash( aEnemy.boundingBox ) )
                 {
                 satellite.explode();
                 aEnemy.explode();
@@ -166,6 +166,8 @@ public final class Player extends GameObject
         reloadUpgrades = 2;
         bulletUpgrades = 2;
         //#endif
+
+        secondaryWeapon = model.weapons.homingMissile;
         }
 
     public final void onStartLevel()

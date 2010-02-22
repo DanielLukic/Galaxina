@@ -16,7 +16,7 @@ public final class AvoidBeingHit extends EnemyBehavior
 
     public final void onWaiting( final Enemy aEnemy )
         {
-        final boolean projectileApproaching = model.gunShots.isProjectileApproaching( aEnemy.bbox );
+        final boolean projectileApproaching = model.gunShots.isProjectileApproaching( aEnemy.boundingBox );
         if ( projectileApproaching ) setAttackPath( aEnemy );
         }
 

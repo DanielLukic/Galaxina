@@ -9,7 +9,7 @@ import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.*;
 
 
-public final class Enemy
+public final class Enemy extends WorldObjectWithSize
     {
     public static final EnemyController ENTERING = new EnteringController();
 
@@ -45,10 +45,6 @@ public final class Enemy
 
     public static GameModel model;
 
-
-    public final Position worldPosFixed = new Position();
-
-    public final Rectangle bbox = new Rectangle();
 
     public Position formationPosition;
 
@@ -244,7 +240,7 @@ public final class Enemy
 
     public final boolean isHit( final Position aWorldPosFixed )
         {
-        return bbox.contains( aWorldPosFixed );
+        return boundingBox.contains( aWorldPosFixed );
         }
 
     public final void hit()
@@ -314,7 +310,7 @@ public final class Enemy
 
         final int width = type.sizeInWorldFixed.width * 80 / 100;
         final int height = type.sizeInWorldFixed.height * 80 / 100;
-        bbox.setCenterAndSize( worldPosFixed, width, height );
+        boundingBox.setCenterAndSize( worldPosFixed, width, height );
 
         weapon.onControlTick();
 

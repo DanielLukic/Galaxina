@@ -74,17 +74,21 @@ public final class GameController extends ScreenBase implements GameContext
         myHiscore = new Hiscore();
 
         mySharedGameDrawers = new MultiScreen();
-        mySharedGameDrawers.addScreen( new BombsDrawer( this ) );
-        mySharedGameDrawers.addScreen( new DebrisDrawer( this ) );
-        mySharedGameDrawers.addScreen( new GunShotsDrawer( this ) );
+        mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "bomb", myGameModel.bombs.bombs ) );
+        mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "debris", myGameModel.debrises.debrises, 3 ) );
+        mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "gunshot", myGameModel.gunShots.gunShots ) );
+
+        // TODO: Can EnemiesDrawer and MissilesDrawer be unified in the ObjectsDrawer? Like 'WorldObjectWithDirection'?
+        // TODO: But what about the EnemyType? How to unify this?
         mySharedGameDrawers.addScreen( new EnemiesDrawer( this ) );
         mySharedGameDrawers.addScreen( new MissilesDrawer( this ) );
+
         mySharedGameDrawers.addScreen( new PlayerDrawer( this ) );
         mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "satellite", myGameModel.satellites.satellites ) );
-        mySharedGameDrawers.addScreen( new SmokesDrawer( this ) );
+        mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "smoke", myGameModel.smokes.smokes ) );
         mySharedGameDrawers.addScreen( new SparksDrawer( this ) );
         mySharedGameDrawers.addScreen( new ExtrasDrawer( this ) );
-        mySharedGameDrawers.addScreen( new ExplosionsDrawer( this ) );
+        mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "explosion", myGameModel.explosions.explosions, 3 ) );
         mySharedGameDrawers.addScreen( new ScoreTagsDrawer( this ) );
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 

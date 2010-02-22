@@ -93,9 +93,9 @@ public final class Explosions extends GameObject
             final Explosion explosion = explosions[ idx ];
             if ( explosion.active )
                 {
-                if ( explosion.explodeTick > oldestExplosionTicks )
+                if ( explosion.tickCount > oldestExplosionTicks )
                     {
-                    oldestExplosionTicks = explosion.explodeTick;
+                    oldestExplosionTicks = explosion.tickCount;
                     oldestExplosionIndex = idx;
                     }
                 continue;

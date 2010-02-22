@@ -18,7 +18,7 @@ public final class StrikeWhenAttacked extends EnemyBehavior
         {
         if ( !model.level.anotherAttackerAllowed() ) return;
 
-        final boolean projectileApproaching = model.gunShots.isProjectileApproaching( aEnemy.bbox );
+        final boolean projectileApproaching = model.gunShots.isProjectileApproaching( aEnemy.boundingBox );
         if ( projectileApproaching ) setAttackPath( aEnemy );
         }
 

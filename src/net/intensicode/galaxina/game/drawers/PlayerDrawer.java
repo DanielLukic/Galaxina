@@ -20,9 +20,6 @@ public final class PlayerDrawer extends ScreenBase
         {
         final SkinManager skin = myGameContext.visualContext().skinManager();
         myGalaxina = skin.sprite( "galaxian" );
-        myDamageIndicator = skin.sprite( "damage" );
-
-        myLive = skin.image( "live" );
 
         final Size sizeInWorld = myGameContext.camera().toWorldSize( myGalaxina.getWidth(), myGalaxina.getHeight() );
 
@@ -38,24 +35,6 @@ public final class PlayerDrawer extends ScreenBase
         else myAnimTicks = 0;
 
         myAnimFrame = myAnimTicks * ( myGalaxina.getRawFrameCount() - 1 ) / ( tps - 1 );
-
-        if ( myIndicatorTicks < tps * 2 ) myIndicatorTicks++;
-        else myIndicatorTicks = 0;
-
-        final Player player = myGameContext.gameModel().player;
-        final int damage = FixedMath.toInt( player.damageInPercentFixed );
-        if ( damage > 75 )
-            {
-            myIndicatorVisible = ( myIndicatorTicks % tps ) < ( tps * 2 / 3 );
-            }
-        else if ( damage > 50 )
-            {
-            myIndicatorVisible = myIndicatorTicks < ( tps * 3 / 2 );
-            }
-        else
-            {
-            myIndicatorVisible = true;
-            }
         }
 
     public final void onDrawFrame()
@@ -74,26 +53,6 @@ public final class PlayerDrawer extends ScreenBase
             myGalaxina.setFrame( myAnimFrame );
             myGalaxina.paint( gc, screenPos.x, screenPos.y );
             }
-
-        final int shownLives = Math.min( 5, player.lives );
-        final int liveWidth = myLive.getWidth();
-        final int liveHeight = myLive.getHeight();
-        final int xPosBase = ( screen().width() - shownLives * liveWidth ) / 2;
-        for ( int idx = 0; idx < shownLives; idx++ )
-            {
-            final int xPos = xPosBase + idx * liveWidth;
-            gc.drawImage( myLive, xPos, liveHeight / 2, DirectGraphics.ALIGN_TOP_LEFT );
-            }
-
-        if ( !myIndicatorVisible ) return;
-
-        final int indicatorFrames = myDamageIndicator.getRawFrameCount();
-        final int damage = FixedMath.toInt( player.damageInPercentFixed );
-        final int frameID = damage * ( indicatorFrames - 1 ) / 100;
-        final int xPos = screen().width() / 2;
-        final int yPos = myDamageIndicator.getHeight() + liveHeight * 2;
-        myDamageIndicator.setFrame( frameID );
-        myDamageIndicator.paint( gc, xPos, yPos );
         }
 
 
@@ -101,18 +60,10 @@ public final class PlayerDrawer extends ScreenBase
 
     private int myAnimFrame;
 
-    private int myIndicatorTicks;
-
     private boolean myLastInvulState;
 
-    private boolean myIndicatorVisible;
-
-
-    private ImageResource myLive;
 
     private SpriteGenerator myGalaxina;
-
-    private SpriteGenerator myDamageIndicator;
 
 
     private final GameContext myGameContext;

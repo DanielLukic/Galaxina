@@ -47,7 +47,7 @@ public final class ExtrasDrawer extends ScreenBase
             final Camera camera = myGameContext.camera();
             final Position screenPos = camera.toScreen( extra.worldPosFixed );
 
-            final int frame = extra.animTickCount * ( FRAMES_PER_EXTRA - 1 ) / ( extra.animTicks - 1 );
+            final int frame = extra.tickCount * ( FRAMES_PER_EXTRA - 1 ) / ( extra.animTicks - 1 );
             final int maxId = myExtraGen.getFrameSequenceLength() / FRAMES_PER_EXTRA;
             final int id = extra.type.idForDrawer() % maxId;
             final int idOffset = id * FRAMES_PER_EXTRA;

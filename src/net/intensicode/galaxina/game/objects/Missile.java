@@ -4,10 +4,8 @@ import net.intensicode.core.GameTiming;
 import net.intensicode.galaxina.game.enemies.Enemy;
 import net.intensicode.util.*;
 
-public final class Missile
+public final class Missile extends WorldObjectWithSize
     {
-    public final Position worldPosFixed = new Position();
-
     public final Position directionFixed = new Position();
 
     public static GameTiming timing;
@@ -15,16 +13,11 @@ public final class Missile
     public int speedFixed;
 
 
-    public final Rectangle bbox = new Rectangle();
-
     public boolean playerOwned;
 
     public boolean homing;
 
-    public boolean active;
-
     public boolean visible;
-
 
 
     public final void init( final Position aPosition )
@@ -95,7 +88,8 @@ public final class Missile
             return;
             }
 
-        bbox.setCenterAndSize( worldPosFixed, GameObject.model.player.sizeInWorldFixed );
+        updateBoundingBox();
+        boundingBox.applyOutsets( sizeInWorldFixed.width / 3 );
 
         if ( myStateTicks < myRandom.nextInt( timing.ticksPerSecond / 4 ) )
             {
@@ -151,7 +145,7 @@ public final class Missile
                 }
 
             if ( myState == STATE_LAUNCHED ) continue;
-            if ( enemy.bbox.intersectsWith( bbox ) ) explode();
+            if ( enemy.boundingBox.intersectsWith( boundingBox ) ) explode();
             }
         }
 
@@ -227,7 +221,6 @@ public final class Missile
         bomb.init( worldPosFixed, dx, dy );
         bomb.start( Bomb.FROM_MISSILE );
         }
-
 
 
     private int myStateTicks;

@@ -57,9 +57,9 @@ public final class Sparks extends GameObject
             final Spark spark = sparks[ idx ];
             if ( spark.active )
                 {
-                if ( spark.tick > oldestTicks )
+                if ( spark.tickCount > oldestTicks )
                     {
-                    oldestTicks = spark.tick;
+                    oldestTicks = spark.tickCount;
                     oldestIndex = idx;
                     }
                 continue;

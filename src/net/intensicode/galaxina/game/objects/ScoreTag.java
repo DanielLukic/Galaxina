@@ -3,19 +3,15 @@ package net.intensicode.galaxina.game.objects;
 import net.intensicode.core.GameTiming;
 import net.intensicode.util.Position;
 
-public final class ScoreTag
+public final class ScoreTag extends WorldObject
     {
-    public final Position worldPosFixed;
-
     public final int score;
-
-    public boolean active;
 
 
     public ScoreTag( final Position aPosition, final int aScore, final int aTicksVisible )
         {
         active = true;
-        worldPosFixed = aPosition;
+        worldPosFixed.setTo( aPosition );
         score = aScore;
         myTicksVisible = aTicksVisible;
         }

@@ -5,12 +5,8 @@ import net.intensicode.galaxina.game.weapons.Weapon;
 import net.intensicode.util.*;
 
 
-public final class GunShot
+public final class GunShot extends WorldObject
     {
-    public final Position worldPosFixed = new Position();
-
-    public boolean active;
-
     public int speedFixed;
 
     public Weapon source;

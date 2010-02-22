@@ -1,10 +1,9 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.enemies.Enemy;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
-public final class Debris
+public final class Debris extends WorldObjectWithType
     {
     public static final int TYPE_BIG = 0;
 
@@ -12,20 +11,9 @@ public final class Debris
 
     public static final int TYPE_MEDIUM = 2;
 
-    public final Position worldPosFixed = new Position();
-
     public final Position speedFixed = new Position();
 
-    public boolean active;
-
-    public int tickCount;
-
-    public int animTicks;
-
     public int timeOut;
-
-    public int type;
-
 
 
     public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
@@ -49,9 +37,8 @@ public final class Debris
             }
         if ( !active ) return;
 
-        if ( tickCount < animTicks ) tickCount++;
-        else tickCount = 0;
-        
+        tickAnimation();
+
         worldPosFixed.translate( speedFixed );
 
         final GameModel model = GameObject.model;

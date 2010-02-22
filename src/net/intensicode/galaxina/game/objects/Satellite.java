@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.util.*;
 
-public final class Satellite extends SimpleObject
+public final class Satellite extends WorldObjectWithSize
     {
     public final void init( final Player aOwningPlayer, final int aIndex, final int aCount, final Satellite aPrevious )
         {
@@ -55,7 +55,7 @@ public final class Satellite extends SimpleObject
         worldPosFixed.x += FixedMath.toFixed( xOffset );
         worldPosFixed.y += FixedMath.toFixed( yOffset );
 
-        updateBBoxes();
+        updateBoundingBox();
 
         while ( myRotationAngleInFixedSinusSize >= sinTableSizeFixed )
             {
@@ -96,7 +96,7 @@ public final class Satellite extends SimpleObject
 
     public final boolean isCrash( final Rectangle aRectangleFixed )
         {
-        return innerBBox.intersectsWith( aRectangleFixed );
+        return boundingBox.intersectsWith( aRectangleFixed );
         }
 
 

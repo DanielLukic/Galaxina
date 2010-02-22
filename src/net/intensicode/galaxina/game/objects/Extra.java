@@ -5,19 +5,11 @@ import net.intensicode.util.Position;
 import net.intensicode.util.Rectangle;
 import net.intensicode.core.GameTiming;
 
-public final class Extra
+public final class Extra extends WorldObject
     {
-    public final Position worldPosFixed = new Position();
-
     public final Position speedFixed = new Position();
 
     public static GameTiming timing;
-
-    public int animTickCount;
-
-    public int animTicks;
-
-    public boolean active;
 
     public ExtraType type;
 
@@ -30,7 +22,7 @@ public final class Extra
     public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
         {
         active = true;
-        animTickCount = 0;
+        tickCount = 0;
         animTicks = timing.ticksPerSecond / 2;
 
         speedFixed.x = aSpeedX;
@@ -47,8 +39,7 @@ public final class Extra
         {
         if ( !active ) return;
 
-        if ( animTickCount < animTicks ) animTickCount++;
-        else animTickCount = 0;
+        tickAnimation();
 
         worldPosFixed.translate( speedFixed );
         myRect.setCenterAndSize( worldPosFixed, aGameModel.extras.sizeInWorldFixed );

@@ -61,9 +61,9 @@ public final class Smokes extends GameObject
             final Smoke Smoke = smokes[ idx ];
             if ( Smoke.active )
                 {
-                if ( Smoke.smokeTick > oldestSmokeTicks )
+                if ( Smoke.tickCount > oldestSmokeTicks )
                     {
-                    oldestSmokeTicks = Smoke.smokeTick;
+                    oldestSmokeTicks = Smoke.tickCount;
                     oldestSmokeIndex = idx;
                     }
                 continue;

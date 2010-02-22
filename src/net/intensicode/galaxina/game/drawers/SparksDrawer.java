@@ -56,11 +56,11 @@ public final class SparksDrawer extends ScreenBase
             final Spark spark = sparks[ idx ];
             if ( !spark.active ) continue;
 
-            final int frame = spark.tick * ( maxIndex - 1 ) / ( spark.durationTicks );
+            final int frame = spark.tickCount * ( maxIndex - 1 ) / ( spark.animTicks );
             final int gradientIndex = frame * ( gradientColors.length - 1 ) / ( maxIndex - 1 );
 
             final Camera camera = myGameContext.camera();
-            myFromPos.setTo( camera.toScreen( spark.fromPosFixed ) );
+            myFromPos.setTo( camera.toScreen( spark.worldPosFixed ) );
             myToPos.setTo( camera.toScreen( spark.toPosFixed ) );
 
             graphics.setColorRGB24( gradientColors[ gradientIndex ] );
