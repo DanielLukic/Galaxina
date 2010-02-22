@@ -37,10 +37,7 @@ public final class GameScreen extends GalaxinaGameScreen
         switch ( model().state )
             {
             case GameModel.STATE_INITIALIZED:
-                //#if DEBUG
-                Assert.fail( "should not be here" );
-                //#endif
-                model().startGame();
+                // This happens in the editor only.. Just wait for the ReloadAndSwitchHandler..
                 break;
             case GameModel.STATE_SHOW_LEVEL_INFO:
                 stack().pushOnce( myLevelInfo );

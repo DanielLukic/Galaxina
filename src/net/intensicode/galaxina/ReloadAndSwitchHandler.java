@@ -1,14 +1,14 @@
 package net.intensicode.galaxina;
 
+import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.screens.ScreenBase;
-import net.intensicode.galaxina.game.GameController;
 import net.intensicode.util.Log;
 
 public final class ReloadAndSwitchHandler extends ScreenBase
     {
-    public final void attach( final GameController aGameController )
+    public final void attach( final GameContext aGameContext )
         {
-        myGameController = aGameController;
+        myGameContext = aGameContext;
         }
 
     public final void reloadGame() throws Exception
@@ -30,16 +30,23 @@ public final class ReloadAndSwitchHandler extends ScreenBase
         {
         if ( myTriggerReload )
             {
-            myGameController.startGame();
-            myGameController.gameModel().enemySpawner.reload();
+            //#if DEBUG
+            Log.debug( "ReloadAndSwitchHandler triggering game reload" );
+            //#endif
+            myGameContext.startGame();
+            myGameContext.gameModel().enemySpawner.reload();
             myTriggerReload = false;
             }
 
         if ( myTriggerLevelSwitch > 0 )
             {
+            //#if DEBUG
+            Log.debug( "ReloadAndSwitchHandler triggering level switch to {}", myTriggerLevelSwitch );
+            //#endif
+
             // Start a new game first, then set the level number:
-            myGameController.startGame();
-            myGameController.gameModel().level.numberStartingAt1 = myTriggerLevelSwitch;
+            myGameContext.startGame();
+            myGameContext.gameModel().level.numberStartingAt1 = myTriggerLevelSwitch;
 
             // This will update the level number on the level info screen:
             stack().activeScreen().onInit( system() );
@@ -53,10 +60,9 @@ public final class ReloadAndSwitchHandler extends ScreenBase
         }
 
 
-
     private boolean myTriggerReload;
 
     private int myTriggerLevelSwitch;
 
-    private GameController myGameController;
+    private GameContext myGameContext;
     }

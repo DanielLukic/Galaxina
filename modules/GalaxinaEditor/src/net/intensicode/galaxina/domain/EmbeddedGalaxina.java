@@ -1,21 +1,16 @@
 package net.intensicode.galaxina.domain;
 
 import net.intensicode.IntensiME;
-import net.intensicode.util.Log;
-import net.intensicode.graphics.FontGenerator;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.*;
+import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.galaxina.screens.GameScreen;
-import net.intensicode.galaxina.game.*;
 import net.intensicode.screens.*;
+import net.intensicode.util.*;
 
 
-public final class EmbeddedGalaxina extends IntensiME implements MainContext
+public final class EmbeddedGalaxina extends IntensiME
     {
-    public EmbeddedGalaxina()
-        {
-        }
-
     public final void reloadGame() throws Exception
         {
         myReloadHandler.reloadGame();
@@ -26,12 +21,12 @@ public final class EmbeddedGalaxina extends IntensiME implements MainContext
         myReloadHandler.switchToLevel( aLevelIndex );
         }
 
-    public final GameController controller() throws Exception
+    public final GameContext controller() throws Exception
         {
         //#if DEBUG
-        if ( myGameController == null ) throw new IllegalStateException();
+        Assert.notNull( "game context initialized", myGameContext );
         //#endif
-        return myGameController;
+        return myGameContext;
         }
 
     // From SystemContext
@@ -43,80 +38,41 @@ public final class EmbeddedGalaxina extends IntensiME implements MainContext
 
     public final ScreenBase createMainScreen( final GameSystem aGameSystem ) throws Exception
         {
-        if ( myGameController == null )
+        final MainController controller = new MainController();
+        controller.onInit( aGameSystem );
+        controller.onLoadingDone( aGameSystem );
+
+        myGameContext = controller.gameContext();
+
+        myReloadHandler.attach( myGameContext );
+        aGameSystem.stack.addGlobalHandler( myReloadHandler );
+
+        //#if CONSOLE
+        ConsoleOverlay.show = false;
+        //#endif
+
+        getGameSystem().audio.disable();
+
+        myGameScreen = new GameScreen( controller );
+        return myGameScreen;
+        }
+
+    public final void terminateApplication()
+        {
+        try
             {
-            final FontGenerator font = aGameSystem.skin.font( "textfont" );
-            mySoftkeysScreen = new AutohideSoftkeysScreen( font );
-
-            final SkinManager skin = getGameSystem().skin;
-            myVisualContext = new ConfigurableVisualContext( skin, mySoftkeysScreen );
-            myVisualContext.initialize();
-
-            myGameController = new GameController( this );
-            myGameController.onInit( aGameSystem );
-            myGameController.startGame();
-
-            myReloadHandler.attach( myGameController );
-            aGameSystem.stack.addGlobalHandler( myReloadHandler );
-
-            synchronized ( this )
-                {
-                notifyAll();
-                }
+            myGameContext.startGame();
+            getGameSystem().stack.pushOnce( myGameScreen );
             }
-        return new GameScreen( this );
+        catch ( Exception e )
+            {
+            Log.error( "failed (re)starting game - ignored", e );
+            }
         }
 
-    // From MainContext
-
-    public GameSystem gameSystem()
-        {
-        return getGameSystem();
-        }
-
-    public GameContext gameContext()
-        {
-        return myGameController;
-        }
-
-    public VisualContext visualContext()
-        {
-        return myVisualContext;
-        }
-
-    public MusicController musicController()
-        {
-        return new NoMusicController();
-        }
-
-    public void showMainMenu() throws Exception
-        {
-        myGameController.startGame();
-        }
-
-    public void showHelp() throws Exception
-        {
-        }
-
-    public void showHiscore() throws Exception
-        {
-        }
-
-    public void showOptions() throws Exception
-        {
-        }
-
-    public void startNewGame() throws Exception
-        {
-        myGameController.startGame();
-        }
-
-
-    private GameController myGameController;
-
-    private AutohideSoftkeysScreen mySoftkeysScreen;
-
-    private ConfigurableVisualContext myVisualContext;
+    private GameContext myGameContext;
 
     private final ReloadAndSwitchHandler myReloadHandler = new ReloadAndSwitchHandler();
+
+    private GameScreen myGameScreen;
     }
