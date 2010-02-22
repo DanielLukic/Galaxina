@@ -21,7 +21,7 @@ public final class LevelInfoScreen extends GalaxinaGameScreen
 
     public final void onInitEverytime() throws Exception
         {
-        game().visualContext().sharedSoftkeys().setSoftkeys( "START", "END", false );
+        game().sharedSoftkeys().setSoftkeys( "START", "END" );
 
         // Load the level data.. Only then it is possible to distinguish challenging stages..
         model().enemySpawner.onStartLevel();

@@ -24,7 +24,7 @@ public final class GameOverScreen extends MultiScreen
 
     public final void onInitEverytime() throws Exception
         {
-        myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "START", "END", false );
+        myGameContext.sharedSoftkeys().setSoftkeys( "START", "END" );
         }
 
     public final void onControlTick() throws Exception

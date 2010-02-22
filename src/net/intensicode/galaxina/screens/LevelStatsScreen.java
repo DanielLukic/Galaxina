@@ -25,7 +25,7 @@ public final class LevelStatsScreen extends MultiScreen
     public void onInitEverytime() throws Exception
         {
         myTimeOutTicks = timing().ticksPerSecond * 5;
-        myGameContext.visualContext().sharedSoftkeys().setSoftkeys( "CONTINUE", "CONTINUE", false );
+        myGameContext.sharedSoftkeys().setSoftkeys( "CONTINUE", "CONTINUE" );
         }
 
     public final void onControlTick() throws Exception

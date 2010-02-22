@@ -21,7 +21,7 @@ public final class PlayLevelScreen extends GalaxinaGameScreen
 
     public final void onInitEverytime() throws Exception
         {
-        game().visualContext().sharedSoftkeys().setSoftkeys( "MENU", "PAUSE", true );
+        game().sharedSoftkeys().setSoftkeys( "MENU", "PAUSE" );
 
         keys().dontRepeatFlags[ KeysHandler.FIRE1 ] = false;
         keys().dontRepeatFlags[ KeysHandler.FIRE2 ] = true;

@@ -27,8 +27,7 @@ public final class GamePausedScreen extends GalaxinaGameScreen
 
     public void onInitEverytime() throws Exception
         {
-        final AutohideSoftkeysScreen softkeys = visuals().sharedSoftkeys();
-        softkeys.setSoftkeys( "MENU", "BACK", false );
+        game().sharedSoftkeys().setSoftkeys( "MENU", "BACK" );
         }
 
     public final void onControlTick() throws Exception

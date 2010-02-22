@@ -69,21 +69,27 @@ public class VerticalSoftkeysScreen extends ScreenBase
             {
             if ( myLeftImage != null )
                 {
-                final Position pos = calcLeftPosition( myLeftImage.getHeight() );
-                graphics.drawImage( myLeftImage, pos.x, pos.y, ALIGN_TOP_LEFT );
+                setLeftPosition( myLeftImage.getHeight() );
+                graphics.drawImage( myLeftImage, myPosition.x, myPosition.y, ALIGN_TOP_LEFT );
                 }
-            final Position pos = calcLeftPosition( getTextHeight( myLeftText ) + myInsetY * 2 );
-            blitVerticalString( myLeftText, pos, ALIGN_TOP_LEFT );
+            else
+                {
+                setLeftPosition( getTextHeight( myLeftText ) + myInsetY * 2 );
+                }
+            blitVerticalString( myLeftText, ALIGN_TOP_LEFT );
             }
         if ( hasRightText() )
             {
             if ( myRightImage != null )
                 {
-                final Position pos = calcRightPosition( myRightImage.getHeight() );
-                graphics.drawImage( myRightImage, pos.x, pos.y, ALIGN_TOP_RIGHT );
+                setRightPosition( myRightImage.getHeight() );
+                graphics.drawImage( myRightImage, myPosition.x, myPosition.y, ALIGN_TOP_RIGHT );
                 }
-            final Position pos = calcRightPosition( getTextHeight( myRightText ) + myInsetY * 2 );
-            blitVerticalString( myRightText, pos, ALIGN_TOP_RIGHT );
+            else
+                {
+                setRightPosition( getTextHeight( myRightText ) + myInsetY * 2 );
+                }
+            blitVerticalString( myRightText, ALIGN_TOP_RIGHT );
             }
         }
 
@@ -99,18 +105,16 @@ public class VerticalSoftkeysScreen extends ScreenBase
 
     // Implementation
 
-    private Position calcLeftPosition( final int aObjectHeight )
+    private void setLeftPosition( final int aObjectHeight )
         {
-        myBlitPosition.x = 0;
-        myBlitPosition.y = calcVerticalPosition( aObjectHeight );
-        return myBlitPosition;
+        myPosition.x = 0;
+        myPosition.y = calcVerticalPosition( aObjectHeight );
         }
 
-    private Position calcRightPosition( final int aObjectHeight )
+    private void setRightPosition( final int aObjectHeight )
         {
-        myBlitPosition.x = screen().width();
-        myBlitPosition.y = calcVerticalPosition( aObjectHeight );
-        return myBlitPosition;
+        myPosition.x = screen().width();
+        myPosition.y = calcVerticalPosition( aObjectHeight );
         }
 
     private int calcVerticalPosition( final int aObjectHeight )
@@ -128,16 +132,14 @@ public class VerticalSoftkeysScreen extends ScreenBase
         return myFontGen.charHeight() * aText.length();
         }
 
-    private void blitVerticalString( final String aText, final Position aPosition, final int aAlignment )
+    private void blitVerticalString( final String aText, final int aAlignment )
         {
         final int maxCharWidth = myFontGen.maxCharWidth( aText );
         final int alignWidth = maxCharWidth + myInsetX * 2;
         final int charHeight = myFontGen.charHeight();
-        final int x = aPosition.x;
-        final int y = aPosition.y;
+        final int x = myPosition.x;
+        final int y = myPosition.y;
         final Position aligned = DirectGraphics.getAlignedPosition( x, y, alignWidth, charHeight, aAlignment );
-
-        Log.debug( "blitting vertical text {} at {}", aText, aligned );
 
         final DirectGraphics graphics = graphics();
         for ( int idx = 0; idx < aText.length(); idx++ )
@@ -146,8 +148,6 @@ public class VerticalSoftkeysScreen extends ScreenBase
             final int yPos = aligned.y + myInsetY + charHeight * idx;
 
             final char charCode = aText.charAt( idx );
-            Log.debug( "blitting char {}", charCode );
-            Log.debug( "at {},{}", xPos, yPos );
 
             final int xCentered = xPos + ( maxCharWidth - myFontGen.charWidth( charCode ) ) / 2;
             myFontGen.blitChar( graphics, xCentered, yPos, charCode );
@@ -174,7 +174,7 @@ public class VerticalSoftkeysScreen extends ScreenBase
 
     private final FontGenerator myFontGen;
 
-    private final Position myBlitPosition = new Position();
+    private final Position myPosition = new Position();
 
 
     private static final int ONE_HUNDRED_PERCENT = 100;

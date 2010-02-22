@@ -46,6 +46,11 @@ public final class GameController extends ScreenBase implements GameContext
         return mySharedGameDrawers;
         }
 
+    public final VerticalSoftkeysScreen sharedSoftkeys()
+        {
+        return mySharedSoftkeys;
+        }
+
     public final void startGame() throws Exception
         {
         myGameModel.startGame();
@@ -77,11 +82,14 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameDrawers.addScreen( new ScoreTagsDrawer( this ) );
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 
+        mySharedSoftkeys = new VerticalSoftkeysScreen( visualContext().textFont() );
+        mySharedSoftkeys.setButtonImage( skin().image( "softkeys" ) );
+
         mySharedGameBackground = new MultiScreen();
         mySharedGameBackground.addScreen( new ClearScreen() );
         mySharedGameBackground.addScreen( new StarField( 32, skin().charGen( "stars" ) ) );
         mySharedGameBackground.addScreen( myCamera );
-        mySharedGameBackground.addScreen( visualContext().sharedSoftkeys() );
+        mySharedGameBackground.addScreen( mySharedSoftkeys );
         mySharedGameBackground.addScreen( new ScoreboardDrawer( this ) );
         }
 
@@ -110,6 +118,8 @@ public final class GameController extends ScreenBase implements GameContext
     private MultiScreen mySharedGameBackground;
 
     private GamePausedScreen myGamePausedScreen;
+
+    private VerticalSoftkeysScreen mySharedSoftkeys;
 
     private final MainContext myMainContext;
     }
