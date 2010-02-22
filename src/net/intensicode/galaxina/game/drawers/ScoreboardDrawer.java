@@ -42,8 +42,8 @@ public final class ScoreboardDrawer extends ScreenBase
         final int screenWidth = screen().width();
         final int lineHeight = myFont.charHeight() * 12 / 10;
 
-        final int leftPos = screenWidth / 4;
-        final int rightPos = screenWidth * 3 / 4;
+        final int leftPos = screenWidth / 6;
+        final int rightPos = screenWidth * 5 / 6;
 
         myBlitPos.x = leftPos;
         myBlitPos.y = 0;

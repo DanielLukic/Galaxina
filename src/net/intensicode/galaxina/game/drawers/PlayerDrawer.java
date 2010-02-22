@@ -81,7 +81,7 @@ public final class PlayerDrawer extends ScreenBase
             final int damage = FixedMath.toInt( player.damageInPercentFixed );
             final int frameID = damage * ( indicatorFrames - 1 ) / 100;
             final int xPos = screen().width() / 2;
-            final int yPos = screen().height() - myDamageIndicator.getHeight();
+            final int yPos = myDamageIndicator.getHeight();
             myDamageIndicator.setFrame( frameID );
             myDamageIndicator.paint( gc, xPos, yPos );
             }
@@ -90,7 +90,7 @@ public final class PlayerDrawer extends ScreenBase
         final int liveWidth = myLive.getWidth();
         final int liveHeight = myLive.getHeight();
         final int xPosBase = ( screen().width() - shownLives * liveWidth ) / 2;
-        final int yPos = screen().height() - liveHeight - liveHeight / 2 - myDamageIndicator.getHeight();
+        final int yPos = liveHeight + liveHeight / 2 + myDamageIndicator.getHeight();
         for ( int idx = 0; idx < shownLives; idx++ )
             {
             final int xPos = xPosBase + idx * liveWidth;
