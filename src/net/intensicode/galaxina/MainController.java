@@ -4,8 +4,11 @@ import net.intensicode.core.GameSystem;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.screens.LoadingCallback;
 import net.intensicode.graphics.BitmapFontGenerator;
+import net.intensicode.io.StorageIO;
 import net.intensicode.screens.*;
-import net.intensicode.util.Assert;
+import net.intensicode.util.*;
+
+import java.io.IOException;
 
 public final class MainController extends ScreenBase implements LoadingCallback, MainContext
     {
@@ -35,6 +38,33 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         return myMusicController;
         }
 
+    public final Controls controls()
+        {
+        return myControls;
+        }
+
+    public final Options options()
+        {
+        return myOptions;
+        }
+
+    public final Hiscore hiscore()
+        {
+        return myHiscore;
+        }
+
+    public final void saveHiscore() throws Exception
+        {
+        storage().save( myHiscore );
+        }
+
+    //#if ONLINE_HISCORE
+    public final void updateHiscore() throws Exception
+        {
+        throw new RuntimeException( "nyi" );
+        }
+    //#endif
+
     public final void showMainMenu() throws Exception
         {
         myScreenBuilder.showMainMenu();
@@ -55,6 +85,16 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         myScreenBuilder.showOptions();
         }
 
+    public final void showControls() throws Exception
+        {
+        myScreenBuilder.showControls();
+        }
+
+    public final void showReset() throws Exception
+        {
+        myScreenBuilder.showReset();
+        }
+
     public final void startNewGame() throws Exception
         {
         myScreenBuilder.showGameScreen();
@@ -73,6 +113,21 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         myGameController = new GameController( this );
         myGameController.onInit( aGameSystem );
 
+        addGlobalHandlers();
+
+        myControls = new Controls();
+        myControls.initFrom( keys() );
+        tryLoading( myControls );
+
+        myOptions = new Options( myVisualContext.configuration(), audio() );
+        tryLoading( myOptions );
+
+        myHiscore = new Hiscore();
+        tryLoading( myHiscore );
+        }
+
+    private void addGlobalHandlers() throws Exception
+        {
         //#if DEBUG
         stack().addGlobalHandler( new SkinErrorHandler( skin() ) );
         //#endif
@@ -85,11 +140,27 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         stack().addGlobalHandler( new ConsoleOverlay( skin().font( "textfont" ) ) );
         //#endif
 
+        //#if CONSOLE
+        stack().addGlobalHandler( new EngineStats( skin().font( "textfont" ) ) );
+        //#endif
+
         //#if DEBUG
         Assert.notNull( "audio initialized", audio() );
         //#endif
         myMusicController = new MusicController();
         stack().addGlobalHandler( myMusicController );
+        }
+
+    private void tryLoading( final StorageIO aStorageIO )
+        {
+        try
+            {
+            if ( storage().hasData( aStorageIO ) ) storage().load( aStorageIO );
+            }
+        catch ( final IOException e )
+            {
+            Log.error( "Failed loading data for storage object {}", aStorageIO, e );
+            }
         }
 
     // From ScreenBase
@@ -124,6 +195,12 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         }
 
 
+    private Hiscore myHiscore;
+
+    private Options myOptions;
+
+    private Controls myControls;
+
     private boolean myLateInitFlag;
 
     private int myState = STATE_LOADING;
@@ -135,7 +212,6 @@ public final class MainController extends ScreenBase implements LoadingCallback,
     private MusicController myMusicController;
 
     private ConfigurableVisualContext myVisualContext;
-
 
     private static final int STATE_LOADING = 0;
 

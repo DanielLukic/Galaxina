@@ -1,7 +1,7 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.VisualContext;
+import net.intensicode.galaxina.VisualContext;
 import net.intensicode.galaxina.screens.*;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.SoftkeysScreen;
@@ -58,12 +58,22 @@ public final class ScreensBuilder
 
     public final void showHiscore() throws Exception
         {
-        throw new RuntimeException( "nyi" );
+        stack().pushOnce( new HiscoreScreen( myMainContext ) );
         }
 
     public final void showOptions() throws Exception
         {
-        throw new RuntimeException( "nyi" );
+        stack().pushOnce( new OptionsScreen( myMainContext ) );
+        }
+
+    public final void showControls() throws Exception
+        {
+        stack().pushOnce( new ControlsScreen( myMainContext ) );
+        }
+
+    public final void showReset() throws Exception
+        {
+        stack().pushOnce( new ResetScreen( myMainContext ) );
         }
 
     // Implementation

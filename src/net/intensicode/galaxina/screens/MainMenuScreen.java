@@ -1,9 +1,8 @@
 package net.intensicode.galaxina.screens;
 
-import net.intensicode.galaxina.MainContext;
-import net.intensicode.galaxina.game.VisualContext;
+import net.intensicode.galaxina.*;
+import net.intensicode.galaxina.VisualContext;
 import net.intensicode.screens.*;
-import net.intensicode.util.Log;
 
 public final class MainMenuScreen extends MenuBase
     {
@@ -23,6 +22,8 @@ public final class MainMenuScreen extends MenuBase
         addMenuEntry( SHOW_HELP, "SHOW HELP" );
         addMenuEntry( HISCORE, "HISCORE" );
         addMenuEntry( OPTIONS, "OPTIONS" );
+        addMenuEntry( CONTROLS, "CONTROLS" );
+        addMenuEntry( RESET, "RESET" );
         addMenuEntry( EXIT, "EXIT" );
 
         mySoftkeys = visuals().sharedSoftkeys();
@@ -68,6 +69,12 @@ public final class MainMenuScreen extends MenuBase
             case OPTIONS:
                 context().showOptions();
                 break;
+            case CONTROLS:
+                context().showControls();
+                break;
+            case RESET:
+                context().showReset();
+                break;
             case EXIT:
                 system().shutdownAndExit();
                 break;
@@ -102,7 +109,11 @@ public final class MainMenuScreen extends MenuBase
 
     private static final int OPTIONS = 3;
 
-    private static final int EXIT = 4;
+    private static final int CONTROLS = 4;
+
+    private static final int RESET = 5;
+
+    private static final int EXIT = 6;
 
     private static final int MAIN_CONTROLLER_AND_MAIN_MENU = 2;
 

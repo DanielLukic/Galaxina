@@ -1,12 +1,13 @@
 package net.intensicode.galaxina.game;
 
+import net.intensicode.io.StorageIO;
 import net.intensicode.util.*;
 
 import java.io.*;
 
-public final class Hiscore
+public final class Hiscore extends StorageIO
     {
-    public static final int MAX_NAME_LENGTH = 16;
+    public static final int MAX_NAME_LENGTH = 8;
 
     public static final int HISCORE_RS_ID = 1;
 
@@ -15,18 +16,24 @@ public final class Hiscore
     public static final String HISCORE_ID = "Galaxina Development";
 
 
-
     public Hiscore()
         {
+        super( HISCORE_RS_NAME );
+
         for ( int idx = 0; idx < NUMBER_OF_ENTRIES; idx++ )
             {
-            myEntries.add( new HiscoreRank( 100000 - idx * 10000, 10 - idx, "The.French.DJ" ) );
+            myEntries.add( new HiscoreRank( 100000 - idx * 10000, 10 - idx, "INTENSICODE" ) );
             }
         }
 
     public final String id()
         {
         return HISCORE_ID;
+        }
+
+    public final boolean isLatestRank( final int aIndex )
+        {
+        return rank( aIndex ) == myLatestRank;
         }
 
     public final boolean isNewHiscore( final int aScore )
@@ -64,7 +71,28 @@ public final class Hiscore
         return rank( aRank ).name;
         }
 
-    public final void loadFrom( final InputStream aInput ) throws IOException
+    public final String rankSpec( final int aIndex )
+        {
+        final HiscoreRank rank = (HiscoreRank) myEntries.get( aIndex );
+        return rank.toString();
+        }
+
+    public final void insert( final int aScore, final int aLevel, final String aName )
+        {
+        for ( int idx = 0; idx < myEntries.size; idx++ )
+            {
+            if ( aScore < rank( idx ).score ) continue;
+            myLatestRank = new HiscoreRank( aScore, aLevel, aName );
+            myEntries.insert( idx, myLatestRank );
+            break;
+            }
+
+        while ( myEntries.size > numberOfEntries() ) myEntries.remove( myEntries.size - 1 );
+        }
+
+    // From StorageIO
+
+    public final void loadFrom( final DataInputStream aInput ) throws IOException
         {
         //#if DEBUG
         Log.debug( "Loading hiscore" );
@@ -88,7 +116,7 @@ public final class Hiscore
             }
         }
 
-    public final void saveTo( final OutputStream aOutput ) throws IOException
+    public final void saveTo( final DataOutputStream aOutput ) throws IOException
         {
         //#if DEBUG
         Log.debug( "Saving hiscore" );
@@ -103,26 +131,6 @@ public final class Hiscore
             aOutput.write( rank.toString().getBytes() );
             aOutput.write( 10 );
             }
-        }
-
-    public final void insert( final int aScore, final int aLevel, final String aName )
-        {
-        for ( int idx = 0; idx < myEntries.size; idx++ )
-            {
-            if ( aScore >= rank( idx ).score )
-                {
-                myEntries.insert( idx, new HiscoreRank( aScore, aLevel, aName ) );
-                break;
-                }
-            }
-
-        while ( myEntries.size > numberOfEntries() ) myEntries.remove( myEntries.size - 1 );
-        }
-
-    public final String rankSpec( final int aIndex )
-        {
-        final HiscoreRank rank = (HiscoreRank) myEntries.get( aIndex );
-        return rank.toString();
         }
 
     // Implementation
@@ -172,6 +180,7 @@ public final class Hiscore
         }
 
 
+    private HiscoreRank myLatestRank;
 
     private final DynamicArray myEntries = new DynamicArray( 10, 0 );
 

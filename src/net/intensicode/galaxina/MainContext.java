@@ -13,6 +13,18 @@ public interface MainContext
 
     MusicController musicController();
 
+    Controls controls();
+
+    Options options();
+
+    Hiscore hiscore();
+
+    void saveHiscore() throws Exception;
+
+    //#if ONLINE_HISCORE
+    void updateHiscore() throws Exception;
+    //#endif
+
     void showMainMenu() throws Exception;
 
     void showHelp() throws Exception;
@@ -20,6 +32,10 @@ public interface MainContext
     void showHiscore() throws Exception;
 
     void showOptions() throws Exception;
+
+    void showControls() throws Exception;
+
+    void showReset() throws Exception;
 
     void startNewGame() throws Exception;
     }
