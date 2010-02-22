@@ -2,8 +2,7 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.enemies.Enemy;
 import net.intensicode.galaxina.game.weapons.Weapon;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 
 public final class GunShot
@@ -17,12 +16,12 @@ public final class GunShot
     public Weapon source;
 
 
-
     public final GunShot init( final Position aStartPosition, final int aFixedSpeed )
         {
         worldPosFixed.setTo( aStartPosition );
         speedFixed = aFixedSpeed;
         active = true;
+        myCollisionCheckSteps = GameObject.model.configuration.readInt( "GunShot.CollisionCheckSteps", DEFAULT_COLLISION_CHECK_STEPS );
         return this;
         }
 
@@ -30,30 +29,39 @@ public final class GunShot
         {
         if ( !active ) return;
 
-        worldPosFixed.y -= speedFixed;
-
-        final World world = aGameModel.world;
-        active = world.isInside( worldPosFixed );
-        if ( !active )
+        final int speedStepFixed = speedFixed / myCollisionCheckSteps;
+        for ( int step = 0; step < myCollisionCheckSteps; step++ )
             {
-            if ( source != null ) source.onProjectileDone( this );
-            return;
-            }
+            worldPosFixed.y -= speedStepFixed;
 
-        final DynamicArray enemies = aGameModel.level.activeEnemies;
-        for ( int idx = 0; idx < enemies.size; idx++ )
-            {
-            final Enemy enemy = (Enemy) enemies.objects[ idx ];
-            if ( !enemy.active ) continue;
+            final World world = aGameModel.world;
+            active = world.isInside( worldPosFixed );
+            if ( !active )
+                {
+                if ( source != null ) source.onProjectileDone( this );
+                return;
+                }
 
-            final boolean hit = enemy.isHit( worldPosFixed );
-            if ( !hit ) continue;
+            final DynamicArray enemies = aGameModel.level.activeEnemies;
+            for ( int idx = 0; idx < enemies.size; idx++ )
+                {
+                final Enemy enemy = (Enemy) enemies.objects[ idx ];
+                if ( !enemy.active ) continue;
 
-            enemy.hit();
+                final boolean hit = enemy.isHit( worldPosFixed );
+                if ( !hit ) continue;
 
-            active = false;
-            if ( source != null ) source.onProjectileDone( this );
-            break;
+                enemy.hit();
+
+                active = false;
+                if ( source != null ) source.onProjectileDone( this );
+                return;
+                }
             }
         }
+
+
+    private int myCollisionCheckSteps;
+
+    private static final int DEFAULT_COLLISION_CHECK_STEPS = 3;
     }
