@@ -53,28 +53,12 @@ public class VerticalSoftkeysScreen extends ScreenBase
 
     // From ScreenBase
 
-    public void onTop()
+    public final void onControlTick()
         {
-        super.onTop();
-
         //#if TOUCH_SUPPORTED
-        updateTouchableAreas();
-        //#endif
-        }
-
-    public void onPop()
-        {
-        super.onPop();
-
-        //#if TOUCH_SUPPORTED
-        removeTouchableAreas();
-        //#endif
-        }
-
-    public final void onControlTick() throws Exception
-        {
         if ( mySomethingChanged ) updateTouchableAreas();
-        //else tickTouchableAreas();
+        else tickTouchableAreas();
+        //#endif
         mySomethingChanged = false;
         }
 
@@ -165,8 +149,7 @@ public class VerticalSoftkeysScreen extends ScreenBase
 
     private int getAlignWidthForVerticalText( final String aText )
         {
-        final int maxCharWidth = myFontGen.maxCharWidth( aText );
-        return maxCharWidth + myInsetX * 2;
+        return myFontGen.maxCharWidth( aText ) + myInsetX * 2;
         }
 
     //#if TOUCH_SUPPORTED
@@ -176,6 +159,12 @@ public class VerticalSoftkeysScreen extends ScreenBase
         updateTouchableArea( myLeftTouchRect, myLeftText, 0 );
         final int alignWidth = getAlignWidthForVerticalText( myRightText );
         updateTouchableArea( myRightTouchRect, myRightText, screen().width() - alignWidth );
+        }
+
+    private void tickTouchableAreas()
+        {
+        if ( hasLeftText() ) touch().addLocalControl( myLeftTouchRect );
+        if ( hasRightText() ) touch().addLocalControl( myRightTouchRect );
         }
 
     private void updateTouchableArea( final TouchableArea aTouchableArea, final String aText, final int aHorizontalPosition )
