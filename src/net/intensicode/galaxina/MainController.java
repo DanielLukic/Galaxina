@@ -68,7 +68,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         if ( myLateInitFlag ) return;
         myLateInitFlag = true;
 
-        myVisualContext.initialize();
+        myVisualContext.initialize( resources() );
 
         myGameController = new GameController( this );
         myGameController.onInit( aGameSystem );

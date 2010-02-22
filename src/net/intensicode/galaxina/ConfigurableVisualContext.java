@@ -1,6 +1,6 @@
 package net.intensicode.galaxina;
 
-import net.intensicode.core.SkinManager;
+import net.intensicode.core.*;
 import net.intensicode.galaxina.game.VisualContext;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
@@ -15,12 +15,13 @@ public final class ConfigurableVisualContext implements VisualContext
         mySharedSoftkeys = aSoftkeys;
         }
 
-    public final void initialize() throws IOException
+    public final void initialize( final ResourcesManager aResourcesManager ) throws IOException
         {
-        mySharedBackground = new ImageScreen( skin().image( "title_background" ) );
+        mySharedBackground = new ImageScreen( mySkinManager.image( "title_background" ) );
         myTitleFont = skinManager().font( "menufont" );
         myMenuFont = skinManager().font( "menufont" );
         myTextFont = skinManager().font( "textfont" );
+        myConfiguration = VisualConfiguration.fromConfigurationResource( aResourcesManager, mySkinManager );
         }
 
     // From VisualContext
@@ -61,13 +62,13 @@ public final class ConfigurableVisualContext implements VisualContext
         return myTextFont;
         }
 
-    // Implementation
-
-    private SkinManager skin()
+    public final VisualConfiguration configuration()
         {
-        return mySkinManager;
+        return myConfiguration;
         }
 
+
+    private VisualConfiguration myConfiguration;
 
     private ScreenBase mySharedBackground;
 
