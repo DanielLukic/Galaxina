@@ -13,9 +13,9 @@ public final class ReturningController extends EnemyController
         final World world = GameObject.model.world;
         if ( aEnemy.worldPosFixed.y > world.visibleSizeFixed.height )
             {
-            myTempPos.x = aEnemy.formationPositionRelative.x;
-            myTempPos.y = -100;
-            aEnemy.worldPosFixed.setTo( world.relativeToWorld( myTempPos ) );
+            myTempPos.x = aEnemy.formationPosition.x;
+            myTempPos.y = -GameObject.model.world.sizeFixed.height;
+            aEnemy.worldPosFixed.setTo( myTempPos );
             }
         aEnemy.deployExtraIfDestroyed = true;
         }

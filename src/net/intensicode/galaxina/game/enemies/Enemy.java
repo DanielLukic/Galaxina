@@ -50,7 +50,7 @@ public final class Enemy
 
     public final Rectangle bbox = new Rectangle();
 
-    public Position formationPositionRelative;
+    public Position formationPosition;
 
 
     public int pathPos;
@@ -101,7 +101,7 @@ public final class Enemy
     public final void init( final EnemyType aEnemyType, final PathWithDirection aIncomingPath, final Position aFormationPosition )
         {
         type = aEnemyType;
-        formationPositionRelative = aFormationPosition;
+        formationPosition = aFormationPosition;
         weapon = type.createWeapon( worldPosFixed );
         hitsRemaining = type.hits;
 
@@ -151,7 +151,7 @@ public final class Enemy
 
     public final Position getBreathPos( final boolean aInSyncFlag )
         {
-        return model.breather.getBreathPos( formationPositionRelative, aInSyncFlag );
+        return model.breather.getBreathPos( formationPosition, aInSyncFlag );
         }
 
     public final void syncSpeedWith( final Enemy aEnemy )
@@ -279,7 +279,7 @@ public final class Enemy
         unsync();
         setPath( null );
 
-        if ( formationPositionRelative == null )
+        if ( formationPosition == null )
             {
             // Challenging stage or vanish after entering..
             setController( Enemy.VANISHED );

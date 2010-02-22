@@ -17,21 +17,17 @@ public final class Breather extends GameObject
 
 
 
-    public final Position getBreathPos( final Position aRelativePosition, final boolean aInSyncFlag )
+    public final Position getBreathPos( final Position aWorldPosition, final boolean aInSyncFlag )
         {
-        if ( !aInSyncFlag )
-            {
-            return model.world.relativeToWorld( aRelativePosition );
-            }
+        if ( !aInSyncFlag ) return aWorldPosition;
 
-        myTempPos.setTo( aRelativePosition );
-        myTempPos.x = myTempPos.x * model.breather.breathPercentX / 100;
-        myTempPos.y = myTempPos.y * model.breather.breathPercentY / 100;
+        myTempPos.x = aWorldPosition.x * model.breather.breathPercentX / ONE_HUNDRED_PERCENT;
+        myTempPos.y = aWorldPosition.y * model.breather.breathPercentY / ONE_HUNDRED_PERCENT;
 
-        myTempPos.x += FixedMath.toInt( model.breather.breathOffsetFixedX );
-        myTempPos.y += FixedMath.toInt( model.breather.breathOffsetFixedY );
+        myTempPos.x += model.breather.breathOffsetFixedX;
+        myTempPos.y += model.breather.breathOffsetFixedY;
 
-        return model.world.relativeToWorld( myTempPos );
+        return myTempPos;
         }
 
     // From GameObject
@@ -44,7 +40,7 @@ public final class Breather extends GameObject
         {
         myState = STATE_WALKING;
         breathPercent = breathOffsetFixedX = breathOffsetFixedY = 0;
-        breathPercentX = breathPercentY = 100;
+        breathPercentX = breathPercentY = ONE_HUNDRED_PERCENT;
         myBreathingTicks = 0;
         myReallyBreathFlag = false;
         }
@@ -73,7 +69,7 @@ public final class Breather extends GameObject
         if ( myBreathingTicks < breathingTicks ) myBreathingTicks++;
         else myBreathingTicks = 0;
 
-        breathPercent = myBreathingTicks * 100 / breathingTicks;
+        breathPercent = myBreathingTicks * ONE_HUNDRED_PERCENT / breathingTicks;
 
         if ( myReallyBreathFlag ) setExpansion();
         else setMovement();
@@ -85,15 +81,15 @@ public final class Breather extends GameObject
         {
         if ( breathPercent >= 0 & breathPercent < 50 )
             {
-            breathPercentX = 100 + breathPercent / 2;
+            breathPercentX = ONE_HUNDRED_PERCENT + breathPercent / 2;
             breathOffsetFixedY = breathPercent / 5;
             }
-        else if ( breathPercent >= 50 & breathPercent <= 100 )
+        else if ( breathPercent >= 50 & breathPercent <= ONE_HUNDRED_PERCENT )
             {
-            breathPercentX = 100 + ( 100 - breathPercent ) / 2;
+            breathPercentX = ONE_HUNDRED_PERCENT + ( ONE_HUNDRED_PERCENT - breathPercent ) / 2;
             breathOffsetFixedY = 20 - breathPercent / 5;
             }
-        breathPercentY = 100;
+        breathPercentY = ONE_HUNDRED_PERCENT;
 
         breathOffsetFixedX = 0;
         breathOffsetFixedY = FixedMath.toFixed( breathOffsetFixedY );
@@ -107,12 +103,12 @@ public final class Breather extends GameObject
             breathOffsetFixedX = FixedMath.toFixed( ( 50 - breathPercent ) * 15 / 25 );
         else if ( breathPercent >= 50 & breathPercent < 75 )
             breathOffsetFixedX = FixedMath.toFixed( ( breathPercent - 50 ) * -15 / 25 );
-        else if ( breathPercent >= 75 & breathPercent <= 100 )
-            breathOffsetFixedX = FixedMath.toFixed( ( 100 - breathPercent ) * -15 / 25 );
+        else if ( breathPercent >= 75 & breathPercent <= ONE_HUNDRED_PERCENT )
+            breathOffsetFixedX = FixedMath.toFixed( ( ONE_HUNDRED_PERCENT - breathPercent ) * -15 / 25 );
 
         breathOffsetFixedY = 0;
-        breathPercentX = 100;
-        breathPercentY = 100;
+        breathPercentX = ONE_HUNDRED_PERCENT;
+        breathPercentY = ONE_HUNDRED_PERCENT;
         }
 
 
@@ -130,4 +126,6 @@ public final class Breather extends GameObject
     private static final int STATE_CENTERING = 1;
 
     private static final int STATE_BREATHING = 2;
+
+    private static final int ONE_HUNDRED_PERCENT = 100;
     }

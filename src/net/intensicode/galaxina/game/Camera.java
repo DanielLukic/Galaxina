@@ -15,11 +15,8 @@ public final class Camera extends ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        myScreenWidth = screen().width();
-        myScreenHeight = screen().height();
-
-        myScreenCenterX = myScreenWidth / 2;
-        myScreenCenterY = myScreenHeight / 2;
+        myScreenCenterX = myWorld.pixelSize.width / 2;
+        myScreenCenterY = myWorld.pixelSize.height / 2;
         }
 
     public final void onControlTick() throws Exception
@@ -32,8 +29,8 @@ public final class Camera extends ScreenBase
 
     public final Position toScreen( final Position aWorldPos )
         {
-        final int x = aWorldPos.x * myScreenWidth / myWorld.visibleSizeFixed.width;
-        final int y = aWorldPos.y * myScreenHeight / myWorld.visibleSizeFixed.height;
+        final int x = aWorldPos.x * myWorld.pixelSize.width / myWorld.visibleSizeFixed.width;
+        final int y = aWorldPos.y * myWorld.pixelSize.height / myWorld.visibleSizeFixed.height;
         myTempPos.x = x + myScreenCenterX;
         myTempPos.y = y + myScreenCenterY;
         return myTempPos;
@@ -41,16 +38,11 @@ public final class Camera extends ScreenBase
 
     public final Size toWorldSize( final int aWidth, final int aHeight )
         {
-        myTempSize.width = aWidth * myWorld.visibleSizeFixed.width / myScreenWidth;
-        myTempSize.height = aHeight * myWorld.visibleSizeFixed.height / myScreenHeight;
+        myTempSize.width = aWidth * myWorld.visibleSizeFixed.width / myWorld.pixelSize.width;
+        myTempSize.height = aHeight * myWorld.visibleSizeFixed.height / myWorld.pixelSize.height;
         return myTempSize;
         }
 
-
-
-    private int myScreenWidth;
-
-    private int myScreenHeight;
 
     private int myScreenCenterX;
 

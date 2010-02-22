@@ -1,10 +1,10 @@
 package net.intensicode.galaxina.game.data;
 
 import net.intensicode.galaxina.game.extras.ExtraTypes;
-import net.intensicode.util.Position;
+import net.intensicode.galaxina.game.objects.GameObject;
+import net.intensicode.util.*;
 
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 
 public final class SwarmConfiguration
     {
@@ -19,7 +19,6 @@ public final class SwarmConfiguration
     public EnemyConfiguration[] enemies;
 
     public Position[] formation;
-
 
 
     public final void load( final DataInputStream aInputStream ) throws IOException
@@ -76,26 +75,27 @@ public final class SwarmConfiguration
 
     // Implementation
 
-    private final void loadPositions( final DataInputStream aInputStream ) throws IOException
+    private void loadPositions( final DataInputStream aInputStream ) throws IOException
         {
         final int count = aInputStream.readInt();
         formation = new Position[count];
         for ( int idx = 0; idx < count; idx++ )
             {
-            final int x = aInputStream.readInt() * 150 / 240 - 75;
-            final int y = aInputStream.readInt() * 150 / 320 - 75;
-            formation[ idx ] = new Position( x, y );
+            final int x = aInputStream.readInt();
+            final int y = aInputStream.readInt();
+            final Position position = GameObject.model.world.editorToWorld( x, y );
+            formation[ idx ] = new Position( position );
             }
         }
 
-    private final void loadPathes( final DataInputStream aInputStream ) throws IOException
+    private void loadPathes( final DataInputStream aInputStream ) throws IOException
         {
         final int size = aInputStream.readInt();
         pathes = new int[size];
         for ( int idx = 0; idx < size; idx++ ) pathes[ idx ] = aInputStream.readInt();
         }
 
-    private final void loadEnemies( final DataInputStream aInputStream ) throws IOException
+    private void loadEnemies( final DataInputStream aInputStream ) throws IOException
         {
         final int size = aInputStream.readInt();
         enemies = new EnemyConfiguration[size];

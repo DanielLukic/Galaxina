@@ -2,8 +2,9 @@ package net.intensicode.galaxina.game.data;
 
 import net.intensicode.core.ResourcesManager;
 import net.intensicode.galaxina.game.enemies.*;
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.path.PathWithDirection;
+import net.intensicode.util.*;
 
 import java.io.*;
 
@@ -16,7 +17,6 @@ public final class FormationConfiguration
     public boolean isChallengingState;
 
     public SwarmConfiguration[] swarms;
-
 
 
     public FormationConfiguration( final ResourcesManager aResourcesManager, final GameModel aGameModel ) throws IOException
@@ -91,9 +91,10 @@ public final class FormationConfiguration
         final int size = aInputStream.readInt();
         for ( int idx = 0; idx < size; idx++ )
             {
-            final int x = aInputStream.readInt() * 150 / 240 - 75;
-            final int y = aInputStream.readInt() * 150 / 320 - 75;
-            path.addRelativePos( x, y );
+            final int x = aInputStream.readInt();
+            final int y = aInputStream.readInt();
+            final Position position = myGameModel.world.editorToWorld( x, y );
+            path.addWorldPos( position );
             }
         path.end();
 
@@ -119,7 +120,6 @@ public final class FormationConfiguration
         config.load( aInputStream );
         return config;
         }
-
 
 
     private PathWithDirection[] myDefinedPaths;
