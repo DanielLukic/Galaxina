@@ -102,7 +102,9 @@ public final class OptionsScreen extends GalaxinaScreen implements TouchableHand
         final VisualConfiguration config = visuals().configuration();
         updateEntry( Options.SHOW_ENGINE_STATS );
         updateEntry( Options.BUFFERED_FONTGEN );
+        //#if CONSOLE
         updateEntry( Options.SHOW_CONSOLE );
+        //#endif
         updateEntry( Options.SHOW_STARS );
         updateEntry( Options.PLAY_MUSIC );
         updateEntry( Options.PLAY_SOUND );

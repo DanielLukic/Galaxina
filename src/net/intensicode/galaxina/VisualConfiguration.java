@@ -65,7 +65,7 @@ public final class VisualConfiguration
 
         //#if DEBUG
         EngineStats.show = true;
-        //#else
+        //#endif
         }
 
     private void readSize( final Size aSize, final String aName )
