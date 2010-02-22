@@ -20,6 +20,8 @@ public final class GameModel
     public static final int STATE_PAUSED = 4;
 
 
+    public final Configuration configuration;
+
     public final World world;
 
     public final Level level;
@@ -64,15 +66,14 @@ public final class GameModel
 
     public AudioResource soundDebris;
 
-    public Configuration configuration;
-
     public int screenFlashIntensity;
 
     public int state;
 
 
-    public GameModel( final World aWorld )
+    public GameModel( final Configuration aConfiguration, final World aWorld )
         {
+        configuration = aConfiguration;
         myGameObjects.add( world = aWorld );
         myGameObjects.add( level = new Level() );
         myGameObjects.add( bombs = new Bombs() );
@@ -164,18 +165,6 @@ public final class GameModel
         EnemyBehavior.model = EnemyWeapon.model = Enemy.model = this;
         EnemyBehavior.engine = EnemyWeapon.engine = aGameSystem.engine;
         Enemy.timing = EnemyWeapon.timing = aGameSystem.timing;
-
-        try
-            {
-            configuration = aGameSystem.resources.loadConfiguration( "game.properties" );
-            }
-        catch ( final Exception e )
-            {
-            //#if DEBUG
-            e.printStackTrace();
-            //#endif
-            configuration = new Configuration();
-            }
 
         for ( int idx = 0; idx < myGameObjects.size; idx++ )
             {

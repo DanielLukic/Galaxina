@@ -5,7 +5,8 @@ import net.intensicode.galaxina.game.drawers.*;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.screens.*;
 import net.intensicode.screens.*;
-import net.intensicode.util.Assert;
+import net.intensicode.util.*;
+import net.intensicode.core.Configuration;
 
 public final class GameController extends ScreenBase implements GameContext
     {
@@ -60,8 +61,13 @@ public final class GameController extends ScreenBase implements GameContext
 
     public void onInitOnce() throws Exception
         {
-        final World world = new World( screen().width(), screen().height() );
-        myGameModel = new GameModel( world );
+        final Configuration configuration = loadGameConfiguration();
+
+        final int worldWidth = configuration.readInt( "World.pixelSize.width", screen().width() );
+        final int worldHeight = configuration.readInt( "World.pixelSize.height", screen().height() );
+        final World world = new World( worldWidth, worldHeight );
+
+        myGameModel = new GameModel( configuration, world );
         myGameModel.onInitialize( system() );
 
         myCamera = new Camera( this );
@@ -91,6 +97,21 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameBackground.addScreen( myCamera );
         mySharedGameBackground.addScreen( mySharedSoftkeys );
         mySharedGameBackground.addScreen( new ScoreboardDrawer( this ) );
+        }
+
+    private Configuration loadGameConfiguration()
+        {
+        try
+            {
+            return resources().loadConfiguration( "game.properties" );
+            }
+        catch ( final Exception e )
+            {
+            //#if DEBUG
+            e.printStackTrace();
+            //#endif
+            return new Configuration();
+            }
         }
 
     public final void onControlTick() throws Exception
