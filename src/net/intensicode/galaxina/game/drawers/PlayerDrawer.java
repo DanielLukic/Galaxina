@@ -75,29 +75,26 @@ public final class PlayerDrawer extends ScreenBase
             myGalaxina.paint( gc, screenPos.x, screenPos.y );
             }
 
-        if ( myIndicatorVisible )
-            {
-            final int indicatorFrames = myDamageIndicator.getRawFrameCount();
-            final int damage = FixedMath.toInt( player.damageInPercentFixed );
-            final int frameID = damage * ( indicatorFrames - 1 ) / 100;
-            final int xPos = screen().width() / 2;
-            final int yPos = myDamageIndicator.getHeight();
-            myDamageIndicator.setFrame( frameID );
-            myDamageIndicator.paint( gc, xPos, yPos );
-            }
-
         final int shownLives = Math.min( 5, player.lives );
         final int liveWidth = myLive.getWidth();
         final int liveHeight = myLive.getHeight();
         final int xPosBase = ( screen().width() - shownLives * liveWidth ) / 2;
-        final int yPos = liveHeight + liveHeight / 2 + myDamageIndicator.getHeight();
         for ( int idx = 0; idx < shownLives; idx++ )
             {
             final int xPos = xPosBase + idx * liveWidth;
-            gc.drawImage( myLive, xPos, yPos, DirectGraphics.ALIGN_TOP_LEFT );
+            gc.drawImage( myLive, xPos, liveHeight / 2, DirectGraphics.ALIGN_TOP_LEFT );
             }
-        }
 
+        if ( !myIndicatorVisible ) return;
+
+        final int indicatorFrames = myDamageIndicator.getRawFrameCount();
+        final int damage = FixedMath.toInt( player.damageInPercentFixed );
+        final int frameID = damage * ( indicatorFrames - 1 ) / 100;
+        final int xPos = screen().width() / 2;
+        final int yPos = myDamageIndicator.getHeight() + liveHeight * 2;
+        myDamageIndicator.setFrame( frameID );
+        myDamageIndicator.paint( gc, xPos, yPos );
+        }
 
 
     private int myAnimTicks;
