@@ -98,6 +98,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         {
         final BitmapFontGenerator textfont = skin().font( "textfont" );
         final AutohideSoftkeysScreen softkeys = new AutohideSoftkeysScreen( textfont );
+        softkeys.setButtonImage( skin().image( "softkeys" ) );
         myVisualContext = new ConfigurableVisualContext( skin(), softkeys );
         myScreenBuilder = new ScreensBuilder( this );
         }

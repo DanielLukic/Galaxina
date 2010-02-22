@@ -89,7 +89,7 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 
         mySharedSoftkeys = new VerticalSoftkeysScreen( visualContext().textFont() );
-        mySharedSoftkeys.setButtonImage( skin().image( "softkeys" ) );
+        mySharedSoftkeys.setButtonImage( skin().image( "softkeys_vertical" ) );
 
         mySharedGameBackground = new MultiScreen();
         mySharedGameBackground.addScreen( new ClearScreen() );
