@@ -157,14 +157,9 @@ public final class Player extends GameObject
         weaponUpgrades = 2;
         reloadUpgrades = 2;
         bulletUpgrades = 2;
+        satellites.clear();
         secondaryWeapon = null;
         primaryWeapon = model.weapons.simpleGun;
-
-        //#if DEBUG
-        while ( satellites.size > 0 ) removeSatellite( (Satellite) satellites.get( 0 ) );
-        addSatellite( model.satellites.getAvailableInstance() );
-        addSatellite( model.satellites.getAvailableInstance() );
-        //#endif
         }
 
     public final void onStartLevel()
