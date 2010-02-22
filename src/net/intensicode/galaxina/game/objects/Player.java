@@ -154,12 +154,18 @@ public final class Player extends GameObject
         lives = 3;
         damageInPercentFixed = 0;
         myLastScoreCheck = 0;
-        weaponUpgrades = 2;
-        reloadUpgrades = 2;
-        bulletUpgrades = 2;
+        weaponUpgrades = 0;
+        reloadUpgrades = 0;
+        bulletUpgrades = 0;
         satellites.clear();
         secondaryWeapon = null;
         primaryWeapon = model.weapons.simpleGun;
+
+        //#if DEBUG
+        weaponUpgrades = 2;
+        reloadUpgrades = 2;
+        bulletUpgrades = 2;
+        //#endif
         }
 
     public final void onStartLevel()
