@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.screens;
 
-import net.intensicode.galaxina.MainContext;
-import net.intensicode.galaxina.game.VisualContext;
+import net.intensicode.galaxina.*;
+import net.intensicode.galaxina.VisualContext;
 import net.intensicode.screens.MultiScreen;
 
 public abstract class GalaxinaScreen extends MultiScreen

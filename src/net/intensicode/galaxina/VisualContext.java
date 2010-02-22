@@ -1,4 +1,4 @@
-package net.intensicode.galaxina.game;
+package net.intensicode.galaxina;
 
 import net.intensicode.core.SkinManager;
 import net.intensicode.graphics.BitmapFontGenerator;

@@ -1,7 +1,7 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.VisualContext;
+import net.intensicode.galaxina.VisualContext;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.screens.*;
 
