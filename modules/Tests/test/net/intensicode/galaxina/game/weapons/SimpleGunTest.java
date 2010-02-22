@@ -8,7 +8,7 @@ public final class SimpleGunTest extends TestCase
     {
     protected final void setUp() throws Exception
         {
-        GameObject.model = new GameModel( null );
+        GameObject.model = new GameModel( null, null );
         }
 
     protected final void tearDown() throws Exception
