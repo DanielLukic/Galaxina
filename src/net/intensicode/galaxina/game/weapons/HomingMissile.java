@@ -49,7 +49,6 @@ public final class HomingMissile extends Weapon
         missile.directionFixed.y = -FixedMath.FIXED_1;
         missile.playerOwned = true;
         missile.homing = true;
-        missile.type = Missile.TYPE_HOMING;
         missile.launch();
 
         myReloadTickCount = myReloadTicks;

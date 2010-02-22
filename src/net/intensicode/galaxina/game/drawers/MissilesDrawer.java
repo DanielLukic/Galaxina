@@ -1,11 +1,11 @@
 package net.intensicode.galaxina.game.drawers;
 
-import net.intensicode.core.*;
+import net.intensicode.core.DirectGraphics;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.Missile;
+import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.graphics.SpriteGenerator;
 import net.intensicode.screens.ScreenBase;
-import net.intensicode.galaxina.util.*;
 import net.intensicode.util.*;
 
 public final class MissilesDrawer extends ScreenBase
@@ -19,16 +19,7 @@ public final class MissilesDrawer extends ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        final SkinManager skin = myGameContext.visualContext().skinManager();
-
-        myGenerators = new SpriteGenerator[4];
-
-        for ( int idx = 0; idx < myGenerators.length; idx++ )
-            {
-            final StringBuffer imageName = new StringBuffer( "missile" );
-            imageName.append( idx + 1 );
-            myGenerators[ idx ] = skin.sprite( imageName.toString() );
-            }
+        myGenerator = skin().sprite( "missile" );
         }
 
     public final void onControlTick() throws Exception
@@ -55,16 +46,15 @@ public final class MissilesDrawer extends ScreenBase
         final Camera camera = myGameContext.camera();
         final Position screenPos = camera.toScreen( aMissile.worldPosFixed );
 
-        final SpriteGenerator sprite = myGenerators[ aMissile.type ];
-        final int directionSteps = sprite.getFrameSequenceLength();
+        final int directionSteps = myGenerator.getFrameSequenceLength();
         final int directinFixed = UtilitiesEx.directionToDegrees( aMissile.directionFixed );
         final int direction = FixedMath.toIntRounded( directinFixed );
         final int directionIndex = UtilitiesEx.getDirectionID( direction + 45, directionSteps );
-        sprite.setFrame( directionIndex % directionSteps );
-        sprite.paint( aGraphics, screenPos.x, screenPos.y );
+        myGenerator.setFrame( directionIndex % directionSteps );
+        myGenerator.paint( aGraphics, screenPos.x, screenPos.y );
         }
 
-    private SpriteGenerator[] myGenerators;
+    private SpriteGenerator myGenerator;
 
     private final GameContext myGameContext;
     }

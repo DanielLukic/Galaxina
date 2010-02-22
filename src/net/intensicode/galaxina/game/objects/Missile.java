@@ -6,14 +6,6 @@ import net.intensicode.util.*;
 
 public final class Missile
     {
-    public static final int TYPE_1 = 0;
-
-    public static final int TYPE_2 = 1;
-
-    public static final int TYPE_3 = 2;
-
-    public static final int TYPE_HOMING = 3;
-
     public final Position worldPosFixed = new Position();
 
     public final Position directionFixed = new Position();
@@ -32,8 +24,6 @@ public final class Missile
     public boolean active;
 
     public boolean visible;
-
-    public int type;
 
 
 
