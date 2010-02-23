@@ -7,7 +7,7 @@ import net.intensicode.util.*;
 
 final class ControlKeyEntry extends ScreenBase
     {
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
     public final TouchableArea touchable = new TouchableArea();
     //#endif
 
@@ -27,7 +27,7 @@ final class ControlKeyEntry extends ScreenBase
         myTextPosition = aPosition;
         }
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     final void updateTouchable()
         {

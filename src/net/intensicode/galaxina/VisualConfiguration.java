@@ -10,7 +10,7 @@ public final class VisualConfiguration
 
     public boolean showStars = true;
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     public int touchButtonSize = 48;
 

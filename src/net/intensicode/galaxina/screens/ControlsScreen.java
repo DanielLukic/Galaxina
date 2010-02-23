@@ -16,7 +16,7 @@ public final class ControlsScreen extends GalaxinaScreen implements TouchableHan
         myRedefineScreen = new RedefineControlScreen( visuals(), myEntries );
         }
 
-    //#ifdef TOUCH_SUPPORTED
+    //#ifdef TOUCH
 
     // From TouchableHandler
 
@@ -73,7 +73,7 @@ public final class ControlsScreen extends GalaxinaScreen implements TouchableHan
 
     public final void onControlTick() throws Exception
         {
-        //#if TOUCH_SUPPORTED
+        //#if TOUCH
         addTouchableAreas();
         //#endif
 
@@ -138,7 +138,7 @@ public final class ControlsScreen extends GalaxinaScreen implements TouchableHan
         controls.rightSoftCode = getEntry( Controls.RIGHT_SOFTKEY ).keyCode;
         }
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     private void addTouchableAreas()
         {
@@ -163,7 +163,7 @@ public final class ControlsScreen extends GalaxinaScreen implements TouchableHan
         addScreen( newEntry );
         newEntry.id = aID;
 
-        //#if TOUCH_SUPPORTED
+        //#if TOUCH
         newEntry.touchable.associatedHandler = this;
         newEntry.updateTouchable();
         //#endif
@@ -183,7 +183,7 @@ public final class ControlsScreen extends GalaxinaScreen implements TouchableHan
             }
         }
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     private int getEntryIndexByTouchable( final Touchable aTouchable )
         {

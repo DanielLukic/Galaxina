@@ -7,7 +7,7 @@ import net.intensicode.util.*;
 
 final class OptionsEntry extends ScreenBase
     {
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
     public final TouchableArea touchable = new TouchableArea();
     //#endif
 
@@ -30,7 +30,7 @@ final class OptionsEntry extends ScreenBase
         myOnOffState = aStateFlag;
         }
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     final void updateTouchable()
         {

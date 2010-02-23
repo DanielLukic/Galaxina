@@ -16,7 +16,7 @@ public final class OptionsScreen extends GalaxinaScreen implements TouchableHand
         myTextFont = visuals().textFont();
         }
 
-    //#ifdef TOUCH_SUPPORTED
+    //#ifdef TOUCH
 
     // From TouchableHandler
 
@@ -72,7 +72,7 @@ public final class OptionsScreen extends GalaxinaScreen implements TouchableHand
 
     public final void onControlTick() throws Exception
         {
-        //#if TOUCH_SUPPORTED
+        //#if TOUCH
         addTouchableAreas();
         //#endif
 
@@ -114,7 +114,7 @@ public final class OptionsScreen extends GalaxinaScreen implements TouchableHand
 
     // Implementation
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     private void addTouchableAreas()
         {
@@ -137,7 +137,7 @@ public final class OptionsScreen extends GalaxinaScreen implements TouchableHand
         final OptionsEntry newEntry = new OptionsEntry( myTextFont, aText, position );
         newEntry.id = aID;
         addScreen( newEntry );
-        //#if TOUCH_SUPPORTED
+        //#if TOUCH
         newEntry.touchable.associatedHandler = this;
         newEntry.updateTouchable();
         //#endif
@@ -173,7 +173,7 @@ public final class OptionsScreen extends GalaxinaScreen implements TouchableHand
         throw new IllegalArgumentException();
         }
 
-    //#if TOUCH_SUPPORTED
+    //#if TOUCH
 
     private int getEntryIndexByTouchable( final Touchable aTouchable )
         {
