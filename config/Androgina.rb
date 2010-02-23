@@ -2,10 +2,7 @@
 @name = "Galaxina"
 
 # Possible targets are defined in file _targets.rb.
-@targets = [ Generic_ANDROID ]
-
-Generic_ANDROID.music_suffix            = '.mod'
-Generic_ANDROID.music_type              = 'audio/mod'
+@targets = [ Canvas_ANDROID, Opengl_ANDROID ]
 
 # Possible sizes correspond to the image folders in the res directory.
 # You may use arbitrary folder names (no spaces or special chars) here -
@@ -14,7 +11,8 @@ Generic_ANDROID.music_type              = 'audio/mod'
 
 # Use this to activate global - not target-specific - settings. Used
 # primarly for debug output and effects.
-@symbols = [ :FULL_FX, :OPENGL ]
+@symbols = [ :FULL_FX ]
 
-# Override to have OPENGL symbol in output name:
-@properties['output.name'] = 'Androgina-OPENGL'
+# Force mod music format:
+@properties['target.music_suffix'] = '.mod'
+@properties['target.music_type'] = 'audio/mod'
