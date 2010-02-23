@@ -14,4 +14,7 @@ Generic_ANDROID.music_type              = 'audio/mod'
 
 # Use this to activate global - not target-specific - settings. Used
 # primarly for debug output and effects.
-@symbols = [ :NO_KEY_REPEAT, :MORE_FX, :FULL_FX, :TOUCH_SUPPORTED, :HANDLE_SLOW_DOWN, :CHEAT, :MULTI_BG, :OPENGL ]
+@symbols = [ :FULL_FX, :OPENGL ]
+
+# Override to have OPENGL symbol in output name:
+@properties['output.name'] = 'Androgina-OPENGL'
