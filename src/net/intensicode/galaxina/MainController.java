@@ -133,10 +133,6 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         stack().addGlobalHandler( new SkinErrorHandler( skin() ) );
         //#endif
 
-        ////#if CHEAT
-        //stack().addGlobalHandler( new CheatHandler( myGameController ) );
-        ////#endif
-
         //#if TOUCH_SUPPORTED
         stack().addGlobalHandler( new TouchHelper( this ) );
         //#endif
