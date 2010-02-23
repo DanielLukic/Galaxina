@@ -1,5 +1,6 @@
 package net.intensicode.galaxina.screens;
 
+import net.intensicode.core.KeysHandler;
 import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.galaxina.game.objects.Level;
 import net.intensicode.graphics.*;
@@ -33,20 +34,19 @@ public final class LevelStatsScreen extends MultiScreen
         myGameContext.gameModel().onControlTick();
         super.onControlTick();
 
-        if ( keys().checkLeftSoftAndConsume() )
+        final KeysHandler keys = keys();
+        if ( keys.checkLeftSoftAndConsume() || keys.checkStickDownAndConsume() )
             {
             myTimeOutTicks = 0;
             }
-        else
-        if ( keys().checkRightSoftAndConsume() )
+        else if ( keys.checkRightSoftAndConsume() )
             {
             myTimeOutTicks = 0;
             }
-        else
-        if ( myTimeOutTicks < timing().ticksPerSecond * 3 && keys().checkFireAndConsume() )
-            {
-            myTimeOutTicks = 0;
-            }
+        else if ( myTimeOutTicks < timing().ticksPerSecond * 3 && keys().checkFireAndConsume() )
+                {
+                myTimeOutTicks = 0;
+                }
 
         if ( myTimeOutTicks > 0 )
             {
@@ -76,8 +76,7 @@ public final class LevelStatsScreen extends MultiScreen
             myBlitPos.y += myFontGen.charHeight() * 3 / 2;
             myFontGen.blitString( graphics(), "PERFECT", myBlitPos, FontGenerator.CENTER );
             }
-        else
-        if ( level.bonusApplies > 0 )
+        else if ( level.bonusApplies > 0 )
             {
             myBlitPos.y += myFontGen.charHeight() * 3 / 2;
             myFontGen.blitString( graphics(), "BONUS", myBlitPos, FontGenerator.CENTER );
