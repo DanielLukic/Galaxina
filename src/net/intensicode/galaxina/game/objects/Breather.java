@@ -2,6 +2,7 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
+import net.intensicode.galaxina.game.GameObject;
 
 public final class Breather extends GameObject
     {

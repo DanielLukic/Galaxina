@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.data;
 
 import net.intensicode.galaxina.game.extras.ExtraTypes;
-import net.intensicode.galaxina.game.objects.GameObject;
+import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.util.*;
 
 import java.io.*;

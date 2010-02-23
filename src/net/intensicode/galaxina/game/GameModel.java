@@ -1,8 +1,10 @@
-package net.intensicode.galaxina.game.objects;
+package net.intensicode.galaxina.game;
 
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.extras.ExtraTypes;
+import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.particles.SimpleParticles;
 import net.intensicode.util.*;
 
 public final class GameModel
@@ -32,7 +34,7 @@ public final class GameModel
 
     public final Satellites satellites;
 
-    public final FallingExtras extras;
+    public final Extras extras;
 
     public final Player player;
 
@@ -60,6 +62,8 @@ public final class GameModel
 
     public final Sparks sparks;
 
+    public final SimpleParticles warps;
+
     public final ExtraTypes extraTypes = new ExtraTypes();
 
     public AudioResource soundExtra;
@@ -78,7 +82,7 @@ public final class GameModel
         myGameObjects.add( level = new Level() );
         myGameObjects.add( bombs = new Bombs() );
         myGameObjects.add( gunShots = new GunShots() );
-        myGameObjects.add( extras = new FallingExtras() );
+        myGameObjects.add( extras = new Extras() );
         myGameObjects.add( satellites = new Satellites() ); // before player!
         myGameObjects.add( player = new Player() );
         myGameObjects.add( enemies = new Enemies() );
@@ -89,6 +93,7 @@ public final class GameModel
         myGameObjects.add( attackSpawner = new AttackSpawner() );
         myGameObjects.add( smokes = new Smokes() );
         myGameObjects.add( sparks = new Sparks() );
+        myGameObjects.add( warps = new SimpleParticles( 32, FixedMath.FIXED_0_5, false ) );
         myGameObjects.add( explosions = new Explosions() );
         myGameObjects.add( scoreMarkers = new ScoreMarkers() );
         myGameObjects.add( breather = new Breather() );

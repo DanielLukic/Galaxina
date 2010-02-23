@@ -1,8 +1,8 @@
 package net.intensicode.galaxina.game.weapons;
 
-import net.intensicode.galaxina.game.objects.GameModel;
-import net.intensicode.galaxina.game.objects.GameObject;
-import net.intensicode.galaxina.game.objects.Missile;
+import net.intensicode.galaxina.game.GameModel;
+import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.util.FixedMath;
 
 public final class HomingMissile extends Weapon

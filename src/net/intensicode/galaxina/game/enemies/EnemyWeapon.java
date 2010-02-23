@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.util.Position;
 
 public abstract class EnemyWeapon

@@ -1,5 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
+import net.intensicode.galaxina.game.GameObject;
+
 public final class Debrises extends GameObject
     {
     public final Debris[] debrises = new Debris[MAX_DEBRISES];

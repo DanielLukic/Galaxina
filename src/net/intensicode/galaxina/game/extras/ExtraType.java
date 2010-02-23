@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.game.extras;
 
-import net.intensicode.galaxina.game.objects.GameModel;
-import net.intensicode.util.Log;
+import net.intensicode.galaxina.game.GameModel;
 
 public abstract class ExtraType
     {

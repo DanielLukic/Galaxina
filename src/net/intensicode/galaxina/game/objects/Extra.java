@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.extras.ExtraType;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.util.Position;
 import net.intensicode.util.Rectangle;
 import net.intensicode.core.GameTiming;

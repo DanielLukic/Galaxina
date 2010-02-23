@@ -2,6 +2,7 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.util.Position;
 import net.intensicode.util.Size;
+import net.intensicode.galaxina.game.GameObject;
 
 public final class Sparks extends GameObject
     {

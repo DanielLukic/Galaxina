@@ -1,15 +1,16 @@
 package net.intensicode.galaxina.game.objects;
 
+import net.intensicode.galaxina.game.*;
 import net.intensicode.util.Position;
 
 public final class Smokes extends GameObject
     {
-    public final Smoke[] smokes = new Smoke[MAX_SMOKES];
+    public final WorldObjectWithSpeed[] smokes = new WorldObjectWithSpeed[MAX_INSTANCES];
 
 
     public Smokes()
         {
-        for ( int idx = 0; idx < smokes.length; idx++ ) smokes[ idx ] = new Smoke();
+        for ( int idx = 0; idx < smokes.length; idx++ ) smokes[ idx ] = new WorldObjectWithSpeed();
         }
 
     public final void add( final Position aWorldPosFixed )
@@ -21,8 +22,9 @@ public final class Smokes extends GameObject
 
     public final void add( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
         {
-        final Smoke smoke = getSmoke();
-        smoke.init( aWorldPosFixed, timing.ticksPerSecond, aSpeedX, aSpeedY );
+        final WorldObjectWithSpeed smoke = getInstance();
+        smoke.init( aWorldPosFixed, aSpeedX, aSpeedY );
+        smoke.animTicks = timing.ticksPerSecond;
         }
 
     // From GameObject
@@ -43,7 +45,7 @@ public final class Smokes extends GameObject
         {
         for ( int idx = 0; idx < smokes.length; idx++ )
             {
-            final Smoke smoke = smokes[ idx ];
+            final WorldObjectWithSpeed smoke = smokes[ idx ];
             if ( !smoke.active ) continue;
             smoke.onControlTick();
             }
@@ -51,30 +53,23 @@ public final class Smokes extends GameObject
 
     // Implementation
 
-    private Smoke getSmoke()
+    private WorldObjectWithSpeed getInstance()
         {
-        int oldestSmokeIndex = 0;
-        int oldestSmokeTicks = 0;
+        int oldestIndex = 0;
+        int oldestTicks = 0;
 
         for ( int idx = 0; idx < smokes.length; idx++ )
             {
-            final Smoke Smoke = smokes[ idx ];
-            if ( Smoke.active )
-                {
-                if ( Smoke.tickCount > oldestSmokeTicks )
-                    {
-                    oldestSmokeTicks = Smoke.tickCount;
-                    oldestSmokeIndex = idx;
-                    }
-                continue;
-                }
-
-            return Smoke;
+            final WorldObjectWithSpeed instance = smokes[ idx ];
+            if ( !instance.active ) return instance;
+            if ( instance.tickCount <= oldestTicks ) continue;
+            oldestTicks = instance.tickCount;
+            oldestIndex = idx;
             }
 
-        return smokes[ oldestSmokeIndex ];
+        return smokes[ oldestIndex ];
         }
 
 
-    private static final int MAX_SMOKES = 32;
+    private static final int MAX_INSTANCES = 32;
     }

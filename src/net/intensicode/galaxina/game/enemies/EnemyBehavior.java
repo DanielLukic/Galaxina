@@ -1,7 +1,8 @@
 package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.GameModel;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.util.Random;
 
 public abstract class EnemyBehavior

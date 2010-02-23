@@ -3,6 +3,7 @@ package net.intensicode.galaxina.game.objects;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.enemies.behaviors.*;
 import net.intensicode.galaxina.game.extras.ExtraTypes;
+import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.util.Log;
 
 import java.io.*;

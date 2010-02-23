@@ -3,7 +3,7 @@ package net.intensicode.galaxina.game.drawers;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.enemies.*;
-import net.intensicode.galaxina.game.objects.Level;
+import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.graphics.SpriteGenerator;
 import net.intensicode.screens.ScreenBase;

@@ -2,7 +2,6 @@ package net.intensicode.galaxina.game;
 
 import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.game.drawers.*;
-import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.screens.*;
 import net.intensicode.screens.*;
 import net.intensicode.util.*;
@@ -89,6 +88,7 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameDrawers.addScreen( new SparksDrawer( this ) );
         mySharedGameDrawers.addScreen( new ExtrasDrawer( this ) );
         mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "explosion", myGameModel.explosions.explosions, 3 ) );
+        mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "warp", myGameModel.warps.instances ) );
         mySharedGameDrawers.addScreen( new ScoreTagsDrawer( this ) );
         mySharedGameDrawers.addScreen( new InfoFlashDrawer( this ) );
 

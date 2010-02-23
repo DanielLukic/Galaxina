@@ -2,6 +2,7 @@ package net.intensicode.galaxina.game.weapons;
 
 import net.intensicode.core.Configuration;
 import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.util.Position;
 
 public final class SpreadBombs extends Weapon

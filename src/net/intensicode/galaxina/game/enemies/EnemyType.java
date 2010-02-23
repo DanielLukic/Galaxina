@@ -1,7 +1,8 @@
 package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.galaxina.game.extras.ExtraTypes;
-import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.util.*;
 
 public final class EnemyType

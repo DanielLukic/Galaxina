@@ -1,8 +1,8 @@
 package net.intensicode.galaxina.game.extras;
 
-import net.intensicode.galaxina.game.objects.GameModel;
-import net.intensicode.galaxina.game.objects.Player;
-import net.intensicode.galaxina.game.weapons.Weapon;
+import net.intensicode.galaxina.game.GameModel;
+import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.objects.Weapon;
 
 public final class SetHomingMissile extends ExtraType
     {

@@ -1,13 +1,15 @@
 package net.intensicode.galaxina.game;
 
-import net.intensicode.galaxina.game.objects.World;
+import net.intensicode.galaxina.game.World;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.*;
+import net.intensicode.core.Configuration;
 
 public final class Camera extends ScreenBase
     {
     public Camera( final GameContext aGameContext )
         {
+        myGameContext = aGameContext;
         myWorld = aGameContext.gameModel().world;
         }
 
@@ -15,8 +17,10 @@ public final class Camera extends ScreenBase
 
     public final void onInitOnce() throws Exception
         {
-        myScreenCenterX = myWorld.pixelSize.width / 2;
-        myScreenCenterY = myWorld.pixelSize.height / 2;
+        // By default align world-to-screen-projection at top and horizontally centered:
+        final Configuration configuration = myGameContext.gameModel().configuration;
+        myScreenCenterX = configuration.readInt( "Camera.screenCenter.x", screen().width() / 2 );
+        myScreenCenterY = configuration.readInt( "Camera.screenCenter.y", myWorld.pixelSize.height / 2 );
         }
 
     public final void onControlTick() throws Exception
@@ -53,4 +57,6 @@ public final class Camera extends ScreenBase
     private final Size myTempSize = new Size();
 
     private final Position myTempPos = new Position();
+
+    private final GameContext myGameContext;
     }

@@ -1,4 +1,4 @@
-package net.intensicode.galaxina.game.objects;
+package net.intensicode.galaxina.game;
 
 public abstract class WorldObjectWithType extends WorldObjectWithSize
     {

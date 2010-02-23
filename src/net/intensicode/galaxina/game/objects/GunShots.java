@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.util.Rectangle;
+import net.intensicode.galaxina.game.GameObject;
 
 /**
  * TODO: Describe this!

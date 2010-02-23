@@ -2,7 +2,6 @@ package net.intensicode.galaxina.game.drawers;
 
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
-import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.graphics.SpriteGenerator;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.*;

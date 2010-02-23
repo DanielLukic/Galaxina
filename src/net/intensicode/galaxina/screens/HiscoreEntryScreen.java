@@ -2,7 +2,7 @@ package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.*;
 import net.intensicode.galaxina.MainContext;
-import net.intensicode.galaxina.game.Hiscore;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.util.Position;

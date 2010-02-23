@@ -1,19 +1,16 @@
 package net.intensicode.galaxina.game.enemies;
 
-import net.intensicode.galaxina.game.data.FormationConfiguration;
-import net.intensicode.galaxina.game.data.SwarmConfiguration;
-import net.intensicode.galaxina.game.objects.GameObject;
+import net.intensicode.galaxina.game.GameObject;
+import net.intensicode.galaxina.game.data.*;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.path.PathWithDirection;
-import net.intensicode.util.DynamicArray;
-import net.intensicode.util.Log;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.io.IOException;
 
 public final class EnemySpawner extends GameObject
     {
     public final DynamicArray spawnedSwarms = new DynamicArray();
-
 
 
     public EnemySpawner()
@@ -198,6 +195,14 @@ public final class EnemySpawner extends GameObject
             enemy.init( type, path, null );
             }
 
+        for ( int idx = 0; idx < 3; idx++ )
+            {
+            myWarpPos.setTo( path.getStartPosition() );
+            myWarpPos.x += myRandom.nextInt( type.sizeInWorldFixed.width ) - type.sizeInWorldFixed.width / 2;
+            myWarpPos.y += myRandom.nextInt( type.sizeInWorldFixed.height ) - type.sizeInWorldFixed.height / 2;
+            model.warps.add( myWarpPos, 0, 0 );
+            }
+
         if ( config.syncSpeedWithPrevious( myCurrentEnemyIndex ) )
             {
             final Enemy previous = (Enemy) model.level.activeEnemies.last();
@@ -229,7 +234,6 @@ public final class EnemySpawner extends GameObject
         }
 
 
-
     private int mySpawnTicks;
 
     private boolean myDoneFlag;
@@ -245,6 +249,10 @@ public final class EnemySpawner extends GameObject
     private int myState = STATE_INITIALIZING;
 
     private FormationConfiguration myConfiguration;
+
+    private final Random myRandom = Random.INSTANCE;
+
+    private final Position myWarpPos = new Position();
 
 
     private static final int STATE_INITIALIZING = 0;

@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.screens;
 
 import net.intensicode.galaxina.MainContext;
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.GameModel;
 
 public final class GameScreen extends GalaxinaGameScreen
     {

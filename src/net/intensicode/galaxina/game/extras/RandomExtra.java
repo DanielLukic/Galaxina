@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.extras;
 
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.util.Random;
 
 public final class RandomExtra extends ExtraType

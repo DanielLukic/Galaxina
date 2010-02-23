@@ -1,4 +1,4 @@
-package net.intensicode.galaxina.game.objects;
+package net.intensicode.galaxina.game;
 
 import net.intensicode.util.Position;
 
@@ -8,6 +8,8 @@ public abstract class WorldObject
 
     public final Position worldPosFixed = new Position();
 
+    public boolean repeatAnimation;
+
     public int animTicks;
 
     public int tickCount;
@@ -16,6 +18,7 @@ public abstract class WorldObject
     public final void tickAnimation()
         {
         if ( tickCount < animTicks ) tickCount++;
-        else tickCount = 0;
+        else if ( repeatAnimation ) tickCount = 0;
+        else active = false;
         }
     }

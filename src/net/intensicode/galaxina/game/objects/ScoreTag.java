@@ -2,6 +2,7 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.GameTiming;
 import net.intensicode.util.Position;
+import net.intensicode.galaxina.game.*;
 
 public final class ScoreTag extends WorldObject
     {

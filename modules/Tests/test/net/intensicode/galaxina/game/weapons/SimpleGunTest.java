@@ -1,8 +1,8 @@
 package net.intensicode.galaxina.game.weapons;
 
 import junit.framework.TestCase;
-import net.intensicode.galaxina.game.objects.GameModel;
-import net.intensicode.galaxina.game.objects.GameObject;
+import net.intensicode.galaxina.game.GameModel;
+import net.intensicode.galaxina.game.GameObject;
 
 public final class SimpleGunTest extends TestCase
     {

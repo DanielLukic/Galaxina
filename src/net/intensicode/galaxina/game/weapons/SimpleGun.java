@@ -1,9 +1,8 @@
 package net.intensicode.galaxina.game.weapons;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.objects.GameObject;
-import net.intensicode.galaxina.game.objects.GunShot;
-import net.intensicode.galaxina.game.objects.Weapons;
+import net.intensicode.galaxina.game.GameObject;
+import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.util.FixedMath;
 import net.intensicode.util.Position;
 import net.intensicode.util.DynamicArray;

@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.drawers;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.game.GameContext;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.graphics.*;
 import net.intensicode.screens.ScreenBase;

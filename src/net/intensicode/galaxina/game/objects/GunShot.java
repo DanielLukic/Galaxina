@@ -1,7 +1,8 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
-import net.intensicode.galaxina.game.weapons.Weapon;
+import net.intensicode.galaxina.game.objects.Enemy;
+import net.intensicode.galaxina.game.objects.Weapon;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.util.*;
 
 

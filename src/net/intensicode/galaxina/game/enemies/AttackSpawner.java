@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.enemies;
 
-import net.intensicode.galaxina.game.objects.GameObject;
+import net.intensicode.galaxina.game.GameObject;
 
 
 /**

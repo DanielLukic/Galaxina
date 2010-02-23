@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.extras;
 
 import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.GameModel;
 
 public final class AddSatellite extends ExtraType
     {

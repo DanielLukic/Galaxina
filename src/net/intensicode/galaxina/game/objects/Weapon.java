@@ -1,4 +1,4 @@
-package net.intensicode.galaxina.game.weapons;
+package net.intensicode.galaxina.game.objects;
 
 public abstract class Weapon
     {

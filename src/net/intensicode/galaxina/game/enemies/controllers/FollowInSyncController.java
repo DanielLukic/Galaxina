@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.enemies.controllers;
 
 import net.intensicode.galaxina.game.enemies.*;
+import net.intensicode.galaxina.game.objects.Enemy;
 
 public final class FollowInSyncController extends EnemyController
     {

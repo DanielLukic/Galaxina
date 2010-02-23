@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.util.*;
+import net.intensicode.galaxina.game.WorldObject;
 
 
 public final class Spark extends WorldObject

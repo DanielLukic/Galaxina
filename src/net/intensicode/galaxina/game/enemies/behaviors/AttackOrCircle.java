@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.enemies.behaviors;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.galaxina.game.enemies.EnemyBehavior;
 import net.intensicode.galaxina.game.enemies.EnemyPath;
 import net.intensicode.util.Position;

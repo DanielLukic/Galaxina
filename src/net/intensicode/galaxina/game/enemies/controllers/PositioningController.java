@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.enemies.controllers;
 
 import net.intensicode.galaxina.game.enemies.*;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.util.Position;
 
 public final class PositioningController extends EnemyController

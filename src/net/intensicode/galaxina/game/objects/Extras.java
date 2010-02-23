@@ -1,10 +1,11 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.extras.ExtraType;
+import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.util.Position;
 import net.intensicode.util.Size;
 
-public final class FallingExtras extends GameObject
+public final class Extras extends GameObject
     {
     public final Size sizeInWorldFixed = new Size();
 
@@ -12,7 +13,7 @@ public final class FallingExtras extends GameObject
 
 
 
-    public FallingExtras()
+    public Extras()
         {
         }
 

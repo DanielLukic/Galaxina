@@ -2,6 +2,7 @@ package net.intensicode.galaxina.game.enemies;
 
 import junit.framework.TestCase;
 import net.intensicode.util.FixedMath;
+import net.intensicode.galaxina.game.objects.Enemy;
 
 public final class EnemyTest extends TestCase
     {

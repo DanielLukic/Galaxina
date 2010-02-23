@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.enemies;
 
-import net.intensicode.galaxina.game.objects.World;
+import net.intensicode.galaxina.game.World;
 import net.intensicode.path.SmoothPath;
 import net.intensicode.util.Position;
 

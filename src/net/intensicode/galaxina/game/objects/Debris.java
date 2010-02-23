@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
+import net.intensicode.galaxina.game.objects.Enemy;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.util.*;
 
 public final class Debris extends WorldObjectWithType
@@ -26,6 +27,7 @@ public final class Debris extends WorldObjectWithType
         worldPosFixed.setTo( aWorldPosFixed );
         tickCount = 0;
         animTicks = GameObject.timing.ticksPerSecond / 2;
+        repeatAnimation = true;
         }
 
     public final void onControlTick()

@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.data;
 
 import net.intensicode.core.ResourcesManager;
 import net.intensicode.galaxina.game.enemies.*;
-import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.*;
 

@@ -1,9 +1,10 @@
-package net.intensicode.galaxina.game.enemies;
+package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.GameTiming;
 import net.intensicode.galaxina.game.enemies.controllers.*;
+import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.extras.ExtraType;
-import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.*;

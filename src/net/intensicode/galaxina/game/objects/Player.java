@@ -1,8 +1,9 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.KeysHandler;
-import net.intensicode.galaxina.game.enemies.Enemy;
-import net.intensicode.galaxina.game.weapons.Weapon;
+import net.intensicode.galaxina.game.objects.Enemy;
+import net.intensicode.galaxina.game.objects.Weapon;
+import net.intensicode.galaxina.game.*;
 import net.intensicode.util.*;
 
 public final class Player extends GameObject

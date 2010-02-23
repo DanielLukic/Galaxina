@@ -1,5 +1,7 @@
 package net.intensicode.galaxina.game.enemies;
 
+import net.intensicode.galaxina.game.objects.Enemy;
+
 public abstract class EnemyController
     {
     public boolean isReadyForAction( final Enemy aEnemy )

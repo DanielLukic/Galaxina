@@ -2,7 +2,8 @@ package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.galaxina.game.extras.ExtraType;
 import net.intensicode.galaxina.game.extras.ExtraTypes;
-import net.intensicode.galaxina.game.objects.GameObject;
+import net.intensicode.galaxina.game.GameObject;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.util.Position;
 import net.intensicode.util.Visitor;
 import net.intensicode.util.DynamicArray;

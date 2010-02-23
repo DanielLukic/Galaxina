@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game;
 
-import net.intensicode.galaxina.game.objects.GameModel;
+import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.galaxina.VisualContext;
 import net.intensicode.screens.*;
 

@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.enemies.controllers;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
+import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.galaxina.game.enemies.EnemyController;
 
 public final class AttackingController extends EnemyController

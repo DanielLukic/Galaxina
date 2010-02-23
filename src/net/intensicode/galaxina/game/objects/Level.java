@@ -1,6 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.galaxina.game.enemies.Enemy;
+import net.intensicode.galaxina.game.objects.Enemy;
+import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.util.DynamicArray;
 
 public final class Level extends GameObject
