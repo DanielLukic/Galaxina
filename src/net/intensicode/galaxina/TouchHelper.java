@@ -3,23 +3,45 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.*;
-import net.intensicode.util.Position;
+import net.intensicode.screens.ScreenBase;
+import net.intensicode.util.*;
+import net.intensicode.galaxina.screens.GalaxinaGameScreen;
 
 import java.io.IOException;
 
-public final class TouchHelper
+public final class TouchHelper extends ScreenBase
     {
-    public TouchHelper( final GameSystem aGameSystem, final VisualConfiguration aVisualConfiguration )
+    public TouchHelper( final MainContext aMainContext )
         {
-        myGameSystem = aGameSystem;
-        myVisualConfiguration = aVisualConfiguration;
+        myMainContext = aMainContext;
         }
 
-    public void createTouchControls() throws IOException
-        {
-        touch().globalControlsActive = false;
+    // From ScreenBase
 
-        final VisualConfiguration config = myVisualConfiguration;
+    public final void onInitOnce() throws Exception
+        {
+        createTouchControls();
+        }
+
+    public final void onControlTick() throws Exception
+        {
+        final boolean gameActive = stack().activeScreen() instanceof GalaxinaGameScreen;
+        touch().globalControlsActive = gameActive;
+        }
+
+    public final void onDrawFrame()
+        {
+        }
+
+    // Implementation
+
+    private void createTouchControls() throws IOException
+        {
+        //#if DEBUG
+        Log.debug( "creating global touch controls" );
+        //#endif
+
+        final VisualConfiguration config = myMainContext.visualContext().configuration();
         if ( config.touchButtonImages )
             {
             myTouchPrimaryFire = makeTouchableImage( "touchPrimaryFire", config.touchPrimaryFire, KeysHandler.FIRE1 );
@@ -81,24 +103,6 @@ public final class TouchHelper
         return aTouchable;
         }
 
-    private SkinManager skin()
-        {
-        if ( myGameSystem.skin == null ) throw new IllegalStateException();
-        return myGameSystem.skin;
-        }
-
-    private DirectScreen screen()
-        {
-        if ( myGameSystem.screen == null ) throw new IllegalStateException();
-        return myGameSystem.screen;
-        }
-
-    private TouchHandler touch()
-        {
-        if ( myGameSystem.touch == null ) throw new IllegalStateException();
-        return myGameSystem.touch;
-        }
-
 
     private Touchable myTouchPrimaryFire;
 
@@ -112,7 +116,5 @@ public final class TouchHelper
 
     private Touchable myTouchDown;
 
-    private final GameSystem myGameSystem;
-
-    private final VisualConfiguration myVisualConfiguration;
+    private final MainContext myMainContext;
     }

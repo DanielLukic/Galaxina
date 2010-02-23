@@ -6,7 +6,7 @@ import net.intensicode.galaxina.screens.LoadingCallback;
 import net.intensicode.graphics.BitmapFontGenerator;
 import net.intensicode.io.StorageIO;
 import net.intensicode.screens.*;
-import net.intensicode.util.*;
+import net.intensicode.util.Log;
 
 import java.io.IOException;
 
@@ -136,6 +136,10 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         ////#if CHEAT
         //stack().addGlobalHandler( new CheatHandler( myGameController ) );
         ////#endif
+
+        //#if TOUCH_SUPPORTED
+        stack().addGlobalHandler( new TouchHelper( this ) );
+        //#endif
 
         //#if CONSOLE
         stack().addGlobalHandler( new ConsoleOverlay( skin().font( "textfont" ) ) );
