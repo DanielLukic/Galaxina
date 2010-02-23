@@ -45,6 +45,10 @@ public final class VisualConfiguration
 
     private VisualConfiguration( final Configuration aConfiguration, final SkinManager aSkin )
         {
+        //#if DEBUG
+        Log.debug( "initializing visual configuration from properties" );
+        //#endif
+
         myConfiguration = aConfiguration;
         skin = aSkin;
 
