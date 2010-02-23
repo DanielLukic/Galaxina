@@ -14,6 +14,7 @@ public final class Satellite extends WorldObjectWithSize
 
         active = true;
 
+        repeatAnimation = true;
         tickCount = 0;
         animTicks = GameObject.timing.ticksPerSecond / 2;
 
