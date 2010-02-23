@@ -118,6 +118,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         myControls = new Controls();
         myControls.initFrom( keys() );
         tryLoading( myControls );
+        myControls.activate( keys() );
 
         myOptions = new Options( myVisualContext.configuration(), audio() );
         tryLoading( myOptions );

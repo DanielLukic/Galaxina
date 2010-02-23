@@ -95,6 +95,7 @@ public final class ControlsScreen extends GalaxinaScreen implements TouchableHan
                     stack().popScreen( this );
                     updateControlsFromEntries();
                     storage().save( context().controls() );
+                    context().controls().activate( keys );
                     }
                 else if ( keys.checkRightSoftAndConsume() )
                         {
