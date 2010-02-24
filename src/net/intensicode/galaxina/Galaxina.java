@@ -21,8 +21,5 @@ public final class Galaxina extends IntensiGame
 
     public final void onFramesDropped( final GameSystem aGameSystem )
         {
-        //#if DEBUG
-        Log.debug( "FRAMES DROPPED - IGNORED FOR NOW" );
-        //#endif
         }
     }
