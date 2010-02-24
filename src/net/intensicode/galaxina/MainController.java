@@ -72,6 +72,9 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
     public final void startNewGame() throws Exception
         {
+        // Removed menu or whatever other screen has called startNewGame:
+        while ( stack().activeScreen() != this ) stack().popScreen();
+
         myScreenBuilder.showGameScreen();
         myGameController.startGame();
         }
