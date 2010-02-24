@@ -3,9 +3,9 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.*;
+import net.intensicode.galaxina.screens.GalaxinaGameScreen;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.*;
-import net.intensicode.galaxina.screens.GalaxinaGameScreen;
 
 import java.io.IOException;
 
@@ -46,10 +46,8 @@ public final class TouchHelper extends ScreenBase
             {
             myTouchPrimaryFire = makeTouchableImage( "touchPrimaryFire", config.touchPrimaryFire, KeysHandler.FIRE1 );
             myTouchSecondaryFire = makeTouchableImage( "touchSecondaryFire", config.touchSecondaryFire, KeysHandler.FIRE2 );
-            if ( config.touchShowArrows )
+            if ( config.touchShowArrows && touch().supportsMultiTouch() )
                 {
-                myTouchUp = makeTouchableImage( "touchUp", config.touchUp, KeysHandler.UP );
-                myTouchDown = makeTouchableImage( "touchDown", config.touchDown, KeysHandler.DOWN );
                 myTouchLeft = makeTouchableImage( "touchLeft", config.touchLeft, KeysHandler.LEFT );
                 myTouchRight = makeTouchableImage( "touchRight", config.touchRight, KeysHandler.RIGHT );
                 }
@@ -59,10 +57,8 @@ public final class TouchHelper extends ScreenBase
             final int touchButtonSize = config.touchButtonSize;
             myTouchPrimaryFire = makeTouchableArea( touchButtonSize, config.touchPrimaryFire, KeysHandler.FIRE1 );
             myTouchSecondaryFire = makeTouchableArea( touchButtonSize, config.touchSecondaryFire, KeysHandler.FIRE2 );
-            if ( config.touchShowArrows )
+            if ( config.touchShowArrows && touch().supportsMultiTouch() )
                 {
-                myTouchUp = makeTouchableArea( touchButtonSize, config.touchUp, KeysHandler.UP );
-                myTouchDown = makeTouchableArea( touchButtonSize, config.touchDown, KeysHandler.DOWN );
                 myTouchLeft = makeTouchableArea( touchButtonSize, config.touchLeft, KeysHandler.LEFT );
                 myTouchRight = makeTouchableArea( touchButtonSize, config.touchRight, KeysHandler.RIGHT );
                 }
@@ -71,8 +67,19 @@ public final class TouchHelper extends ScreenBase
         // Enable key repeat functionality by emulating real key behavior:
         myTouchPrimaryFire.triggerMode = Touchable.TRIGGER_ON_DOWN;
         myTouchPrimaryFire.releaseMode = Touchable.RELEASE_ON_UP;
-        myTouchSecondaryFire.triggerMode = Touchable.TRIGGER_ON_DOWN;
-        myTouchSecondaryFire.releaseMode = Touchable.RELEASE_ON_UP;
+        myTouchSecondaryFire.triggerMode = Touchable.TRIGGER_ON_DOWN | Touchable.TRIGGER_ON_SWIPE;
+        myTouchSecondaryFire.releaseMode = Touchable.RELEASE_ON_UP | Touchable.RELEASE_ON_OUT;
+
+        if ( myTouchLeft != null )
+            {
+            myTouchLeft.triggerMode = Touchable.TRIGGER_ON_DOWN | Touchable.TRIGGER_ON_SWIPE;
+            myTouchLeft.releaseMode = Touchable.RELEASE_ON_UP | Touchable.RELEASE_ON_OUT;
+            }
+        if ( myTouchRight != null )
+            {
+            myTouchRight.triggerMode = Touchable.TRIGGER_ON_DOWN | Touchable.TRIGGER_ON_SWIPE;
+            myTouchRight.releaseMode = Touchable.RELEASE_ON_UP | Touchable.RELEASE_ON_OUT;
+            }
 
         touch().setGlobalControlsBlending( config.touchButtonAlpha );
         }
@@ -114,13 +121,9 @@ public final class TouchHelper extends ScreenBase
 
     private Touchable myTouchSecondaryFire;
 
-    private Touchable myTouchUp;
-
     private Touchable myTouchLeft;
 
     private Touchable myTouchRight;
-
-    private Touchable myTouchDown;
 
     private final MainContext myMainContext;
     }

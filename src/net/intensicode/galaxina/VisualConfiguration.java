@@ -1,8 +1,8 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.*;
-import net.intensicode.util.*;
 import net.intensicode.screens.EngineStats;
+import net.intensicode.util.*;
 
 public final class VisualConfiguration
     {
@@ -27,10 +27,6 @@ public final class VisualConfiguration
     public final Position touchLeft = new Position( 48, 272 );
 
     public final Position touchRight = new Position( 144, 272 );
-
-    public final Position touchUp = new Position( 96, 224 );
-
-    public final Position touchDown = new Position( 96, 272 );
 
     //#endif
 
@@ -64,8 +60,6 @@ public final class VisualConfiguration
         readPosition( touchSecondaryFire, "touchSecondaryFire" );
         readPosition( touchLeft, "touchLeft" );
         readPosition( touchRight, "touchRight" );
-        readPosition( touchDown, "touchDown" );
-        readPosition( touchUp, "touchUp" );
 
         //#if DEBUG
         EngineStats.show = true;
