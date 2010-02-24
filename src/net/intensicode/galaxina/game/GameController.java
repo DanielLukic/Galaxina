@@ -82,11 +82,13 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedGameDrawers.addScreen( new EnemiesDrawer( this ) );
         mySharedGameDrawers.addScreen( new MissilesDrawer( this ) );
 
-        mySharedGameDrawers.addScreen( new PlayerDrawer( this ) );
         mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "satellite", myGameModel.satellites.satellites ) );
         mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "smoke", myGameModel.smokes.smokes ) );
         mySharedGameDrawers.addScreen( new SparksDrawer( this ) );
         mySharedGameDrawers.addScreen( new ExtrasDrawer( this ) );
+
+        mySharedGameDrawers.addScreen( new PlayerDrawer( this ) );
+
         mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "explosion", myGameModel.explosions.explosions, 3 ) );
         mySharedGameDrawers.addScreen( new ObjectsDrawer( this, "warp", myGameModel.warps.instances ) );
         mySharedGameDrawers.addScreen( new ScoreTagsDrawer( this ) );
