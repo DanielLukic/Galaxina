@@ -46,6 +46,7 @@ public final class LoadingScreen extends MultiScreen
         myWaitTicks = myDelayInTicks == -1 ? timing().ticksPerSecond * 5 : myDelayInTicks;
         myAnimFrame = -1;
         myAnimTick = 0;
+        myAnimTicks = timing().ticksPerSecond;
         }
 
     public final void onInitOnce() throws Exception
@@ -79,7 +80,7 @@ public final class LoadingScreen extends MultiScreen
             {
             case ANIMATING_LOGO:
                 if ( myAnimTick == 0 && myStartSound != null ) myStartSound.start();
-                if ( myAnimTick < timing().ticksPerSecond )
+                if ( myAnimTick < myAnimTicks )
                     {
                     myAnimTick++;
                     }
@@ -90,7 +91,7 @@ public final class LoadingScreen extends MultiScreen
                 if ( myLogoAnim != null )
                     {
                     final int animSteps = myLogoAnim.getFrameSequenceLength();
-                    myAnimFrame = myAnimTick * ( animSteps - 1 ) / timing().ticksPerSecond;
+                    myAnimFrame = myAnimTick * ( animSteps - 1 ) / myAnimTicks;
                     }
                 break;
             case LOADING_IMAGES:
@@ -170,4 +171,6 @@ public final class LoadingScreen extends MultiScreen
     private static final int LATE_INIT = 2;
 
     private static final int POP_SCREEN = 3;
+
+    private int myAnimTicks;
     }
