@@ -20,6 +20,10 @@ public final class MissilesDrawer extends ScreenBase
     public final void onInitOnce() throws Exception
         {
         myGenerator = skin().sprite( "missile" );
+
+        final Camera camera = myGameContext.camera();
+        final Size sizeInWorld = camera.toWorldSize( myGenerator.getWidth(), myGenerator.getHeight() );
+        myGameContext.gameModel().missiles.sizeInWorld.setTo( sizeInWorld );
         }
 
     public final void onControlTick() throws Exception

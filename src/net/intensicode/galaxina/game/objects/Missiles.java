@@ -1,18 +1,20 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.GameObject;
 
 public final class Missiles extends GameObject
     {
     public final Missile[] missiles = new Missile[MAX_MISSILES];
 
+    public final Size sizeInWorld = new Size();
 
 
     public final Missile prepare( final Position aStartPosition )
         {
         final Missile missile = getMissile();
         missile.init( aStartPosition );
+        missile.sizeInWorldFixed.setTo( sizeInWorld );
         return missile;
         }
 
