@@ -45,7 +45,7 @@ public final class HiscoreScreen extends GalaxinaScreen
             //#if ONLINE_HISCORE
             context().updateHiscore();
             //#else
-            //# context().showMainMenu();
+            //# context().screens().showMainMenu();
             //#endif
             }
         else if ( keys.checkRightSoftAndConsume() )
