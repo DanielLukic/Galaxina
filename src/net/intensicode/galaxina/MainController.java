@@ -119,7 +119,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         stack().addGlobalHandler( new ConsoleOverlay( skin().font( "textfont" ) ) );
         //#endif
 
-        stack().addGlobalHandler( new EngineStats( skin().font( "textfont" ) ) );
+        stack().addGlobalHandler( new EngineStats( skin().font( "minifont" ) ) );
 
         myMusicController = new MusicController();
         stack().addGlobalHandler( myMusicController );
