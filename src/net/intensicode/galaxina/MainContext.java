@@ -25,17 +25,7 @@ public interface MainContext
     void updateHiscore() throws Exception;
     //#endif
 
-    void showMainMenu() throws Exception;
-
-    void showHelp() throws Exception;
-
-    void showHiscore() throws Exception;
-
-    void showOptions() throws Exception;
-
-    void showControls() throws Exception;
-
-    void showReset() throws Exception;
+    ScreensBuilder screens();
 
     void startNewGame() throws Exception;
     }

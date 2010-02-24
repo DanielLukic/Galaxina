@@ -46,7 +46,7 @@ public final class HiscoreUpdateScreen extends GalaxinaScreen implements Network
         if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
-            context().showHiscore();
+            context().screens().showHiscore();
             }
 
         super.onControlTick();
@@ -63,7 +63,7 @@ public final class HiscoreUpdateScreen extends GalaxinaScreen implements Network
 
             case STATE_COMPLETE:
                 stack().popScreen( this );
-                context().showHiscore();
+                context().screens().showHiscore();
                 context().saveHiscore();
                 break;
 

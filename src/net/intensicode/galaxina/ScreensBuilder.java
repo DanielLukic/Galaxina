@@ -1,10 +1,9 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.core.*;
-import net.intensicode.galaxina.VisualContext;
 import net.intensicode.galaxina.screens.*;
-import net.intensicode.graphics.BitmapFontGenerator;
-import net.intensicode.screens.SoftkeysScreen;
+import net.intensicode.graphics.*;
+import net.intensicode.screens.*;
 
 public final class ScreensBuilder
     {
@@ -74,6 +73,15 @@ public final class ScreensBuilder
     public final void showReset() throws Exception
         {
         stack().pushOnce( new ResetScreen( myMainContext ) );
+        }
+
+    public void showInfo() throws Exception
+        {
+        final FontGenerator textfont = skin().font( "textfont" );
+        final FontGenerator minifont = skin().font( "minifont" );
+        final InfoScreen infoScreen = new InfoScreen( textfont, minifont );
+        infoScreen.shareSoftkeys( softkeys() );
+        stack().pushOnce( infoScreen );
         }
 
     // Implementation

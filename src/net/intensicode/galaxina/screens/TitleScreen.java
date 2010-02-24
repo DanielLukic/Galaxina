@@ -53,7 +53,7 @@ public final class TitleScreen extends GalaxinaScreen
         if ( keys().checkLeftSoftAndConsume() || keys().checkFireAndConsume() || keys().checkStickDownAndConsume() )
             {
             stack().popScreen( this );
-            context().showMainMenu();
+            context().screens().showMainMenu();
             }
         if ( keys().checkRightSoftAndConsume() )
             {

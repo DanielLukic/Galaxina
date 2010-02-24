@@ -65,34 +65,9 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         }
     //#endif
 
-    public final void showMainMenu() throws Exception
+    public final ScreensBuilder screens()
         {
-        myScreenBuilder.showMainMenu();
-        }
-
-    public final void showHelp() throws Exception
-        {
-        myScreenBuilder.showHelp();
-        }
-
-    public final void showHiscore() throws Exception
-        {
-        myScreenBuilder.showHiscore();
-        }
-
-    public final void showOptions() throws Exception
-        {
-        myScreenBuilder.showOptions();
-        }
-
-    public final void showControls() throws Exception
-        {
-        myScreenBuilder.showControls();
-        }
-
-    public final void showReset() throws Exception
-        {
-        myScreenBuilder.showReset();
+        return myScreenBuilder;
         }
 
     public final void startNewGame() throws Exception

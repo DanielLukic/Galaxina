@@ -149,7 +149,7 @@ public final class HiscoreEntryScreen extends GalaxinaScreen
                 final Level level = myGameModel.level;
                 myHiscore.insert( player.score, level.numberStartingAt1, myCurrentName );
 
-                context().showHiscore();
+                context().screens().showHiscore();
                 context().saveHiscore();
                 }
             }

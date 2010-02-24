@@ -51,7 +51,7 @@ public final class LevelInfoScreen extends GalaxinaGameScreen
         else if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
-            context().showMainMenu();
+            context().screens().showMainMenu();
             }
         }
 

@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.screens;
 
 import net.intensicode.galaxina.*;
-import net.intensicode.galaxina.VisualContext;
 import net.intensicode.screens.*;
 
 public final class MainMenuScreen extends MenuBase
@@ -24,6 +23,7 @@ public final class MainMenuScreen extends MenuBase
         addMenuEntry( OPTIONS, "OPTIONS" );
         addMenuEntry( CONTROLS, "CONTROLS" );
         addMenuEntry( RESET, "RESET" );
+        addMenuEntry( INFO, "INFO" );
         addMenuEntry( EXIT, "EXIT" );
 
         mySoftkeys = visuals().sharedSoftkeys();
@@ -54,26 +54,28 @@ public final class MainMenuScreen extends MenuBase
 
     protected final void onSelected( final MenuEntry aSelectedEntry ) throws Exception
         {
-        stack().popScreen( this );
         switch ( aSelectedEntry.id )
             {
             case START_GAME:
                 context().startNewGame();
                 break;
             case SHOW_HELP:
-                context().showHelp();
+                context().screens().showHelp();
                 break;
             case HISCORE:
-                context().showHiscore();
+                context().screens().showHiscore();
                 break;
             case OPTIONS:
-                context().showOptions();
+                context().screens().showOptions();
                 break;
             case CONTROLS:
-                context().showControls();
+                context().screens().showControls();
                 break;
             case RESET:
-                context().showReset();
+                context().screens().showReset();
+                break;
+            case INFO:
+                context().screens().showInfo();
                 break;
             case EXIT:
                 system().shutdownAndExit();
@@ -113,7 +115,9 @@ public final class MainMenuScreen extends MenuBase
 
     private static final int RESET = 5;
 
-    private static final int EXIT = 6;
+    private static final int INFO = 6;
+
+    private static final int EXIT = 7;
 
     private static final int MAIN_CONTROLLER_AND_MAIN_MENU = 2;
 

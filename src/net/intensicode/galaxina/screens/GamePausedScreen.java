@@ -38,7 +38,7 @@ public final class GamePausedScreen extends GalaxinaGameScreen
         if ( keys.checkFireAndConsume() || keys.checkLeftSoftAndConsume() )
             {
             stack().popScreen( this );
-            context().showMainMenu();
+            context().screens().showMainMenu();
             }
         else if ( keys.checkRightSoftAndConsume() )
             {

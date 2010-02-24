@@ -40,7 +40,7 @@ public final class PlayLevelScreen extends GalaxinaGameScreen
         super.onControlTick();
 
         final KeysHandler keys = keys();
-        if ( keys.checkLeftSoftAndConsume() ) context().showMainMenu();
+        if ( keys.checkLeftSoftAndConsume() ) context().screens().showMainMenu();
         else if ( keys.checkRightSoftAndConsume() ) model().pauseGame();
         }
     }

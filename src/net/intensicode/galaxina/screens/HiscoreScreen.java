@@ -51,7 +51,7 @@ public final class HiscoreScreen extends GalaxinaScreen
         else if ( keys.checkRightSoftAndConsume() )
             {
             stack().popScreen( this );
-            context().showMainMenu();
+            context().screens().showMainMenu();
             }
 
         final int linesOnScreen = myHiscore.numberOfEntries();
