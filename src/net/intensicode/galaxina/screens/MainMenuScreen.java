@@ -17,6 +17,7 @@ public final class MainMenuScreen extends GalaxinaScreen implements MenuHandlerE
         addScreen( visuals().sharedBackground() );
 
         final BasicMenu menu = new BasicMenu( this, visuals().menuFont() );
+        menu.setEntryImage( skin().sprite( "menuentry" ) );
         menu.addMenuEntry( START_GAME, "START GAME" );
         menu.addMenuEntry( SHOW_HELP, "SHOW HELP" );
         menu.addMenuEntry( HISCORE, "HISCORE" );
@@ -48,19 +49,19 @@ public final class MainMenuScreen extends GalaxinaScreen implements MenuHandlerE
 
     // From MenuHandlerEx
 
-    public final void onLeftSoftKey( final MenuEntry aSelectedEntry ) throws Exception
+    public final void onLeftSoftKey( final BasicMenuEntry aSelectedEntry ) throws Exception
         {
         onSelected( aSelectedEntry );
         }
 
-    public final void onRightSoftKey( final MenuEntry aSelectedEntry ) throws Exception
+    public final void onRightSoftKey( final BasicMenuEntry aSelectedEntry ) throws Exception
         {
         if ( myHandleBack ) stack().popScreen( this );
         }
 
     // From MenuHandler
 
-    public final void onSelected( final MenuEntry aSelectedEntry ) throws Exception
+    public final void onSelected( final BasicMenuEntry aSelectedEntry ) throws Exception
         {
         switch ( aSelectedEntry.id )
             {
