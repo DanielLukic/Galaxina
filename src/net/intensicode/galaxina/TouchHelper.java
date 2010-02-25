@@ -44,8 +44,8 @@ public final class TouchHelper extends ScreenBase
         final VisualConfiguration config = myMainContext.visualContext().configuration();
         if ( config.touchButtonImages )
             {
-            myTouchPrimaryFire = makeTouchableImage( "touchPrimaryFire", config.touchPrimaryFire, KeysHandler.FIRE1 );
-            myTouchSecondaryFire = makeTouchableImage( "touchSecondaryFire", config.touchSecondaryFire, KeysHandler.FIRE2 );
+            myTouchPrimaryFire = makeTouchableImage( "touchCannon", config.touchPrimaryFire, KeysHandler.FIRE1 );
+            myTouchSecondaryFire = makeTouchableImage( "touchMissile", config.touchSecondaryFire, KeysHandler.FIRE2 );
             if ( config.touchShowArrows && touch().supportsMultiTouch() )
                 {
                 myTouchLeft = makeTouchableImage( "touchLeft", config.touchLeft, KeysHandler.LEFT );
@@ -92,6 +92,7 @@ public final class TouchHelper extends ScreenBase
 
         final TouchableImage aTouchable = new TouchableImage();
         aTouchable.image = skin.image( aImageID );
+        aTouchable.imageHover = skin.image( aImageID + "Hover" );
         aTouchable.associatedKeyID = aKeyID;
         aTouchable.position.setTo( aPosition );
         aTouchable.imageAlignment = DirectGraphics.ALIGN_TOP_LEFT;
