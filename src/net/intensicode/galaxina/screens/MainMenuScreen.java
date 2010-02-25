@@ -1,14 +1,13 @@
 package net.intensicode.galaxina.screens;
 
-import net.intensicode.galaxina.*;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.screens.*;
 
-public final class MainMenuScreen extends MenuBase
+public final class MainMenuScreen extends GalaxinaScreen implements MenuHandlerEx
     {
     public MainMenuScreen( final MainContext aMainContext )
         {
-        super( aMainContext.visualContext().menuFont() );
-        myMainContext = aMainContext;
+        super( aMainContext );
         }
 
     // From ScreenBase
@@ -17,20 +16,22 @@ public final class MainMenuScreen extends MenuBase
         {
         addScreen( visuals().sharedBackground() );
 
-        addMenuEntry( START_GAME, "START GAME" );
-        addMenuEntry( SHOW_HELP, "SHOW HELP" );
-        addMenuEntry( HISCORE, "HISCORE" );
-        addMenuEntry( OPTIONS, "OPTIONS" );
-        addMenuEntry( CONTROLS, "CONTROLS" );
-        addMenuEntry( RESET, "RESET" );
-        addMenuEntry( INFO, "INFO" );
-        addMenuEntry( EXIT, "EXIT" );
+        final BasicMenu menu = new BasicMenu( this, visuals().menuFont() );
+        menu.addMenuEntry( START_GAME, "START GAME" );
+        menu.addMenuEntry( SHOW_HELP, "SHOW HELP" );
+        menu.addMenuEntry( HISCORE, "HISCORE" );
+        menu.addMenuEntry( OPTIONS, "OPTIONS" );
+        menu.addMenuEntry( CONTROLS, "CONTROLS" );
+        menu.addMenuEntry( RESET, "RESET" );
+        menu.addMenuEntry( INFO, "INFO" );
+        menu.addMenuEntry( EXIT, "EXIT" );
+        addScreen( menu );
 
         mySoftkeys = visuals().sharedSoftkeys();
         addScreen( mySoftkeys );
         }
 
-    protected void afterInitEverytime() throws Exception
+    public final void onInitEverytime() throws Exception
         {
         final int screenCount = stack().numberOfStackedScreens();
         if ( screenCount <= MAIN_CONTROLLER_AND_MAIN_MENU )
@@ -45,14 +46,21 @@ public final class MainMenuScreen extends MenuBase
             }
         }
 
-    // From MenuBase
+    // From MenuHandlerEx
 
-    protected void onRightSoftKey( final MenuEntry aSelectedEntry ) throws Exception
+    public final void onLeftSoftKey( final MenuEntry aSelectedEntry ) throws Exception
+        {
+        onSelected( aSelectedEntry );
+        }
+
+    public final void onRightSoftKey( final MenuEntry aSelectedEntry ) throws Exception
         {
         if ( myHandleBack ) stack().popScreen( this );
         }
 
-    protected final void onSelected( final MenuEntry aSelectedEntry ) throws Exception
+    // From MenuHandler
+
+    public final void onSelected( final MenuEntry aSelectedEntry ) throws Exception
         {
         switch ( aSelectedEntry.id )
             {
@@ -83,24 +91,10 @@ public final class MainMenuScreen extends MenuBase
             }
         }
 
-    // Implementation
-
-    private MainContext context()
-        {
-        return myMainContext;
-        }
-
-    private VisualContext visuals()
-        {
-        return myMainContext.visualContext();
-        }
-
 
     private boolean myHandleBack;
 
     private AutohideSoftkeysScreen mySoftkeys;
-
-    private final MainContext myMainContext;
 
 
     private static final int START_GAME = 0;
