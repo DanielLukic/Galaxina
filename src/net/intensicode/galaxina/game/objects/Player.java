@@ -166,9 +166,9 @@ public final class Player extends GameObject
         weaponUpgrades = 2;
         reloadUpgrades = 2;
         bulletUpgrades = 2;
-        //#endif
-
         secondaryWeapon = model.weapons.homingMissile;
+        addSatellite( model.satellites.getAvailableInstance() );
+        //#endif
         }
 
     public final void onStartLevel()
