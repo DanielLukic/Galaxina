@@ -108,7 +108,7 @@ public final class ObjectsDrawer extends ScreenBase
             aGenerator.paint( myGraphics, screenPos.x, screenPos.y );
             }
 
-        //#if DEBUG
+        //#if DEBUG && DEBUG_WORLD
         myGraphics.setColorARGB32( 0x8000FFFF );
         myGraphics.fillRect( screenPos.x - 1, screenPos.y - 1, 3, 3 );
         //#endif

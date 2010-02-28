@@ -68,7 +68,7 @@ public final class EnemiesDrawer extends ScreenBase
         sprite.setFrame( directionIndex % directionSteps );
         sprite.paint( aGraphics, screenPos.x, screenPos.y );
 
-        //#if DEBUG
+        //#if DEBUG && DEBUG_WORLD
         aGraphics.setColorARGB32( 0xFF00FFFF );
         aGraphics.fillRect( screenPos.x - 1, screenPos.y - 1, 3, 3 );
         //#endif

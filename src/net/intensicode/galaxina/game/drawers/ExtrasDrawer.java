@@ -55,7 +55,7 @@ public final class ExtrasDrawer extends ScreenBase
 
             myExtraGen.paint( aGraphics, screenPos.x, screenPos.y, index );
 
-            //#if DEBUG
+            //#if DEBUG && DEBUG_WORLD
             aGraphics.setColorARGB32( 0xFF00FFFF );
             aGraphics.fillRect( screenPos.x - 1, screenPos.y - 1, FRAMES_PER_EXTRA, FRAMES_PER_EXTRA );
             //#endif
