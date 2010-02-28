@@ -1,7 +1,5 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.galaxina.game.objects.Weapon;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.util.*;
 
@@ -60,5 +58,5 @@ public final class GunShot extends WorldObject
 
     private int myCollisionCheckSteps;
 
-    private static final int DEFAULT_COLLISION_CHECK_STEPS = 3;
+    private static final int DEFAULT_COLLISION_CHECK_STEPS = 2;
     }
