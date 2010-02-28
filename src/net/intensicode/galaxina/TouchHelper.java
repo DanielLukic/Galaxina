@@ -65,8 +65,8 @@ public final class TouchHelper extends ScreenBase
             }
 
         // Enable key repeat functionality by emulating real key behavior:
-        myTouchPrimaryFire.triggerMode = Touchable.TRIGGER_ON_DOWN;
-        myTouchPrimaryFire.releaseMode = Touchable.RELEASE_ON_UP;
+        myTouchPrimaryFire.triggerMode = Touchable.TRIGGER_ON_DOWN | Touchable.TRIGGER_ON_SWIPE;
+        myTouchPrimaryFire.releaseMode = Touchable.RELEASE_ON_UP | Touchable.RELEASE_ON_OUT;
         myTouchSecondaryFire.triggerMode = Touchable.TRIGGER_ON_DOWN | Touchable.TRIGGER_ON_SWIPE;
         myTouchSecondaryFire.releaseMode = Touchable.RELEASE_ON_UP | Touchable.RELEASE_ON_OUT;
 
