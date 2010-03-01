@@ -8,7 +8,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="InterpolationTest" />
     <orderEntry type="module" module-name="IntensiGame" />
     <orderEntry type="module" module-name="Galaxina" />
     <orderEntry type="module" module-name="RunME" />
@@ -17,8 +16,12 @@
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/junit-3.8.1.jar!/" />
         </CLASSES>
-        <JAVADOC />
-        <SOURCES />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/junit-3.8.1-docs.zip!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/junit-3.8.1-src.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
