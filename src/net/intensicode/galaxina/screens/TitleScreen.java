@@ -1,10 +1,10 @@
 package net.intensicode.galaxina.screens;
 
+import net.intensicode.ReleaseProperties;
 import net.intensicode.core.ImageResource;
 import net.intensicode.galaxina.MainContext;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.screens.*;
-import net.intensicode.ReleaseProperties;
 
 public final class TitleScreen extends GalaxinaScreen
     {
@@ -29,14 +29,11 @@ public final class TitleScreen extends GalaxinaScreen
         addScreen( new TitleCreditsScreen( creditsFont, creditsText ) );
         addScreen( visuals().sharedSoftkeys() );
 
-        final StringBuffer versionTag = new StringBuffer();
-        versionTag.append( "Version: " );
-        versionTag.append( ReleaseProperties.VERSION );
-        versionTag.append( "/" );
-        versionTag.append( ReleaseProperties.DATE );
-
-        final FontGenerator textFont = skin().font( "minifont" );
-        addScreen( new AlignedTextScreen( textFont, versionTag.toString(), 0, 0, FontGenerator.TOP_LEFT ) );
+        final FontGenerator miniFont = skin().font( "minifont" );
+        final int miniHeight = miniFont.charHeight();
+        addScreen( new AlignedTextScreen( miniFont, ReleaseProperties.DATE, 0, 0, FontGenerator.TOP_LEFT ) );
+        final String version = ReleaseProperties.VERSION + ":" + ReleaseProperties.BUILD;
+        addScreen( new AlignedTextScreen( miniFont, version, 0, miniHeight, FontGenerator.TOP_LEFT ) );
 
         context().musicController().play( "theme" );
         }
