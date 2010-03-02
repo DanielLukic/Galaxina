@@ -148,6 +148,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         softkeys.setButtonImage( skin().image( "softkeys" ) );
         myVisualContext = new ConfigurableVisualContext( skin(), softkeys );
         myScreenBuilder = new ScreensBuilder( this );
+        system().setErrorScreenFont( skin().font( "minifont" ) );
         }
 
     public final void onControlTick() throws Exception
