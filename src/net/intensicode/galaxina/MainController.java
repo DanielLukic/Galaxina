@@ -1,5 +1,6 @@
 package net.intensicode.galaxina;
 
+import net.intensicode.TouchSequenceHandler;
 import net.intensicode.core.GameSystem;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.screens.LoadingCallback;
@@ -113,6 +114,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
         //#if TOUCH
         stack().addGlobalHandler( new TouchHelper( this ) );
+        stack().addGlobalHandler( new TouchSequenceHandler() );
         //#endif
 
         //#if CONSOLE
