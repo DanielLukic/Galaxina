@@ -1,9 +1,8 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.IntensiGame;
-import net.intensicode.util.Log;
-import net.intensicode.screens.ScreenBase;
 import net.intensicode.core.GameSystem;
+import net.intensicode.screens.ScreenBase;
 
 public final class Galaxina extends IntensiGame
     {
@@ -19,7 +18,13 @@ public final class Galaxina extends IntensiGame
         return new MainController();
         }
 
-    public final void onFramesDropped( final GameSystem aGameSystem )
+    public void onDebugTriggered()
         {
+        throw new RuntimeException( "debug" );
+        }
+
+    public void onCheatTriggered()
+        {
+        throw new RuntimeException( "cheat" );
         }
     }
