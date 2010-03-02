@@ -2,7 +2,7 @@
 @name = "Galaxina"
 
 # Possible targets are defined in file _targets.rb.
-@targets = [ Canvas_ANDROID, Opengl_ANDROID ]
+@targets = [ Opengl_ANDROID ]
 
 # Possible sizes correspond to the image folders in the res directory.
 # You may use arbitrary folder names (no spaces or special chars) here -
