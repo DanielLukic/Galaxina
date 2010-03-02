@@ -123,6 +123,10 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
         stack().addGlobalHandler( new EngineStats( skin().font( "minifont" ) ) );
 
+        //#if FALSE
+        system().debug.autoVisible = true;
+        //#endif
+
         myMusicController = new MusicController();
         stack().addGlobalHandler( myMusicController );
         }
@@ -148,7 +152,7 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         softkeys.setButtonImage( skin().image( "softkeys" ) );
         myVisualContext = new ConfigurableVisualContext( skin(), softkeys );
         myScreenBuilder = new ScreensBuilder( this );
-        system().setErrorScreenFont( skin().font( "minifont" ) );
+        system().setSystemFont( skin().font( "minifont" ) );
         }
 
     public final void onControlTick() throws Exception

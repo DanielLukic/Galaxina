@@ -92,7 +92,7 @@ public final class EditorCore implements EditorCoreAPI
 
     private GameSystem getGameSystem()
         {
-        return myProject.galaxina().getGameSystem();
+        return myProject.galaxina().system();
         }
 
 

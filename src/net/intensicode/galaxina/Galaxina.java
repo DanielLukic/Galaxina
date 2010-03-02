@@ -20,7 +20,7 @@ public final class Galaxina extends IntensiGame
 
     public void onDebugTriggered()
         {
-        throw new RuntimeException( "debug" );
+        system().debug.visible = !system().debug.visible;
         }
 
     public void onCheatTriggered()

@@ -51,7 +51,7 @@ public final class EmbeddedGalaxina extends IntensiME
         ConsoleOverlay.show = false;
         //#endif
 
-        getGameSystem().audio.disable();
+        system().audio.disable();
 
         myGameScreen = new GameScreen( controller );
         return myGameScreen;
@@ -62,7 +62,7 @@ public final class EmbeddedGalaxina extends IntensiME
         try
             {
             myGameContext.startGame();
-            getGameSystem().stack.pushOnce( myGameScreen );
+            system().stack.pushOnce( myGameScreen );
             }
         catch ( Exception e )
             {
