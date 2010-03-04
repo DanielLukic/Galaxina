@@ -47,7 +47,7 @@ public final class BombDropper extends EnemyWeapon
 
 
 
-    private static int myReloadTicks;
+    private int myReloadTicks;
 
     private Position myParentPosition;
     }
