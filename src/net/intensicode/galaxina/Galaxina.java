@@ -3,6 +3,7 @@ package net.intensicode.galaxina;
 import net.intensicode.IntensiGame;
 import net.intensicode.core.GameSystem;
 import net.intensicode.galaxina.game.GameObject;
+import net.intensicode.galaxina.game.weapons.Missile;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.screens.ScreenBase;

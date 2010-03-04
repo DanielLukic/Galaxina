@@ -2,6 +2,7 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.util.*;
 import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.weapons.GunShot;
 
 public final class Satellite extends WorldObjectWithSize
     {

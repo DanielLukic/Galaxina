@@ -1,17 +1,12 @@
 package net.intensicode.galaxina.game.weapons;
 
-import net.intensicode.galaxina.game.objects.*;
-import net.intensicode.galaxina.game.GameModel;
-import net.intensicode.galaxina.game.GameObject;
-import net.intensicode.util.DynamicArray;
 import net.intensicode.core.KeysHandler;
+import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.objects.Enemy;
+import net.intensicode.util.DynamicArray;
 
-public final class SmartBomb extends Weapon
+public final class SmartBomb extends SecondaryWeapon
     {
-    public final void onInitialize()
-        {
-        }
-
     public final void onStartLevel()
         {
         myState = STATE_IDLE;
@@ -66,6 +61,10 @@ public final class SmartBomb extends Weapon
 
     private void onEngage()
         {
+        if ( remainingShots <= 0 ) return;
+        remainingShots--;
+        if ( remainingShots == 0 ) deactivate();
+
         myState = STATE_LOADING;
         myStateTicks = GameObject.timing.ticksPerSecond;
         }
@@ -83,7 +82,6 @@ public final class SmartBomb extends Weapon
             enemy.explode();
             }
         }
-
 
 
     private int myStateTicks;

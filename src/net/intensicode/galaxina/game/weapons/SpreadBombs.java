@@ -1,19 +1,11 @@
 package net.intensicode.galaxina.game.weapons;
 
 import net.intensicode.core.Configuration;
-import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.util.Position;
 
-public final class SpreadBombs extends Weapon
+public final class SpreadBombs extends SecondaryWeapon
     {
-    public final void onInitialize()
-        {
-        final Configuration config = GameObject.model.configuration;
-        final int spreadCount = config.readInt( "Weapons.SpreadBombs.COUNT", 8 );
-        myBombSpread = new Bomb[spreadCount];
-        }
-
     public final void onStartLevel()
         {
         myState = STATE_IDLE;
@@ -41,11 +33,25 @@ public final class SpreadBombs extends Weapon
         throw new RuntimeException( "nyi" );
         }
 
+    // From SecondaryWeapon
+
+    protected final void onInitializeSubclass()
+        {
+        if ( myBombSpread == null )
+            {
+            final Configuration config = GameObject.model.configuration;
+            final int spreadCount = config.readInt( "Weapons.SpreadBombs.COUNT", 8 );
+            myBombSpread = new Bomb[spreadCount];
+            }
+        remainingShots = SHOTS_PER_STOCK;
+        }
+
     // Implementation
 
     private void onControl()
         {
         if ( !GameObject.system.keys.checkFire2AndConsume() ) return;
+        if ( remainingShots <= 0 ) return;
 
         final boolean fired = onFire();
         onReload( fired );
@@ -74,6 +80,9 @@ public final class SpreadBombs extends Weapon
             bomb.start( Bomb.FROM_PLAYER );
             }
 
+        remainingShots--;
+        if ( remainingShots == 0 ) deactivate();
+
         return true;
         }
 
@@ -95,16 +104,15 @@ public final class SpreadBombs extends Weapon
         }
 
 
-
     private Bomb[] myBombSpread;
 
-    protected int myReloadTicks;
+    private int myReloadTicks;
 
-    protected int myReloadTickCount;
+    private int myReloadTickCount;
 
-    protected int myState = STATE_IDLE;
+    private int myState = STATE_IDLE;
 
-    protected static final int STATE_IDLE = 0;
+    private static final int STATE_IDLE = 0;
 
-    protected static final int STATE_RELOADING = 1;
+    private static final int STATE_RELOADING = 1;
     }

@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.util.Position;
-import net.intensicode.galaxina.game.objects.Bomb;
+import net.intensicode.galaxina.game.weapons.Bomb;
 
 public final class BombDropper extends EnemyWeapon
     {

@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.extras;
 
 import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.galaxina.game.objects.Player;
-import net.intensicode.galaxina.game.objects.Weapons;
+import net.intensicode.galaxina.game.weapons.Weapons;
 
 public final class UpgradeBullets extends ExtraType
     {

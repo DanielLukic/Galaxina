@@ -5,6 +5,7 @@ import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.extras.ExtraTypes;
 import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.galaxina.game.particles.SimpleParticles;
+import net.intensicode.galaxina.game.weapons.*;
 import net.intensicode.util.*;
 
 public final class GameModel

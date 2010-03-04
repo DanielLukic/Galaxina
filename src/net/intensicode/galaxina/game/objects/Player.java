@@ -1,9 +1,8 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.KeysHandler;
-import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.galaxina.game.objects.Weapon;
 import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.weapons.*;
 import net.intensicode.util.*;
 
 public final class Player extends GameObject
@@ -26,7 +25,7 @@ public final class Player extends GameObject
 
     public Weapon primaryWeapon;
 
-    public Weapon secondaryWeapon;
+    public SecondaryWeapon secondaryWeapon;
 
     public final DynamicArray satellites = new DynamicArray();
 
@@ -359,6 +358,12 @@ public final class Player extends GameObject
 
     private void tickWeapons()
         {
+        if ( secondaryWeapon != myPreviousSecondaryWeapon )
+            {
+            if ( secondaryWeapon != null ) secondaryWeapon.onInitialize();
+            myPreviousSecondaryWeapon = secondaryWeapon;
+            }
+
         if ( primaryWeapon != null ) primaryWeapon.onControlTick( isAlive() );
         if ( secondaryWeapon != null ) secondaryWeapon.onControlTick( isAlive() );
         }
@@ -379,6 +384,8 @@ public final class Player extends GameObject
     private int mySpeedLeftFixed;
 
     private int mySpeedRightFixed;
+
+    private Weapon myPreviousSecondaryWeapon;
 
 
     private final Random myRandom = new Random( 17 );

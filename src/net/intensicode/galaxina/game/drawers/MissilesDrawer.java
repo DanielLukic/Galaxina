@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.drawers;
 
 import net.intensicode.core.DirectGraphics;
 import net.intensicode.galaxina.game.*;
-import net.intensicode.galaxina.game.objects.Missile;
+import net.intensicode.galaxina.game.weapons.Missile;
 import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.graphics.SpriteGenerator;
 import net.intensicode.screens.ScreenBase;

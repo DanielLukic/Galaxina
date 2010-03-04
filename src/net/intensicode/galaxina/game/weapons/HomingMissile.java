@@ -1,16 +1,10 @@
 package net.intensicode.galaxina.game.weapons;
 
-import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.galaxina.game.*;
-import net.intensicode.galaxina.game.objects.*;
 import net.intensicode.util.FixedMath;
 
-public final class HomingMissile extends Weapon
+public final class HomingMissile extends SecondaryWeapon
     {
-    public final void onInitialize()
-        {
-        }
-
     public final void onStartLevel()
         {
         myState = STATE_IDLE;
@@ -39,11 +33,15 @@ public final class HomingMissile extends Weapon
 
     // Implementation
 
-    private void onControl(  )
+    private void onControl()
         {
         if ( !GameObject.system.keys.checkFire2AndConsume() ) return;
+        if ( remainingShots <= 0 ) return;
+        remainingShots--;
 
         final GameModel model = GameObject.model;
+        if ( remainingShots == 0 ) deactivate();
+
         final Missile missile = model.missiles.prepare( model.player.worldPosFixed );
         missile.directionFixed.x = 0;
         missile.directionFixed.y = -FixedMath.FIXED_1;
@@ -56,12 +54,11 @@ public final class HomingMissile extends Weapon
         }
 
 
+    private int myReloadTicks;
 
-    protected int myReloadTicks;
+    private int myReloadTickCount;
 
-    protected int myReloadTickCount;
-
-    protected int myState = STATE_IDLE;
+    private int myState = STATE_IDLE;
 
     protected static final int STATE_IDLE = 0;
 

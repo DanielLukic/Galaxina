@@ -3,7 +3,7 @@ package net.intensicode.galaxina.game.drawers;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.*;
 import net.intensicode.galaxina.game.objects.Player;
-import net.intensicode.graphics.SpriteGenerator;
+import net.intensicode.graphics.*;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.*;
 
@@ -25,6 +25,8 @@ public final class PlayerDrawer extends ScreenBase
 
         final Player player = myGameContext.gameModel().player;
         player.sizeInWorldFixed.setTo( sizeInWorld );
+
+        myFont = skin().font( "scorefont" );
         }
 
     public final void onControlTick() throws Exception
@@ -53,6 +55,13 @@ public final class PlayerDrawer extends ScreenBase
             myGalaxina.setFrame( myAnimFrame );
             myGalaxina.paint( gc, screenPos.x, screenPos.y );
             }
+
+        myBlitPos.x = myGameContext.visualContext().configuration().touchSecondaryFire.x;
+        myBlitPos.y = myGameContext.visualContext().configuration().touchSecondaryFire.y;
+        if ( player.secondaryWeapon != null )
+            {
+            myFont.blitNumber( gc, myBlitPos, player.secondaryWeapon.remainingShots, FontGenerator.CENTER );
+            }
         }
 
 
@@ -67,4 +76,8 @@ public final class PlayerDrawer extends ScreenBase
 
 
     private final GameContext myGameContext;
+
+    private final Position myBlitPos = new Position();
+
+    private BitmapFontGenerator myFont;
     }

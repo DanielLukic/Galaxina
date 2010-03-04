@@ -2,10 +2,7 @@ package net.intensicode.galaxina.game.weapons;
 
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.GameObject;
-import net.intensicode.galaxina.game.objects.*;
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.Position;
-import net.intensicode.util.DynamicArray;
+import net.intensicode.util.*;
 
 public final class SimpleGun extends Weapon
     {
@@ -135,7 +132,6 @@ public final class SimpleGun extends Weapon
         myTrackedShots.add( aGunShot );
         aGunShot.source = this;
         }
-
 
 
     private int myReloadTicks;
