@@ -124,12 +124,16 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
         stack().addGlobalHandler( new ControlSequenceHandler() );
 
-        //#if FALSE
-        system().debug.autoVisible = true;
+        //#if DEBUG && DEBUG_AUTO
+        //# system().debug.autoVisible = true;
         //#endif
 
         myMusicController = new MusicController();
         stack().addGlobalHandler( myMusicController );
+
+        //#if FALSE
+        audio().disable();
+        //#endif
         }
 
     private void tryLoading( final StorageIO aStorageIO )
