@@ -1,37 +1,36 @@
 package net.intensicode.galaxina.screens;
 
 import net.intensicode.core.KeysHandler;
-import net.intensicode.galaxina.game.GameContext;
+import net.intensicode.galaxina.MainContext;
 import net.intensicode.galaxina.game.objects.Level;
 import net.intensicode.graphics.*;
-import net.intensicode.screens.MultiScreen;
 import net.intensicode.util.Position;
 
-public final class LevelStatsScreen extends MultiScreen
+public final class LevelStatsScreen extends GalaxinaGameScreen
     {
-    public LevelStatsScreen( final GameContext aGameContext )
+    public LevelStatsScreen( final MainContext aMainContext )
         {
-        myGameContext = aGameContext;
+        super( aMainContext );
         }
 
     // From MultiScreen
 
     public final void onInitOnce() throws Exception
         {
-        addScreen( myGameContext.sharedGameBackground() );
-        addScreen( myGameContext.sharedGameDrawers() );
-        myFontGen = myGameContext.visualContext().textFont();
+        addScreen( game().sharedGameBackground() );
+        addScreen( game().sharedGameDrawers() );
+        myFontGen = game().visualContext().textFont();
         }
 
     public void onInitEverytime() throws Exception
         {
         myTimeOutTicks = timing().ticksPerSecond * 5;
-        myGameContext.sharedSoftkeys().setSoftkeys( "CONTINUE", "CONTINUE" );
+        game().sharedSoftkeys().setSoftkeys( "CONTINUE", "CONTINUE" );
         }
 
     public final void onControlTick() throws Exception
         {
-        myGameContext.gameModel().onControlTick();
+        game().gameModel().onControlTick();
         super.onControlTick();
 
         final KeysHandler keys = keys();
@@ -55,7 +54,7 @@ public final class LevelStatsScreen extends MultiScreen
         else
             {
             stack().popScreen( this );
-            myGameContext.gameModel().onNextLevel();
+            game().gameModel().onNextLevel();
             }
         }
 
@@ -63,7 +62,7 @@ public final class LevelStatsScreen extends MultiScreen
         {
         super.onDrawFrame();
 
-        final Level level = myGameContext.gameModel().level;
+        final Level level = game().gameModel().level;
 
         final int linesOnScreen = 1 + ( level.perfect ? 1 : ( level.bonusApplies > 0 ? 1 : 0 ) );
 
@@ -92,8 +91,6 @@ public final class LevelStatsScreen extends MultiScreen
     private int myTimeOutTicks;
 
     private BitmapFontGenerator myFontGen;
-
-    private final GameContext myGameContext;
 
     private final Position myBlitPos = new Position();
     }

@@ -16,7 +16,7 @@ public final class GameScreen extends GalaxinaGameScreen
         {
         myLevelInfo = new LevelInfoScreen( context() );
         myPlayLevel = new PlayLevelScreen( context() );
-        myLevelStats = new LevelStatsScreen( game() );
+        myLevelStats = new LevelStatsScreen( context() );
         myGameOver = new GameOverScreen( game() );
         myPausedScreen = new GamePausedScreen( context() );
 
