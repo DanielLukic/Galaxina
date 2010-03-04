@@ -291,10 +291,17 @@ public final class Player extends GameObject
         mySpeedLeftFixed = Math.min( mySpeedStepFixed, mySpeedLeftFixed );
         mySpeedRightFixed = Math.min( mySpeedStepFixed, mySpeedRightFixed );
 
+        if ( system.analog.xDeltaFixed < 0 )
+            {
+            mySpeedLeftFixed -= system.analog.xDeltaFixed;
+            }
+        if ( system.analog.xDeltaFixed > 0 )
+            {
+            mySpeedRightFixed += system.analog.xDeltaFixed;
+            }
+
         worldPosFixed.x -= mySpeedLeftFixed;
         worldPosFixed.x += mySpeedRightFixed;
-
-        worldPosFixed.x += system.analog.xDeltaFixed;
 
         final Size visibleSizeFixed = model.world.visibleSizeFixed;
         final int maxRightPos = ( visibleSizeFixed.width - sizeInWorldFixed.width ) / 2;
