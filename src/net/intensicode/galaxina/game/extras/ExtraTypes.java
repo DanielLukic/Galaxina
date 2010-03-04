@@ -20,12 +20,17 @@ public final class ExtraTypes
 
     public static final int SATELLITE = 8;
 
-    public static final int RANDOM = 9;
+    public static final int REPAIR = 9;
 
-    public static final int NUMBER_OF_EXTRA_TYPES = 10;
+    public static final int INDESTRUCTIBLE = 10;
+
+    public static final int RANDOM = 11;
+
+    public static final int RANDOM_WEAPON = 12;
+
+    public static final int NUMBER_OF_EXTRA_TYPES = 13;
 
     public final ExtraType[] all;
-
 
 
     public ExtraTypes()
@@ -40,7 +45,18 @@ public final class ExtraTypes
         add( new SetHomingMissile( HOMING_MISSILE ) );
         add( new SetSmartBomb( SMART_BOMB ) );
         add( new AddSatellite( SATELLITE ) );
+        add( new RepairPlayer( REPAIR ) );
+        add( new Indestructible( INDESTRUCTIBLE ) );
         add( new RandomExtra( RANDOM ) );
+        add( new RandomExtra( RANDOM_WEAPON ) );
+        }
+
+    public static boolean isWeaponId( final int aId )
+        {
+        if ( aId == SMART_BOMB ) return true;
+        if ( aId == HOMING_MISSILE ) return true;
+        if ( aId == SPREAD_BOMBS ) return true;
+        return false;
         }
 
     // Implementation

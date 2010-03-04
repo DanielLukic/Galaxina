@@ -35,6 +35,7 @@ public final class RandomExtra extends ExtraType
         do
             {
             myNextRandomId = Random.INSTANCE.nextInt( ExtraTypes.NUMBER_OF_EXTRA_TYPES );
+            if ( id == ExtraTypes.RANDOM_WEAPON && !ExtraTypes.isWeaponId( myNextRandomId ) ) continue;
             }
         while ( myNextRandomId == ExtraTypes.NO_EXTRA );
         }
