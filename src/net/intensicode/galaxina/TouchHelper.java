@@ -27,6 +27,15 @@ public final class TouchHelper extends ScreenBase
         {
         final boolean gameActive = stack().activeScreen() instanceof GalaxinaGameScreen;
         touch().globalControlsActive = gameActive;
+
+        if ( myMainContext.gameContext().gameModel().player.secondaryWeapon != null )
+            {
+            touch().addGlobalControl( myTouchSecondaryFire );
+            }
+        else
+            {
+            touch().removeGlobalControl( myTouchSecondaryFire );
+            }
         }
 
     public final void onDrawFrame()
