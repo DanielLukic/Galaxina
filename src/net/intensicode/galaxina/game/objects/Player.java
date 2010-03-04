@@ -295,6 +295,8 @@ public final class Player extends GameObject
         worldPosFixed.x -= mySpeedLeftFixed;
         worldPosFixed.x += mySpeedRightFixed;
 
+        worldPosFixed.x += system.analog.xDeltaFixed;
+
         final Size visibleSizeFixed = model.world.visibleSizeFixed;
         final int maxRightPos = ( visibleSizeFixed.width - sizeInWorldFixed.width ) / 2;
         final int maxLeftPos = -maxRightPos;
