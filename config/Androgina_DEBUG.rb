@@ -11,7 +11,7 @@
 
 # Use this to activate global - not target-specific - settings. Used
 # primarly for debug output and effects.
-@symbols = [ :FULL_FX, :DEBUG, :DEBUG_OPENGL, :DEBUG_TOUCH ]
+@symbols = [ :FULL_FX, :DEBUG, :DEBUG_OPENGL, :DEBUG_TOUCH, :TIMING ]
 
 # Force mod music format:
 @properties['target.music_suffix'] = '.mod'
