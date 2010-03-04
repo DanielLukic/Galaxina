@@ -6,4 +6,16 @@
     <!-- Set fallback defaults to make IntelliJ happy. -->
     <property name="output.name" value="${ant.project.name}"/>
 
+    <target name="android_use_galaxy" description="Call this before restart when targetting the galaxy.">
+        <property name="device-options" value="-s I7500COF7v16fiJ"/>
+    </target>
+
+    <target name="android_use_nexus" description="Call this before restart when targetting the nexus.">
+        <property name="device-options" value="-s HT019P803683"/>
+    </target>
+
+    <target name="android_use_hero" description="Call this before restart when targetting the hero.">
+        <property name="device-options" value="-s HT93SKV01165"/>
+    </target>
+
 </project>
