@@ -17,14 +17,4 @@ public final class Galaxina extends IntensiGame
         {
         return new MainController();
         }
-
-    public void onDebugTriggered()
-        {
-        system().debug.visible = !system().debug.visible;
-        }
-
-    public void onCheatTriggered()
-        {
-        throw new RuntimeException( "cheat" );
-        }
     }
