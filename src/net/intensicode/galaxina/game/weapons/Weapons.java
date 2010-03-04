@@ -1,6 +1,5 @@
-package net.intensicode.galaxina.game.objects;
+package net.intensicode.galaxina.game.weapons;
 
-import net.intensicode.galaxina.game.weapons.*;
 import net.intensicode.galaxina.game.GameObject;
 
 public final class Weapons extends GameObject
