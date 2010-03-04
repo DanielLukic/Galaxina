@@ -1,0 +1,29 @@
+= OPEN =
+
+* clone startfield: dann nur nach unten, mit warp zwischen leveln..
+
+* work on multi touch
+
+* AndroidManifest via build config konfigurieren: portrait/landscape/dynamic mode
+
+* trigger image texture generation via config file (opengl.properties?)
+* or simply texturize all loaded images? with internal API?
+
+* menu key => android native engine menu
+ * dump texture atlases
+ * reset controls
+ * switch trackball, direct touch, dpad?
+* debug.properties mit ssh/ftp target
+
+
+= RFC =
+
+* direct touch control: touch => new position of ship? or move there quickly?
+
+
+= DONE =
+
+* debug screen
+* touch grid => enable debug, cheat, ..
+* android obfuscate
+* basic analog/trackball controller
