@@ -114,7 +114,6 @@ public final class MainController extends ScreenBase implements LoadingCallback,
 
         //#if TOUCH
         stack().addGlobalHandler( new TouchHelper( this ) );
-        stack().addGlobalHandler( new ControlSequenceHandler() );
         //#endif
 
         //#if CONSOLE
@@ -122,6 +121,8 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         //#endif
 
         stack().addGlobalHandler( new EngineStats( skin().font( "minifont" ) ) );
+
+        stack().addGlobalHandler( new ControlSequenceHandler() );
 
         //#if FALSE
         system().debug.autoVisible = true;
