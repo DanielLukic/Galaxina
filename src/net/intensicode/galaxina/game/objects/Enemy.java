@@ -31,6 +31,11 @@ public final class Enemy extends WorldObjectWithSize
     public static final EnemyController RETURNING = new ReturningController();
 
 
+    public static final int LOOK_AHEAD_STEPS = 3;
+
+    public static final int LOOK_BEHIND_STEPS = 2;
+
+
     public static final int SYNC_NONE = 0;
 
     public static final int SYNC_SPEED = 1;
@@ -353,10 +358,6 @@ public final class Enemy extends WorldObjectWithSize
 
 
     private final Position myLastHitPosition;
-
-    public static final int LOOK_AHEAD_STEPS = 3;
-
-    public static final int LOOK_BEHIND_STEPS = 2;
 
     private final Position myTempPos = new Position();
 
