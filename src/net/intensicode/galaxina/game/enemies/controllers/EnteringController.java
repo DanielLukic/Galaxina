@@ -16,6 +16,8 @@ public final class EnteringController extends EnemyController
 
     public final void onControlTick( final Enemy aEnemy )
         {
+        aEnemy.type.tickEnteringBehaviors( aEnemy );
+
         final boolean endOfPath = aEnemy.moveAlongPath();
         if ( endOfPath ) aEnemy.onEndOfPath();
         }

@@ -13,6 +13,11 @@ public class WaitingController extends EnemyController
 
     public void onControlTick( final Enemy aEnemy )
         {
+        if ( GameObject.model.enemySpawner.done() )
+            {
+            aEnemy.type.tickWaitingBehaviors( aEnemy );
+            }
+
         if ( !aEnemy.inSyncWithBreath )
             {
             aEnemy.inSyncWithBreath = GameObject.model.breather.breathPercent <= 1;

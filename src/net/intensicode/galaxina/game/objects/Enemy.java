@@ -1,10 +1,10 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.GameTiming;
-import net.intensicode.galaxina.game.enemies.controllers.*;
-import net.intensicode.galaxina.game.enemies.*;
-import net.intensicode.galaxina.game.extras.ExtraType;
 import net.intensicode.galaxina.game.*;
+import net.intensicode.galaxina.game.enemies.*;
+import net.intensicode.galaxina.game.enemies.controllers.*;
+import net.intensicode.galaxina.game.extras.*;
 import net.intensicode.galaxina.util.UtilitiesEx;
 import net.intensicode.path.PathWithDirection;
 import net.intensicode.util.*;
@@ -103,6 +103,7 @@ public final class Enemy extends WorldObjectWithSize
     public final void init( final EnemyType aEnemyType, final PathWithDirection aIncomingPath, final Position aFormationPosition )
         {
         type = aEnemyType;
+        deployExtraIfDestroyed = type.extraID != ExtraTypes.NO_EXTRA;
         formationPosition = aFormationPosition;
         weapon = type.createWeapon( worldPosFixed );
         hitsRemaining = type.hits;
@@ -295,6 +296,8 @@ public final class Enemy extends WorldObjectWithSize
 
     public final void onControlTick()
         {
+        if ( !active ) return;
+
         controller.onControlTick( this );
 
         if ( worldPosFixed.y > 0 )
@@ -302,8 +305,6 @@ public final class Enemy extends WorldObjectWithSize
             final Player player = model.player;
             player.checkForCrash( this );
             }
-
-        if ( !active ) return;
 
         if ( hitsRemaining < type.hits )
             {
@@ -344,7 +345,7 @@ public final class Enemy extends WorldObjectWithSize
         if ( targetDirectionFixed == directionInDegreesFixed ) return;
 
         final int delta = getDirectionDelta( targetDirectionFixed, directionInDegreesFixed );
-        directionInDegreesFixed += delta * 12 / timing.ticksPerSecond;
+        directionInDegreesFixed += delta * ( timing.ticksPerSecond / 2 ) / timing.ticksPerSecond;
 
         while ( directionInDegreesFixed < 0 )
             {

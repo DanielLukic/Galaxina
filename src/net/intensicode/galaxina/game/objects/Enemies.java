@@ -1,9 +1,9 @@
 package net.intensicode.galaxina.game.objects;
 
+import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.enemies.behaviors.*;
 import net.intensicode.galaxina.game.extras.ExtraTypes;
-import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.util.Log;
 
 import java.io.*;
@@ -27,7 +27,6 @@ public final class Enemies extends GameObject
     public static final EnemyBehavior HARD_DIVE = new HardDive();
 
     public EnemyType[] types;
-
 
 
     public final void onStartGame() throws Exception
@@ -79,7 +78,7 @@ public final class Enemies extends GameObject
         type.baseScore = aInputStream.readInt();
 
         // Hardcoded for now.. should obviously be configurable, too..
-        type.extraID = ExtraTypes.RANDOM;
+        type.extraID = ExtraTypes.NO_EXTRA;
         type.baseSpeed = 40 - aTypeID / 2 * 5;
         type.weaponClass = Class.forName( "net.intensicode.galaxina.game.enemies.BombDropper" );
 
@@ -88,27 +87,28 @@ public final class Enemies extends GameObject
         Log.debug( "Enemy name: {}", type.name );
         //#endif
 
-        //switch ( aTypeID )
-        //    {
-        //    case 0:
-        //        type.add( ATTACK_WHEN_CLOSE );
-        //        break;
-        //    case 1:
-        //        type.add( ATTACK_OR_CIRLE );
-        //        break;
-        //    case 2:
-        //        type.add( STRIKE_WHEN_ATTACKED );
-        //        break;
-        //    case 3:
-        //        type.add( HARD_DIVE );
-        //        break;
-        //    case 4:
-        //        type.add( AVOID_BEING_HIT );
-        //        break;
-        //    case 5:
-        //        type.add( AVOID_BEING_HIT );
-        //        break;
-        //    }
+        switch ( aTypeID )
+            {
+            case 0:
+                type.add( ATTACK_WHEN_CLOSE );
+                break;
+            case 1:
+                type.add( ATTACK_OR_CIRLE );
+                break;
+            case 2:
+                type.add( STRIKE_WHEN_ATTACKED );
+                break;
+            case 3:
+                type.add( HARD_DIVE );
+                break;
+            case 4:
+                type.add( AVOID_BEING_HIT );
+                break;
+            case 5:
+                type.extraID = ExtraTypes.RANDOM_WEAPON;
+                type.add( AVOID_BEING_HIT );
+                break;
+            }
 
         type.add( FIRE_WHILE_ENTERING );
         type.add( FIRE_WHILE_WAITING );
@@ -116,7 +116,6 @@ public final class Enemies extends GameObject
 
         return type;
         }
-
 
 
     private static final String DATA_FILE_NAME = "enemies.dat";

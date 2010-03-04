@@ -73,7 +73,7 @@ public final class Level extends GameObject
 
     public final boolean fireWhileEntering()
         {
-        return !isChallengingStage() && numberStartingAt1 > 5;
+        return !isChallengingStage();
         }
 
     public final boolean fireWhileWaiting()
