@@ -2,6 +2,7 @@ package net.intensicode.galaxina.screens;
 
 import net.intensicode.galaxina.MainContext;
 import net.intensicode.galaxina.game.GameModel;
+import net.intensicode.util.FixedMath;
 
 public final class GameScreen extends GalaxinaGameScreen
     {
@@ -33,24 +34,32 @@ public final class GameScreen extends GalaxinaGameScreen
 
     public final void onControlTick() throws Exception
         {
+        final int slowMoveFixed = -FixedMath.FIXED_1 / timing().ticksPerSecond;
+        final int warpMoveFixed = -FixedMath.FIXED_10 / timing().ticksPerSecond;
+
         switch ( model().state )
             {
             case GameModel.STATE_INITIALIZED:
                 // This happens in the editor only.. Just wait for the ReloadAndSwitchHandler..
                 break;
             case GameModel.STATE_SHOW_LEVEL_INFO:
+                game().starField().changeMovement( 0, slowMoveFixed, 0 );
                 stack().pushOnce( myLevelInfo );
                 break;
             case GameModel.STATE_PLAY_LEVEL:
+                game().starField().changeMovement( 0, slowMoveFixed, 0 );
                 stack().pushOnce( myPlayLevel );
                 break;
             case GameModel.STATE_SHOW_LEVEL_STATS:
+                game().starField().changeMovement( 0, warpMoveFixed, 0 );
                 stack().pushOnce( myLevelStats );
                 break;
             case GameModel.STATE_SHOW_GAME_OVER:
+                game().starField().startTumbling();
                 stack().pushOnce( myGameOver );
                 break;
             case GameModel.STATE_PAUSED:
+                game().starField().changeMovement( 0, 0, slowMoveFixed );
                 stack().pushOnce( myPausedScreen );
                 break;
             }

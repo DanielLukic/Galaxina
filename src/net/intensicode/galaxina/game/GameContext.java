@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game;
 
-import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.galaxina.VisualContext;
+import net.intensicode.galaxina.screens.StarField;
 import net.intensicode.screens.*;
 
 public interface GameContext
@@ -11,6 +11,8 @@ public interface GameContext
     Hiscore hiscore();
 
     GameModel gameModel();
+
+    StarField starField();
 
     VisualContext visualContext();
 

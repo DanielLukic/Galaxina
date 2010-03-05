@@ -1,11 +1,11 @@
 package net.intensicode.galaxina.game;
 
+import net.intensicode.core.Configuration;
 import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.game.drawers.*;
-import net.intensicode.galaxina.screens.*;
+import net.intensicode.galaxina.screens.StarField;
 import net.intensicode.screens.*;
 import net.intensicode.util.*;
-import net.intensicode.core.Configuration;
 
 public final class GameController extends ScreenBase implements GameContext
     {
@@ -29,6 +29,11 @@ public final class GameController extends ScreenBase implements GameContext
     public final GameModel gameModel()
         {
         return myGameModel;
+        }
+
+    public final StarField starField()
+        {
+        return myMyStarField;
         }
 
     public final VisualContext visualContext()
@@ -97,9 +102,11 @@ public final class GameController extends ScreenBase implements GameContext
         mySharedSoftkeys = new VerticalSoftkeysScreen( visualContext().textFont() );
         mySharedSoftkeys.setButtonImage( skin().image( "softkeys_vertical" ) );
 
+        myMyStarField = new StarField( 32, skin().charGen( "stars" ) );
+
         mySharedGameBackground = new MultiScreen();
         mySharedGameBackground.addScreen( new ClearScreen() );
-        mySharedGameBackground.addScreen( new StarField( 32, skin().charGen( "stars" ) ) );
+        mySharedGameBackground.addScreen( myMyStarField );
         mySharedGameBackground.addScreen( myCamera );
         mySharedGameBackground.addScreen( mySharedSoftkeys );
         mySharedGameBackground.addScreen( new ScoreboardDrawer( this ) );
@@ -138,15 +145,13 @@ public final class GameController extends ScreenBase implements GameContext
 
     private GameModel myGameModel;
 
-    private GameScreen myGameScreen;
-
     private MultiScreen mySharedGameDrawers;
 
     private MultiScreen mySharedGameBackground;
 
-    private GamePausedScreen myGamePausedScreen;
-
     private VerticalSoftkeysScreen mySharedSoftkeys;
 
     private final MainContext myMainContext;
+
+    private StarField myMyStarField;
     }
