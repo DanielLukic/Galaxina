@@ -1,11 +1,10 @@
 package net.intensicode.galaxina;
 
 import net.intensicode.IntensiGame;
-import net.intensicode.core.GameSystem;
 import net.intensicode.galaxina.game.GameObject;
-import net.intensicode.galaxina.game.weapons.Missile;
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.*;
+import net.intensicode.galaxina.game.weapons.Missile;
 import net.intensicode.screens.ScreenBase;
 import net.intensicode.util.Log;
 
@@ -18,14 +17,18 @@ public final class Galaxina extends IntensiGame
 
     // From SystemContext
 
-    public ScreenBase createMainScreen( final GameSystem aGameSystem ) throws Exception
+    public ScreenBase createMainScreen() throws Exception
         {
         return new MainController();
         }
 
-    public void onStopApplication( final GameSystem aGameSystem )
+    public final void onPauseApplication()
         {
-        Log.debug( "onStopApplication" );
+        }
+
+    public void onDestroyApplication()
+        {
+        Log.debug( "onDestroyApplication" );
 
         // Clean up static bull shit.. I hate myself.. Is that enough?
 
