@@ -1,6 +1,5 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.galaxina.game.GameObject;
 import net.intensicode.util.DynamicArray;
 
@@ -16,7 +15,6 @@ public final class Level extends GameObject
     public int bonusApplies;
 
     public boolean perfect;
-
 
 
     public final void advance()
@@ -100,7 +98,7 @@ public final class Level extends GameObject
         bonusApplies = 0;
 
         myMaxBombs = Math.min( MAX_BOMBS, 4 + ( numberStartingAt1 - 1 ) * 2 / 5 );
-        myMaxAttackers = Math.min( MAX_ATTACKERS, 3 + ( numberStartingAt1 - 1 ) / 5 );
+        myMaxAttackers = Math.min( MAX_ATTACKERS, 1 + ( numberStartingAt1 - 1 ) / 5 );
 
         myBombCount = 0;
         myAttackCount = 0;
@@ -141,7 +139,6 @@ public final class Level extends GameObject
         }
 
 
-
     private int myMaxBombs;
 
     private int myBombCount;
@@ -152,7 +149,7 @@ public final class Level extends GameObject
 
     private int myBombWaitTicks;
 
-    private static final int MAX_ATTACKERS = 10;
+    private static final int MAX_ATTACKERS = 8;
 
     private static final int MAX_BOMBS = 20;
     }
