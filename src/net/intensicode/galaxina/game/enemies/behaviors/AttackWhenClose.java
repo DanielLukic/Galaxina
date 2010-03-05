@@ -1,8 +1,7 @@
 package net.intensicode.galaxina.game.enemies.behaviors;
 
-import net.intensicode.galaxina.game.enemies.EnemyBehavior;
+import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.galaxina.game.enemies.EnemyPath;
 import net.intensicode.util.Position;
 
 public final class AttackWhenClose extends EnemyBehavior
@@ -54,7 +53,6 @@ public final class AttackWhenClose extends EnemyBehavior
 
         aEnemy.startAttack( path );
         }
-
 
 
     private final Position myTempPos = new Position();

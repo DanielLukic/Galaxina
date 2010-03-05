@@ -1,12 +1,9 @@
 package net.intensicode.galaxina.game.enemies;
 
-import net.intensicode.galaxina.game.extras.ExtraType;
-import net.intensicode.galaxina.game.extras.ExtraTypes;
 import net.intensicode.galaxina.game.GameObject;
+import net.intensicode.galaxina.game.extras.*;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.util.Position;
-import net.intensicode.util.Visitor;
-import net.intensicode.util.DynamicArray;
+import net.intensicode.util.*;
 
 
 public final class Swarm
@@ -25,9 +22,19 @@ public final class Swarm
     public int extraID;
 
 
-
     public Swarm()
         {
+        }
+
+    public final int numberOfAttackers()
+        {
+        int attackers = 0;
+        for ( int idx = 0; idx < myParticipants.size; idx++ )
+            {
+            final Enemy enemy = (Enemy) myParticipants.get( idx );
+            if ( enemy.controller == Enemy.ATTACKING ) attackers++;
+            }
+        return attackers;
         }
 
     public final void onScoreSwarmBonus( final int aBonusScore )

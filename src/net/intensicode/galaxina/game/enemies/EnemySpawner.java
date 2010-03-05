@@ -54,6 +54,17 @@ public final class EnemySpawner extends GameObject
         return myDoneFlag = true;
         }
 
+    public final int numberOfAttackers()
+        {
+        int attackers = 0;
+        for ( int idx = 0; idx <spawnedSwarms.size; idx++ )
+            {
+            final Swarm swarm = (Swarm) spawnedSwarms.get( idx );
+            attackers += swarm.numberOfAttackers();
+            }
+        return attackers;
+        }
+
     // From GameObject
 
     public final void onStartGame() throws Exception

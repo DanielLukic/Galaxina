@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.GameObject;
-import net.intensicode.util.DynamicArray;
+import net.intensicode.util.*;
 
 public final class Level extends GameObject
     {
@@ -43,20 +43,8 @@ public final class Level extends GameObject
 
     public final boolean anotherAttackerAllowed()
         {
-        return myAttackCount < myMaxAttackers;
-        }
-
-    public final void onEnemyStartedAttackRun()
-        {
-        myAttackCount++;
-        }
-
-    public final void onEnemyAttackRunDone()
-        {
-        //#if DEBUG
-        if ( myAttackCount <= 0 ) throw new IllegalStateException();
-        //#endif
-        myAttackCount--;
+        final int activeAttackers = model.enemySpawner.numberOfAttackers();
+        return activeAttackers < myMaxAttackers;
         }
 
     public final boolean isChallengingStage()
@@ -101,7 +89,6 @@ public final class Level extends GameObject
         myMaxAttackers = Math.min( MAX_ATTACKERS, 1 + ( numberStartingAt1 - 1 ) / 5 );
 
         myBombCount = 0;
-        myAttackCount = 0;
         }
 
     public final void onControlTick()
@@ -142,8 +129,6 @@ public final class Level extends GameObject
     private int myMaxBombs;
 
     private int myBombCount;
-
-    private int myAttackCount;
 
     private int myMaxAttackers;
 

@@ -1,8 +1,7 @@
 package net.intensicode.galaxina.game.enemies.behaviors;
 
+import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.galaxina.game.enemies.EnemyBehavior;
-import net.intensicode.galaxina.game.enemies.EnemyPath;
 import net.intensicode.util.Position;
 
 public final class AttackOrCircle extends EnemyBehavior
@@ -84,7 +83,6 @@ public final class AttackOrCircle extends EnemyBehavior
 
         aEnemy.startAttack( path );
         }
-
 
 
     private final Position myTempPos = new Position();
