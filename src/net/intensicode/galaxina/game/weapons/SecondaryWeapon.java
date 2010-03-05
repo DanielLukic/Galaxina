@@ -17,6 +17,7 @@ public abstract class SecondaryWeapon extends Weapon
     public final void onInitialize()
         {
         remainingShots = SHOTS_PER_STOCK;
+        onInitializeSubclass();
         }
 
     // Protected API
