@@ -291,14 +291,17 @@ public final class Player extends GameObject
         mySpeedLeftFixed = Math.min( mySpeedStepFixed, mySpeedLeftFixed );
         mySpeedRightFixed = Math.min( mySpeedStepFixed, mySpeedRightFixed );
 
-        if ( system.analog.xDeltaFixed < 0 )
+        //#if TRACKBALL
+        if ( system.trackball.leftDelta > 0 )
             {
-            mySpeedLeftFixed -= system.analog.xDeltaFixed;
+            mySpeedLeftFixed += FixedMath.toFixed( system.trackball.leftDelta );
             }
-        if ( system.analog.xDeltaFixed > 0 )
+        if ( system.trackball.rightDelta > 0 )
             {
-            mySpeedRightFixed += system.analog.xDeltaFixed;
+            mySpeedRightFixed += FixedMath.toFixed( system.trackball.rightDelta );
             }
+        system.trackball.clearDeltaValues();
+        //#endif
 
         worldPosFixed.x -= mySpeedLeftFixed;
         worldPosFixed.x += mySpeedRightFixed;
