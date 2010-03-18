@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.domain;
 
 import net.intensicode.IntensiME;
-import net.intensicode.core.*;
 import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.game.GameContext;
 import net.intensicode.galaxina.screens.GameScreen;
@@ -36,16 +35,16 @@ public final class EmbeddedGalaxina extends IntensiME
         return false;
         }
 
-    public final ScreenBase createMainScreen( final GameSystem aGameSystem ) throws Exception
+    public final ScreenBase createMainScreen() throws Exception
         {
         final MainController controller = new MainController();
-        controller.onInit( aGameSystem );
-        controller.onLoadingDone( aGameSystem );
+        controller.onInit( system() );
+        controller.onLoadingDone( system() );
 
         myGameContext = controller.gameContext();
 
         myReloadHandler.attach( myGameContext );
-        aGameSystem.stack.addGlobalHandler( myReloadHandler );
+        system().stack.addGlobalHandler( myReloadHandler );
 
         //#if CONSOLE
         ConsoleOverlay.show = false;
