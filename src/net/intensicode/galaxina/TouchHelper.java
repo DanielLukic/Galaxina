@@ -23,6 +23,8 @@ public final class TouchHelper extends ScreenBase
         createTouchControls();
         }
 
+    private boolean myGlobalControlsAddedFlag = true;
+
     public final void onControlTick() throws Exception
         {
         final boolean gameActive = stack().activeScreen() instanceof GalaxinaGameScreen;
@@ -30,11 +32,13 @@ public final class TouchHelper extends ScreenBase
 
         if ( myMainContext.gameContext().gameModel().player.secondaryWeapon != null )
             {
-            touch().addGlobalControl( myTouchSecondaryFire );
+            if ( !myGlobalControlsAddedFlag ) touch().addGlobalControl( myTouchSecondaryFire );
+            myGlobalControlsAddedFlag = true;
             }
         else
             {
-            touch().removeGlobalControl( myTouchSecondaryFire );
+            if ( myGlobalControlsAddedFlag ) touch().removeGlobalControl( myTouchSecondaryFire );
+            myGlobalControlsAddedFlag = false;
             }
         }
 
