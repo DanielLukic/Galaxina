@@ -11,7 +11,16 @@ load_config '_320x480.rb'
 
 # Use this to activate global - not target-specific - settings. Used
 # primarly for debug output and effects.
-@symbols = [ :FULL_FX, :SENSORS, :TRACKBALL ]
+@symbols = [ :FULL_FX, :SENSORS ]
+
+# IntensiGame symbols follow.
+@symbols << :INFO      # activate INFO level logging
+@symbols << :STATS     # show IntensiGame EngineStats
+@symbols << :TRACKBALL # support for trackball control
+
+@symbols << :PROFILING
+@symbols << :CONSOLE
+@symbols << :TIMING
 
 # Force mod music format:
 @properties['target.music_suffix'] = '.mod'
