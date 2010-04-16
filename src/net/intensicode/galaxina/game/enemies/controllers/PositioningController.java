@@ -6,9 +6,9 @@ import net.intensicode.util.Position;
 
 public final class PositioningController extends EnemyController
     {
-    public final boolean isReadyForAction( final Enemy aEnemy )
+    public PositioningController()
         {
-        return false;
+        readyForAction = false;
         }
 
     public final void onInitialize( final Enemy aEnemy )

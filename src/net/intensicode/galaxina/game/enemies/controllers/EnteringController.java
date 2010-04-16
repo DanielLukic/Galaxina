@@ -5,9 +5,9 @@ import net.intensicode.galaxina.game.objects.Enemy;
 
 public final class EnteringController extends EnemyController
     {
-    public final boolean isReadyForAction( final Enemy aEnemy )
+    public EnteringController()
         {
-        return false;
+        readyForAction = false;
         }
 
     public final void onInitialize( final Enemy aEnemy )

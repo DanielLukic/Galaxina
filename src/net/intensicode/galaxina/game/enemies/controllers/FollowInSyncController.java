@@ -5,9 +5,9 @@ import net.intensicode.galaxina.game.objects.Enemy;
 
 public final class FollowInSyncController extends EnemyController
     {
-    public boolean isReadyForAction( final Enemy aEnemy )
+    public FollowInSyncController()
         {
-        return aEnemy.syncSource.controller.isReadyForAction( aEnemy );
+        readyUsesSyncSource = true;
         }
 
     public final void onInitialize( final Enemy aEnemy )

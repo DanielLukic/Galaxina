@@ -242,7 +242,14 @@ public final class Enemy extends WorldObjectWithSize
 
     public final boolean isReady()
         {
-        return controller.isReadyForAction( this );
+        if ( controller.readyUsesSyncSource )
+            {
+            return syncSource.controller.readyForAction;
+            }
+        else
+            {
+            return controller.readyForAction;
+            }
         }
 
     public final boolean isHit( final Position aWorldPosFixed )

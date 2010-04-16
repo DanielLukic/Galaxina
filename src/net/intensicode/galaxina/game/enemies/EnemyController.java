@@ -4,10 +4,9 @@ import net.intensicode.galaxina.game.objects.Enemy;
 
 public abstract class EnemyController
     {
-    public boolean isReadyForAction( final Enemy aEnemy )
-        {
-        return true;
-        }
+    public boolean readyForAction = true;
+
+    public boolean readyUsesSyncSource = false;
 
     // Abstract Interface
 

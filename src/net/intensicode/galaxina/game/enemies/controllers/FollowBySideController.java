@@ -6,9 +6,9 @@ import net.intensicode.util.Position;
 
 public final class FollowBySideController extends EnemyController
     {
-    public boolean isReadyForAction( final Enemy aEnemy )
+    public FollowBySideController()
         {
-        return aEnemy.syncSource.controller.isReadyForAction( aEnemy );
+        readyUsesSyncSource = true;
         }
 
     public final void onInitialize( final Enemy aEnemy )
