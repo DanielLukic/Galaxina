@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.enemies.behaviors;
 
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class AttackOrCircle extends EnemyBehavior
     {
@@ -16,15 +16,15 @@ public final class AttackOrCircle extends EnemyBehavior
         if ( !model.level.anotherAttackerAllowed() ) return;
 
         {
-        final int minDist = model.player.sizeInWorldFixed.width * 2;
-        final int maxDist = model.player.sizeInWorldFixed.width * 3;
-        final int dx = Math.abs( model.player.worldPosFixed.x - aEnemy.worldPosFixed.x );
+        final float minDist = model.player.sizeInWorld.width * 2;
+        final float maxDist = model.player.sizeInWorld.width * 3;
+        final float dx = Math.abs( model.player.worldPos.x - aEnemy.worldPos.x );
         if ( dx > minDist && dx < maxDist ) setAttackPath( aEnemy, false );
         }
         {
-        final int minDist = model.player.sizeInWorldFixed.width * 4;
-        final int maxDist = model.player.sizeInWorldFixed.width * 6;
-        final int dx = Math.abs( model.player.worldPosFixed.x - aEnemy.worldPosFixed.x );
+        final float minDist = model.player.sizeInWorld.width * 4;
+        final float maxDist = model.player.sizeInWorld.width * 6;
+        final float dx = Math.abs( model.player.worldPos.x - aEnemy.worldPos.x );
         if ( dx > minDist && dx < maxDist ) setAttackPath( aEnemy, true );
         }
         }
@@ -34,11 +34,11 @@ public final class AttackOrCircle extends EnemyBehavior
     private void setAttackPath( final Enemy aEnemy, final boolean aDoCircle )
         {
         final EnemyPath path = new EnemyPath( model.world );
-        myTempPos.setTo( aEnemy.worldPosFixed );
+        myTempPos.setTo( aEnemy.worldPos );
         path.addWorldPos( myTempPos );
 
-        final int stepWidth = aEnemy.type.sizeInWorldFixed.width * 2;
-        final int stepHeight = aEnemy.type.sizeInWorldFixed.height * 2;
+        final float stepWidth = aEnemy.type.sizeInWorld.width * 2;
+        final float stepHeight = aEnemy.type.sizeInWorld.height * 2;
         myTempPos.x += stepWidth;
         myTempPos.y -= stepHeight;
         path.addWorldPos( myTempPos );
@@ -47,7 +47,7 @@ public final class AttackOrCircle extends EnemyBehavior
         myTempPos.y += stepHeight;
         path.addWorldPos( myTempPos );
 
-        final Position playerPos = model.player.worldPosFixed;
+        final PositionF playerPos = model.player.worldPos;
 
         if ( aDoCircle )
             {
@@ -76,7 +76,7 @@ public final class AttackOrCircle extends EnemyBehavior
             }
 
         myTempPos.x = 0;
-        myTempPos.y = model.world.sizeFixed.height;
+        myTempPos.y = model.world.size.height;
         path.addWorldPos( myTempPos );
 
         path.end();
@@ -85,5 +85,5 @@ public final class AttackOrCircle extends EnemyBehavior
         }
 
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
     }

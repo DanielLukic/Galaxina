@@ -31,19 +31,19 @@ public final class Camera extends ScreenBase
         {
         }
 
-    public final Position toScreen( final Position aWorldPos )
+    public final Position toScreen( final PositionF aWorldPos )
         {
-        final int x = aWorldPos.x * myWorld.pixelSize.width / myWorld.visibleSizeFixed.width;
-        final int y = aWorldPos.y * myWorld.pixelSize.height / myWorld.visibleSizeFixed.height;
-        myTempPos.x = x + myScreenCenterX;
-        myTempPos.y = y + myScreenCenterY;
+        final float x = aWorldPos.x * myWorld.pixelSize.width / myWorld.visibleSize.width;
+        final float y = aWorldPos.y * myWorld.pixelSize.height / myWorld.visibleSize.height;
+        myTempPos.x = (int) (x + myScreenCenterX);
+        myTempPos.y = (int) (y + myScreenCenterY);
         return myTempPos;
         }
 
-    public final Size toWorldSize( final int aWidth, final int aHeight )
+    public final SizeF toWorldSize( final int aWidth, final int aHeight )
         {
-        myTempSize.width = aWidth * myWorld.visibleSizeFixed.width / myWorld.pixelSize.width;
-        myTempSize.height = aHeight * myWorld.visibleSizeFixed.height / myWorld.pixelSize.height;
+        myTempSize.width = aWidth * myWorld.visibleSize.width / myWorld.pixelSize.width;
+        myTempSize.height = aHeight * myWorld.visibleSize.height / myWorld.pixelSize.height;
         return myTempSize;
         }
 
@@ -54,7 +54,7 @@ public final class Camera extends ScreenBase
 
     private final World myWorld;
 
-    private final Size myTempSize = new Size();
+    private final SizeF myTempSize = new SizeF();
 
     private final Position myTempPos = new Position();
 

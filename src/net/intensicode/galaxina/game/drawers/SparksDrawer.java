@@ -60,8 +60,8 @@ public final class SparksDrawer extends ScreenBase
             final int gradientIndex = frame * ( gradientColors.length - 1 ) / ( maxIndex - 1 );
 
             final Camera camera = myGameContext.camera();
-            myFromPos.setTo( camera.toScreen( spark.worldPosFixed ) );
-            myToPos.setTo( camera.toScreen( spark.toPosFixed ) );
+            myFromPos.setTo( camera.toScreen( spark.worldPos ) );
+            myToPos.setTo( camera.toScreen( spark.toPos ) );
 
             graphics.setColorRGB24( gradientColors[ gradientIndex ] );
             graphics.drawLine( myFromPos.x, myFromPos.y, myToPos.x, myToPos.y );

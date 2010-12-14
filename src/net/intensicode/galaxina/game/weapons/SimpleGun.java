@@ -32,7 +32,7 @@ public final class SimpleGun extends Weapon
         {
         final Configuration config = GameObject.model.configuration;
         final int distanceInPixels = config.readInt( "Weapons.GunShots.DISTANCE", 2 );
-        myShotDistanceFixed = FixedMath.toFixed( distanceInPixels );
+        myShotDistance = ( distanceInPixels );
         }
 
     public final void onStartLevel()
@@ -81,17 +81,17 @@ public final class SimpleGun extends Weapon
     private boolean onFire()
         {
         //#if DEBUG
-        if ( myShotDistanceFixed == 0 ) throw new IllegalStateException();
+        if ( myShotDistance == 0 ) throw new IllegalStateException();
         //#endif
 
         final int numberOfSlots = getNumberOfSlots();
 
-        final int spreadWidth = myShotDistanceFixed * ( numberOfSlots - 1 );
-        final int xOffset = -spreadWidth / 2;
+        final float spreadWidth = myShotDistance * ( numberOfSlots - 1 );
+        final float xOffset = -spreadWidth / 2;
 
-        final int gunShotSpeed = GameObject.model.level.getGunShotSpeed();
+        final float gunShotSpeed = GameObject.model.level.getGunShotSpeed();
 
-        final Position startPos = GameObject.model.player.worldPosFixed;
+        final PositionF startPos = GameObject.model.player.worldPos;
 
         for ( int idx = 0; idx < numberOfSlots; idx++ )
             {
@@ -99,7 +99,7 @@ public final class SimpleGun extends Weapon
             if ( shot == null ) return false;
 
             shot.init( startPos, gunShotSpeed );
-            shot.worldPosFixed.x += xOffset + myShotDistanceFixed * idx;
+            shot.worldPos.x += xOffset + myShotDistance * idx;
             }
 
         return true;
@@ -138,7 +138,7 @@ public final class SimpleGun extends Weapon
 
     private int myReloadTickCount;
 
-    private int myShotDistanceFixed;
+    private float myShotDistance;
 
     private int myState = STATE_IDLE;
 

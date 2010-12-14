@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.galaxina.game.World;
 import net.intensicode.path.SmoothPath;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 
 public final class EnemyPath extends SmoothPath
@@ -18,7 +18,7 @@ public final class EnemyPath extends SmoothPath
         return this;
         }
 
-    public final EnemyPath addWorldPos( final Position aWorldPosition )
+    public final EnemyPath addWorldPos( final PositionF aWorldPosition )
         {
         add( aWorldPosition );
         return this;
@@ -26,7 +26,7 @@ public final class EnemyPath extends SmoothPath
 
     // Implementation
 
-    private Position getWorldPos( final int aX, final int aY )
+    private PositionF getWorldPos( final int aX, final int aY )
         {
         myTempPos.setTo( myWorld.relativeToWorld( aX, aY ) );
         return myTempPos;
@@ -35,5 +35,5 @@ public final class EnemyPath extends SmoothPath
 
     private final World myWorld;
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
     }

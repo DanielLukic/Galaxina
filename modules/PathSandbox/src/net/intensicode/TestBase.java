@@ -1,7 +1,3 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode;
 
 import net.intensicode.path.Interpolation;
@@ -11,9 +7,6 @@ import net.intensicode.util.*;
 
 
 
-/**
- * TODO: Describe this!
- */
 abstract class TestBase
 {
     protected static final void prepare( final PositionList aPositionList )
@@ -54,8 +47,8 @@ abstract class TestBase
         frame.setVisible( true );
     }
 
-    protected static final Position pos( final int aX, final int aY )
+    protected static final PositionF pos( final int aX, final int aY )
     {
-        return new Position( FixedMath.toFixed( aX ), FixedMath.toFixed( aY ) );
+        return new PositionF( aX, aY );
     }
 }

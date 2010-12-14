@@ -35,13 +35,13 @@ public final class ObjectsDrawer extends ScreenBase
         else myGenerator = skin.sprite( myImageId );
 
         final Camera camera = myGameContext.camera();
-        final Size sizeInWorld = camera.toWorldSize( myGenerator.getWidth(), myGenerator.getHeight() );
+        final SizeF sizeInWorld = camera.toWorldSize( myGenerator.getWidth(), myGenerator.getHeight() );
 
         for ( int idx = 0; idx < myObjects.length; idx++ )
             {
             if ( !( myObjects[ idx ] instanceof WorldObjectWithSize ) ) continue;
             final WorldObjectWithSize object = (WorldObjectWithSize) myObjects[ idx ];
-            object.sizeInWorldFixed.setTo( sizeInWorld );
+            object.sizeInWorld.setTo( sizeInWorld );
             }
 
         myCamera = myGameContext.camera();
@@ -97,7 +97,7 @@ public final class ObjectsDrawer extends ScreenBase
         {
         final int animLength = myGenerator.getFrameSequenceLength();
 
-        final Position screenPos = myCamera.toScreen( aObject.worldPosFixed );
+        final Position screenPos = myCamera.toScreen( aObject.worldPos );
         if ( aGenerator.getRawFrameCount() > 1 )
             {
             final int frame = aObject.tickCount * ( animLength - 1 ) / ( aObject.animTicks - 1 );

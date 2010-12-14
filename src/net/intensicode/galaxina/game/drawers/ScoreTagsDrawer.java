@@ -49,7 +49,7 @@ public final class ScoreTagsDrawer extends ScreenBase
         final ScoreTag scoreTag = (ScoreTag) aObject;
         if ( !scoreTag.active ) return;
         final Camera camera = myGameContext.camera();
-        final Position screenPos = camera.toScreen( scoreTag.worldPosFixed );
+        final Position screenPos = camera.toScreen( scoreTag.worldPos );
         myFontGen.blitNumber( graphics(), screenPos, scoreTag.score, ALIGN_CENTER );
         }
     };

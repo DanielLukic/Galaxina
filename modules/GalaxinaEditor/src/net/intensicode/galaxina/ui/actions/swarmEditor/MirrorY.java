@@ -3,7 +3,7 @@ package net.intensicode.galaxina.ui.actions.swarmEditor;
 import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.ui.actions.RunnableAction;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class MirrorY extends RunnableAction implements EditorStateListener
     {
@@ -19,7 +19,7 @@ public final class MirrorY extends RunnableAction implements EditorStateListener
         {
         final Swarm swarm = myCoreAPI.state().currentSwarm();
         if ( swarm == null ) return;
-        for ( final Position pos : swarm.positions() )
+        for ( final PositionF pos : swarm.positions() )
             {
             pos.y = myCoreAPI.gameScreenHeight() - pos.y;
             }

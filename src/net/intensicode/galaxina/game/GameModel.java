@@ -94,7 +94,7 @@ public final class GameModel
         myGameObjects.add( attackSpawner = new AttackSpawner() );
         myGameObjects.add( smokes = new Smokes() );
         myGameObjects.add( sparks = new Sparks() );
-        myGameObjects.add( warps = new SimpleParticles( 32, FixedMath.FIXED_0_5, false ) );
+        myGameObjects.add( warps = new SimpleParticles( 32, 0.5f, false ) );
         myGameObjects.add( explosions = new Explosions() );
         myGameObjects.add( scoreMarkers = new ScoreMarkers() );
         myGameObjects.add( breather = new Breather() );

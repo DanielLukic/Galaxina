@@ -13,14 +13,16 @@ public final class Player extends GameObject
 
     public static final int FULL_HIT = 2;
 
+    private static final float ONE_HUNDRED_PERCENT = 100;
 
-    public final Size sizeInWorldFixed = new Size( DEFAULT_SIZE, DEFAULT_SIZE );
 
-    public final Position worldPosFixed = new Position();
+    public final SizeF sizeInWorld = new SizeF( DEFAULT_SIZE, DEFAULT_SIZE );
 
-    public final Rectangle outerBBox = new Rectangle();
+    public final PositionF worldPos = new PositionF();
 
-    public final Rectangle innerBBox = new Rectangle();
+    public final RectangleF outerBBox = new RectangleF();
+
+    public final RectangleF innerBBox = new RectangleF();
 
 
     public Weapon primaryWeapon;
@@ -30,7 +32,7 @@ public final class Player extends GameObject
     public final DynamicArray satellites = new DynamicArray();
 
 
-    public int damageInPercentFixed;
+    public float damageInPercent;
 
     public int invulnerableTicks;
 
@@ -54,44 +56,44 @@ public final class Player extends GameObject
 
     public final boolean isDead()
         {
-        return damageInPercentFixed == FixedMath.FIXED_100;
+        return damageInPercent == ONE_HUNDRED_PERCENT;
         }
 
     public final boolean isAlive()
         {
-        return damageInPercentFixed < FixedMath.FIXED_100;
+        return damageInPercent < ONE_HUNDRED_PERCENT;
         }
 
-    public final boolean isCrash( final Rectangle aRectangleFixed )
+    public final boolean isCrash( final RectangleF aRectangle )
         {
         if ( invulnerableTicks > 0 ) return false;
         if ( !visible ) return false;
-        return innerBBox.intersectsWith( aRectangleFixed );
+        return innerBBox.intersectsWith( aRectangle );
         }
 
-    public final int isHit( final Position aWorldPosFixed )
+    public final int isHit( final PositionF aWorldPos )
         {
         if ( invulnerableTicks > 0 ) return NOT_HIT;
         if ( myState != STATE_PLAYING || !visible ) return NOT_HIT;
-        if ( !outerBBox.contains( aWorldPosFixed ) ) return NOT_HIT;
-        if ( !innerBBox.contains( aWorldPosFixed ) ) return OUTER_HIT;
+        if ( !outerBBox.contains( aWorldPos ) ) return NOT_HIT;
+        if ( !innerBBox.contains( aWorldPos ) ) return OUTER_HIT;
         return FULL_HIT;
         }
 
     public final void hit( final int aHitKind )
         {
-        if ( aHitKind == OUTER_HIT ) damageInPercentFixed += FixedMath.FIXED_30;
-        if ( aHitKind == FULL_HIT ) damageInPercentFixed += FixedMath.FIXED_50;
+        if ( aHitKind == OUTER_HIT ) damageInPercent += 30;
+        if ( aHitKind == FULL_HIT ) damageInPercent += 50;
 
-        final int maxValue = FixedMath.FIXED_100;
-        if ( damageInPercentFixed > maxValue ) damageInPercentFixed = maxValue;
-        if ( damageInPercentFixed == maxValue ) explode();
+        final float maxValue = ONE_HUNDRED_PERCENT;
+        if ( damageInPercent > maxValue ) damageInPercent = maxValue;
+        if ( damageInPercent == maxValue ) explode();
         }
 
     public final void explode()
         {
         myState = STATE_EXPLODING;
-        damageInPercentFixed = FixedMath.FIXED_100;
+        damageInPercent = ONE_HUNDRED_PERCENT;
         myExplodeTick = 0;
         myExplodeTicks = timing.ticksPerSecond * 2;
 
@@ -152,7 +154,7 @@ public final class Player extends GameObject
         visible = true;
         score = 0;
         lives = 3;
-        damageInPercentFixed = 0;
+        damageInPercent = 0;
         myLastScoreCheck = 0;
         weaponUpgrades = 0;
         reloadUpgrades = 0;
@@ -176,16 +178,16 @@ public final class Player extends GameObject
         if ( primaryWeapon != null ) primaryWeapon.onStartLevel();
         if ( secondaryWeapon != null ) secondaryWeapon.onStartLevel();
 
-        damageInPercentFixed /= 2;
+        damageInPercent /= 2;
 
-        final Size visibleSizeFixed = model.world.visibleSizeFixed;
+        final SizeF visibleSize = model.world.visibleSize;
 
-        worldPosFixed.x = 0;
-        worldPosFixed.y = visibleSizeFixed.height / 2;
-        worldPosFixed.y -= visibleSizeFixed.height / 10;
+        worldPos.x = 0;
+        worldPos.y = visibleSize.height / 2;
+        worldPos.y -= visibleSize.height / 10;
 
-        mySpeedStepFixed = visibleSizeFixed.width / timing.ticksPerSecond * 2 / 3;
-        mySpeedLeftFixed = mySpeedRightFixed = 0;
+        mySpeedStep = visibleSize.width / timing.ticksPerSecond * 2 / 3;
+        mySpeedLeft = mySpeedRight = 0;
 
         updateBBoxes();
 
@@ -215,13 +217,13 @@ public final class Player extends GameObject
 
     private void updateBBoxes()
         {
-        final int outerWidth = sizeInWorldFixed.width * 90 / 100;
-        final int outerHeight = sizeInWorldFixed.height * 90 / 100;
-        outerBBox.setCenterAndSize( worldPosFixed, outerWidth, outerHeight );
+        final float outerWidth = sizeInWorld.width * 90 / ONE_HUNDRED_PERCENT;
+        final float outerHeight = sizeInWorld.height * 90 / ONE_HUNDRED_PERCENT;
+        outerBBox.setCenterAndSize( worldPos, outerWidth, outerHeight );
 
-        final int innerWidth = sizeInWorldFixed.width * 50 / 100;
-        final int innerHeight = sizeInWorldFixed.height * 50 / 100;
-        innerBBox.setCenterAndSize( worldPosFixed, innerWidth, innerHeight );
+        final float innerWidth = sizeInWorld.width * 50 / ONE_HUNDRED_PERCENT;
+        final float innerHeight = sizeInWorld.height * 50 / ONE_HUNDRED_PERCENT;
+        innerBBox.setCenterAndSize( worldPos, innerWidth, innerHeight );
         }
 
     private void onPlayLevel()
@@ -240,7 +242,7 @@ public final class Player extends GameObject
                 throw new IllegalStateException();
             }
 
-        if ( visible && damageInPercentFixed > FixedMath.FIXED_25 )
+        if ( visible && damageInPercent > 25 )
             {
             if ( mySmokeTicks > 0 )
                 {
@@ -248,11 +250,11 @@ public final class Player extends GameObject
                 }
             else
                 {
-                myTempPos.setTo( worldPosFixed );
-                myTempPos.x += myRandom.nextInt( sizeInWorldFixed.width ) - sizeInWorldFixed.width / 2;
+                myTempPos.setTo( worldPos );
+                myTempPos.x += myRandom.nextFloat( sizeInWorld.width ) - sizeInWorld.width / 2;
                 model.smokes.add( myTempPos );
-                final int maxDamage = Math.min( 75, FixedMath.toInt( damageInPercentFixed ) );
-                mySmokeTicks = timing.ticksPerSecond * ( 100 - maxDamage ) / 100;
+                final int maxDamage = (int) Math.min( 75, damageInPercent );
+                mySmokeTicks = (int) (timing.ticksPerSecond * ( ONE_HUNDRED_PERCENT - maxDamage ) / ONE_HUNDRED_PERCENT);
                 }
             }
         }
@@ -265,53 +267,41 @@ public final class Player extends GameObject
 
         if ( invulnerableTicks > 0 ) invulnerableTicks--;
 
-        damageInPercentFixed -= FixedMath.FIXED_1 / timing.ticksPerSecond;
-        if ( damageInPercentFixed < 0 ) damageInPercentFixed = 0;
+        damageInPercent -= 1f / timing.ticksPerSecond;
+        if ( damageInPercent < 0 ) damageInPercent = 0;
 
         final KeysHandler keys = system.keys;
         if ( keys.check( KeysHandler.LEFT ) )
             {
-            mySpeedLeftFixed += mySpeedStepFixed / 6;
-            mySpeedRightFixed = mySpeedRightFixed * 60 / 100;
+            mySpeedLeft += mySpeedStep / 6;
+            mySpeedRight = mySpeedRight * 60 / ONE_HUNDRED_PERCENT;
             }
         else
             {
-            mySpeedLeftFixed = mySpeedLeftFixed * 80 / 100;
+            mySpeedLeft = mySpeedLeft * 80 / ONE_HUNDRED_PERCENT;
             }
         if ( keys.check( KeysHandler.RIGHT ) )
             {
-            mySpeedRightFixed += mySpeedStepFixed / 6;
-            mySpeedLeftFixed = mySpeedLeftFixed * 60 / 100;
+            mySpeedRight += mySpeedStep / 6;
+            mySpeedLeft = mySpeedLeft * 60 / ONE_HUNDRED_PERCENT;
             }
         else
             {
-            mySpeedRightFixed = mySpeedRightFixed * 80 / 100;
+            mySpeedRight = mySpeedRight * 80 / ONE_HUNDRED_PERCENT;
             }
 
-        mySpeedLeftFixed = Math.min( mySpeedStepFixed, mySpeedLeftFixed );
-        mySpeedRightFixed = Math.min( mySpeedStepFixed, mySpeedRightFixed );
+        mySpeedLeft = Math.min( mySpeedStep, mySpeedLeft );
+        mySpeedRight = Math.min( mySpeedStep, mySpeedRight );
 
-        //#if TRACKBALL
-        if ( system.trackball.leftDelta > 0 )
-            {
-            mySpeedLeftFixed += FixedMath.toFixed( system.trackball.leftDelta );
-            }
-        if ( system.trackball.rightDelta > 0 )
-            {
-            mySpeedRightFixed += FixedMath.toFixed( system.trackball.rightDelta );
-            }
-        system.trackball.clearDeltaValues();
-        //#endif
+        worldPos.x -= mySpeedLeft;
+        worldPos.x += mySpeedRight;
 
-        worldPosFixed.x -= mySpeedLeftFixed;
-        worldPosFixed.x += mySpeedRightFixed;
+        final SizeF visibleSize = model.world.visibleSize;
+        final float maxRightPos = ( visibleSize.width - sizeInWorld.width ) / 2;
+        final float maxLeftPos = -maxRightPos;
 
-        final Size visibleSizeFixed = model.world.visibleSizeFixed;
-        final int maxRightPos = ( visibleSizeFixed.width - sizeInWorldFixed.width ) / 2;
-        final int maxLeftPos = -maxRightPos;
-
-        worldPosFixed.x = Math.max( maxLeftPos, worldPosFixed.x );
-        worldPosFixed.x = Math.min( maxRightPos, worldPosFixed.x );
+        worldPos.x = Math.max( maxLeftPos, worldPos.x );
+        worldPos.x = Math.min( maxRightPos, worldPos.x );
 
         updateBBoxes();
         }
@@ -322,8 +312,8 @@ public final class Player extends GameObject
 
         invulnerableTicks = 0;
 
-        worldPosFixed.x -= mySpeedLeftFixed / 6;
-        worldPosFixed.x += mySpeedRightFixed / 6;
+        worldPos.x -= mySpeedLeft / 6;
+        worldPos.x += mySpeedRight / 6;
 
         if ( myExplodeTick < myExplodeTicks )
             {
@@ -332,18 +322,18 @@ public final class Player extends GameObject
             myExplodeTick++;
             if ( myExplodeTick == 1 )
                 {
-                model.explosions.addBigPlayer( worldPosFixed );
+                model.explosions.addBigPlayer( worldPos );
                 }
             if ( myExplodeTick < myExplodeTicks / 2 && myExplodeTick % ( myExplodeTicks / 10 ) == 0 )
                 {
-                myTempPos.x = worldPosFixed.x + myRandom.nextInt( sizeInWorldFixed.width ) - sizeInWorldFixed.width / 2;
-                myTempPos.y = worldPosFixed.y + myRandom.nextInt( sizeInWorldFixed.height ) - sizeInWorldFixed.height / 2;
+                myTempPos.x = worldPos.x + myRandom.nextFloat( sizeInWorld.width ) - sizeInWorld.width / 2;
+                myTempPos.y = worldPos.y + myRandom.nextFloat( sizeInWorld.height ) - sizeInWorld.height / 2;
                 model.explosions.addForPlayer( myTempPos );
                 }
             }
         else
             {
-            mySpeedLeftFixed = mySpeedRightFixed = 0;
+            mySpeedLeft = mySpeedRight = 0;
 
             onLiveLost();
             }
@@ -354,8 +344,8 @@ public final class Player extends GameObject
         if ( lives > 0 )
             {
             lives--;
-            damageInPercentFixed = 0;
-            worldPosFixed.x = 0;
+            damageInPercent = 0;
+            worldPos.x = 0;
             myState = STATE_PLAYING;
             invulnerableTicks = timing.ticksPerSecond;
             }
@@ -389,18 +379,18 @@ public final class Player extends GameObject
 
     private int myLastScoreCheck;
 
-    private int mySpeedStepFixed;
+    private float mySpeedStep;
 
-    private int mySpeedLeftFixed;
+    private float mySpeedLeft;
 
-    private int mySpeedRightFixed;
+    private float mySpeedRight;
 
     private Weapon myPreviousSecondaryWeapon;
 
 
     private final Random myRandom = new Random( 17 );
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
 
 
     private static final int STATE_PLAYING = 0;
@@ -409,7 +399,7 @@ public final class Player extends GameObject
 
     private static final int STATE_GAME_OVER = 2;
 
-    private static final int DEFAULT_SIZE = FixedMath.toFixed( 16 );
+    private static final int DEFAULT_SIZE = 16;
 
     private static final int EXTRA_LIVE_SCORE = 10000;
     }

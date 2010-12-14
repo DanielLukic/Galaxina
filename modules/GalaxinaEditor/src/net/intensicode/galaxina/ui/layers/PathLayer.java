@@ -7,8 +7,7 @@ import net.intensicode.galaxina.domain.Path;
 import net.intensicode.galaxina.domain.ListOfPositions;
 import net.intensicode.galaxina.ui.logic.CoordinateTransformer;
 import net.intensicode.path.SmoothPath;
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.awt.*;
 
@@ -89,10 +88,9 @@ public class PathLayer implements VisualLayer, Identifiers
     private final void drawSmoothPath( final Graphics2D aGraphics2D )
         {
         mySmoothPath.clear();
-        for ( final Position position : myPath.positions() )
+        for ( final PositionF position : myPath.positions() )
             {
             myPosition.setTo( position );
-            FixedMath.toFixed( myPosition );
             mySmoothPath.add( myPosition );
             }
         mySmoothPath.end();
@@ -104,10 +102,8 @@ public class PathLayer implements VisualLayer, Identifiers
         for ( int idx = 1; idx <= pathSteps; idx++ )
             {
             myPosition.setTo( mySmoothPath.getPosition( pathLength * ( idx - 1 ) / pathSteps ) );
-            final Position to = mySmoothPath.getPosition( pathLength * idx / pathSteps );
-            FixedMath.toInt( myPosition );
-            FixedMath.toInt( to );
-            aGraphics2D.drawLine( myPosition.x, myPosition.y, to.x, to.y );
+            final PositionF to = mySmoothPath.getPosition( pathLength * idx / pathSteps );
+            aGraphics2D.drawLine( (int) myPosition.x, (int) myPosition.y, (int) to.x, (int) to.y );
             }
         }
 
@@ -117,11 +113,11 @@ public class PathLayer implements VisualLayer, Identifiers
         final ListOfPositions positions = myPath.positions();
         for ( int idx = 1; idx < positions.size(); idx++ )
             {
-            final int x1 = positions.at( idx - 1 ).x;
-            final int y1 = positions.at( idx - 1 ).y;
-            final int x2 = positions.at( idx ).x;
-            final int y2 = positions.at( idx ).y;
-            aGraphics2D.drawLine( x1, y1, x2, y2 );
+            final float x1 = positions.at( idx - 1 ).x;
+            final float y1 = positions.at( idx - 1 ).y;
+            final float x2 = positions.at( idx ).x;
+            final float y2 = positions.at( idx ).y;
+            aGraphics2D.drawLine( (int) x1, (int) y1, (int) x2, (int) y2 );
             }
         }
 
@@ -132,11 +128,11 @@ public class PathLayer implements VisualLayer, Identifiers
         final int halfMarkerSize = markerSize / 2;
 
         aGraphics2D.setColor( myMarkerColor );
-        for ( final Position position : myPath.positions() )
+        for ( final PositionF position : myPath.positions() )
             {
-            final int x = position.x - halfMarkerSize;
-            final int y = position.y - halfMarkerSize;
-            aGraphics2D.fillRect( x, y, markerSize, markerSize );
+            final float x = position.x - halfMarkerSize;
+            final float y = position.y - halfMarkerSize;
+            aGraphics2D.fillRect( (int) x, (int) y, markerSize, markerSize );
             }
         }
 
@@ -156,7 +152,7 @@ public class PathLayer implements VisualLayer, Identifiers
 
     protected final CoordinateTransformer myTransformer;
 
-    private final Position myPosition = new Position();
+    private final PositionF myPosition = new PositionF();
 
     private final SmoothPath mySmoothPath = new SmoothPath();
     }

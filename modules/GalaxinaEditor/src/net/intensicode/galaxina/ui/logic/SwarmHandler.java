@@ -5,7 +5,7 @@ import net.intensicode.galaxina.domain.PositionEx;
 import net.intensicode.galaxina.domain.SelectedSwarmMarker;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.domain.ListOfPositions;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.awt.event.MouseEvent;
 
@@ -30,7 +30,7 @@ public class SwarmHandler implements InputHandler
 
     public final boolean mouseClicked( final MouseEvent aEvent )
         {
-        final Position position = myContext.getTransformer().toGame( aEvent.getPoint() );
+        final PositionF position = myContext.getTransformer().toGame( aEvent.getPoint() );
         final PositionEx selectedMarker = findMarkerFor( position );
         if ( selectedMarker != null )
             {
@@ -42,14 +42,14 @@ public class SwarmHandler implements InputHandler
 
     public final boolean mousePressed( final MouseEvent aEvent )
         {
-        final Position position = myContext.getTransformer().toGame( aEvent.getPoint() );
+        final PositionF position = myContext.getTransformer().toGame( aEvent.getPoint() );
         myDraggedMarker = findMarkerFor( position );
         return myDraggedMarker != null;
         }
 
     public final boolean mouseReleased( final MouseEvent aEvent )
         {
-        final Position draggedMarker = myDraggedMarker;
+        final PositionF draggedMarker = myDraggedMarker;
         myDraggedMarker = null;
         return draggedMarker != null;
         }
@@ -58,7 +58,7 @@ public class SwarmHandler implements InputHandler
         {
         if ( myDraggedMarker == null ) return false;
 
-        final Position position = myContext.getTransformer().toGame( aEvent.getPoint() );
+        final PositionF position = myContext.getTransformer().toGame( aEvent.getPoint() );
         if ( myDraggedMarker.equals( position ) ) return true;
         myDraggedMarker.setTo( position );
 
@@ -75,7 +75,7 @@ public class SwarmHandler implements InputHandler
 
     // Implementation
 
-    private final PositionEx findMarkerFor( final Position aPosition )
+    private final PositionEx findMarkerFor( final PositionF aPosition )
         {
         final int rawMarkerSize = myContext.getCoreApi().ui().configuration().markerSize;
         final int markerSize = (int) ( myContext.getTransformer().scaled( rawMarkerSize ) + 1 );
@@ -85,8 +85,8 @@ public class SwarmHandler implements InputHandler
         for ( int idx = positions.size() - 1; idx >= 0; idx-- )
             {
             final PositionEx position = positions.at( idx );
-            final int dx = Math.abs( position.x - aPosition.x );
-            final int dy = Math.abs( position.y - aPosition.y );
+            final float dx = Math.abs( position.x - aPosition.x );
+            final Float dy = Math.abs( position.y - aPosition.y );
             if ( dx <= halfMarkerSize && dy <= halfMarkerSize ) return position;
             }
 
@@ -97,7 +97,7 @@ public class SwarmHandler implements InputHandler
 
     private Swarm mySwarm;
 
-    private Position myDraggedMarker;
+    private PositionF myDraggedMarker;
 
     private final InputHandlerContext myContext;
     }

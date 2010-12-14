@@ -7,14 +7,14 @@ public final class Missiles extends GameObject
     {
     public final Missile[] missiles = new Missile[MAX_MISSILES];
 
-    public final Size sizeInWorld = new Size();
+    public final SizeF sizeInWorld = new SizeF();
 
 
-    public final Missile prepare( final Position aStartPosition )
+    public final Missile prepare( final PositionF aStartPosition )
         {
         final Missile missile = getMissile();
         missile.init( aStartPosition );
-        missile.sizeInWorldFixed.setTo( sizeInWorld );
+        missile.sizeInWorld.setTo( sizeInWorld );
         return missile;
         }
 

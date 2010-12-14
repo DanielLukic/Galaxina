@@ -2,12 +2,11 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.extras.ExtraType;
 import net.intensicode.galaxina.game.GameObject;
-import net.intensicode.util.Position;
-import net.intensicode.util.Size;
+import net.intensicode.util.*;
 
 public final class Extras extends GameObject
     {
-    public final Size sizeInWorldFixed = new Size();
+    public final SizeF sizeInWorld = new SizeF();
 
     public final Extra[] extras = new Extra[MAX_EXTRAS];
 
@@ -17,12 +16,12 @@ public final class Extras extends GameObject
         {
         }
 
-    public final void deploy( final Position aPosition, final ExtraType aExtraType )
+    public final void deploy( final PositionF aPosition, final ExtraType aExtraType )
         {
         final Extra extra = getInstance();
         if ( extra == null ) return;
 
-        final int dropSpeed = model.world.visibleSizeFixed.height / timing.ticksPerSecond / 3;
+        final float dropSpeed = model.world.visibleSize.height / timing.ticksPerSecond / 3;
         extra.init( aPosition, dropSpeed );
         extra.type = aExtraType;
 

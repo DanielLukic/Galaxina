@@ -3,9 +3,7 @@ package net.intensicode.galaxina.game.enemies.behaviors;
 import net.intensicode.galaxina.game.enemies.EnemyBehavior;
 import net.intensicode.galaxina.game.objects.Enemy;
 import net.intensicode.galaxina.game.enemies.EnemyPath;
-import net.intensicode.util.Random;
-import net.intensicode.util.Size;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class StrikeWhenAttacked extends EnemyBehavior
     {
@@ -28,10 +26,10 @@ public final class StrikeWhenAttacked extends EnemyBehavior
         {
         final EnemyPath path = new EnemyPath( model.world );
 
-        myTempPos.setTo( aEnemy.worldPosFixed );
+        myTempPos.setTo( aEnemy.worldPos );
         path.addWorldPos( myTempPos );
 
-        final Size size = aEnemy.type.sizeInWorldFixed;
+        final SizeF size = aEnemy.type.sizeInWorld;
         myTempPos.x += size.width;
         myTempPos.y -= size.height;
         path.addWorldPos( myTempPos );
@@ -45,11 +43,11 @@ public final class StrikeWhenAttacked extends EnemyBehavior
         myTempPos.setTo( model.world.relativeToWorld( xStop, yStop ) );
         path.addWorldPos( myTempPos );
 
-        myTempPos.setTo( model.player.worldPosFixed );
+        myTempPos.setTo( model.player.worldPos );
         myTempPos.y -= size.height;
         path.addWorldPos( myTempPos );
 
-        path.addWorldPos( aEnemy.worldPosFixed );
+        path.addWorldPos( aEnemy.worldPos );
         path.end();
 
         aEnemy.startAttack( path );
@@ -57,7 +55,7 @@ public final class StrikeWhenAttacked extends EnemyBehavior
 
 
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
 
     private static final Random myRandom = new Random();
     }

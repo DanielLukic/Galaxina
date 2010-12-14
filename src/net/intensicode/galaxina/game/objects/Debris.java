@@ -12,19 +12,19 @@ public final class Debris extends WorldObjectWithType
 
     public static final int TYPE_MEDIUM = 2;
 
-    public final Position speedFixed = new Position();
+    public final PositionF speed = new PositionF();
 
     public int timeOut;
 
 
-    public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+    public final void init( final PositionF aWorldPos, final float aSpeedX, final float aSpeedY )
         {
         timeOut = 0;
         type = TYPE_MEDIUM;
         active = true;
-        speedFixed.x = aSpeedX;
-        speedFixed.y = aSpeedY;
-        worldPosFixed.setTo( aWorldPosFixed );
+        speed.x = aSpeedX;
+        speed.y = aSpeedY;
+        worldPos.setTo( aWorldPos );
         tickCount = 0;
         animTicks = GameObject.timing.ticksPerSecond / 2;
         repeatAnimation = true;
@@ -41,10 +41,10 @@ public final class Debris extends WorldObjectWithType
 
         tickAnimation();
 
-        worldPosFixed.translate( speedFixed );
+        worldPos.translate( speed );
 
         final GameModel model = GameObject.model;
-        active = model.world.isInside( worldPosFixed );
+        active = model.world.isInside( worldPos );
 
         checkIfEnemyHit( model );
         checkIfPlayerHit( model );
@@ -60,7 +60,7 @@ public final class Debris extends WorldObjectWithType
             final Enemy enemy = (Enemy) enemies.objects[ idx ];
             if ( !enemy.active ) continue;
 
-            final boolean hit = enemy.isHit( worldPosFixed );
+            final boolean hit = enemy.isHit( worldPos );
             if ( !hit ) continue;
 
             enemy.hit();
@@ -73,7 +73,7 @@ public final class Debris extends WorldObjectWithType
     private void checkIfPlayerHit( final GameModel aGameModel )
         {
         final Player player = aGameModel.player;
-        final int hitKind = player.isHit( worldPosFixed );
+        final int hitKind = player.isHit( worldPos );
         if ( hitKind != Player.NOT_HIT )
             {
             player.hit( hitKind );

@@ -38,7 +38,7 @@ public final class ScoreboardDrawer extends ScreenBase
         else myIndicatorTicks = 0;
 
         final Player player = myGameContext.gameModel().player;
-        final int damage = FixedMath.toInt( player.damageInPercentFixed );
+        final int damage = (int) player.damageInPercent;
         if ( damage > 75 )
             {
             myIndicatorVisible = ( myIndicatorTicks % tps ) < ( tps * 2 / 3 );
@@ -105,7 +105,7 @@ public final class ScoreboardDrawer extends ScreenBase
         {
         final int indicatorFrames = myDamageIndicator.getRawFrameCount();
         final Player player = myGameContext.gameModel().player;
-        final int damage = FixedMath.toInt( player.damageInPercentFixed );
+        final int damage = (int) player.damageInPercent;
         final int frameID = damage * ( indicatorFrames - 1 ) / 100;
         final int xPos = screen().width() / 2;
         final int liveHeight = myLive.getHeight();

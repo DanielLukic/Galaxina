@@ -3,7 +3,7 @@ package net.intensicode.galaxina.game.enemies.behaviors;
 import net.intensicode.galaxina.game.enemies.EnemyBehavior;
 import net.intensicode.galaxina.game.enemies.EnemyPath;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class HardDive extends EnemyBehavior
     {
@@ -24,11 +24,11 @@ public final class HardDive extends EnemyBehavior
     private void setAttackPath( final Enemy aEnemy )
         {
         final EnemyPath path = new EnemyPath( model.world );
-        myTempPos.setTo( aEnemy.worldPosFixed );
+        myTempPos.setTo( aEnemy.worldPos );
         path.addWorldPos( myTempPos );
 
-        final int stepWidth = aEnemy.type.sizeInWorldFixed.width;
-        final int stepHeight = aEnemy.type.sizeInWorldFixed.height;
+        final float stepWidth = aEnemy.type.sizeInWorld.width;
+        final float stepHeight = aEnemy.type.sizeInWorld.height;
         myTempPos.x += stepWidth;
         myTempPos.y -= stepHeight;
         path.addWorldPos( myTempPos );
@@ -38,11 +38,11 @@ public final class HardDive extends EnemyBehavior
         path.addWorldPos( myTempPos );
 
         myTempPos.x -= stepWidth;
-        myTempPos.y = model.world.sizeFixed.height / 3;
+        myTempPos.y = model.world.size.height / 3;
         path.addWorldPos( myTempPos );
 
         myTempPos.x -= stepWidth;
-        myTempPos.y = model.world.sizeFixed.height;
+        myTempPos.y = model.world.size.height;
         path.addWorldPos( myTempPos );
 
         path.end();
@@ -52,5 +52,5 @@ public final class HardDive extends EnemyBehavior
 
 
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
     }

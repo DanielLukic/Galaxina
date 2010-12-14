@@ -15,7 +15,7 @@ public final class RepairPlayer extends ExtraType
     public final boolean apply( final GameModel aModel )
         {
         final Player player = aModel.player;
-        player.damageInPercentFixed = 0;
+        player.damageInPercent = 0;
         return true;
         }
     }

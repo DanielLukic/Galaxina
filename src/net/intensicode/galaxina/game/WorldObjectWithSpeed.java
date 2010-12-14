@@ -1,19 +1,19 @@
 package net.intensicode.galaxina.game;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.WorldObject;
 
 
 public final class WorldObjectWithSpeed extends WorldObject
     {
-    public final Position speedFixed = new Position();
+    public final PositionF speed = new PositionF();
 
 
-    public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+    public final void init( final PositionF aWorldPosFixed, final float aSpeedX, final float aSpeedY )
         {
-        worldPosFixed.setTo( aWorldPosFixed );
-        speedFixed.x = aSpeedX;
-        speedFixed.y = aSpeedY;
+        worldPos.setTo( aWorldPosFixed );
+        speed.x = aSpeedX;
+        speed.y = aSpeedY;
 
         tickCount = animTicks = 0;
         active = true;
@@ -22,7 +22,6 @@ public final class WorldObjectWithSpeed extends WorldObject
     public final void onControlTick()
         {
         tickAnimation();
-
-        worldPosFixed.translate( speedFixed );
+        worldPos.translate( speed );
         }
     }

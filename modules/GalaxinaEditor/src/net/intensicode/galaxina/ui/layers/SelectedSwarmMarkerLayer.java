@@ -5,7 +5,7 @@ import net.intensicode.galaxina.EditorStateListener;
 import net.intensicode.galaxina.Identifiers;
 import net.intensicode.galaxina.domain.SelectedSwarmMarker;
 import net.intensicode.galaxina.ui.logic.CoordinateTransformer;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.awt.*;
 
@@ -38,10 +38,10 @@ public class SelectedSwarmMarkerLayer implements VisualLayer, EditorStateListene
         aGraphics2D.setStroke( myCoreAPI.ui().configuration().activeMarkerStroke );
         aGraphics2D.setColor( myCoreAPI.ui().configuration().activeMarkerColor );
 
-        final Position position = mySelectedSwarmMarker.marker;
-        final int x = position.x - halfMarkerSize;
-        final int y = position.y - halfMarkerSize;
-        aGraphics2D.drawRect( x, y, markerSize, markerSize );
+        final PositionF position = mySelectedSwarmMarker.marker;
+        final float x = position.x - halfMarkerSize;
+        final float y = position.y - halfMarkerSize;
+        aGraphics2D.drawRect( (int) x, (int) y, markerSize, markerSize );
         }
 
     // Protected Interface

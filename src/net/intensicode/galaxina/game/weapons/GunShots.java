@@ -1,22 +1,19 @@
 package net.intensicode.galaxina.game.weapons;
 
-import net.intensicode.util.Rectangle;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.GameObject;
 
-/**
- * TODO: Describe this!
- */
 public final class GunShots extends GameObject
     {
-    public final boolean isProjectileApproaching( final Rectangle aRectangle )
+    public final boolean isProjectileApproaching( final RectangleF aRectangle )
         {
         for ( int idx = 0; idx < gunShots.length; idx++ )
             {
             final GunShot shot = gunShots[ idx ];
             if ( shot == null || !shot.active ) continue;
-            if ( shot.worldPosFixed.x < aRectangle.x ) continue;
-            if ( shot.worldPosFixed.x > aRectangle.x + aRectangle.width ) continue;
-            if ( shot.worldPosFixed.y < aRectangle.y ) continue;
+            if ( shot.worldPos.x < aRectangle.x ) continue;
+            if ( shot.worldPos.x > aRectangle.x + aRectangle.width ) continue;
+            if ( shot.worldPos.y < aRectangle.y ) continue;
             return true;
             }
         return false;

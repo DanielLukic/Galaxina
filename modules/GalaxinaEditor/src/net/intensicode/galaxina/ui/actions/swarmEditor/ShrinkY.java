@@ -5,7 +5,7 @@ import net.intensicode.galaxina.EditorStateListener;
 import net.intensicode.galaxina.Identifiers;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.ui.actions.RunnableAction;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class ShrinkY extends RunnableAction implements EditorStateListener
     {
@@ -20,7 +20,7 @@ public final class ShrinkY extends RunnableAction implements EditorStateListener
     public final void run()
         {
         final Swarm swarm = myCoreAPI.state().currentSwarm();
-        for ( final Position pos : swarm.positions() )
+        for ( final PositionF pos : swarm.positions() )
             {
             pos.y = pos.y * 9 / 10;
             }

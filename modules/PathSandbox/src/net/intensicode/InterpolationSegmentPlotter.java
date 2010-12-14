@@ -1,8 +1,7 @@
 package net.intensicode;
 
-import net.intensicode.util.FixedMath;
+import net.intensicode.util.*;
 import net.intensicode.path.Interpolation;
-import net.intensicode.util.Position;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,9 +9,6 @@ import java.awt.Graphics2D;
 
 
 
-/**
- * TODO: Describe this!
- */
 final class InterpolationSegmentPlotter implements VisualLayer
 {
     InterpolationSegmentPlotter( final Interpolation aCurveInterpolation )
@@ -37,20 +33,20 @@ final class InterpolationSegmentPlotter implements VisualLayer
 
     private final void drawSegment( final Graphics2D aGraphics2D, final int aSegmentIndex )
     {
-        final Position from = new Position();
-        final Position to = new Position();
+        final PositionF from = new PositionF();
+        final PositionF to = new PositionF();
 
         from.setTo( myCurveInterpolation.getPosition( aSegmentIndex, 0 ) );
 
         for ( int idx = 1; idx <= SEGMENT_STEPS; idx++ )
         {
-            final int segmentPosFixed = FixedMath.toFixed( idx ) / SEGMENT_STEPS;
-            to.setTo( myCurveInterpolation.getPosition( aSegmentIndex, segmentPosFixed ) );
+            final float segmentPos = ( idx ) / SEGMENT_STEPS;
+            to.setTo( myCurveInterpolation.getPosition( aSegmentIndex, segmentPos ) );
 
-            final int x1 = FixedMath.toInt( from.x );
-            final int y1 = FixedMath.toInt( from.y );
-            final int x2 = FixedMath.toInt( to.x );
-            final int y2 = FixedMath.toInt( to.y );
+            final int x1 = (int) from.x;
+            final int y1 = (int) from.y;
+            final int x2 = (int) to.x;
+            final int y2 = (int) to.y;
             aGraphics2D.drawLine( x1, y1, x2, y2 );
 
             from.setTo( to );
@@ -61,5 +57,5 @@ final class InterpolationSegmentPlotter implements VisualLayer
 
     private final Interpolation myCurveInterpolation;
 
-    private static final int SEGMENT_STEPS = 3;
+    private static final float SEGMENT_STEPS = 3;
 }

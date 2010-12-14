@@ -13,7 +13,7 @@ public final class Bomb extends WorldObject
 
     public static final int FROM_MISSILE = 2;
 
-    public final Position speedFixed = new Position();
+    public final PositionF speed = new PositionF();
 
 
     public Bomb()
@@ -25,18 +25,18 @@ public final class Bomb extends WorldObject
         myOwner = aOwnerID;
         }
 
-    public final void init( final Position aWorldPosFixed, final int aDropSpeedFixed )
+    public final void init( final PositionF aWorldPos, final float aDropSpeed )
         {
-        init( aWorldPosFixed, 0, aDropSpeedFixed );
+        init( aWorldPos, 0, aDropSpeed );
         }
 
-    public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+    public final void init( final PositionF aWorldPos, final float aSpeedX, final float aSpeedY )
         {
         active = true;
         myOwner = INVALID;
-        speedFixed.x = aSpeedX;
-        speedFixed.y = aSpeedY;
-        worldPosFixed.setTo( aWorldPosFixed );
+        speed.x = aSpeedX;
+        speed.y = aSpeedY;
+        worldPos.setTo( aWorldPos );
         }
 
     public final void onControlTick( final GameModel aGameModel )
@@ -47,10 +47,10 @@ public final class Bomb extends WorldObject
 
         if ( !active ) return;
 
-        worldPosFixed.translate( speedFixed );
+        worldPos.translate( speed );
 
         final World world = aGameModel.world;
-        active = world.isInside( worldPosFixed );
+        active = world.isInside( worldPos );
         if ( !active ) GameObject.model.level.onEnemyBombDone();
 
         if ( myOwner == FROM_PLAYER || myOwner == FROM_MISSILE )
@@ -73,7 +73,7 @@ public final class Bomb extends WorldObject
             final Enemy enemy = (Enemy) enemies.objects[ idx ];
             if ( !enemy.active ) continue;
 
-            final boolean hit = enemy.isHit( worldPosFixed );
+            final boolean hit = enemy.isHit( worldPos );
             if ( !hit ) continue;
 
             enemy.hit();
@@ -86,7 +86,7 @@ public final class Bomb extends WorldObject
     private void checkIfPlayerHit( final GameModel aGameModel )
         {
         final Player player = aGameModel.player;
-        final int hitKind = player.isHit( worldPosFixed );
+        final int hitKind = player.isHit( worldPos );
         if ( hitKind != Player.NOT_HIT )
             {
             player.hit( hitKind );

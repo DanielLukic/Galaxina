@@ -1,24 +1,24 @@
 package net.intensicode.galaxina.domain;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class PositionEx extends Position implements GroupEntry
+public class PositionEx extends PositionF implements GroupEntry
     {
     public PositionEx()
         {
         }
 
-    public PositionEx( int aX, int aY )
+    public PositionEx( final float aX, final float aY )
         {
         x = aX;
         y = aY;
         }
 
-    public PositionEx( final Position aPosition )
+    public PositionEx( final PositionF aPosition )
         {
         super( aPosition );
         }
@@ -27,13 +27,13 @@ public class PositionEx extends Position implements GroupEntry
 
     public final void load( final DataInputStream aInputStream ) throws IOException
         {
-        x = aInputStream.readInt();
-        y = aInputStream.readInt();
+        x = aInputStream.readFloat();
+        y = aInputStream.readFloat();
         }
 
     public final void save( final DataOutputStream aOutputStream ) throws IOException
         {
-        aOutputStream.writeInt( x );
-        aOutputStream.writeInt( y );
+        aOutputStream.writeFloat( x );
+        aOutputStream.writeFloat( y );
         }
     }

@@ -11,43 +11,50 @@ public final class World extends GameObject
 
     public final Size pixelSize = new Size();
 
-    public final Size sizeFixed = new Size();
+    public final SizeF size = new SizeF();
 
-    public final Size visibleSizeFixed = new Size();
+    public final SizeF visibleSize = new SizeF();
 
 
     public World( final int aScreenWidth, final int aScreenHeight )
         {
         pixelSize.setTo( aScreenWidth, aScreenHeight );
-        sizeFixed.width = FixedMath.toFixed( aScreenWidth );
-        sizeFixed.height = FixedMath.toFixed( aScreenHeight );
-        visibleSizeFixed.width = sizeFixed.width * 3 / 4;
-        visibleSizeFixed.height = sizeFixed.height * 3 / 4;
+        size.width = aScreenWidth;
+        size.height = aScreenHeight;
+        visibleSize.width = size.width * 3 / 4;
+        visibleSize.height = size.height * 3 / 4;
         }
 
-    public boolean isInside( final Position aWorldPosFixed )
+    public boolean isInside( final Position aWorldPos )
         {
-        if ( Math.abs( aWorldPosFixed.x ) > sizeFixed.width / 2 ) return false;
-        if ( Math.abs( aWorldPosFixed.y ) > sizeFixed.height / 2 ) return false;
+        if ( Math.abs( aWorldPos.x ) > size.width / 2 ) return false;
+        if ( Math.abs( aWorldPos.y ) > size.height / 2 ) return false;
         return true;
         }
 
-    public final Position relativeToWorld( final Position aRelativePosition )
+    public boolean isInside( final PositionF aWorldPos )
+        {
+        if ( Math.abs( aWorldPos.x ) > size.width / 2 ) return false;
+        if ( Math.abs( aWorldPos.y ) > size.height / 2 ) return false;
+        return true;
+        }
+
+    public final PositionF relativeToWorld( final Position aRelativePosition )
         {
         return relativeToWorld( aRelativePosition.x, aRelativePosition.y );
         }
 
-    public final Position relativeToWorld( final int aRelativeX, final int aRelativeY )
+    public final PositionF relativeToWorld( final int aRelativeX, final int aRelativeY )
         {
-        myTempPos.x = aRelativeX * sizeFixed.width / ONE_HUNDRED_PERCENT_ON_BOTH_SIDES;
-        myTempPos.y = aRelativeY * sizeFixed.height / ONE_HUNDRED_PERCENT_ON_BOTH_SIDES;
+        myTempPos.x = aRelativeX * size.width / ONE_HUNDRED_PERCENT_ON_BOTH_SIDES;
+        myTempPos.y = aRelativeY * size.height / ONE_HUNDRED_PERCENT_ON_BOTH_SIDES;
         return myTempPos;
         }
 
-    public final Position editorToWorld( final int aEditorX, final int aEditorY )
+    public final PositionF editorToWorld( final int aEditorX, final int aEditorY )
         {
-        myTempPos.x = aEditorX * visibleSizeFixed.width / EDITOR_WORLD_WIDTH - visibleSizeFixed.width / 2;
-        myTempPos.y = aEditorY * visibleSizeFixed.height / EDITOR_WORLD_HEIGHT - visibleSizeFixed.height / 2;
+        myTempPos.x = aEditorX * visibleSize.width / EDITOR_WORLD_WIDTH - visibleSize.width / 2;
+        myTempPos.y = aEditorY * visibleSize.height / EDITOR_WORLD_HEIGHT - visibleSize.height / 2;
         return myTempPos;
         }
 
@@ -66,7 +73,7 @@ public final class World extends GameObject
         }
 
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
 
-    private static final int ONE_HUNDRED_PERCENT_ON_BOTH_SIDES = 200;
+    private static final float ONE_HUNDRED_PERCENT_ON_BOTH_SIDES = 200;
     }

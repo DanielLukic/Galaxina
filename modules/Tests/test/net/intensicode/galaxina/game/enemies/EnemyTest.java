@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.game.enemies;
 
 import junit.framework.TestCase;
-import net.intensicode.util.FixedMath;
 import net.intensicode.galaxina.game.objects.Enemy;
 
 public final class EnemyTest extends TestCase
@@ -23,9 +22,9 @@ public final class EnemyTest extends TestCase
 
     private final int getDelta( final int aTo, final int aFrom )
         {
-        final int toFixed = FixedMath.toFixed( aTo );
-        final int fromFixed = FixedMath.toFixed( aFrom );
-        final int delta = Enemy.getDirectionDelta( toFixed, fromFixed );
-        return FixedMath.toIntRounded( delta );
+        final float to = ( aTo );
+        final float from = ( aFrom );
+        final float delta = Enemy.getDirectionDelta( to, from );
+        return Math.round( delta );
         }
     }

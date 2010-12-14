@@ -7,7 +7,7 @@ import net.intensicode.util.*;
 
 public final class EnemyType
     {
-    public final Size sizeInWorldFixed = new Size();
+    public final SizeF sizeInWorld = new SizeF();
 
     public int extraID = ExtraTypes.NO_EXTRA;
 
@@ -37,7 +37,7 @@ public final class EnemyType
         myBehaviors.add( aBehavior );
         }
 
-    public final EnemyWeapon createWeapon( final Position aParentPosition )
+    public final EnemyWeapon createWeapon( final PositionF aParentPosition )
         {
         try
             {
@@ -59,9 +59,9 @@ public final class EnemyType
         return baseScore + ( aModel.level.numberStartingAt1 - 1 ) * baseScore / 10;
         }
 
-    public final int getSpeedFixed( final GameModel aModel )
+    public final float getSpeed( final GameModel aModel )
         {
-        return baseSpeed * aModel.world.visibleSizeFixed.height / 100 / GameObject.timing.ticksPerSecond;
+        return baseSpeed * aModel.world.visibleSize.height / 100 / GameObject.timing.ticksPerSecond;
         }
 
     public final void tickEnteringBehaviors( final Enemy aEnemy )

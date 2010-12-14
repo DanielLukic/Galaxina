@@ -31,8 +31,8 @@ public final class EnemiesDrawer extends ScreenBase
             imageName.append( idx + 1 );
 
             final SpriteGenerator sprite = myEnemyGenerators[ idx ] = skin.sprite( imageName.toString() );
-            final Size sizeInWorld = myGameContext.camera().toWorldSize( sprite.getWidth(), sprite.getHeight() );
-            enemyTypes[ idx ].sizeInWorldFixed.setTo( sizeInWorld );
+            final SizeF sizeInWorld = myGameContext.camera().toWorldSize( sprite.getWidth(), sprite.getHeight() );
+            enemyTypes[ idx ].sizeInWorld.setTo( sizeInWorld );
             }
         }
 
@@ -59,11 +59,11 @@ public final class EnemiesDrawer extends ScreenBase
     private void drawEnemy( final DirectGraphics aGraphics, final Enemy aEnemy )
         {
         final Camera camera = myGameContext.camera();
-        final Position screenPos = camera.toScreen( aEnemy.worldPosFixed );
+        final Position screenPos = camera.toScreen( aEnemy.worldPos );
 
         final SpriteGenerator sprite = myEnemyGenerators[ aEnemy.type.typeID ];
         final int directionSteps = sprite.getFrameSequenceLength();
-        final int direction = FixedMath.toIntRounded( aEnemy.directionInDegreesFixed );
+        final int direction = MathExtended.round( aEnemy.directionInDegrees );
         final int directionIndex = UtilitiesEx.getDirectionID( direction + 45, directionSteps );
         sprite.setFrame( directionIndex % directionSteps );
         sprite.paint( aGraphics, screenPos.x, screenPos.y );

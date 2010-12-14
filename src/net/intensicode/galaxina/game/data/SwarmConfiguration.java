@@ -18,7 +18,7 @@ public final class SwarmConfiguration
 
     public EnemyConfiguration[] enemies;
 
-    public Position[] formation;
+    public PositionF[] formation;
 
 
     public final void load( final DataInputStream aInputStream ) throws IOException
@@ -42,7 +42,7 @@ public final class SwarmConfiguration
         return pathes[ aFormationIndex % pathes.length ];
         }
 
-    public final Position formationPositionFor( final int aFormationIndex )
+    public final PositionF formationPositionFor( final int aFormationIndex )
         {
         return formation[ aFormationIndex % formation.length ];
         }
@@ -78,13 +78,13 @@ public final class SwarmConfiguration
     private void loadPositions( final DataInputStream aInputStream ) throws IOException
         {
         final int count = aInputStream.readInt();
-        formation = new Position[count];
+        formation = new PositionF[count];
         for ( int idx = 0; idx < count; idx++ )
             {
             final int x = aInputStream.readInt();
             final int y = aInputStream.readInt();
-            final Position position = GameObject.model.world.editorToWorld( x, y );
-            formation[ idx ] = new Position( position );
+            final PositionF position = GameObject.model.world.editorToWorld( x, y );
+            formation[ idx ] = new PositionF( position );
             }
         }
 

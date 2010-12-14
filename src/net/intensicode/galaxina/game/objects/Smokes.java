@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.*;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class Smokes extends GameObject
     {
@@ -13,14 +13,14 @@ public final class Smokes extends GameObject
         for ( int idx = 0; idx < smokes.length; idx++ ) smokes[ idx ] = new WorldObjectWithSpeed();
         }
 
-    public final void add( final Position aWorldPosFixed )
+    public final void add( final PositionF aWorldPosFixed )
         {
-        final int speedValue = model.world.visibleSizeFixed.height / 4;
-        final int fallingSpeedFixed = speedValue / timing.ticksPerSecond;
+        final float speedValue = model.world.visibleSize.height / 4;
+        final float fallingSpeedFixed = speedValue / timing.ticksPerSecond;
         add( aWorldPosFixed, 0, fallingSpeedFixed );
         }
 
-    public final void add( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+    public final void add( final PositionF aWorldPosFixed, final float aSpeedX, final float aSpeedY )
         {
         final WorldObjectWithSpeed smoke = getInstance();
         smoke.init( aWorldPosFixed, aSpeedX, aSpeedY );

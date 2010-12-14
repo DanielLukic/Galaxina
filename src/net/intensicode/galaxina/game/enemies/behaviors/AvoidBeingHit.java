@@ -26,15 +26,15 @@ public final class AvoidBeingHit extends EnemyBehavior
         {
         final EnemyPath path = new EnemyPath( model.world );
 
-        myTempPos.setTo( aEnemy.worldPosFixed );
+        myTempPos.setTo( aEnemy.worldPos );
         path.addWorldPos( myTempPos );
 
-        final Size size = aEnemy.type.sizeInWorldFixed;
+        final SizeF size = aEnemy.type.sizeInWorld;
 
-        final int playerDelta = model.player.worldPosFixed.x - aEnemy.worldPosFixed.x;
+        final float playerDelta = model.player.worldPos.x - aEnemy.worldPos.x;
         final int sign = playerDelta > 0 ? 1 : -1;
-        final int xDelta = sign * ( myRandom.nextInt( size.width * 4 ) - size.width * 2 );
-        final int yDelta = myRandom.nextInt( size.height ) + size.height;
+        final float xDelta = sign * ( myRandom.nextFloat( size.width * 4 ) - size.width * 2 );
+        final float yDelta = myRandom.nextFloat( size.height ) + size.height;
 
         myTempPos.x += xDelta;
         myTempPos.y -= yDelta;
@@ -57,7 +57,7 @@ public final class AvoidBeingHit extends EnemyBehavior
 
 
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
 
     private static final Random myRandom = new Random( 1704 );
     }

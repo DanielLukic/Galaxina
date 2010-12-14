@@ -3,7 +3,7 @@ package net.intensicode.galaxina.ui.actions.pathEditor;
 import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.Path;
 import net.intensicode.galaxina.ui.actions.RunnableAction;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class MirrorY extends RunnableAction implements EditorStateListener
     {
@@ -18,7 +18,7 @@ public final class MirrorY extends RunnableAction implements EditorStateListener
     public final void run()
         {
         final Path path = myCoreAPI.state().currentPath();
-        for ( final Position pos : path.positions() )
+        for ( final PositionF pos : path.positions() )
             {
             pos.y = myCoreAPI.gameScreenHeight() - pos.y;
             }

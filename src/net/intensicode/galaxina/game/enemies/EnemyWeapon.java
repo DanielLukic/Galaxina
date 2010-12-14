@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.enemies;
 
 import net.intensicode.core.*;
 import net.intensicode.galaxina.game.GameModel;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public abstract class EnemyWeapon
     {
@@ -14,7 +14,7 @@ public abstract class EnemyWeapon
 
     public abstract void onControlTick();
 
-    public abstract void attachTo( final Position aParentPosition );
+    public abstract void attachTo( final PositionF aParentPosition );
 
     public abstract boolean canFire();
 

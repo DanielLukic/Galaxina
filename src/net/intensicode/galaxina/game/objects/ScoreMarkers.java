@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.util.Position;
-import net.intensicode.util.DynamicArray;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.GameObject;
 
 public final class ScoreMarkers extends GameObject
@@ -9,7 +8,7 @@ public final class ScoreMarkers extends GameObject
     public final DynamicArray scoreTags = new DynamicArray();
 
 
-    public final void add( final Position aPosition, final int aScore )
+    public final void add( final PositionF aPosition, final int aScore )
         {
         scoreTags.add( new ScoreTag( aPosition, aScore, timing.ticksPerSecond ) );
         }

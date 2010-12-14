@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.enemies.controllers;
 
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class PositioningController extends EnemyController
     {
@@ -17,8 +17,8 @@ public final class PositioningController extends EnemyController
 
     public final void onControlTick( final Enemy aEnemy )
         {
-        final Position targetPos = aEnemy.getBreathPos( true );
-        final Position currentPos = aEnemy.worldPosFixed;
+        final PositionF targetPos = aEnemy.getBreathPos( true );
+        final PositionF currentPos = aEnemy.worldPos;
         myTempPos.x = targetPos.x - currentPos.x;
         myTempPos.y = targetPos.y - currentPos.y;
         aEnemy.moveByDirection( myTempPos );
@@ -26,5 +26,5 @@ public final class PositioningController extends EnemyController
         if ( aEnemy.isCloseTo( targetPos ) ) aEnemy.setController( Enemy.BREATHING );
         }
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
     }

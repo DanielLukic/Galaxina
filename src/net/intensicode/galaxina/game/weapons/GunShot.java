@@ -8,15 +8,15 @@ import net.intensicode.util.*;
 
 public final class GunShot extends WorldObject
     {
-    public int speedFixed;
+    public float speed;
 
     public Weapon source;
 
 
-    public final GunShot init( final Position aStartPosition, final int aFixedSpeed )
+    public final GunShot init( final PositionF aStartPosition, final float aSpeed )
         {
-        worldPosFixed.setTo( aStartPosition );
-        speedFixed = aFixedSpeed;
+        worldPos.setTo( aStartPosition );
+        speed = aSpeed;
         active = true;
         myCollisionCheckSteps = GameObject.model.configuration.readInt( "GunShot.CollisionCheckSteps", DEFAULT_COLLISION_CHECK_STEPS );
         return this;
@@ -26,13 +26,13 @@ public final class GunShot extends WorldObject
         {
         if ( !active ) return;
 
-        final int speedStepFixed = speedFixed / myCollisionCheckSteps;
+        final float speedStep = speed / myCollisionCheckSteps;
         for ( int step = 0; step < myCollisionCheckSteps; step++ )
             {
-            worldPosFixed.y -= speedStepFixed;
+            worldPos.y -= speedStep;
 
             final World world = aGameModel.world;
-            active = world.isInside( worldPosFixed );
+            active = world.isInside( worldPos );
             if ( !active )
                 {
                 if ( source != null ) source.onProjectileDone( this );
@@ -45,7 +45,7 @@ public final class GunShot extends WorldObject
                 final Enemy enemy = (Enemy) enemies.objects[ idx ];
                 if ( !enemy.active ) continue;
 
-                final boolean hit = enemy.isHit( worldPosFixed );
+                final boolean hit = enemy.isHit( worldPos );
                 if ( !hit ) continue;
 
                 enemy.hit();

@@ -11,7 +11,7 @@ public final class Swarm
     /**
      * Shared position for showing a swarm bonus.
      */
-    public final Position lastHitPosition = new Position();
+    public final PositionF lastHitPosition = new PositionF();
 
     public boolean isComplete = false;
 

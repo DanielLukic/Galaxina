@@ -1,8 +1,7 @@
 package net.intensicode;
 
 import net.intensicode.path.Interpolation;
-import net.intensicode.util.FixedMath;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,9 +9,6 @@ import java.awt.Graphics2D;
 
 
 
-/**
- * TODO: Describe this!
- */
 final class InterpolationPlotter implements VisualLayer
 {
     InterpolationPlotter( final Interpolation aCurveInterpolation )
@@ -34,9 +30,9 @@ final class InterpolationPlotter implements VisualLayer
         final int size = myCurveInterpolation.getNumberOfInputPositions();
         for ( int idx = 0; idx < size; idx++ )
         {
-            final Position point = myCurveInterpolation.getInputPosition( idx );
-            final int x = FixedMath.toInt( point.x );
-            final int y = FixedMath.toInt( point.y );
+            final PositionF point = myCurveInterpolation.getInputPosition( idx );
+            final int x = (int) point.x;
+            final int y = (int) point.y;
             aGraphics2D.drawRect( x - halfSize, y - halfSize, pointSize, pointSize );
         }
     }

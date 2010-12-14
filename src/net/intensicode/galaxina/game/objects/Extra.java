@@ -2,13 +2,12 @@ package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.galaxina.game.extras.ExtraType;
 import net.intensicode.galaxina.game.*;
-import net.intensicode.util.Position;
-import net.intensicode.util.Rectangle;
+import net.intensicode.util.*;
 import net.intensicode.core.GameTiming;
 
 public final class Extra extends WorldObject
     {
-    public final Position speedFixed = new Position();
+    public final PositionF speed = new PositionF();
 
     public static GameTiming timing;
 
@@ -20,20 +19,20 @@ public final class Extra extends WorldObject
         {
         }
 
-    public final void init( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+    public final void init( final PositionF aWorldPos, final float aSpeedX, final float aSpeedY )
         {
         active = true;
         tickCount = 0;
         animTicks = timing.ticksPerSecond / 2;
 
-        speedFixed.x = aSpeedX;
-        speedFixed.y = aSpeedY;
-        worldPosFixed.setTo( aWorldPosFixed );
+        speed.x = aSpeedX;
+        speed.y = aSpeedY;
+        worldPos.setTo( aWorldPos );
         }
 
-    public final void init( final Position aWorldPosFixed, final int aDropSpeedFixed )
+    public final void init( final PositionF aWorldPos, final float aDropSpeed )
         {
-        init( aWorldPosFixed, 0, aDropSpeedFixed );
+        init( aWorldPos, 0, aDropSpeed );
         }
 
     public final void onControlTick( final GameModel aGameModel )
@@ -42,11 +41,11 @@ public final class Extra extends WorldObject
 
         tickAnimation();
 
-        worldPosFixed.translate( speedFixed );
-        myRect.setCenterAndSize( worldPosFixed, aGameModel.extras.sizeInWorldFixed );
+        worldPos.translate( speed );
+        myRect.setCenterAndSize( worldPos, aGameModel.extras.sizeInWorld );
 
         final World world = aGameModel.world;
-        active = world.isInside( worldPosFixed );
+        active = world.isInside( worldPos );
 
         checkIfCaught( aGameModel );
         }
@@ -62,7 +61,7 @@ public final class Extra extends WorldObject
             if ( applied )
                 {
                 aGameModel.infoFlash.show( type.name );
-                aGameModel.explosions.addSpecial( worldPosFixed );
+                aGameModel.explosions.addSpecial( worldPos );
                 }
             else
                 {
@@ -70,7 +69,7 @@ public final class Extra extends WorldObject
                 myMessage.append( type.name );
                 myMessage.append( " REJECTED" );
                 aGameModel.infoFlash.show( myMessage.toString() );
-                aGameModel.smokes.add( worldPosFixed );
+                aGameModel.smokes.add( worldPos );
                 }
             active = false;
             }
@@ -78,7 +77,7 @@ public final class Extra extends WorldObject
 
 
 
-    private final Rectangle myRect = new Rectangle();
+    private final RectangleF myRect = new RectangleF();
 
     private final StringBuffer myMessage = new StringBuffer();
     }

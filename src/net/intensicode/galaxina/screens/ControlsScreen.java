@@ -4,6 +4,7 @@ import net.intensicode.core.*;
 import net.intensicode.galaxina.*;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.screens.AlignedTextScreen;
+import net.intensicode.touch.*;
 import net.intensicode.util.*;
 
 public final class ControlsScreen extends GalaxinaScreen implements TouchableHandler

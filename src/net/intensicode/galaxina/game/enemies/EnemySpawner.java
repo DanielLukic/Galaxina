@@ -198,7 +198,7 @@ public final class EnemySpawner extends GameObject
         final boolean normalLevel = !configuration.isChallengingState;
         if ( normalLevel )
             {
-            final Position position = config.formationPositionFor( myCurrentEnemyIndex );
+            final PositionF position = config.formationPositionFor( myCurrentEnemyIndex );
             enemy.init( type, path, position );
             }
         else
@@ -209,8 +209,8 @@ public final class EnemySpawner extends GameObject
         for ( int idx = 0; idx < 3; idx++ )
             {
             myWarpPos.setTo( path.getStartPosition() );
-            myWarpPos.x += myRandom.nextInt( type.sizeInWorldFixed.width ) - type.sizeInWorldFixed.width / 2;
-            myWarpPos.y += myRandom.nextInt( type.sizeInWorldFixed.height ) - type.sizeInWorldFixed.height / 2;
+            myWarpPos.x += myRandom.nextFloat( type.sizeInWorld.width ) - type.sizeInWorld.width / 2;
+            myWarpPos.y += myRandom.nextFloat( type.sizeInWorld.height ) - type.sizeInWorld.height / 2;
             model.warps.add( myWarpPos, 0, 0 );
             }
 
@@ -263,7 +263,7 @@ public final class EnemySpawner extends GameObject
 
     private final Random myRandom = Random.INSTANCE;
 
-    private final Position myWarpPos = new Position();
+    private final PositionF myWarpPos = new PositionF();
 
 
     private static final int STATE_INITIALIZING = 0;

@@ -10,10 +10,10 @@ public final class SimpleParticles extends GameObject
 
     public SimpleParticles()
         {
-        this( DEFAULT_MAX_INSTANCES, FixedMath.FIXED_1, false );
+        this( DEFAULT_MAX_INSTANCES, 1, false );
         }
 
-    public SimpleParticles( final int aMaxCount, final int aAnimDurationInSecondsFixed, final boolean aRepeatAnimation )
+    public SimpleParticles( final int aMaxCount, final float aAnimDurationInSeconds, final boolean aRepeatAnimation )
         {
         instances = new WorldObjectWithSpeed[DEFAULT_MAX_INSTANCES];
         for ( int idx = 0; idx < DEFAULT_MAX_INSTANCES; idx++ )
@@ -21,14 +21,14 @@ public final class SimpleParticles extends GameObject
             instances[ idx ] = new WorldObjectWithSpeed();
             instances[ idx ].repeatAnimation = aRepeatAnimation;
             }
-        myAnimDurationInSecondsFixed = aAnimDurationInSecondsFixed;
+        myAnimDurationInSeconds = aAnimDurationInSeconds;
         }
 
-    public final void add( final Position aWorldPosFixed, final int aSpeedX, final int aSpeedY )
+    public final void add( final PositionF aWorldPos, final float aSpeedX, final float aSpeedY )
         {
         final WorldObjectWithSpeed warp = getInstance();
-        warp.init( aWorldPosFixed, aSpeedX, aSpeedY );
-        warp.animTicks = FixedMath.toInt( timing.ticksPerSecond * myAnimDurationInSecondsFixed );
+        warp.init( aWorldPos, aSpeedX, aSpeedY );
+        warp.animTicks = (int) (timing.ticksPerSecond * myAnimDurationInSeconds);
         }
 
     // From GameObject
@@ -76,7 +76,7 @@ public final class SimpleParticles extends GameObject
         }
 
 
-    private final int myAnimDurationInSecondsFixed;
+    private final float myAnimDurationInSeconds;
 
     private static final int DEFAULT_MAX_INSTANCES = 32;
     }

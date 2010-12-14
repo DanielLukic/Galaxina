@@ -6,7 +6,7 @@ import net.intensicode.galaxina.UiConfiguration;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.domain.ListOfPositions;
 import net.intensicode.galaxina.ui.logic.CoordinateTransformer;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -103,9 +103,9 @@ public class SwarmLayer implements VisualLayer, Identifiers, Runnable
         final ListOfPositions positions = mySwarm.positions();
         for ( int idx = 0; idx < positions.size(); idx++ )
             {
-            final Position position = positions.at( idx );
-            final int x = position.x - halfMarkerSize;
-            final int y = position.y - halfMarkerSize;
+            final PositionF position = positions.at( idx );
+            final int x = (int) (position.x - halfMarkerSize);
+            final int y = (int) (position.y - halfMarkerSize);
             aGraphics2D.setColor( myMarkerColor );
             aGraphics2D.fillRect( x, y, markerSize, markerSize );
             if ( aGraphics2D.getFont() != null )

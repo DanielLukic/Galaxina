@@ -67,9 +67,9 @@ public final class Level extends GameObject
         return !isChallengingStage();
         }
 
-    public final int getGunShotSpeed()
+    public final float getGunShotSpeed()
         {
-        return 2 * GameObject.model.world.visibleSizeFixed.height / GameObject.timing.ticksPerSecond;
+        return 2 * GameObject.model.world.visibleSize.height / GameObject.timing.ticksPerSecond;
         }
 
     // From GameObject

@@ -105,10 +105,6 @@ public final class MainController extends ScreenBase implements LoadingCallback,
         myHiscore = new Hiscore();
         tryLoading( myHiscore );
 
-        //#if TRACKBALL
-        system().trackball.silenceBeforeUpdateInMillis = 0;
-        //#endif
-
         system().context.loadConfigurableValues();
         }
 

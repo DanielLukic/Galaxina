@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.game.weapons;
 
 import net.intensicode.galaxina.game.*;
-import net.intensicode.util.FixedMath;
 
 public final class HomingMissile extends SecondaryWeapon
     {
@@ -42,9 +41,9 @@ public final class HomingMissile extends SecondaryWeapon
         final GameModel model = GameObject.model;
         if ( remainingShots == 0 ) deactivate();
 
-        final Missile missile = model.missiles.prepare( model.player.worldPosFixed );
-        missile.directionFixed.x = 0;
-        missile.directionFixed.y = -FixedMath.FIXED_1;
+        final Missile missile = model.missiles.prepare( model.player.worldPos );
+        missile.direction.x = 0;
+        missile.direction.y = -1;
         missile.playerOwned = true;
         missile.homing = true;
         missile.launch();

@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.GameObject;
 
 
@@ -14,47 +14,47 @@ public final class Explosions extends GameObject
         for ( int idx = 0; idx < explosions.length; idx++ ) explosions[ idx ] = new Explosion();
         }
 
-    public final void addBig( final Position aWorldPosFixed )
+    public final void addBig( final PositionF aWorldPos )
         {
         final Explosion explosion = getExplosion();
 
-        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, 0 );
+        explosion.init( aWorldPos, timing.ticksPerSecond / 2, 0 );
         explosion.type = Explosion.BIG;
         }
 
-    public final void addNormal( final Position aWorldPosFixed )
+    public final void addNormal( final PositionF aWorldPos )
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 10 / timing.ticksPerSecond;
-        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, driftSpeedFixed );
+        final float driftSpeed = model.world.visibleSize.height / 10 / timing.ticksPerSecond;
+        explosion.init( aWorldPos, timing.ticksPerSecond / 2, driftSpeed );
         explosion.type = Explosion.DEFAULT;
         }
 
-    public final void addSpecial( final Position aWorldPosFixed )
+    public final void addSpecial( final PositionF aWorldPos )
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 10 / timing.ticksPerSecond;
-        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, -driftSpeedFixed );
+        final float driftSpeed = model.world.visibleSize.height / 10 / timing.ticksPerSecond;
+        explosion.init( aWorldPos, timing.ticksPerSecond / 2, -driftSpeed );
         explosion.type = Explosion.SPECIAL;
         }
 
-    public final void addForPlayer( final Position aWorldPosFixed )
+    public final void addForPlayer( final PositionF aWorldPos )
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 12 / timing.ticksPerSecond;
-        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, -driftSpeedFixed );
+        final float driftSpeed = model.world.visibleSize.height / 12 / timing.ticksPerSecond;
+        explosion.init( aWorldPos, timing.ticksPerSecond / 2, -driftSpeed );
         explosion.type = Explosion.DEFAULT;
         }
 
-    public final void addBigPlayer( final Position aWorldPosFixed )
+    public final void addBigPlayer( final PositionF aWorldPos )
         {
         final Explosion explosion = getExplosion();
 
-        final int driftSpeedFixed = model.world.visibleSizeFixed.height / 12 / timing.ticksPerSecond;
-        explosion.init( aWorldPosFixed, timing.ticksPerSecond / 2, -driftSpeedFixed );
+        final float driftSpeed = model.world.visibleSize.height / 12 / timing.ticksPerSecond;
+        explosion.init( aWorldPos, timing.ticksPerSecond / 2, -driftSpeed );
         explosion.type = Explosion.BIG;
         }
 

@@ -33,7 +33,7 @@ public final class MarkerPositionUpdater extends TextFieldUpdater implements Edi
         myMarker = (SelectedMarker) aNewValue;
         if ( myMarker != null )
             {
-            myTextField.setText( Integer.toString( getRawValue() ) );
+            myTextField.setText( Float.toString( getRawValue() ) );
             myTextField.setEditable( true );
             myTextField.setEnabled( true );
             }
@@ -49,7 +49,7 @@ public final class MarkerPositionUpdater extends TextFieldUpdater implements Edi
     protected final String getOldValue()
         {
         if ( myMarker == null ) return null;
-        return Integer.toString( getRawValue() );
+        return Float.toString( getRawValue() );
         }
 
     protected final void setNewValue( final String aNewValue )
@@ -60,7 +60,7 @@ public final class MarkerPositionUpdater extends TextFieldUpdater implements Edi
 
     // Implementation
 
-    private final int getRawValue()
+    private final float getRawValue()
         {
         if ( myOrdinateID == ORDINATE_X ) return myMarker.marker.x;
         if ( myOrdinateID == ORDINATE_Y ) return myMarker.marker.y;

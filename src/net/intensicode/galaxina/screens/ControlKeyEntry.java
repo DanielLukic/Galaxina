@@ -3,6 +3,7 @@ package net.intensicode.galaxina.screens;
 import net.intensicode.core.*;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.screens.ScreenBase;
+import net.intensicode.touch.TouchableArea;
 import net.intensicode.util.*;
 
 final class ControlKeyEntry extends ScreenBase

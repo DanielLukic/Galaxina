@@ -1,7 +1,6 @@
 package net.intensicode.galaxina.game.objects;
 
-import net.intensicode.util.Position;
-import net.intensicode.util.Size;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.GameObject;
 
 public final class Sparks extends GameObject
@@ -15,10 +14,10 @@ public final class Sparks extends GameObject
         for ( int idx = 0; idx < sparks.length; idx++ ) sparks[ idx ] = new Spark();
         }
 
-    public final void add( final Position aWorldPosFixed, final Size aSparkArea )
+    public final void add( final PositionF aWorldPos, final SizeF aSparkArea )
         {
         final Spark spark = getSpark();
-        spark.init( aWorldPosFixed, timing.ticksPerSecond /3);
+        spark.init( aWorldPos, timing.ticksPerSecond /3);
         spark.randomize( aSparkArea );
         }
 

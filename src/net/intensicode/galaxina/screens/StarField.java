@@ -8,11 +8,11 @@ import net.intensicode.util.*;
 
 public final class StarField extends ScreenBase
     {
-    public int xMoveFixed;
+    public float xMove;
 
-    public int yMoveFixed;
+    public float yMove;
 
-    public int zMoveFixed;
+    public float zMove;
 
 
     public StarField( final int aNumberOfStars, final CharGenerator aStarsGenerator )
@@ -29,9 +29,9 @@ public final class StarField extends ScreenBase
             }
 
         myNumberOfStars = aNumberOfStars;
-        myStarsX = new int[myNumberOfStars];
-        myStarsY = new int[myNumberOfStars];
-        myStarsZ = new int[myNumberOfStars];
+        myStarsX = new float[myNumberOfStars];
+        myStarsY = new float[myNumberOfStars];
+        myStarsZ = new float[myNumberOfStars];
 
         final Random random = new Random();
         for ( int idx = 0; idx < myNumberOfStars; idx++ )
@@ -42,36 +42,36 @@ public final class StarField extends ScreenBase
             }
         }
 
-    public final void changeMovement( final int aFixedX, final int aFixedY, final int aFixedZ )
+    public final void changeMovement( final float aX, final float aY, final float aZ )
         {
         myState = CHANGE_MOVEMENT;
-        myNewFixedX = aFixedX;
-        myNewFixedY = aFixedY;
-        myNewFixedZ = aFixedZ;
+        myNewX = aX;
+        myNewY = aY;
+        myNewZ = aZ;
 
         final int ticksForChange = timing().ticksPerSecond * 2;
-        myChangeFixedX = ( myNewFixedX - xMoveFixed ) / ticksForChange;
-        myChangeFixedY = ( myNewFixedY - yMoveFixed ) / ticksForChange;
-        myChangeFixedZ = ( myNewFixedZ - zMoveFixed ) / ticksForChange;
-        if ( myChangeFixedX == 0 && myNewFixedX < xMoveFixed ) myChangeFixedX = -1;
-        if ( myChangeFixedX == 0 && myNewFixedX > xMoveFixed ) myChangeFixedX = +1;
-        if ( myChangeFixedY == 0 && myNewFixedY < yMoveFixed ) myChangeFixedY = -1;
-        if ( myChangeFixedY == 0 && myNewFixedY > yMoveFixed ) myChangeFixedY = +1;
-        if ( myChangeFixedZ == 0 && myNewFixedZ < zMoveFixed ) myChangeFixedZ = -1;
-        if ( myChangeFixedZ == 0 && myNewFixedZ > zMoveFixed ) myChangeFixedZ = +1;
+        myChangeX = ( myNewX - xMove ) / ticksForChange;
+        myChangeY = ( myNewY - yMove ) / ticksForChange;
+        myChangeZ = ( myNewZ - zMove ) / ticksForChange;
+        if ( myChangeX == 0 && myNewX < xMove ) myChangeX = -1;
+        if ( myChangeX == 0 && myNewX > xMove ) myChangeX = +1;
+        if ( myChangeY == 0 && myNewY < yMove ) myChangeY = -1;
+        if ( myChangeY == 0 && myNewY > yMove ) myChangeY = +1;
+        if ( myChangeZ == 0 && myNewZ < zMove ) myChangeZ = -1;
+        if ( myChangeZ == 0 && myNewZ > zMove ) myChangeZ = +1;
         }
 
-    private int myNewFixedX;
+    private float myNewX;
 
-    private int myNewFixedY;
+    private float myNewY;
 
-    private int myNewFixedZ;
+    private float myNewZ;
 
-    private int myChangeFixedX;
+    private float myChangeX;
 
-    private int myChangeFixedY;
+    private float myChangeY;
 
-    private int myChangeFixedZ;
+    private float myChangeZ;
 
     private int myState = MOVING;
 
@@ -111,34 +111,34 @@ public final class StarField extends ScreenBase
         {
         for ( int idx = 0; idx < myNumberOfStars; idx++ )
             {
-            myStarsX[ idx ] = move( myStarsX[ idx ], xMoveFixed );
-            myStarsY[ idx ] = move( myStarsY[ idx ], yMoveFixed );
-            myStarsZ[ idx ] = move( myStarsZ[ idx ], zMoveFixed );
+            myStarsX[ idx ] = move( myStarsX[ idx ], xMove );
+            myStarsY[ idx ] = move( myStarsY[ idx ], yMove );
+            myStarsZ[ idx ] = move( myStarsZ[ idx ], zMove );
             }
         }
 
     private void onChangeMovement()
         {
-        xMoveFixed = update( xMoveFixed, myNewFixedX, myChangeFixedX );
-        yMoveFixed = update( yMoveFixed, myNewFixedY, myChangeFixedY );
-        zMoveFixed = update( zMoveFixed, myNewFixedZ, myChangeFixedZ );
+        xMove = update( xMove, myNewX, myChangeX );
+        yMove = update( yMove, myNewY, myChangeY );
+        zMove = update( zMove, myNewZ, myChangeZ );
         onMoving();
-        if ( !closeEnough( xMoveFixed, myNewFixedX, myChangeFixedX ) ) return;
-        if ( !closeEnough( yMoveFixed, myNewFixedY, myChangeFixedY ) ) return;
-        if ( !closeEnough( zMoveFixed, myNewFixedZ, myChangeFixedZ ) ) return;
-        xMoveFixed = myNewFixedX;
-        yMoveFixed = myNewFixedY;
-        zMoveFixed = myNewFixedZ;
+        if ( !closeEnough( xMove, myNewX, myChangeX ) ) return;
+        if ( !closeEnough( yMove, myNewY, myChangeY ) ) return;
+        if ( !closeEnough( zMove, myNewZ, myChangeZ ) ) return;
+        xMove = myNewX;
+        yMove = myNewY;
+        zMove = myNewZ;
         myState = MOVING;
         }
 
-    private boolean closeEnough( final int aCurrent, final int aTarget, final int aDelta )
+    private boolean closeEnough( final float aCurrent, final float aTarget, final float aDelta )
         {
         if ( Math.abs( aTarget - aCurrent ) > Math.abs( aDelta ) ) return false;
         return true;
         }
 
-    private int update( final int aCurrent, final int aTarget, final int aDelta )
+    private float update( final float aCurrent, final float aTarget, final float aDelta )
         {
         if ( Math.abs( aTarget - aCurrent ) >= Math.abs( aDelta ) ) return aCurrent + aDelta;
         return aCurrent;
@@ -149,10 +149,10 @@ public final class StarField extends ScreenBase
         final Random random = Random.INSTANCE;
         if ( random.nextInt( 32 ) > 30 )
             {
-            final int maxSpeedFixed = FixedMath.FIXED_10 / timing().ticksPerSecond;
-            final int x = random.nextInt( maxSpeedFixed ) - maxSpeedFixed / 2;
-            final int y = random.nextInt( maxSpeedFixed ) - maxSpeedFixed / 2;
-            final int z = random.nextInt( maxSpeedFixed ) - maxSpeedFixed / 2;
+            final float maxSpeed = 10f / timing().ticksPerSecond;
+            final float x = random.nextFloat( maxSpeed ) - maxSpeed / 2;
+            final float y = random.nextFloat( maxSpeed ) - maxSpeed / 2;
+            final float z = random.nextFloat( maxSpeed ) - maxSpeed / 2;
             changeMovement( x, y, z );
             }
 
@@ -161,10 +161,12 @@ public final class StarField extends ScreenBase
         myState = TUMBLING;
         }
 
-    private int move( final int aValueFixed, final int aDeltaFixed )
+    private float move( final float aValue, final float aDelta )
         {
-        final int newFixed = aValueFixed + aDeltaFixed;
-        return newFixed & ( UNIVERSE_MASK );
+        final float changed = aValue + aDelta;
+        if ( changed < UNIVERSE_SIZE ) return changed + UNIVERSE_SIZE;
+        if ( changed > UNIVERSE_SIZE ) return changed - UNIVERSE_SIZE;
+        return changed;
         }
 
     public final void onDrawFrame()
@@ -182,18 +184,18 @@ public final class StarField extends ScreenBase
             myPosition3d[ 1 ] = myStarsY[ idx ] + myViewerY;
             myPosition3d[ 2 ] = myStarsZ[ idx ] + myViewerZ;
 
-            final int[] xyz2d = doProjection( myPosition3d );
+            final float[] xyz2d = doProjection( myPosition3d );
 
-            final int x2d = xyz2d[ 0 ];
-            final int y2d = xyz2d[ 1 ];
+            final float x2d = xyz2d[ 0 ];
+            final float y2d = xyz2d[ 1 ];
             if ( x2d < 0 || x2d >= screenWidth ) continue;
             if ( y2d < 0 || y2d >= screenHeight ) continue;
 
-            final int zNew = xyz2d[ 2 ];
-            final int starIntensity = ( zNew * maxIntensity ) >> UNIVERSE_SHIFT;
-            final int shiftedIntensity = maxIntensity / 3 + starIntensity;
-            final int intensity = Math.max( 0, Math.min( maxIntensity, shiftedIntensity ) );
-            myStars[ intensity ].blit( graphics(), x2d, y2d );
+            final float zNew = xyz2d[ 2 ];
+            final float starIntensity = ( zNew * maxIntensity ) / UNIVERSE_SIZE;
+            final float shiftedIntensity = maxIntensity / 3 + starIntensity;
+            final int intensity = (int) Math.max( 0, Math.min( maxIntensity, shiftedIntensity ) );
+            myStars[ intensity ].blit( graphics(), (int) x2d, (int) y2d );
 
             maxInt = Math.max( maxInt, intensity );
             minInt = Math.min( minInt, intensity );
@@ -202,17 +204,17 @@ public final class StarField extends ScreenBase
 
     // Implementation
 
-    private int[] doProjection( final int[] aPosition3D )
+    private float[] doProjection( final float[] aPosition3D )
         {
-        final int xTemp = aPosition3D[ 0 ] & UNIVERSE_MASK;
-        final int yTemp = aPosition3D[ 1 ] & UNIVERSE_MASK;
-        final int zTemp = aPosition3D[ 2 ] & UNIVERSE_MASK;
+        final float xTemp = aPosition3D[ 0 ];
+        final float yTemp = aPosition3D[ 1 ];
+        final float zTemp = aPosition3D[ 2 ];
 
-        int z = ( zTemp - UNIVERSE_HALF ) - VIEW_PLANE;
+        float z = ( zTemp - UNIVERSE_HALF ) - VIEW_PLANE;
         if ( z == 0 ) z = 1;
 
-        final int x = ( xTemp - UNIVERSE_HALF ) * myScreenWidth;
-        final int y = ( yTemp - UNIVERSE_HALF ) * myScreenHeight;
+        final float x = ( xTemp - UNIVERSE_HALF ) * myScreenWidth;
+        final float y = ( yTemp - UNIVERSE_HALF ) * myScreenHeight;
         myPosition2dPlusNewZ[ 0 ] = x / z + myScreenCenterX;
         myPosition2dPlusNewZ[ 1 ] = y / z + myScreenCenterY;
         myPosition2dPlusNewZ[ 2 ] = zTemp;
@@ -236,25 +238,23 @@ public final class StarField extends ScreenBase
 
     private int myNumberOfStars;
 
-    private final int[] myStarsX;
+    private final float[] myStarsX;
 
-    private final int[] myStarsY;
+    private final float[] myStarsY;
 
-    private final int[] myStarsZ;
+    private final float[] myStarsZ;
 
     private final CharData[] myStars;
 
-    private final int[] myPosition3d = new int[3];
+    private final float[] myPosition3d = new float[3];
 
-    private final int[] myPosition2dPlusNewZ = new int[3];
+    private final float[] myPosition2dPlusNewZ = new float[3];
 
-    private static final int UNIVERSE_SHIFT = FixedMath.FIXED_SHIFT + 4;
+    private static final int UNIVERSE_SHIFT = 4;
 
     private static final int UNIVERSE_SIZE = 1 << UNIVERSE_SHIFT;
 
     private static final int UNIVERSE_HALF = UNIVERSE_SIZE >> 1;
-
-    private static final int UNIVERSE_MASK = UNIVERSE_SIZE - 1;
 
     private static final int VIEW_PLANE = UNIVERSE_SIZE * 4 / 5;
     }

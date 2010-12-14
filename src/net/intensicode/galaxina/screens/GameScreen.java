@@ -2,7 +2,6 @@ package net.intensicode.galaxina.screens;
 
 import net.intensicode.galaxina.MainContext;
 import net.intensicode.galaxina.game.GameModel;
-import net.intensicode.util.FixedMath;
 
 public final class GameScreen extends GalaxinaGameScreen
     {
@@ -34,8 +33,8 @@ public final class GameScreen extends GalaxinaGameScreen
 
     public final void onControlTick() throws Exception
         {
-        final int slowMoveFixed = -FixedMath.FIXED_1 / timing().ticksPerSecond;
-        final int warpMoveFixed = -FixedMath.FIXED_10 / timing().ticksPerSecond;
+        final float slowMoveFixed = -1f / timing().ticksPerSecond;
+        final float warpMoveFixed = -10f / timing().ticksPerSecond;
 
         switch ( model().state )
             {

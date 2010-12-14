@@ -1,8 +1,7 @@
 package net.intensicode.path;
 
 import junit.framework.TestCase;
-import net.intensicode.util.Position;
-import net.intensicode.util.FixedMath;
+import net.intensicode.util.*;
 
 
 public final class CatmullRomInterpolationTest extends TestCase
@@ -32,24 +31,24 @@ public final class CatmullRomInterpolationTest extends TestCase
         final CatmullRomInterpolation interpolation = interpolation();
 
         assertEquals( pos( 0, -50 ), res( interpolation, 0, 0 ) );
-        assertEquals( pos( 31, -31 ), res( interpolation, 0, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 50, 0 ), res( interpolation, 0, FixedMath.FIXED_1 ) );
+        assertEquals( pos( 31, -31 ), res( interpolation, 0, 0.5f ) );
+        assertEquals( pos( 50, 0 ), res( interpolation, 0, 1f ) );
 
         assertEquals( pos( 50, 0 ), res( interpolation, 1, 0 ) );
-        assertEquals( pos( 31, 31 ), res( interpolation, 1, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 0, 50 ), res( interpolation, 1, FixedMath.FIXED_1 ) );
+        assertEquals( pos( 31, 31 ), res( interpolation, 1, 0.5f ) );
+        assertEquals( pos( 0, 50 ), res( interpolation, 1, 1f ) );
 
         assertEquals( pos( 0, 50 ), res( interpolation, 2, 0 ) );
-        assertEquals( pos( -31, 31 ), res( interpolation, 2, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( -50, 0 ), res( interpolation, 2, FixedMath.FIXED_1 ) );
+        assertEquals( pos( -31, 31 ), res( interpolation, 2, 0.5f ) );
+        assertEquals( pos( -50, 0 ), res( interpolation, 2, 1f ) );
 
         assertEquals( pos( -50, 0 ), res( interpolation, 3, 0 ) );
-        assertEquals( pos( -31, -31 ), res( interpolation, 3, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 0, -50 ), res( interpolation, 3, FixedMath.FIXED_1 ) );
+        assertEquals( pos( -31, -31 ), res( interpolation, 3, 0.5f ) );
+        assertEquals( pos( 0, -50 ), res( interpolation, 3, 1f ) );
 
         assertEquals( pos( 0, -50 ), res( interpolation, 4, 0 ) );
-        assertEquals( pos( 31, -31 ), res( interpolation, 4, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 50, 0 ), res( interpolation, 4, FixedMath.FIXED_1 ) );
+        assertEquals( pos( 31, -31 ), res( interpolation, 4, 0.5f ) );
+        assertEquals( pos( 50, 0 ), res( interpolation, 4, 1f ) );
         }
 
     public final void test_getDirection()
@@ -57,24 +56,24 @@ public final class CatmullRomInterpolationTest extends TestCase
         final CatmullRomInterpolation interpolation = interpolation();
 
         assertEquals( pos( 13, 0 ), dir( interpolation, 0, 0 ) );
-        assertEquals( pos( 10, 10 ), dir( interpolation, 0, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 0, 13 ), dir( interpolation, 0, FixedMath.FIXED_1 ) );
+        assertEquals( pos( 10, 10 ), dir( interpolation, 0, 0.5f ) );
+        assertEquals( pos( 0, 13 ), dir( interpolation, 0, 1f ) );
 
         assertEquals( pos( 0, 13 ), dir( interpolation, 1, 0 ) );
-        assertEquals( pos( -10, 10 ), dir( interpolation, 1, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( -12, 0 ), dir( interpolation, 1, FixedMath.FIXED_1 ) );
+        assertEquals( pos( -10, 10 ), dir( interpolation, 1, 0.5f ) );
+        assertEquals( pos( -12, 0 ), dir( interpolation, 1, 1f ) );
 
         assertEquals( pos( -12, 0 ), dir( interpolation, 2, 0 ) );
-        assertEquals( pos( -10, -10 ), dir( interpolation, 2, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 0, -12 ), dir( interpolation, 2, FixedMath.FIXED_1 ) );
+        assertEquals( pos( -10, -10 ), dir( interpolation, 2, 0.5f ) );
+        assertEquals( pos( 0, -12 ), dir( interpolation, 2, 1f ) );
 
         assertEquals( pos( 0, -12 ), dir( interpolation, 3, 0 ) );
-        assertEquals( pos( 10, -10 ), dir( interpolation, 3, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 13, 0 ), dir( interpolation, 3, FixedMath.FIXED_1 ) );
+        assertEquals( pos( 10, -10 ), dir( interpolation, 3, 0.5f ) );
+        assertEquals( pos( 13, 0 ), dir( interpolation, 3, 1f ) );
 
         assertEquals( pos( 13, 0 ), dir( interpolation, 4, 0 ) );
-        assertEquals( pos( 10, 10 ), dir( interpolation, 4, FixedMath.FIXED_0_5 ) );
-        assertEquals( pos( 0, 13 ), dir( interpolation, 4, FixedMath.FIXED_1 ) );
+        assertEquals( pos( 10, 10 ), dir( interpolation, 4, 0.5f ) );
+        assertEquals( pos( 0, 13 ), dir( interpolation, 4, 1f ) );
         }
 
     private static final CatmullRomInterpolation interpolation()
@@ -88,49 +87,28 @@ public final class CatmullRomInterpolationTest extends TestCase
         return interpolation;
         }
 
-    private static final Position fixed( final int aX, final int aY )
+    private static final PositionF fixed( final int aX, final int aY )
         {
-        return pos( FixedMath.toFixed( aX ), FixedMath.toFixed( aY ) );
+        return pos( ( aX ), ( aY ) );
         }
 
-    private static final Position pos( final int aX, final int aY )
+    private static final PositionF pos( final int aX, final int aY )
         {
-        return new Position( aX, aY );
+        return new PositionF( aX, aY );
         }
 
-    private static final Position input( final Interpolation aInterpolation, final int aIndex )
+    private static final PositionF input( final Interpolation aInterpolation, final int aIndex )
         {
-        final Position position = inputFixed( aInterpolation, aIndex );
-        FixedMath.toIntRounded( position );
-        return position;
+        return new PositionF( aInterpolation.getInputPosition( aIndex ) );
         }
 
-    private static final Position inputFixed( final Interpolation aInterpolation, final int aIndex )
+    private static final PositionF res( final Interpolation aInterpolation, final int aIndex, final float aPosIn_0_1 )
         {
-        return new Position( aInterpolation.getInputPosition( aIndex ) );
+        return new PositionF( aInterpolation.getPosition( aIndex, aPosIn_0_1 ) );
         }
 
-    private static final Position res( final Interpolation aInterpolation, final int aIndex, final int aPosIn_0_1 )
+    private static final PositionF dir( final Interpolation aInterpolation, final int aIndex, final float aPosIn_0_1 )
         {
-        final Position position = resFixed( aInterpolation, aIndex, aPosIn_0_1 );
-        FixedMath.toIntRounded( position );
-        return position;
-        }
-
-    private static final Position resFixed( final Interpolation aInterpolation, final int aIndex, final int aPosIn_0_1 )
-        {
-        return new Position( aInterpolation.getPosition( aIndex, aPosIn_0_1 ) );
-        }
-
-    private static final Position dir( final Interpolation aInterpolation, final int aIndex, final int aPosIn_0_1 )
-        {
-        final Position position = dirFixed( aInterpolation, aIndex, aPosIn_0_1 );
-        FixedMath.toIntRounded( position );
-        return position;
-        }
-
-    private static final Position dirFixed( final Interpolation aInterpolation, final int aIndex, final int aPosIn_0_1 )
-        {
-        return new Position( aInterpolation.getDirection( aIndex, aPosIn_0_1 ) );
+        return new PositionF( aInterpolation.getDirection( aIndex, aPosIn_0_1 ) );
         }
     }

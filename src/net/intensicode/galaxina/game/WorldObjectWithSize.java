@@ -4,14 +4,14 @@ import net.intensicode.util.*;
 
 public abstract class WorldObjectWithSize extends WorldObject
     {
-    public final Size sizeInWorldFixed = new Size();
+    public final SizeF sizeInWorld = new SizeF();
 
-    public final Rectangle boundingBox = new Rectangle();
+    public final RectangleF boundingBox = new RectangleF();
 
     public final void updateBoundingBox()
         {
-        final int outerWidth = sizeInWorldFixed.width * 90 / 100;
-        final int outerHeight = sizeInWorldFixed.height * 90 / 100;
-        boundingBox.setCenterAndSize( worldPosFixed, outerWidth, outerHeight );
+        final float outerWidth = sizeInWorld.width * 90 / 100;
+        final float outerHeight = sizeInWorld.height * 90 / 100;
+        boundingBox.setCenterAndSize( worldPos, outerWidth, outerHeight );
         }
     }

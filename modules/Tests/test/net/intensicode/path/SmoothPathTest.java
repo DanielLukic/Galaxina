@@ -10,16 +10,16 @@ public final class SmoothPathTest extends TestCase
     {
     public final void test_directionToDegrees()
         {
-        check( FixedMath.FIXED_1 );
-        check( FixedMath.FIXED_5 );
-        check( FixedMath.FIXED_50 );
-        check( FixedMath.FIXED_100 );
-        check( FixedMath.FIXED_360 );
+        check( 1 );
+        check( 5 );
+        check( 50 );
+        check( 100 );
+        check( 360 );
         }
 
     private void check( final int aOffset )
         {
-        final Position position = new Position();
+        final PositionF position = new PositionF();
 
         position.x = -aOffset;
         position.y = 0;
@@ -78,28 +78,5 @@ public final class SmoothPathTest extends TestCase
     private static final int acos2deg( final int aF )
         {
         return MathFP.toInt( MathFP.rad2deg( MathFP.acos( aF ) ) + MathFP.HALF );
-        }
-
-    public static final void test_dir2x()
-        {
-        assertEquals( -360, FixedMath.toInt( -FixedMath.FIXED_360 ) );
-        assertEquals( -360 * 1000, FixedMath.toInt( -FixedMath.FIXED_360 * 1000 ) );
-        assertEquals( 0, FixedMath.fraction( -FixedMath.FIXED_360 ) );
-        assertEquals( 0, FixedMath.fraction( -FixedMath.FIXED_360 * 1000 ) );
-
-        assertEquals( -100, dir2x100( -FixedMath.FIXED_1, 0 ) );
-        assertEquals( -100, dir2x100( -FixedMath.FIXED_50, 0 ) );
-        assertEquals( -100, dir2x100( -FixedMath.FIXED_100, 0 ) );
-        assertEquals( -100, dir2x100( -FixedMath.FIXED_360, 0 ) );
-
-        assertEquals( 0, dir2x100( 0, 0 ) );
-        assertEquals( 0, dir2x100( 0, FixedMath.FIXED_50 ) );
-        assertEquals( -70, dir2x100( -FixedMath.FIXED_50, FixedMath.FIXED_50 ) );
-        assertEquals( 70, dir2x100( +FixedMath.FIXED_50, -FixedMath.FIXED_50 ) );
-        }
-
-    private static final int dir2x100( final int aFixedX, final int aFixedY )
-        {
-        return MathFP.toInt( UtilitiesEx.directionToMathFP( aFixedX, aFixedY ) * 100 );
         }
     }

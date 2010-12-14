@@ -52,7 +52,7 @@ public final class Enemy extends WorldObjectWithSize
     public static GameModel model;
 
 
-    public Position formationPosition;
+    public PositionF formationPosition;
 
 
     public int pathPos;
@@ -61,7 +61,7 @@ public final class Enemy extends WorldObjectWithSize
 
     public Enemy syncSource;
 
-    public int syncSpeed;
+    public float syncSpeed;
 
     public int syncMode;
 
@@ -75,9 +75,9 @@ public final class Enemy extends WorldObjectWithSize
     public int hitsRemaining;
 
 
-    public int directionInDegreesFixed;
+    public float directionInDegrees;
 
-    public int targetDirectionFixed;
+    public float targetDirection;
 
 
     public boolean deployExtraIfDestroyed;
@@ -87,25 +87,25 @@ public final class Enemy extends WorldObjectWithSize
     public boolean active;
 
 
-    public Enemy( final Position aLastHitPosition )
+    public Enemy( final PositionF aLastHitPosition )
         {
         myLastHitPosition = aLastHitPosition;
         }
 
-    public static int getDirectionDelta( final int aTo, final int aFrom )
+    public static float getDirectionDelta( final float aTo, final float aFrom )
         {
-        final int delta = aTo - aFrom;
-        if ( delta > FixedMath.FIXED_180 ) return delta - FixedMath.FIXED_360;
-        if ( delta < -FixedMath.FIXED_180 ) return FixedMath.FIXED_360 + delta;
+        final float delta = aTo - aFrom;
+        if ( delta > 180 ) return delta - 360;
+        if ( delta < -180 ) return 360 + delta;
         return delta;
         }
 
-    public final void init( final EnemyType aEnemyType, final PathWithDirection aIncomingPath, final Position aFormationPosition )
+    public final void init( final EnemyType aEnemyType, final PathWithDirection aIncomingPath, final PositionF aFormationPosition )
         {
         type = aEnemyType;
         deployExtraIfDestroyed = type.extraID != ExtraTypes.NO_EXTRA;
         formationPosition = aFormationPosition;
-        weapon = type.createWeapon( worldPosFixed );
+        weapon = type.createWeapon( worldPos );
         hitsRemaining = type.hits;
 
         unsync();
@@ -147,12 +147,12 @@ public final class Enemy extends WorldObjectWithSize
         return type.getScore( GameObject.model );
         }
 
-    public final int getSpeedFixed()
+    public final float getSpeed()
         {
-        return syncSpeed != 0 ? syncSpeed : type.getSpeedFixed( model );
+        return syncSpeed != 0 ? syncSpeed : type.getSpeed( model );
         }
 
-    public final Position getBreathPos( final boolean aInSyncFlag )
+    public final PositionF getBreathPos( final boolean aInSyncFlag )
         {
         return model.breather.getBreathPos( formationPosition, aInSyncFlag );
         }
@@ -161,14 +161,14 @@ public final class Enemy extends WorldObjectWithSize
         {
         syncSource = aEnemy;
         syncMode = SYNC_SPEED;
-        syncSpeed = aEnemy.getSpeedFixed();
+        syncSpeed = aEnemy.getSpeed();
         }
 
     public final void syncPathWith( final Enemy aEnemy )
         {
         syncSource = aEnemy;
         syncMode = SYNC_PATH;
-        syncSpeed = aEnemy.getSpeedFixed();
+        syncSpeed = aEnemy.getSpeed();
         setController( FOLLOW_IN_SYNC );
         }
 
@@ -176,7 +176,7 @@ public final class Enemy extends WorldObjectWithSize
         {
         syncSource = aEnemy;
         syncMode = SYNC_LEFT;
-        syncSpeed = aEnemy.getSpeedFixed();
+        syncSpeed = aEnemy.getSpeed();
         setController( FOLLOW_BY_SIDE );
         }
 
@@ -184,38 +184,36 @@ public final class Enemy extends WorldObjectWithSize
         {
         syncSource = aEnemy;
         syncMode = SYNC_RIGHT;
-        syncSpeed = aEnemy.getSpeedFixed();
+        syncSpeed = aEnemy.getSpeed();
         setController( FOLLOW_BY_SIDE );
         }
 
     public final void updateToBreathPosition()
         {
-        worldPosFixed.setTo( getBreathPos( inSyncWithBreath ) );
-        targetDirectionFixed = 0;
+        worldPos.setTo( getBreathPos( inSyncWithBreath ) );
+        targetDirection = 0;
         }
 
     public final void jumpToStartOfPath()
         {
-        final Position startPosition = path.getStartPosition();
-        final int direction = UtilitiesEx.directionToDegrees( path.getStartPosition() );
-        final int startDirection = FixedMath.toFixed( direction );
-        worldPosFixed.setTo( startPosition );
-        directionInDegreesFixed = targetDirectionFixed = startDirection;
+        final PositionF startPosition = path.getStartPosition();
+        final float startDirection = UtilitiesEx.directionToDegrees( path.getStartPosition() );
+        worldPos.setTo( startPosition );
+        directionInDegrees = targetDirection = startDirection;
         }
 
-    public final void moveByDirection( final Position aOffset )
+    public final void moveByDirection( final PositionF aOffset )
         {
-        aOffset.normalizeFixed();
-        aOffset.scaleFixed( getSpeedFixed() );
-        worldPosFixed.translate( aOffset );
+        aOffset.normalize();
+        aOffset.scale( getSpeed() );
+        worldPos.translate( aOffset );
 
-        final int degrees = UtilitiesEx.directionToDegrees( aOffset );
-        targetDirectionFixed = FixedMath.toFixed( degrees );
+        targetDirection = UtilitiesEx.directionToDegrees( aOffset );
         }
 
     public final boolean moveAlongPath()
         {
-        pathPos += getSpeedFixed();
+        pathPos += getSpeed();
         updateToPathPosition();
         return pathPos >= path.getPathLength();
         }
@@ -231,13 +229,13 @@ public final class Enemy extends WorldObjectWithSize
         {
         final int pathPosInPercent = aSource.pathPos * 100 / aSource.path.getPathLength();
         pathPos = pathPosInPercent * path.getPathLength() / 100;
-        worldPosFixed.setTo( aSource.worldPosFixed );
-        directionInDegreesFixed = targetDirectionFixed = aSource.directionInDegreesFixed;
+        worldPos.setTo( aSource.worldPos );
+        directionInDegrees = targetDirection = aSource.directionInDegrees;
         }
 
-    public final boolean isCloseTo( final Position aPositionFixed )
+    public final boolean isCloseTo( final PositionF aPosition )
         {
-        return ( worldPosFixed.distanceToFixed( aPositionFixed ) <= FixedMath.FIXED_1 );
+        return ( worldPos.distanceTo( aPosition ) <= 1f );
         }
 
     public final boolean isReady()
@@ -252,9 +250,9 @@ public final class Enemy extends WorldObjectWithSize
             }
         }
 
-    public final boolean isHit( final Position aWorldPosFixed )
+    public final boolean isHit( final PositionF aWorldPos )
         {
-        return boundingBox.contains( aWorldPosFixed );
+        return boundingBox.contains( aWorldPos );
         }
 
     public final void hit()
@@ -266,21 +264,21 @@ public final class Enemy extends WorldObjectWithSize
         hitsRemaining--;
         if ( hitsRemaining > 0 ) return;
 
-        myLastHitPosition.setTo( worldPosFixed );
+        myLastHitPosition.setTo( worldPos );
         model.player.score += type.getScore( model );
         explode();
         }
 
     public final void explode()
         {
-        if ( type.hits == 1 ) model.explosions.addNormal( worldPosFixed );
-        else model.explosions.addBig( worldPosFixed );
+        if ( type.hits == 1 ) model.explosions.addNormal( worldPos );
+        else model.explosions.addBig( worldPos );
         active = false;
 
         if ( deployExtraIfDestroyed )
             {
             final ExtraType extraType = model.extraTypes.all[ type.extraID ];
-            model.extras.deploy( worldPosFixed, extraType );
+            model.extras.deploy( worldPos, extraType );
             }
         }
 
@@ -307,7 +305,7 @@ public final class Enemy extends WorldObjectWithSize
 
         controller.onControlTick( this );
 
-        if ( worldPosFixed.y > 0 )
+        if ( worldPos.y > 0 )
             {
             final Player player = model.player;
             player.checkForCrash( this );
@@ -318,13 +316,13 @@ public final class Enemy extends WorldObjectWithSize
             final int probability = timing.ticksPerSecond * ( type.hits - hitsRemaining ) / type.hits;
             if ( theRandom.nextInt( timing.ticksPerSecond ) < probability / 3 )
                 {
-                model.sparks.add( worldPosFixed, type.sizeInWorldFixed );
+                model.sparks.add( worldPos, type.sizeInWorld );
                 }
             }
 
-        final int width = type.sizeInWorldFixed.width * 80 / 100;
-        final int height = type.sizeInWorldFixed.height * 80 / 100;
-        boundingBox.setCenterAndSize( worldPosFixed, width, height );
+        final float width = type.sizeInWorld.width * 0.8f;
+        final float height = type.sizeInWorld.height * 0.8f;
+        boundingBox.setCenterAndSize( worldPos, width, height );
 
         weapon.onControlTick();
 
@@ -335,43 +333,42 @@ public final class Enemy extends WorldObjectWithSize
 
     private void updateToPathPosition()
         {
-        worldPosFixed.setTo( path.getPosition( pathPos ) );
+        worldPos.setTo( path.getPosition( pathPos ) );
 
-        myBeforeDirection.setTo( path.getDirection( pathPos - getSpeedFixed() * LOOK_BEHIND_STEPS ) );
-        myAfterDirection.setTo( path.getDirection( pathPos + getSpeedFixed() * LOOK_AHEAD_STEPS ) );
+        myBeforeDirection.setTo( path.getDirection( pathPos - getSpeed() * LOOK_BEHIND_STEPS ) );
+        myAfterDirection.setTo( path.getDirection( pathPos + getSpeed() * LOOK_AHEAD_STEPS ) );
 
         myTempPos.x = myBeforeDirection.x + myAfterDirection.x;
         myTempPos.y = myBeforeDirection.y + myAfterDirection.y;
 
-        final int degrees = UtilitiesEx.directionToDegrees( myTempPos );
-        targetDirectionFixed = FixedMath.toFixed( degrees );
+        targetDirection = UtilitiesEx.directionToDegrees( myTempPos );
         }
 
     private void onTickRotation()
         {
-        if ( targetDirectionFixed == directionInDegreesFixed ) return;
+        if ( targetDirection == directionInDegrees ) return;
 
-        final int delta = getDirectionDelta( targetDirectionFixed, directionInDegreesFixed );
-        directionInDegreesFixed += delta * ( timing.ticksPerSecond / 2 ) / timing.ticksPerSecond;
+        final float delta = getDirectionDelta( targetDirection, directionInDegrees );
+        directionInDegrees += delta * ( timing.ticksPerSecond / 2 ) / timing.ticksPerSecond;
 
-        while ( directionInDegreesFixed < 0 )
+        while ( directionInDegrees < 0 )
             {
-            directionInDegreesFixed += FixedMath.FIXED_360;
+            directionInDegrees += 360;
             }
-        while ( directionInDegreesFixed >= FixedMath.FIXED_360 )
+        while ( directionInDegrees >= 360 )
             {
-            directionInDegreesFixed -= FixedMath.FIXED_360;
+            directionInDegrees -= 360;
             }
         }
 
 
-    private final Position myLastHitPosition;
+    private final PositionF myLastHitPosition;
 
-    private final Position myTempPos = new Position();
+    private final PositionF myTempPos = new PositionF();
 
-    private static final Position myAfterDirection = new Position();
+    private static final PositionF myAfterDirection = new PositionF();
 
-    private static final Position myBeforeDirection = new Position();
+    private static final PositionF myBeforeDirection = new PositionF();
 
     private static final Random theRandom = new Random();
     }

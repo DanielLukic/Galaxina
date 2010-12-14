@@ -3,7 +3,7 @@ package net.intensicode.galaxina.ui.actions.swarmEditor;
 import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.domain.Swarm;
 import net.intensicode.galaxina.ui.actions.RunnableAction;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class ShrinkX extends RunnableAction implements EditorStateListener
     {
@@ -21,9 +21,9 @@ public final class ShrinkX extends RunnableAction implements EditorStateListener
         final int halfWidth = width / 2;
 
         final Swarm swarm = myCoreAPI.state().currentSwarm();
-        for ( final Position pos : swarm.positions() )
+        for ( final PositionF pos : swarm.positions() )
             {
-            final int delta = pos.x - halfWidth;
+            final float delta = pos.x - halfWidth;
             pos.x = halfWidth + delta * 9 / 10;
             }
         swarm.positions().fireDataChanged();

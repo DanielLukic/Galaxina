@@ -5,6 +5,7 @@ import net.intensicode.galaxina.*;
 import net.intensicode.galaxina.game.GameModel;
 import net.intensicode.graphics.FontGenerator;
 import net.intensicode.screens.AlignedTextScreen;
+import net.intensicode.touch.*;
 import net.intensicode.util.*;
 
 public final class OptionsScreen extends GalaxinaScreen implements TouchableHandler

@@ -7,11 +7,11 @@ import net.intensicode.util.*;
 
 public final class Missile extends WorldObjectWithSize
     {
-    public final Position directionFixed = new Position();
+    public final PositionF direction = new PositionF();
 
     public static GameTiming timing;
 
-    public int speedFixed;
+    public float speed;
 
 
     public boolean playerOwned;
@@ -21,17 +21,17 @@ public final class Missile extends WorldObjectWithSize
     public boolean visible;
 
 
-    public final void init( final Position aPosition )
+    public final void init( final PositionF aPosition )
         {
-        worldPosFixed.setTo( aPosition );
+        worldPos.setTo( aPosition );
 
-        directionFixed.x = directionFixed.y = 0;
+        direction.x = direction.y = 0;
         myState = STATE_PREPARED;
         myDebrisCount = 0;
-        speedFixed = 0;
+        speed = 0;
 
-        final int worldHeightFixed = GameObject.model.world.visibleSizeFixed.height;
-        myMaxSpeedFixed = 75 * worldHeightFixed / 100 / timing.ticksPerSecond;
+        final float worldHeight = GameObject.model.world.visibleSize.height;
+        myMaxSpeed = 75 * worldHeight / 100 / timing.ticksPerSecond;
         }
 
     public final void launch()
@@ -79,18 +79,18 @@ public final class Missile extends WorldObjectWithSize
 
     private void moveAhead()
         {
-        myTempPosition.setTo( directionFixed );
-        myTempPosition.scaleFixed( speedFixed );
-        worldPosFixed.translate( myTempPosition );
+        myTempPosition.setTo( direction );
+        myTempPosition.scale( speed );
+        worldPos.translate( myTempPosition );
 
-        if ( !GameObject.model.world.isInside( worldPosFixed ) )
+        if ( !GameObject.model.world.isInside( worldPos ) )
             {
             active = false;
             return;
             }
 
         updateBoundingBox();
-        boundingBox.applyOutsets( sizeInWorldFixed.width / 3 );
+        boundingBox.applyOutsets( sizeInWorld.width / 3 );
 
         if ( myStateTicks < myRandom.nextInt( timing.ticksPerSecond / 4 ) )
             {
@@ -99,20 +99,20 @@ public final class Missile extends WorldObjectWithSize
         else
             {
             myStateTicks = 0;
-            myTempPosition.setTo( directionFixed );
+            myTempPosition.setTo( direction );
             myTempPosition.x = -myTempPosition.x;
             myTempPosition.y = -myTempPosition.y;
-            if ( speedFixed > 0 ) myTempPosition.scaleFixed( myRandom.nextInt( speedFixed ) );
-            myTempPosition.translate( worldPosFixed );
+            if ( speed > 0 ) myTempPosition.scale( myRandom.nextFloat( speed ) );
+            myTempPosition.translate( worldPos );
             GameObject.model.smokes.add( myTempPosition );
             }
         }
 
     private void onLaunched()
         {
-        if ( speedFixed < myMaxSpeedFixed )
+        if ( speed < myMaxSpeed )
             {
-            speedFixed += myMaxSpeedFixed / timing.ticksPerSecond;
+            speed += myMaxSpeed / timing.ticksPerSecond;
             }
         else
             {
@@ -139,7 +139,7 @@ public final class Missile extends WorldObjectWithSize
             final Enemy enemy = (Enemy) enemies.objects[ idx ];
             if ( !enemy.active ) continue;
 
-            if ( enemy.isHit( worldPosFixed ) )
+            if ( enemy.isHit( worldPos ) )
                 {
                 enemy.hit();
                 explode();
@@ -156,12 +156,12 @@ public final class Missile extends WorldObjectWithSize
             {
             myStateTicks = 0;
 
-            GameObject.model.explosions.addBig( worldPosFixed );
+            GameObject.model.explosions.addBig( worldPos );
 
             for ( int idx = 0; idx < DEBRIS_COUNT; idx++ )
                 {
                 final int sinIndex = idx * Sinus.SIN_TABLE_SIZE / DEBRIS_COUNT;
-                addBomb( speedFixed, sinIndex );
+                addBomb( speed, sinIndex );
                 }
             }
 
@@ -171,9 +171,9 @@ public final class Missile extends WorldObjectWithSize
             final int debrisSoFar = myExplodeTicks * DEBRIS_COUNT / quarterSecond;
             while ( myDebrisCount < debrisSoFar )
                 {
-                final int speed = myRandom.nextInt( speedFixed / 4 ) + speedFixed / 4;
+                final float debrisSpeed = myRandom.nextFloat( speed / 4 ) + speed / 4;
                 final int sinIndex = myRandom.nextInt( Sinus.SIN_TABLE_SIZE );
-                addDebris( speed / 5, sinIndex );
+                addDebris( debrisSpeed / 5, sinIndex );
                 myDebrisCount++;
                 }
             }
@@ -194,32 +194,32 @@ public final class Missile extends WorldObjectWithSize
         else
             {
             myStateTicks = 0;
-            myTempPosition.setTo( worldPosFixed );
-            final int refSize = GameObject.model.player.sizeInWorldFixed.width;
-            myTempPosition.x += myRandom.nextInt( refSize ) - refSize / 2;
-            myTempPosition.y += myRandom.nextInt( refSize ) - refSize / 2;
+            myTempPosition.setTo( worldPos );
+            final float refSize = GameObject.model.player.sizeInWorld.width;
+            myTempPosition.x += myRandom.nextFloat( refSize ) - refSize / 2;
+            myTempPosition.y += myRandom.nextFloat( refSize ) - refSize / 2;
             GameObject.model.explosions.addNormal( myTempPosition );
             }
         }
 
-    private void addDebris( final int speed, final int sinIndex )
+    private void addDebris( final float speed, final int sinIndex )
         {
-        final int dx = Sinus.instance().sin( sinIndex, speed );
-        final int dy = Sinus.instance().cos( sinIndex, speed );
+        final int dx = (int) ( Sinus.instance().sin( sinIndex, (int) (speed * 256) ) / 256f);
+        final int dy = (int) ( Sinus.instance().cos( sinIndex, (int) (speed *256) ) / 256f);
 
         final Debris debris = GameObject.model.debrises.getInstance();
-        debris.init( worldPosFixed, dx, dy );
+        debris.init( worldPos, dx, dy );
         debris.type = Debris.TYPE_SMALL;
         debris.timeOut = timing.ticksPerSecond * 2;
         }
 
-    private void addBomb( final int speed, final int sinIndex )
+    private void addBomb( final float speed, final int sinIndex )
         {
-        final int dx = Sinus.instance().sin( sinIndex, speed );
-        final int dy = Sinus.instance().cos( sinIndex, speed );
+        final int dx = (int) ( Sinus.instance().sin( sinIndex, (int) (speed * 256) ) / 256f);
+        final int dy = (int) ( Sinus.instance().cos( sinIndex, (int) (speed *256) ) / 256f);
 
         final Bomb bomb = GameObject.model.bombs.getAvailableBomb();
-        bomb.init( worldPosFixed, dx, dy );
+        bomb.init( worldPos, dx, dy );
         bomb.start( Bomb.FROM_MISSILE );
         }
 
@@ -230,13 +230,13 @@ public final class Missile extends WorldObjectWithSize
 
     private int myExplodeTicks;
 
-    private int myMaxSpeedFixed;
+    private float myMaxSpeed;
 
     private int myState = STATE_PREPARED;
 
     private final Random myRandom = Random.INSTANCE;
 
-    private final Position myTempPosition = new Position();
+    private final PositionF myTempPosition = new PositionF();
 
 
     private static final int STATE_PREPARED = 0;

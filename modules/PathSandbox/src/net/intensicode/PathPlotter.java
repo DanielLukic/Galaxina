@@ -1,12 +1,7 @@
-/************************************************************************/
-/* {{PROJECT_NAME}}             {{COMPANY}}             {{DATE_CREATE}} */
-/************************************************************************/
-
 package net.intensicode;
 
-import net.intensicode.util.FixedMath;
+import net.intensicode.util.*;
 import net.intensicode.path.Path;
-import net.intensicode.util.Position;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,9 +9,6 @@ import java.awt.Graphics2D;
 
 
 
-/**
- * TODO: Describe this!
- */
 final class PathPlotter implements VisualLayer
 {
     PathPlotter( final Path aPath )
@@ -39,9 +31,9 @@ final class PathPlotter implements VisualLayer
         for ( int idx = 0; idx <= PATH_STEPS; idx++ )
         {
             final int pathPosFixed = pathLengthFixed * idx / PATH_STEPS;
-            final Position point = myPath.getPosition( pathPosFixed );
-            final int x = FixedMath.toInt( point.x );
-            final int y = FixedMath.toInt( point.y );
+            final PositionF point = myPath.getPosition( pathPosFixed );
+            final int x = (int) point.x;
+            final int y = (int) point.y;
             aGraphics2D.drawRect( x - halfSize, y - halfSize, pointSize, pointSize );
         }
     }

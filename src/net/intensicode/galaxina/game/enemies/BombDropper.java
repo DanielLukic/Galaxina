@@ -1,6 +1,6 @@
 package net.intensicode.galaxina.game.enemies;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.weapons.Bomb;
 
 public final class BombDropper extends EnemyWeapon
@@ -10,7 +10,7 @@ public final class BombDropper extends EnemyWeapon
         if ( myReloadTicks > 0 ) myReloadTicks--;
         }
 
-    public final void attachTo( final Position aParentPosition )
+    public final void attachTo( final PositionF aParentPosition )
         {
         myParentPosition = aParentPosition;
         }
@@ -27,8 +27,8 @@ public final class BombDropper extends EnemyWeapon
 
     public final boolean isTargetGood()
         {
-        final int xDelta = Math.abs( myParentPosition.x - model.player.worldPosFixed.x );
-        return xDelta < model.player.sizeInWorldFixed.width;
+        final float xDelta = Math.abs( myParentPosition.x - model.player.worldPos.x );
+        return xDelta < model.player.sizeInWorld.width;
         }
 
     public final void fireIfPossible()
@@ -36,9 +36,9 @@ public final class BombDropper extends EnemyWeapon
         if ( !canFire() ) return;
 
         final Bomb bomb = model.bombs.getAvailableBomb();
-        final int dropHeight = model.world.visibleSizeFixed.height;
-        final int dropSpeed = dropHeight / timing.ticksPerSecond / 2;
-        final int xDelta = ( model.player.worldPosFixed.x - myParentPosition.x ) / 30;
+        final float dropHeight = model.world.visibleSize.height;
+        final float dropSpeed = dropHeight / timing.ticksPerSecond / 2;
+        final float xDelta = ( model.player.worldPos.x - myParentPosition.x ) / 30;
         bomb.init( myParentPosition, xDelta, dropSpeed );
         bomb.start( Bomb.FROM_ENEMY );
         model.level.onEnemyBombLaunched();
@@ -49,5 +49,5 @@ public final class BombDropper extends EnemyWeapon
 
     private int myReloadTicks;
 
-    private Position myParentPosition;
+    private PositionF myParentPosition;
     }

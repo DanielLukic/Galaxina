@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.enemies.controllers;
 
 import net.intensicode.galaxina.game.enemies.*;
 import net.intensicode.galaxina.game.objects.Enemy;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class FollowBySideController extends EnemyController
     {
@@ -19,28 +19,28 @@ public final class FollowBySideController extends EnemyController
         {
         final boolean endOfPath = aEnemy.moveAlongPath();
 
-        final Position direction = aEnemy.path.getDirection( aEnemy.pathPos );
+        final PositionF direction = aEnemy.path.getDirection( aEnemy.pathPos );
         myTempDirection.setTo( direction );
-        myTempDirection.normalizeFixed();
+        myTempDirection.normalize();
 
         if ( aEnemy.syncMode == Enemy.SYNC_LEFT )
             {
-            final int newValue = myTempDirection.x;
+            final float newValue = myTempDirection.x;
             myTempDirection.x = +myTempDirection.y;
             myTempDirection.y = -newValue;
             }
         if ( aEnemy.syncMode == Enemy.SYNC_RIGHT )
             {
-            final int newValue = myTempDirection.x;
+            final float newValue = myTempDirection.x;
             myTempDirection.x = -myTempDirection.y;
             myTempDirection.y = +newValue;
             }
-        myTempDirection.scaleFixed( aEnemy.type.sizeInWorldFixed.width );
+        myTempDirection.scale( aEnemy.type.sizeInWorld.width );
 
-        aEnemy.worldPosFixed.translate( myTempDirection );
+        aEnemy.worldPos.translate( myTempDirection );
 
         if ( endOfPath ) aEnemy.onEndOfPath();
         }
 
-    private final Position myTempDirection = new Position();
+    private final PositionF myTempDirection = new PositionF();
     }

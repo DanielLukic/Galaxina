@@ -1,7 +1,7 @@
 package net.intensicode.galaxina.game.objects;
 
 import net.intensicode.core.GameTiming;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 import net.intensicode.galaxina.game.*;
 
 public final class ScoreTag extends WorldObject
@@ -9,10 +9,10 @@ public final class ScoreTag extends WorldObject
     public final int score;
 
 
-    public ScoreTag( final Position aPosition, final int aScore, final int aTicksVisible )
+    public ScoreTag( final PositionF aPosition, final int aScore, final int aTicksVisible )
         {
         active = true;
-        worldPosFixed.setTo( aPosition );
+        worldPos.setTo( aPosition );
         score = aScore;
         myTicksVisible = aTicksVisible;
         }
@@ -28,7 +28,7 @@ public final class ScoreTag extends WorldObject
             active = false;
             }
 
-        worldPosFixed.y -= aWorld.visibleSizeFixed.height / 6 / aGameTiming.ticksPerSecond;
+        worldPos.y -= aWorld.visibleSize.height / 6 / aGameTiming.ticksPerSecond;
         }
 
 

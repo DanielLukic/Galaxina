@@ -93,7 +93,7 @@ public final class FormationConfiguration
             {
             final int x = aInputStream.readInt();
             final int y = aInputStream.readInt();
-            final Position position = myGameModel.world.editorToWorld( x, y );
+            final PositionF position = myGameModel.world.editorToWorld( x, y );
             path.addWorldPos( position );
             }
         path.end();

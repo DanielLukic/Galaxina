@@ -20,8 +20,8 @@ public final class ExtrasDrawer extends ScreenBase
         {
         myExtraGen = skin().sprite( "extras" );
 
-        final Size sizeInWorld = myGameContext.camera().toWorldSize( myExtraGen.getWidth(), myExtraGen.getHeight() );
-        myGameContext.gameModel().extras.sizeInWorldFixed.setTo( sizeInWorld );
+        final SizeF sizeInWorld = myGameContext.camera().toWorldSize( myExtraGen.getWidth(), myExtraGen.getHeight() );
+        myGameContext.gameModel().extras.sizeInWorld.setTo( sizeInWorld );
         }
 
     public final void onControlTick() throws Exception
@@ -45,7 +45,7 @@ public final class ExtrasDrawer extends ScreenBase
             if ( extra == null || !extra.active ) continue;
 
             final Camera camera = myGameContext.camera();
-            final Position screenPos = camera.toScreen( extra.worldPosFixed );
+            final Position screenPos = camera.toScreen( extra.worldPos );
 
             final int frame = extra.tickCount * ( FRAMES_PER_EXTRA - 1 ) / ( extra.animTicks - 1 );
             final int maxId = myExtraGen.getFrameSequenceLength() / FRAMES_PER_EXTRA;

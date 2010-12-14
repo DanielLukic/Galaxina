@@ -5,6 +5,7 @@ package net.intensicode.galaxina;
 import net.intensicode.core.*;
 import net.intensicode.galaxina.screens.GalaxinaGameScreen;
 import net.intensicode.screens.ScreenBase;
+import net.intensicode.touch.*;
 import net.intensicode.util.*;
 
 import java.io.IOException;
@@ -59,7 +60,7 @@ public final class TouchHelper extends ScreenBase
             {
             myTouchPrimaryFire = makeTouchableImage( "touchCannon", config.touchPrimaryFire, KeysHandler.FIRE1 );
             myTouchSecondaryFire = makeTouchableImage( "touchMissile", config.touchSecondaryFire, KeysHandler.FIRE2 );
-            if ( config.touchShowArrows && touch().supportsMultiTouch() )
+            if ( config.touchShowArrows )
                 {
                 myTouchLeft = makeTouchableImage( "touchLeft", config.touchLeft, KeysHandler.LEFT );
                 myTouchRight = makeTouchableImage( "touchRight", config.touchRight, KeysHandler.RIGHT );
@@ -70,7 +71,7 @@ public final class TouchHelper extends ScreenBase
             final int touchButtonSize = config.touchButtonSize;
             myTouchPrimaryFire = makeTouchableArea( touchButtonSize, config.touchPrimaryFire, KeysHandler.FIRE1 );
             myTouchSecondaryFire = makeTouchableArea( touchButtonSize, config.touchSecondaryFire, KeysHandler.FIRE2 );
-            if ( config.touchShowArrows && touch().supportsMultiTouch() )
+            if ( config.touchShowArrows )
                 {
                 myTouchLeft = makeTouchableArea( touchButtonSize, config.touchLeft, KeysHandler.LEFT );
                 myTouchRight = makeTouchableArea( touchButtonSize, config.touchRight, KeysHandler.RIGHT );

@@ -19,7 +19,7 @@ public final class Satellite extends WorldObjectWithSize
         tickCount = 0;
         animTicks = GameObject.timing.ticksPerSecond / 2;
 
-        worldPosFixed.setTo( myOwningPlayer.worldPosFixed );
+        worldPos.setTo( myOwningPlayer.worldPos );
         }
 
     public final void onStartGame() throws Exception
@@ -37,41 +37,41 @@ public final class Satellite extends WorldObjectWithSize
 
         tickAnimation();
 
-        final int sinTableSizeFixed = FixedMath.toFixed( Sinus.SIN_TABLE_SIZE );
+        final float sinTableSize = Sinus.SIN_TABLE_SIZE;
         if ( myPreviousSatellite == null )
             {
             tickRotation();
             }
         else
             {
-            final int rotationAngleOffsetInFixedSinusSize = sinTableSizeFixed / myNumberOfSatellites;
-            myRotationAngleInFixedSinusSize = myPreviousSatellite.myRotationAngleInFixedSinusSize + rotationAngleOffsetInFixedSinusSize;
+            final float rotationAngleOffsetInSinusSize = sinTableSize / myNumberOfSatellites;
+            myRotationAngleInSinusSize = myPreviousSatellite.myRotationAngleInSinusSize + rotationAngleOffsetInSinusSize;
             }
 
-        final int rotationSinusIndex = FixedMath.toInt( myRotationAngleInFixedSinusSize );
-        final int width = FixedMath.toInt( myOwningPlayer.sizeInWorldFixed.width );
-        final int height = FixedMath.toInt( myOwningPlayer.sizeInWorldFixed.height );
+        final int rotationSinusIndex = (int) myRotationAngleInSinusSize;
+        final int width = (int) myOwningPlayer.sizeInWorld.width;
+        final int height = (int) myOwningPlayer.sizeInWorld.height;
         final int xOffset = theSinus.cos( rotationSinusIndex, width );
         final int yOffset = theSinus.sin( rotationSinusIndex, height );
 
-        worldPosFixed.setTo( myOwningPlayer.worldPosFixed );
-        worldPosFixed.x += FixedMath.toFixed( xOffset );
-        worldPosFixed.y += FixedMath.toFixed( yOffset );
+        worldPos.setTo( myOwningPlayer.worldPos );
+        worldPos.x += xOffset;
+        worldPos.y += yOffset;
 
         updateBoundingBox();
 
-        while ( myRotationAngleInFixedSinusSize >= sinTableSizeFixed )
+        while ( myRotationAngleInSinusSize >= sinTableSize )
             {
-            myRotationAngleInFixedSinusSize -= sinTableSizeFixed;
+            myRotationAngleInSinusSize -= sinTableSize;
             }
 
         if ( Math.abs( yOffset ) == 0 && !myHaveFiredFlag )
             {
-            final int gunShotSpeed = GameObject.model.level.getGunShotSpeed();
+            final float gunShotSpeed = GameObject.model.level.getGunShotSpeed();
             final GunShot shot = GameObject.model.gunShots.getAvailableGunShot();
             if ( shot != null )
                 {
-                shot.init( worldPosFixed, gunShotSpeed );
+                shot.init( worldPos, gunShotSpeed );
                 myHaveFiredFlag = true;
                 }
             }
@@ -82,24 +82,24 @@ public final class Satellite extends WorldObjectWithSize
 
     private void tickRotation()
         {
-        myRotationAngleInFixedSinusSize += getRotationDeltaInFixedSinusSize();
+        myRotationAngleInSinusSize += getRotationDeltaInSinusSize();
         }
 
-    private int getRotationDeltaInFixedSinusSize()
+    private int getRotationDeltaInSinusSize()
         {
-        return FixedMath.toFixed( Sinus.SIN_TABLE_SIZE ) / GameObject.timing.ticksPerSecond / 2;
+        return Sinus.SIN_TABLE_SIZE / GameObject.timing.ticksPerSecond / 2;
         }
 
     public final void explode()
         {
-        GameObject.model.explosions.addNormal( worldPosFixed );
+        GameObject.model.explosions.addNormal( worldPos );
         myOwningPlayer.removeSatellite( this );
         active = false;
         }
 
-    public final boolean isCrash( final Rectangle aRectangleFixed )
+    public final boolean isCrash( final RectangleF aRectangle )
         {
-        return boundingBox.intersectsWith( aRectangleFixed );
+        return boundingBox.intersectsWith( aRectangle );
         }
 
 
@@ -111,7 +111,7 @@ public final class Satellite extends WorldObjectWithSize
 
     private Satellite myPreviousSatellite;
 
-    private int myRotationAngleInFixedSinusSize;
+    private float myRotationAngleInSinusSize;
 
     private static Sinus theSinus = Sinus.instance();
     }

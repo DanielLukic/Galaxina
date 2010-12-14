@@ -2,7 +2,7 @@ package net.intensicode.galaxina.game.weapons;
 
 import net.intensicode.core.Configuration;
 import net.intensicode.galaxina.game.*;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public final class SpreadBombs extends SecondaryWeapon
     {
@@ -63,19 +63,19 @@ public final class SpreadBombs extends SecondaryWeapon
         final Bombs bombs = model.bombs;
         final World world = model.world;
 
-        final int bombSpeed = world.visibleSizeFixed.height / GameObject.timing.ticksPerSecond;
-        final int xSpeedStart = -bombSpeed;
-        final int xSpeedStep = bombSpeed * 2 / myBombSpread.length;
+        final float bombSpeed = world.visibleSize.height / GameObject.timing.ticksPerSecond;
+        final float xSpeedStart = -bombSpeed;
+        final float xSpeedStep = bombSpeed * 2 / myBombSpread.length;
 
-        final Position startPos = GameObject.model.player.worldPosFixed;
+        final PositionF startPos = GameObject.model.player.worldPos;
 
         for ( int idx = 0; idx < myBombSpread.length; idx++ )
             {
             final Bomb bomb = myBombSpread[ idx ] = bombs.getAvailableBomb();
             if ( bomb == null ) return false;
 
-            final int yFactor = Math.abs( myBombSpread.length / 2 - idx );
-            final int ySpeed = -bombSpeed + yFactor * yFactor * xSpeedStep / 8;
+            final float yFactor = Math.abs( myBombSpread.length / 2 - idx );
+            final float ySpeed = -bombSpeed + yFactor * yFactor * xSpeedStep / 8;
             bomb.init( startPos, xSpeedStart + xSpeedStep * idx, ySpeed );
             bomb.start( Bomb.FROM_PLAYER );
             }

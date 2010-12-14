@@ -5,7 +5,7 @@ import net.intensicode.galaxina.Identifiers;
 import net.intensicode.galaxina.EditorStateListener;
 import net.intensicode.galaxina.domain.SelectedPathMarker;
 import net.intensicode.galaxina.ui.logic.CoordinateTransformer;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.awt.*;
 
@@ -38,9 +38,9 @@ public class SelectedPathMarkerLayer implements VisualLayer, EditorStateListener
         aGraphics2D.setStroke( myCoreAPI.ui().configuration().activeMarkerStroke );
         aGraphics2D.setColor( myCoreAPI.ui().configuration().activeMarkerColor );
 
-        final Position position = mySelectedPathMarker.marker;
-        final int x = position.x - halfMarkerSize;
-        final int y = position.y - halfMarkerSize;
+        final PositionF position = mySelectedPathMarker.marker;
+        final int x = (int) (position.x - halfMarkerSize);
+        final int y = (int) (position.y - halfMarkerSize);
         aGraphics2D.drawRect( x, y, markerSize, markerSize );
         }
 

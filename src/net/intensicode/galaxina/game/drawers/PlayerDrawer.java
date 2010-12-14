@@ -21,10 +21,10 @@ public final class PlayerDrawer extends ScreenBase
         final SkinManager skin = myGameContext.visualContext().skinManager();
         myGalaxina = skin.sprite( "galaxian" );
 
-        final Size sizeInWorld = myGameContext.camera().toWorldSize( myGalaxina.getWidth(), myGalaxina.getHeight() );
+        final SizeF sizeInWorld = myGameContext.camera().toWorldSize( myGalaxina.getWidth(), myGalaxina.getHeight() );
 
         final Player player = myGameContext.gameModel().player;
-        player.sizeInWorldFixed.setTo( sizeInWorld );
+        player.sizeInWorld.setTo( sizeInWorld );
 
         myFont = skin().font( "scorefont" );
         }
@@ -51,7 +51,7 @@ public final class PlayerDrawer extends ScreenBase
         if ( player.visible && myLastInvulState )
             {
             final Camera camera = myGameContext.camera();
-            final Position screenPos = camera.toScreen( player.worldPosFixed );
+            final Position screenPos = camera.toScreen( player.worldPos );
             myGalaxina.setFrame( myAnimFrame );
             myGalaxina.paint( gc, screenPos.x, screenPos.y );
             }

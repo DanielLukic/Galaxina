@@ -22,7 +22,7 @@ public final class MissilesDrawer extends ScreenBase
         myGenerator = skin().sprite( "missile" );
 
         final Camera camera = myGameContext.camera();
-        final Size sizeInWorld = camera.toWorldSize( myGenerator.getWidth(), myGenerator.getHeight() );
+        final SizeF sizeInWorld = camera.toWorldSize( myGenerator.getWidth(), myGenerator.getHeight() );
         myGameContext.gameModel().missiles.sizeInWorld.setTo( sizeInWorld );
         }
 
@@ -48,14 +48,13 @@ public final class MissilesDrawer extends ScreenBase
     private void draw( final DirectGraphics aGraphics, final Missile aMissile )
         {
         final Camera camera = myGameContext.camera();
-        final Position screenPos = camera.toScreen( aMissile.worldPosFixed );
+        final Position screenPos = camera.toScreen( aMissile.worldPos );
 
         final int directionSteps = myGenerator.getFrameSequenceLength();
-        final int directinFixed = UtilitiesEx.directionToDegrees( aMissile.directionFixed );
-        final int direction = FixedMath.toIntRounded( directinFixed );
+        final float direction = UtilitiesEx.directionToDegrees( aMissile.direction );
         final int directionIndex = UtilitiesEx.getDirectionID( direction + 45, directionSteps );
         myGenerator.setFrame( directionIndex % directionSteps );
-        myGenerator.paint( aGraphics, screenPos.x, screenPos.y );
+        myGenerator.paint( aGraphics, (int) screenPos.x, (int) screenPos.y );
         }
 
     private SpriteGenerator myGenerator;

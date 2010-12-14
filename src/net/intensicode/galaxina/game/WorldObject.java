@@ -1,12 +1,12 @@
 package net.intensicode.galaxina.game;
 
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 public abstract class WorldObject
     {
     public boolean active;
 
-    public final Position worldPosFixed = new Position();
+    public final PositionF worldPos = new PositionF();
 
     public boolean repeatAnimation;
 

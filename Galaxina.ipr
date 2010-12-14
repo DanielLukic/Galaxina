@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project relativePaths="false" version="4">
+<project version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build.xml">
@@ -73,6 +73,19 @@
   <component name="CodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
+        <option name="FIELD_NAME_PREFIX" value="my" />
+        <option name="STATIC_FIELD_NAME_PREFIX" value="the" />
+        <option name="PARAMETER_NAME_PREFIX" value="a" />
+        <option name="GENERATE_FINAL_LOCALS" value="true" />
+        <option name="GENERATE_FINAL_PARAMETERS" value="true" />
+        <option name="INSERT_OVERRIDE_ANNOTATION" value="false" />
+        <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="2" />
+        <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="2" />
+        <option name="FIELDS_ORDER_WEIGHT" value="4" />
+        <option name="CONSTRUCTORS_ORDER_WEIGHT" value="1" />
+        <option name="METHODS_ORDER_WEIGHT" value="2" />
+        <option name="INNER_CLASSES_ORDER_WEIGHT" value="3" />
+        <option name="BLANK_LINES_AROUND_FIELD" value="1" />
         <option name="BRACE_STYLE" value="3" />
         <option name="CLASS_BRACE_STYLE" value="3" />
         <option name="METHOD_BRACE_STYLE" value="3" />
@@ -88,7 +101,6 @@
         <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
         <option name="ALIGN_MULTILINE_PARENTHESIZED_EXPRESSION" value="true" />
         <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
-        <option name="BLANK_LINES_AROUND_FIELD" value="1" />
         <option name="SPACE_WITHIN_PARENTHESES" value="true" />
         <option name="SPACE_WITHIN_METHOD_CALL_PARENTHESES" value="true" />
         <option name="SPACE_WITHIN_METHOD_PARENTHESES" value="true" />
@@ -100,20 +112,18 @@
         <option name="SPACE_WITHIN_SYNCHRONIZED_PARENTHESES" value="true" />
         <option name="SPACE_WITHIN_BRACKETS" value="true" />
         <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACES" value="true" />
-        <option name="FIELD_NAME_PREFIX" value="my" />
-        <option name="STATIC_FIELD_NAME_PREFIX" value="the" />
-        <option name="PARAMETER_NAME_PREFIX" value="a" />
-        <option name="GENERATE_FINAL_LOCALS" value="true" />
-        <option name="GENERATE_FINAL_PARAMETERS" value="true" />
-        <option name="INSERT_OVERRIDE_ANNOTATION" value="false" />
-        <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="2" />
-        <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="2" />
-        <option name="FIELDS_ORDER_WEIGHT" value="4" />
-        <option name="CONSTRUCTORS_ORDER_WEIGHT" value="1" />
-        <option name="METHODS_ORDER_WEIGHT" value="2" />
-        <option name="INNER_CLASSES_ORDER_WEIGHT" value="3" />
         <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
         <option name="SPACE_WITHIN_ANNOTATION_PARENTHESES" value="true" />
+        <ADDITIONAL_INDENT_OPTIONS fileType="feature">
+          <option name="INDENT_SIZE" value="2" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="groovy">
           <option name="INDENT_SIZE" value="2" />
           <option name="CONTINUATION_INDENT_SIZE" value="8" />
@@ -122,6 +132,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="gsp">
           <option name="INDENT_SIZE" value="2" />
@@ -131,6 +142,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="haml">
           <option name="INDENT_SIZE" value="2" />
@@ -140,6 +152,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="java">
           <option name="INDENT_SIZE" value="4" />
@@ -149,6 +162,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="js">
           <option name="INDENT_SIZE" value="4" />
@@ -158,6 +172,27 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="jsp">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="php">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="rb">
           <option name="INDENT_SIZE" value="2" />
@@ -167,6 +202,7 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="rhtml">
           <option name="INDENT_SIZE" value="2" />
@@ -176,6 +212,17 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="sass">
+          <option name="INDENT_SIZE" value="2" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
         <ADDITIONAL_INDENT_OPTIONS fileType="xml">
           <option name="INDENT_SIZE" value="4" />
@@ -185,6 +232,17 @@
           <option name="SMART_TABS" value="false" />
           <option name="LABEL_INDENT_SIZE" value="0" />
           <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
+        <ADDITIONAL_INDENT_OPTIONS fileType="yml">
+          <option name="INDENT_SIZE" value="2" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+          <option name="USE_RELATIVE_INDENTS" value="false" />
         </ADDITIONAL_INDENT_OPTIONS>
       </value>
     </option>
@@ -192,8 +250,8 @@
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <option name="DEPLOY_AFTER_MAKE" value="0" />
     <resourceExtensions />
+    <annotationProcessing enabled="false" useClasspath="true" />
   </component>
   <component name="CopyrightManager" default="">
     <module2copyright />
@@ -205,11 +263,8 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCompilerSettings">
-    <option name="DEBUGGING_INFO" value="true" />
     <option name="GENERATE_NO_WARNINGS" value="true" />
     <option name="DEPRECATION" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EclipseEmbeddedCompilerSettings">
     <option name="DEBUGGING_INFO" value="true" />
@@ -231,15 +286,7 @@
     <autodetection-disabled>
       <facet-type id="JRUBY">
         <modules>
-          <module name="Galaxina">
-            <files>
-              <file url="file://$PROJECT_DIR$/config/Galaxina.rb" />
-              <file url="file://$PROJECT_DIR$/config/GalaxinaD.rb" />
-              <file url="file://$PROJECT_DIR$/config/GalaxinaR.rb" />
-              <file url="file://$PROJECT_DIR$/config/_groups.rb" />
-              <file url="file://$PROJECT_DIR$/config/_targets.rb" />
-            </files>
-          </module>
+          <module name="Galaxina" />
           <module name="HiscoreServer">
             <files>
               <file url="file://$PROJECT_DIR$/modules/HiscoreServer/src/hiscore/cgi_util.rb" />
@@ -260,44 +307,91 @@
               <file url="file://$PROJECT_DIR$/modules/GalaxinaEditor/src/net/intensicode/galaxina/Editor.rb" />
             </files>
           </module>
+          <module name="IntensiBuild">
+            <files>
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/Rakefile" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/config/_groups.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/config/_targets.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/android_default_avd.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/build.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/common.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/configuration.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/create_symbols_file.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/dependencies.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/determine_intent.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/git/configuration.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/git/module.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/git/system.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/increment_version.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/merge_manifest.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/release.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/release_date.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/target.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/tasks/0_helpers.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/tasks/check.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/tasks/clean.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/tasks/modules.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/tasks/release.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiBuild/src/ruby/tasks/resources.rb" />
+            </files>
+          </module>
+          <module name="IntensiTools">
+            <files>
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/char_grid_configuration.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/font_renderer.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/main_frame.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui/cell_settings_panel.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui/font_cell_render_panel.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui/font_settings_panel.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui/operations_panel.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui/render_panel.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui/view_settings_panel.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui_builder.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bfm/ui_controller.rb" />
+              <file url="file://$PROJECT_DIR$/modules/IntensiTools/src/jruby/bitmap_font_maker.rb" />
+            </files>
+          </module>
+        </modules>
+      </facet-type>
+      <facet-type id="android">
+        <modules>
+          <module name="IntensiBuild" />
         </modules>
       </facet-type>
     </autodetection-disabled>
   </component>
   <component name="IdProvider" IDEtalkID="DF531DBDD80BB8949C8E6FC1F004EC30" />
   <component name="InspectionProjectProfileManager">
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
-    <scopes />
     <profiles>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
         <option name="myLocal" value="false" />
-        <inspection_tool class="AccessStaticViaInstance" level="WARNING" enabled="false" />
-        <inspection_tool class="CanBeFinal" level="WARNING" enabled="false">
+        <inspection_tool class="AccessStaticViaInstance" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="CanBeFinal" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="REPORT_CLASSES" value="false" />
           <option name="REPORT_METHODS" value="false" />
           <option name="REPORT_FIELDS" value="true" />
         </inspection_tool>
-        <inspection_tool class="CheckDtdRefs" level="ERROR" enabled="false" />
-        <inspection_tool class="CheckEmptyScriptTag" level="WARNING" enabled="false" />
+        <inspection_tool class="CheckDtdRefs" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="CheckEmptyScriptTag" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="CheckImageSize" level="WARNING" enabled="false" />
-        <inspection_tool class="CheckTagEmptyBody" level="WARNING" enabled="false" />
-        <inspection_tool class="CheckValidXmlInScriptTagBody" level="ERROR" enabled="false" />
-        <inspection_tool class="CheckXmlFileWithXercesValidator" level="ERROR" enabled="false" />
-        <inspection_tool class="ConstantConditions" level="WARNING" enabled="false">
+        <inspection_tool class="CheckTagEmptyBody" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="CheckValidXmlInScriptTagBody" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="CheckXmlFileWithXercesValidator" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="ConstantConditions" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
           <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
         </inspection_tool>
-        <inspection_tool class="CssInvalidElementInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="CssInvalidShorthandPropertyValue" level="ERROR" enabled="false" />
-        <inspection_tool class="CssNegativeValueInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="CssNoGenericFontName" level="WARNING" enabled="false" />
-        <inspection_tool class="CssOverwrittenProperties" level="WARNING" enabled="false" />
-        <inspection_tool class="CssRgbFunctionInspection" level="ERROR" enabled="false" />
-        <inspection_tool class="CssUnitlessNumber" level="WARNING" enabled="false" />
-        <inspection_tool class="CssUnknownProperty" level="WARNING" enabled="false">
+        <inspection_tool class="CssInvalidElementInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="CssInvalidShorthandPropertyValue" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="CssNegativeValueInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="CssNoGenericFontName" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="CssOverwrittenProperties" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="CssRgbFunctionInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="CssUnitlessNumber" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="CssUnknownProperty" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="myCustomPropertiesEnabled" value="true" />
+          <option name="myIgnoreVendorSpecificProperties" value="false" />
           <option name="myCustomPropertiesList">
             <value>
               <list size="8">
@@ -313,22 +407,22 @@
             </value>
           </option>
         </inspection_tool>
-        <inspection_tool class="CssUnusedSymbolInspection" level="WARNING" enabled="false" />
-        <inspection_tool class="DefaultFileTemplate" level="WARNING" enabled="false">
+        <inspection_tool class="CssUnusedSymbolInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="DefaultFileTemplate" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="CHECK_FILE_HEADER" value="true" />
           <option name="CHECK_TRY_CATCH_SECTION" value="true" />
           <option name="CHECK_METHOD_BODY" value="true" />
         </inspection_tool>
-        <inspection_tool class="Dependency" level="ERROR" enabled="false" />
-        <inspection_tool class="Deprecation" level="WARNING" enabled="false" />
-        <inspection_tool class="DuplicateThrows" level="WARNING" enabled="false" />
-        <inspection_tool class="EmptyMethod" level="WARNING" enabled="false" />
-        <inspection_tool class="FieldCanBeLocal" level="WARNING" enabled="false" />
+        <inspection_tool class="Dependency" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="Deprecation" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="DuplicateThrows" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="EmptyMethod" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="FieldCanBeLocal" enabled="false" level="WARNING" enabled_by_default="false" />
         <inspection_tool class="ForCanBeForeach" level="WARNING" enabled="false">
           <option name="REPORT_INDEXED_LOOP" value="true" />
         </inspection_tool>
-        <inspection_tool class="HtmlExtraClosingTag" level="ERROR" enabled="false" />
-        <inspection_tool class="HtmlUnknownAttribute" level="WARNING" enabled="false">
+        <inspection_tool class="HtmlExtraClosingTag" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="HtmlUnknownAttribute" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="myValues">
             <value>
               <list size="5">
@@ -342,7 +436,7 @@
           </option>
           <option name="myCustomValuesEnabled" value="true" />
         </inspection_tool>
-        <inspection_tool class="HtmlUnknownTag" level="WARNING" enabled="false">
+        <inspection_tool class="HtmlUnknownTag" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="myValues">
             <value>
               <list size="5">
@@ -356,12 +450,12 @@
           </option>
           <option name="myCustomValuesEnabled" value="true" />
         </inspection_tool>
-        <inspection_tool class="InconsistentResourceBundle" level="ERROR" enabled="false">
+        <inspection_tool class="InconsistentResourceBundle" enabled="false" level="ERROR" enabled_by_default="false">
           <option name="REPORT_MISSING_TRANSLATIONS" value="true" />
           <option name="REPORT_INCONSISTENT_PROPERTIES" value="true" />
           <option name="REPORT_DUPLICATED_PROPERTIES" value="true" />
         </inspection_tool>
-        <inspection_tool class="JavaDoc" level="WARNING" enabled="false">
+        <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="TOP_LEVEL_CLASS_OPTIONS">
             <value>
               <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
@@ -388,10 +482,12 @@
           </option>
           <option name="IGNORE_DEPRECATED" value="false" />
           <option name="IGNORE_JAVADOC_PERIOD" value="true" />
+          <option name="IGNORE_DUPLICATED_THROWS" value="false" />
+          <option name="IGNORE_POINT_TO_ITSELF" value="false" />
           <option name="myAdditionalJavadocTags" value="" />
         </inspection_tool>
-        <inspection_tool class="JavadocReference" level="ERROR" enabled="false" />
-        <inspection_tool class="NullableProblems" level="WARNING" enabled="false">
+        <inspection_tool class="JavadocReference" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="NullableProblems" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="REPORT_NULLABLE_METHOD_OVERRIDES_NOTNULL" value="true" />
           <option name="REPORT_NOT_ANNOTATED_METHOD_OVERRIDES_NOTNULL" value="true" />
           <option name="REPORT_NOTNULL_PARAMETER_OVERRIDES_NULLABLE" value="true" />
@@ -400,76 +496,69 @@
           <option name="REPORT_NOT_ANNOTATED_SETTER_PARAMETER" value="true" />
           <option name="REPORT_ANNOTATION_NOT_PROPAGATED_TO_OVERRIDERS" value="true" />
         </inspection_tool>
-        <inspection_tool class="RedundantArrayCreation" level="WARNING" enabled="false" />
-        <inspection_tool class="RedundantCast" level="WARNING" enabled="false" />
-        <inspection_tool class="RedundantThrows" level="WARNING" enabled="false" />
-        <inspection_tool class="RedundantTypeArguments" level="WARNING" enabled="false" />
-        <inspection_tool class="RequiredAttributes" level="WARNING" enabled="false">
+        <inspection_tool class="RedundantArrayCreation" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="RedundantCast" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="RedundantThrows" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="RedundantTypeArguments" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="RequiredAttributes" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="myAdditionalRequiredHtmlAttributes" value="" />
         </inspection_tool>
-        <inspection_tool class="SameParameterValue" level="WARNING" enabled="false" />
-        <inspection_tool class="SameReturnValue" level="WARNING" enabled="false" />
-        <inspection_tool class="SillyAssignment" level="WARNING" enabled="false" />
-        <inspection_tool class="SuspiciousMethodCalls" level="WARNING" enabled="false">
+        <inspection_tool class="SameParameterValue" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="SameReturnValue" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="SillyAssignment" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="SuspiciousMethodCalls" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="REPORT_CONVERTIBLE_METHOD_CALLS" value="true" />
         </inspection_tool>
-        <inspection_tool class="SuspiciousNameCombination" level="WARNING" enabled="false">
+        <inspection_tool class="SuspiciousNameCombination" enabled="false" level="WARNING" enabled_by_default="false">
           <group names="x,width,left,right" />
           <group names="y,height,top,bottom" />
         </inspection_tool>
         <inspection_tool class="ThrowableInstanceNeverThrown" level="WARNING" enabled="false" />
-        <inspection_tool class="UNCHECKED_WARNING" level="WARNING" enabled="false" />
-        <inspection_tool class="UNUSED_IMPORT" level="WARNING" enabled="false" />
-        <inspection_tool class="UNUSED_SYMBOL" level="WARNING" enabled="false">
+        <inspection_tool class="UNCHECKED_WARNING" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="UNUSED_IMPORT" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="UNUSED_SYMBOL" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="LOCAL_VARIABLE" value="true" />
           <option name="FIELD" value="true" />
           <option name="METHOD" value="true" />
           <option name="CLASS" value="true" />
           <option name="PARAMETER" value="true" />
           <option name="REPORT_PARAMETER_FOR_PUBLIC_METHODS" value="true" />
-          <option name="INJECTION_ANNOS">
-            <value>
-              <list size="0" />
-            </value>
-          </option>
         </inspection_tool>
-        <inspection_tool class="UnnecessaryModuleDependencyInspection" level="WARNING" enabled="false" />
-        <inspection_tool class="UnresolvedPropertyKey" level="ERROR" enabled="false" />
-        <inspection_tool class="UnusedAssignment" level="WARNING" enabled="false">
+        <inspection_tool class="UnnecessaryModuleDependencyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="UnresolvedPropertyKey" enabled="false" level="ERROR" enabled_by_default="false" />
+        <inspection_tool class="UnusedAssignment" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="REPORT_PREFIX_EXPRESSIONS" value="false" />
           <option name="REPORT_POSTFIX_EXPRESSIONS" value="true" />
           <option name="REPORT_REDUNDANT_INITIALIZER" value="true" />
         </inspection_tool>
-        <inspection_tool class="UnusedDeclaration" level="WARNING" enabled="false">
+        <inspection_tool class="UnusedDeclaration" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="ADD_MAINS_TO_ENTRIES" value="true" />
           <option name="ADD_APPLET_TO_ENTRIES" value="true" />
           <option name="ADD_SERVLET_TO_ENTRIES" value="true" />
           <option name="ADD_NONJAVA_TO_ENTRIES" value="true" />
-          <option name="ADDITIONAL_ANNOTATIONS">
-            <value>
-              <list size="0" />
-            </value>
-          </option>
-          <option name="ADD_JUNIT_TO_ENTRIES" value="true" />
         </inspection_tool>
-        <inspection_tool class="UnusedMessageFormatParameter" level="WARNING" enabled="false" />
-        <inspection_tool class="UnusedParameters" level="WARNING" enabled="false" />
-        <inspection_tool class="UnusedReturnValue" level="WARNING" enabled="false" />
-        <inspection_tool class="WeakerAccess" level="WARNING" enabled="false">
+        <inspection_tool class="UnusedMessageFormatParameter" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="UnusedParameters" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="UnusedReturnValue" enabled="false" level="WARNING" enabled_by_default="false" />
+        <inspection_tool class="WeakerAccess" enabled="false" level="WARNING" enabled_by_default="false">
           <option name="SUGGEST_PACKAGE_LOCAL_FOR_MEMBERS" value="true" />
           <option name="SUGGEST_PACKAGE_LOCAL_FOR_TOP_CLASSES" value="true" />
           <option name="SUGGEST_PRIVATE_FOR_INNERS" value="false" />
         </inspection_tool>
-        <inspection_tool class="WrongPackageStatement" level="ERROR" enabled="false" />
+        <inspection_tool class="WrongPackageStatement" enabled="false" level="ERROR" enabled_by_default="false" />
         <inspection_tool class="XmlWrongClosingTagName" level="ERROR" enabled="false" />
-        <inspection_tool class="XmlWrongRootElement" level="ERROR" enabled="false" />
+        <inspection_tool class="XmlWrongRootElement" enabled="false" level="ERROR" enabled_by_default="false" />
       </profile>
     </profiles>
-    <list size="4">
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_PROFILE" value="true" />
+    <version value="1.0" />
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="SERVER PROBLEM" />
       <item index="1" class="java.lang.String" itemvalue="INFO" />
-      <item index="2" class="java.lang.String" itemvalue="WARNING" />
-      <item index="3" class="java.lang.String" itemvalue="ERROR" />
+      <item index="2" class="java.lang.String" itemvalue="TYPO" />
+      <item index="3" class="java.lang.String" itemvalue="WARNING" />
+      <item index="4" class="java.lang.String" itemvalue="ERROR" />
     </list>
   </component>
   <component name="IssueNavigationConfiguration">
@@ -481,13 +570,6 @@
         </IssueNavigationLink>
       </list>
     </option>
-  </component>
-  <component name="JavacSettings">
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="DEPRECATION" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -505,14 +587,6 @@
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="false" />
-  </component>
-  <component name="JikesSettings">
-    <option name="JIKES_PATH" value="" />
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="DEPRECATION" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="IS_EMACS_ERRORS_MODE" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -670,10 +744,6 @@
   <component name="ProjectDetails">
     <option name="projectName" value="Galaxina" />
   </component>
-  <component name="ProjectFileVersion" converted="true">
-    <converter id="ror-modules" />
-    <converter id="SelenaRunConfToDiana" />
-  </component>
   <component name="ProjectKey">
     <option name="state" value="project:///home/dl/Projects/intensicode/galaxina/Galaxina.ipr" />
   </component>
@@ -692,11 +762,15 @@
       <module fileurl="file://$PROJECT_DIR$/modules/Tests/Tests.iml" filepath="$PROJECT_DIR$/modules/Tests/Tests.iml" />
     </modules>
   </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="JDK 1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build" />
   </component>
   <component name="ProjectRunConfigurationManager">
-    <configuration default="false" name="Galaxina 240x320" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Galaxina 240x320" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.galaxina.Galaxina width=240 height=320 resources=res/j2me/Galaxina/240x320 resources=res/j2me/Galaxina resources=res/j2me resources=res" />
@@ -724,10 +798,11 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Galaxina 240x320 on 320x480" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Galaxina 240x320 on 320x480" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.galaxina.Galaxina width=320 height=480 resources=res/j2me/Galaxina/240x320 resources=res/j2me/Galaxina resources=res/j2me resources=res" />
@@ -755,10 +830,11 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Galaxina android/240x320/p" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Galaxina android/240x320/p" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.galaxina.Galaxina width=240 height=320 resources=res/android/Galaxina/240x320/p resources=res/android/Galaxina/240x320 resources=res/android/Galaxina resources=res/android resources=res" />
@@ -773,10 +849,11 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Galaxina android/240x320/l" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Galaxina android/240x320/l" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.galaxina.Galaxina width=320 height=240 resources=res/android/Galaxina/240x320/l resources=res/android/Galaxina/240x320 resources=res/android/Galaxina resources=res/android resources=res" />
@@ -791,10 +868,11 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Galaxina android/320x480/p" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Galaxina android/320x480/p" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.galaxina.Galaxina width=320 height=480 resources=res/android/Galaxina/320x480/p resources=res/android/Galaxina/320x480 resources=res/android/Galaxina resources=res/android resources=res" />
@@ -822,10 +900,11 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Galaxina android/320x480/l" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Galaxina android/320x480/l" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.runme.MIDletLauncher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="midlet=net.intensicode.galaxina.Galaxina width=480 height=320 resources=res/android/Galaxina/320x480/l resources=res/android/Galaxina/320x480 resources=res/android/Galaxina resources=res/android resources=res" />
@@ -840,10 +919,11 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="false" name="Editor" type="Application" factoryName="Application" enabled="false" merge="false" sample_coverage="true" runner="emma">
+    <configuration default="false" name="Editor" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="emma" />
       <option name="MAIN_CLASS_NAME" value="net.intensicode.galaxina.Editor" />
       <option name="VM_PARAMETERS" value="-Djava.util.logging.config.file=logging.properties" />
       <option name="PROGRAM_PARAMETERS" value="res/j2me/Galaxina/240x320" />
@@ -871,7 +951,7 @@
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -881,13 +961,6 @@
         <list size="0" />
       </value>
     </option>
-  </component>
-  <component name="RmicSettings">
-    <option name="IS_EANABLED" value="false" />
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="GENERATE_IIOP_STUBS" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="SvnBranchConfigurationManager">
     <option name="mySupportsUserInfoFilter" value="true" />
@@ -902,5 +975,14 @@
     <mapping directory="$PROJECT_DIR$/modules/RunME" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="junit-4.8.2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/modules/IntensiBuild/env/test/junit-4.8.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
 </project>
 

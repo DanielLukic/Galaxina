@@ -2,7 +2,7 @@ package net.intensicode.galaxina.domain;
 
 import net.intensicode.galaxina.EditorConfiguration;
 import net.intensicode.galaxina.EditorCoreAPI;
-import net.intensicode.util.Position;
+import net.intensicode.util.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -22,9 +22,9 @@ public class ListOfPositions extends GroupDomainObject<PositionEx>
         return swarm;
         }
 
-    public final void move( final int aDeltaX, final int aDeltaY )
+    public final void move( final float aDeltaX, final float aDeltaY )
         {
-        for ( final Position pos : myEntries )
+        for ( final PositionF pos : myEntries )
             {
             pos.x += aDeltaX;
             pos.y += aDeltaY;
@@ -58,7 +58,7 @@ public class ListOfPositions extends GroupDomainObject<PositionEx>
     public final ListOfPositions clone()
         {
         final ListOfPositions clone = new ListOfPositions( myConfiguration );
-        for ( final Position pos : myEntries ) clone.myEntries.add( new PositionEx( pos ) );
+        for ( final PositionF pos : myEntries ) clone.myEntries.add( new PositionEx( pos ) );
         return clone;
         }
 
