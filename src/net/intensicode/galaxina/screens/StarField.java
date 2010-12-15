@@ -36,9 +36,9 @@ public final class StarField extends ScreenBase
         final Random random = new Random();
         for ( int idx = 0; idx < myNumberOfStars; idx++ )
             {
-            myStarsX[ idx ] = random.nextInt() % UNIVERSE_HALF;
-            myStarsY[ idx ] = random.nextInt() % UNIVERSE_HALF;
-            myStarsZ[ idx ] = random.nextInt() % UNIVERSE_HALF;
+            myStarsX[ idx ] = random.nextFloat(UNIVERSE_SIZE);
+            myStarsY[ idx ] = random.nextFloat(UNIVERSE_SIZE);
+            myStarsZ[ idx ] = random.nextFloat(UNIVERSE_SIZE);
             }
         }
 
@@ -53,12 +53,12 @@ public final class StarField extends ScreenBase
         myChangeX = ( myNewX - xMove ) / ticksForChange;
         myChangeY = ( myNewY - yMove ) / ticksForChange;
         myChangeZ = ( myNewZ - zMove ) / ticksForChange;
-        if ( myChangeX == 0 && myNewX < xMove ) myChangeX = -1;
-        if ( myChangeX == 0 && myNewX > xMove ) myChangeX = +1;
-        if ( myChangeY == 0 && myNewY < yMove ) myChangeY = -1;
-        if ( myChangeY == 0 && myNewY > yMove ) myChangeY = +1;
-        if ( myChangeZ == 0 && myNewZ < zMove ) myChangeZ = -1;
-        if ( myChangeZ == 0 && myNewZ > zMove ) myChangeZ = +1;
+        if ( myChangeX == 0 && myNewX < xMove ) myChangeX = -0.1f;
+        if ( myChangeX == 0 && myNewX > xMove ) myChangeX = +0.1f;
+        if ( myChangeY == 0 && myNewY < yMove ) myChangeY = -0.1f;
+        if ( myChangeY == 0 && myNewY > yMove ) myChangeY = +0.1f;
+        if ( myChangeZ == 0 && myNewZ < zMove ) myChangeZ = -0.1f;
+        if ( myChangeZ == 0 && myNewZ > zMove ) myChangeZ = +0.1f;
         }
 
     private float myNewX;
@@ -164,7 +164,7 @@ public final class StarField extends ScreenBase
     private float move( final float aValue, final float aDelta )
         {
         final float changed = aValue + aDelta;
-        if ( changed < UNIVERSE_SIZE ) return changed + UNIVERSE_SIZE;
+        if ( changed < 0 ) return changed + UNIVERSE_SIZE;
         if ( changed > UNIVERSE_SIZE ) return changed - UNIVERSE_SIZE;
         return changed;
         }
@@ -173,9 +173,6 @@ public final class StarField extends ScreenBase
         {
         final int screenWidth = screen().width();
         final int screenHeight = screen().height();
-
-        int maxInt = 0;
-        int minInt = 0;
 
         final int maxIntensity = myStars.length - 1;
         for ( int idx = 0; idx < myNumberOfStars; idx++ )
@@ -196,9 +193,6 @@ public final class StarField extends ScreenBase
             final float shiftedIntensity = maxIntensity / 3 + starIntensity;
             final int intensity = (int) Math.max( 0, Math.min( maxIntensity, shiftedIntensity ) );
             myStars[ intensity ].blit( graphics(), (int) x2d, (int) y2d );
-
-            maxInt = Math.max( maxInt, intensity );
-            minInt = Math.min( minInt, intensity );
             }
         }
 
