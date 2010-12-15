@@ -95,7 +95,7 @@ public class PathLayer implements VisualLayer, Identifiers
             }
         mySmoothPath.end();
 
-        final int pathLength = mySmoothPath.getPathLength();
+        final float pathLength = mySmoothPath.getPathLength();
 
         aGraphics2D.setColor( mySmoothPathColor );
         final int pathSteps = myPath.positions().size() * 7;
