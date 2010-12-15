@@ -22,14 +22,14 @@ final class PathSegmentPlotter implements VisualLayer
     {
         aGraphics2D.setColor( Color.GREEN );
 
-        final int pathLengthFixed = myPath.getPathLength();
+        final float pathLengthFixed = myPath.getPathLength();
 
         final PositionF from = new PositionF();
         from.setTo( myPath.getPosition( 0 ) );
 
         for ( int idx = 1; idx <= PATH_STEPS; idx++ )
         {
-            final int pathPosFixed = idx * pathLengthFixed / PATH_STEPS;
+            final float pathPosFixed = idx * pathLengthFixed / PATH_STEPS;
 
             final PositionF to = myPath.getPosition( pathPosFixed );
 

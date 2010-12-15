@@ -55,7 +55,7 @@ public final class Enemy extends WorldObjectWithSize
     public PositionF formationPosition;
 
 
-    public int pathPos;
+    public float pathPos;
 
     public PathWithDirection path;
 
@@ -197,7 +197,7 @@ public final class Enemy extends WorldObjectWithSize
     public final void jumpToStartOfPath()
         {
         final PositionF startPosition = path.getStartPosition();
-        final float startDirection = UtilitiesEx.directionToDegrees( path.getStartPosition() );
+        final float startDirection = UtilitiesEx.directionToDegrees( path.getStartDirection() );
         worldPos.setTo( startPosition );
         directionInDegrees = targetDirection = startDirection;
         }
@@ -220,14 +220,14 @@ public final class Enemy extends WorldObjectWithSize
 
     public final void syncPathTo( final Enemy aSource )
         {
-        final int pathPosInPercent = aSource.pathPos * 100 / aSource.path.getPathLength();
+        final float pathPosInPercent = aSource.pathPos * 100 / aSource.path.getPathLength();
         pathPos = pathPosInPercent * path.getPathLength() / 100;
         updateToPathPosition();
         }
 
     public final void copyFrom( final Enemy aSource )
         {
-        final int pathPosInPercent = aSource.pathPos * 100 / aSource.path.getPathLength();
+        final float pathPosInPercent = aSource.pathPos * 100 / aSource.path.getPathLength();
         pathPos = pathPosInPercent * path.getPathLength() / 100;
         worldPos.setTo( aSource.worldPos );
         directionInDegrees = targetDirection = aSource.directionInDegrees;

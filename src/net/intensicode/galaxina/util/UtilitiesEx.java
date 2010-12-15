@@ -6,7 +6,7 @@ public final class UtilitiesEx
     {
     public static int getDirectionID( final float aDirectionInDegrees, final int aDirectionSteps )
         {
-        final int directionStep = 360 / aDirectionSteps;
+        final float directionStep = 360 / aDirectionSteps;
         return (int) (( aDirectionInDegrees + directionStep / 2 ) / directionStep);
         }
 

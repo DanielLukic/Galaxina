@@ -27,10 +27,10 @@ final class PathPlotter implements VisualLayer
 
         aGraphics2D.setColor( Color.BLUE );
 
-        final int pathLengthFixed = myPath.getPathLength();
+        final float pathLengthFixed = myPath.getPathLength();
         for ( int idx = 0; idx <= PATH_STEPS; idx++ )
         {
-            final int pathPosFixed = pathLengthFixed * idx / PATH_STEPS;
+            final float pathPosFixed = pathLengthFixed * idx / PATH_STEPS;
             final PositionF point = myPath.getPosition( pathPosFixed );
             final int x = (int) point.x;
             final int y = (int) point.y;
